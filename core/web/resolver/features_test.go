@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 )
 
 func Test_ToFeatures(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_ToFeatures(t *testing.T) {
 			name:          "success",
 			authenticated: true,
 			before: func(f *gqlTestFramework) {
-				f.App.On("GetConfig").Return(configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+				f.App.On("GetConfig").Return(configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 					t, f := true, false
 					c.Feature.UICSAKeys = &f
 					c.Feature.FeedsManager = &t

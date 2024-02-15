@@ -3,14 +3,14 @@ package web
 import (
 	"net/http"
 
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 
 	"github.com/gin-gonic/gin"
 )
 
 // PingController has the ping endpoint.
 type PingController struct {
-	App chainlink.Application
+	App erinaceus.Application
 }
 
 // Show returns pong.

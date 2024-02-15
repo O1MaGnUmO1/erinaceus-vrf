@@ -61,7 +61,7 @@ import (
 	clhttptest "github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/httptest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/csakey"
@@ -88,10 +88,10 @@ import (
 
 const (
 	// Collection of test fixture DB user emails per role
-	APIEmailAdmin    = "apiuser@chainlink.test"
-	APIEmailEdit     = "apiuser-edit@chainlink.test"
-	APIEmailRun      = "apiuser-run@chainlink.test"
-	APIEmailViewOnly = "apiuser-view-only@chainlink.test"
+	APIEmailAdmin    = "apiuser@erinaceus.test"
+	APIEmailEdit     = "apiuser-edit@erinaceus.test"
+	APIEmailRun      = "apiuser-run@erinaceus.test"
+	APIEmailViewOnly = "apiuser-view-only@erinaceus.test"
 	// Password just a password we use everywhere for testing
 	Password = testutils.Password
 	// SessionSecret is the hardcoded secret solely used for test
@@ -179,7 +179,7 @@ func NewJobPipelineV2(t testing.TB, cfg pipeline.BridgeConfig, jpcfg JobPipeline
 // TestApplication holds the test application and test servers
 type TestApplication struct {
 	t testing.TB
-	*chainlink.ChainlinkApplication
+	*erinaceus.ChainlinkApplication
 	Logger  logger.Logger
 	Server  *httptest.Server
 	Started bool
@@ -218,7 +218,7 @@ func NewApplicationWithKey(t *testing.T, flagsAndDeps ...interface{}) *TestAppli
 
 // NewApplicationWithConfigAndKey creates a new TestApplication with the given testorm
 // it will also provide an unlocked account on the keystore
-func NewApplicationWithConfigAndKey(t testing.TB, c chainlink.GeneralConfig, flagsAndDeps ...interface{}) *TestApplication {
+func NewApplicationWithConfigAndKey(t testing.TB, c erinaceus.GeneralConfig, flagsAndDeps ...interface{}) *TestApplication {
 	app := NewApplicationWithConfig(t, c, flagsAndDeps...)
 
 	chainID := *ubig.New(&FixtureChainID)
@@ -267,7 +267,7 @@ const (
 
 // NewApplicationWithConfig creates a New TestApplication with specified test config.
 // This should only be used in full integration tests. For controller tests, see NewApplicationEVMDisabled.
-func NewApplicationWithConfig(t testing.TB, cfg chainlink.GeneralConfig, flagsAndDeps ...interface{}) *TestApplication {
+func NewApplicationWithConfig(t testing.TB, cfg erinaceus.GeneralConfig, flagsAndDeps ...interface{}) *TestApplication {
 	t.Helper()
 	testutils.SkipShortDB(t)
 
@@ -330,13 +330,13 @@ func NewApplicationWithConfig(t testing.TB, cfg chainlink.GeneralConfig, flagsAn
 	mailMon := mailbox.NewMonitor(cfg.AppID().String(), lggr.Named("Mailbox"))
 	loopRegistry := plugins.NewLoopRegistry(lggr, nil)
 
-	relayerFactory := chainlink.RelayerFactory{
+	relayerFactory := erinaceus.RelayerFactory{
 		Logger:       lggr,
 		LoopRegistry: loopRegistry,
 		GRPCOpts:     loop.GRPCOpts{},
 	}
 
-	evmOpts := chainlink.EVMFactoryConfig{
+	evmOpts := erinaceus.EVMFactoryConfig{
 		ChainOpts: legacyevm.ChainOpts{
 			AppConfig:        cfg,
 			EventBroadcaster: eventBroadcaster,
@@ -361,14 +361,14 @@ func NewApplicationWithConfig(t testing.TB, cfg chainlink.GeneralConfig, flagsAn
 
 	testCtx := testutils.Context(t)
 	// evm alway enabled for backward compatibility
-	initOps := []chainlink.CoreRelayerChainInitFunc{chainlink.InitEVM(testCtx, relayerFactory, evmOpts)}
+	initOps := []erinaceus.CoreRelayerChainInitFunc{erinaceus.InitEVM(testCtx, relayerFactory, evmOpts)}
 
-	relayChainInterops, err := chainlink.NewCoreRelayerChainInteroperators(initOps...)
+	relayChainInterops, err := erinaceus.NewCoreRelayerChainInteroperators(initOps...)
 	if err != nil {
 		t.Fatal(err)
 	}
 	c := clhttptest.NewTestLocalOnlyHTTPClient()
-	appInstance, err := chainlink.NewApplication(chainlink.ApplicationOpts{
+	appInstance, err := erinaceus.NewApplication(erinaceus.ApplicationOpts{
 		Config:                     cfg,
 		EventBroadcaster:           eventBroadcaster,
 		MailMon:                    mailMon,
@@ -385,7 +385,7 @@ func NewApplicationWithConfig(t testing.TB, cfg chainlink.GeneralConfig, flagsAn
 		LoopRegistry:               plugins.NewLoopRegistry(lggr, nil),
 	})
 	require.NoError(t, err)
-	app := appInstance.(*chainlink.ChainlinkApplication)
+	app := appInstance.(*erinaceus.ChainlinkApplication)
 	ta := &TestApplication{
 		t:                    t,
 		ChainlinkApplication: app,
@@ -545,7 +545,7 @@ func (ta *TestApplication) NewHTTPClient(user *User) HTTPClientCleaner {
 	}
 
 	if user.Email == "" {
-		user.Email = fmt.Sprintf("%s@chainlink.test", uuid.New())
+		user.Email = fmt.Sprintf("%s@erinaceus.test", uuid.New())
 	}
 
 	if user.Role == "" {

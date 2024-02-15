@@ -21,7 +21,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
-	chainlinkMocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink/mocks"
+	chainlinkMocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus/mocks"
 	jobORMMocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job/mocks"
 	keystoreMocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/mocks"
 	pipelineMocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline/mocks"
@@ -61,7 +61,7 @@ type mocks struct {
 type gqlTestFramework struct {
 	t *testing.T
 
-	// The mocked chainlink.Application
+	// The mocked erinaceus.Application
 	App *coremocks.Application
 
 	// The root GQL schema

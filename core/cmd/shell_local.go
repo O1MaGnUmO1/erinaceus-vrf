@@ -503,7 +503,7 @@ func checkFilePermissions(lggr logger.Logger, rootDir string) error {
 			continue
 		}
 		if !owned {
-			lggr.Warnf("The file %v is not owned by the user running chainlink. This will be made mandatory in the future.", path)
+			lggr.Warnf("The file %v is not owned by the user running erinaceus. This will be made mandatory in the future.", path)
 		}
 	}
 	return nil

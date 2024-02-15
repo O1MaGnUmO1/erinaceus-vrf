@@ -26,7 +26,7 @@ import (
 	clhttptest "github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/httptest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/pgtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline/mocks"
@@ -34,7 +34,7 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-func newRunner(t testing.TB, db *sqlx.DB, bridgeORM bridges.ORM, cfg chainlink.GeneralConfig) (pipeline.Runner, *mocks.ORM) {
+func newRunner(t testing.TB, db *sqlx.DB, bridgeORM bridges.ORM, cfg erinaceus.GeneralConfig) (pipeline.Runner, *mocks.ORM) {
 	lggr := logger.TestLogger(t)
 	ethKeyStore := cltest.NewKeyStore(t, db, cfg.Database()).Eth()
 	relayExtenders := evmtest.NewChainRelayExtenders(t, evmtest.TestChainOpts{DB: db, GeneralConfig: cfg, KeyStore: ethKeyStore})

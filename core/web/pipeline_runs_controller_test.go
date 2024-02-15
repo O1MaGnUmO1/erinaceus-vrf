@@ -21,7 +21,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/webhook"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
@@ -34,7 +34,7 @@ func TestPipelineRunsController_CreateWithBody_HappyPath(t *testing.T) {
 	t.Parallel()
 
 	ethClient := cltest.NewEthMocksWithStartupAssertions(t)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.JobPipeline.HTTPRequest.DefaultTimeout = models.MustNewDuration(2 * time.Second)
 		c.Database.Listener.FallbackPollInterval = models.MustNewDuration(10 * time.Millisecond)
 	})
@@ -89,7 +89,7 @@ func TestPipelineRunsController_CreateNoBody_HappyPath(t *testing.T) {
 	t.Parallel()
 
 	ethClient := cltest.NewEthMocksWithStartupAssertions(t)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.JobPipeline.HTTPRequest.DefaultTimeout = models.MustNewDuration(2 * time.Second)
 		c.Database.Listener.FallbackPollInterval = models.MustNewDuration(10 * time.Millisecond)
 	})
@@ -252,7 +252,7 @@ func setupPipelineRunsControllerTests(t *testing.T) (cltest.HTTPClientCleaner, i
 	t.Parallel()
 	ethClient := cltest.NewEthMocksWithStartupAssertions(t)
 	ethClient.On("PendingNonceAt", mock.Anything, mock.Anything).Return(uint64(0), nil)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.OCR.Enabled = ptr(true)
 		c.P2P.V2.Enabled = ptr(true)
 		c.P2P.V2.ListenAddresses = &[]string{fmt.Sprintf("127.0.0.1:%d", freeport.GetOne(t))}

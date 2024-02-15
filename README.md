@@ -50,7 +50,7 @@ For the latest information on setting up a development environment, see the [Dev
 Native builds on the Apple Silicon should work out of the box, but the Docker image requires more consideration.
 
 ```bash
-$ docker build . -t chainlink-develop:latest -f ./core/chainlink.Dockerfile
+$ docker build . -t chainlink-develop:latest -f ./core/erinaceus.Dockerfile
 ```
 
 ### Ethereum Execution Client Requirements

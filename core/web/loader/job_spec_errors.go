@@ -5,14 +5,14 @@ import (
 
 	"github.com/graph-gophers/dataloader"
 
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils/stringutils"
 )
 
 type jobSpecErrorsBatcher struct {
-	app chainlink.Application
+	app erinaceus.Application
 }
 
 func (b *jobSpecErrorsBatcher) loadByJobIDs(ctx context.Context, keys dataloader.Keys) []*dataloader.Result {

@@ -64,7 +64,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/pgtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
@@ -957,7 +957,7 @@ func testEoa(
 
 	key1 := cltest.MustGenerateRandomKey(t)
 	gasLanePriceWei := assets.GWei(10)
-	config, _ := heavyweight.FullTestDBV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	config, _ := heavyweight.FullTestDBV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		simulatedOverrides(t, assets.GWei(10), toml.KeySpecific{
 			// Gas lane.
 			Key:          ptr(key1.EIP55Address),
@@ -1118,7 +1118,7 @@ func TestVRFV2Integration_SingleConsumer_Wrapper(t *testing.T) {
 	callBackGasLimit := int64(100_000) // base callback gas.
 	key1 := cltest.MustGenerateRandomKey(t)
 	gasLanePriceWei := assets.GWei(10)
-	config, db := heavyweight.FullTestDBV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	config, db := heavyweight.FullTestDBV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		simulatedOverrides(t, assets.GWei(10), toml.KeySpecific{
 			// Gas lane.
 			Key:          ptr(key1.EIP55Address),
@@ -1198,7 +1198,7 @@ func TestVRFV2Integration_Wrapper_High_Gas(t *testing.T) {
 	key1 := cltest.MustGenerateRandomKey(t)
 	callBackGasLimit := int64(2_000_000) // base callback gas.
 	gasLanePriceWei := assets.GWei(10)
-	config, db := heavyweight.FullTestDBV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	config, db := heavyweight.FullTestDBV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		simulatedOverrides(t, assets.GWei(10), toml.KeySpecific{
 			// Gas lane.
 			Key:          ptr(key1.EIP55Address),
@@ -1390,8 +1390,8 @@ func TestVRFV2Integration_ConsumerProxy_HappyPath(t *testing.T) {
 	)
 }
 
-func simulatedOverrides(t *testing.T, defaultGasPrice *assets.Wei, ks ...toml.KeySpecific) func(*chainlink.Config, *chainlink.Secrets) {
-	return func(c *chainlink.Config, s *chainlink.Secrets) {
+func simulatedOverrides(t *testing.T, defaultGasPrice *assets.Wei, ks ...toml.KeySpecific) func(*erinaceus.Config, *erinaceus.Secrets) {
+	return func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		require.Zero(t, testutils.SimulatedChainID.Cmp(c.EVM[0].ChainID.ToInt()))
 		c.EVM[0].GasEstimator.Mode = ptr("FixedPrice")
 		if defaultGasPrice != nil {
@@ -1535,7 +1535,7 @@ func TestIntegrationVRFV2(t *testing.T) {
 	gasPrice := assets.GWei(1)
 	key := cltest.MustGenerateRandomKey(t)
 	gasLanePriceWei := assets.GWei(10)
-	config, _ := heavyweight.FullTestDBV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	config, _ := heavyweight.FullTestDBV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		simulatedOverrides(t, gasPrice, toml.KeySpecific{
 			Key:          &key.EIP55Address,
 			GasEstimator: toml.KeySpecificGasEstimator{PriceMax: gasLanePriceWei},

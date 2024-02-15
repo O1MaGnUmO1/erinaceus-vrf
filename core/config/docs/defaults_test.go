@@ -3,7 +3,7 @@ package docs
 import (
 	"testing"
 
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink/cfgtest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus/cfgtest"
 )
 
 func TestCoreDefaults_notNil(t *testing.T) {

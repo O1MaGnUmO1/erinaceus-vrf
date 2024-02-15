@@ -15,7 +15,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/cmd"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/p2pkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 )
@@ -171,7 +171,7 @@ func TestShell_ImportExportP2PKeyBundle(t *testing.T) {
 	requireP2PKeyCount(t, app, 1)
 }
 
-func requireP2PKeyCount(t *testing.T, app chainlink.Application, length int) []p2pkey.KeyV2 {
+func requireP2PKeyCount(t *testing.T, app erinaceus.Application, length int) []p2pkey.KeyV2 {
 	t.Helper()
 
 	keys, err := app.GetKeyStore().P2P().GetAll()

@@ -12,7 +12,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 	clnull "github.com/O1MaGnUmO1/erinaceus-vrf/core/null"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
@@ -28,7 +28,7 @@ func NewTestORM(t *testing.T, db *sqlx.DB, pipelineORM pipeline.ORM, bridgeORM b
 func TestSetDRMinIncomingConfirmations(t *testing.T) {
 	t.Parallel()
 
-	config := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	config := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		hundred := uint32(100)
 		c.EVM[0].MinIncomingConfirmations = &hundred
 	})

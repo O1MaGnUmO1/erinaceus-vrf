@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 
 	"github.com/gin-gonic/gin"
@@ -13,7 +13,7 @@ import (
 
 // ConfigController manages config variables
 type ConfigController struct {
-	App chainlink.Application
+	App erinaceus.Application
 }
 
 // Show returns the whitelist of config variables

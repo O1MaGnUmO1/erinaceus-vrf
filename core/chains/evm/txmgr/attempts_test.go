@@ -23,7 +23,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	ksmocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/mocks"
 )
 
@@ -157,19 +157,19 @@ func TestTxm_NewDynamicFeeTx(t *testing.T) {
 			name        string
 			tipcap      *assets.Wei
 			feecap      *assets.Wei
-			setCfg      func(*chainlink.Config, *chainlink.Secrets)
+			setCfg      func(*erinaceus.Config, *erinaceus.Secrets)
 			expectError string
 		}{
 			{"gas tip = fee cap", assets.GWei(5), assets.GWei(5), nil, ""},
 			{"gas tip < fee cap", assets.GWei(4), assets.GWei(5), nil, ""},
 			{"gas tip > fee cap", assets.GWei(6), assets.GWei(5), nil, "gas fee cap must be greater than or equal to gas tip cap (fee cap: 5 gwei, tip cap: 6 gwei)"},
-			{"fee cap exceeds max allowed", assets.GWei(5), assets.GWei(5), func(c *chainlink.Config, s *chainlink.Secrets) {
+			{"fee cap exceeds max allowed", assets.GWei(5), assets.GWei(5), func(c *erinaceus.Config, s *erinaceus.Secrets) {
 				c.EVM[0].GasEstimator.PriceMax = (*assets.Wei)(assets.GWei(4))
 			}, "specified gas fee cap of 5 gwei would exceed max configured gas price of 4 gwei"},
-			{"ignores global min gas price", assets.GWei(5), assets.GWei(5), func(c *chainlink.Config, s *chainlink.Secrets) {
+			{"ignores global min gas price", assets.GWei(5), assets.GWei(5), func(c *erinaceus.Config, s *erinaceus.Secrets) {
 				c.EVM[0].GasEstimator.PriceMin = (*assets.Wei)(assets.GWei(6))
 			}, ""},
-			{"tip cap below min allowed", assets.GWei(5), assets.GWei(5), func(c *chainlink.Config, s *chainlink.Secrets) {
+			{"tip cap below min allowed", assets.GWei(5), assets.GWei(5), func(c *erinaceus.Config, s *erinaceus.Secrets) {
 				c.EVM[0].GasEstimator.TipCapMin = (*assets.Wei)(assets.GWei(6))
 			}, "specified gas tip cap of 5 gwei is below min configured gas tip of 6 gwei"},
 		}

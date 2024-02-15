@@ -13,7 +13,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/pgtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 
@@ -69,7 +69,7 @@ func TestExternalInitiatorsController_Index(t *testing.T) {
 	t.Parallel()
 
 	app := cltest.NewApplicationWithConfig(t,
-		configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+		configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 			c.JobPipeline.ExternalInitiatorsEnabled = ptr(true)
 		}))
 	require.NoError(t, app.Start(testutils.Context(t)))
@@ -135,7 +135,7 @@ func TestExternalInitiatorsController_Create_success(t *testing.T) {
 	t.Parallel()
 
 	app := cltest.NewApplicationWithConfig(t,
-		configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+		configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 			c.JobPipeline.ExternalInitiatorsEnabled = ptr(true)
 		}))
 	require.NoError(t, app.Start(testutils.Context(t)))
@@ -163,7 +163,7 @@ func TestExternalInitiatorsController_Create_without_URL(t *testing.T) {
 	t.Parallel()
 
 	app := cltest.NewApplicationWithConfig(t,
-		configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+		configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 			c.JobPipeline.ExternalInitiatorsEnabled = ptr(true)
 		}))
 	require.NoError(t, app.Start(testutils.Context(t)))
@@ -191,7 +191,7 @@ func TestExternalInitiatorsController_Create_invalid(t *testing.T) {
 	t.Parallel()
 
 	app := cltest.NewApplicationWithConfig(t,
-		configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+		configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 			c.JobPipeline.ExternalInitiatorsEnabled = ptr(true)
 		}))
 	require.NoError(t, app.Start(testutils.Context(t)))
@@ -209,7 +209,7 @@ func TestExternalInitiatorsController_Delete(t *testing.T) {
 	t.Parallel()
 
 	app := cltest.NewApplicationWithConfig(t,
-		configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+		configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 			c.JobPipeline.ExternalInitiatorsEnabled = ptr(true)
 		}))
 	require.NoError(t, app.Start(testutils.Context(t)))
@@ -231,7 +231,7 @@ func TestExternalInitiatorsController_DeleteNotFound(t *testing.T) {
 	t.Parallel()
 
 	app := cltest.NewApplicationWithConfig(t,
-		configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+		configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 			c.JobPipeline.ExternalInitiatorsEnabled = ptr(true)
 		}))
 	require.NoError(t, app.Start(testutils.Context(t)))

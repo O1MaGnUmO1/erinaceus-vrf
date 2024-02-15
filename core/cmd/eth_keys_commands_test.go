@@ -20,7 +20,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/cmd"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 
 	"github.com/stretchr/testify/assert"
@@ -94,7 +94,7 @@ func TestShell_ListETHKeys(t *testing.T) {
 	ethClient.On("BalanceAt", mock.Anything, mock.Anything, mock.Anything).Return(big.NewInt(42), nil)
 	ethClient.On("LINKBalance", mock.Anything, mock.Anything, mock.Anything).Return(commonassets.NewLinkFromJuels(13), nil)
 	ethClient.On("PendingNonceAt", mock.Anything, mock.Anything).Return(uint64(0), nil)
-	app := startNewApplicationV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	app := startNewApplicationV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].Enabled = ptr(true)
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
@@ -119,7 +119,7 @@ func TestShell_ListETHKeys_Error(t *testing.T) {
 	ethClient.On("BalanceAt", mock.Anything, mock.Anything, mock.Anything).Return(nil, errors.New("fake error"))
 	ethClient.On("LINKBalance", mock.Anything, mock.Anything, mock.Anything).Return(nil, errors.New("fake error"))
 	ethClient.On("PendingNonceAt", mock.Anything, mock.Anything).Return(uint64(0), nil)
-	app := startNewApplicationV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	app := startNewApplicationV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].Enabled = ptr(true)
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
@@ -141,7 +141,7 @@ func TestShell_ListETHKeys_Disabled(t *testing.T) {
 	t.Parallel()
 
 	ethClient := newEthMock(t)
-	app := startNewApplicationV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	app := startNewApplicationV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].Enabled = ptr(false)
 	},
 		withKey(),
@@ -174,7 +174,7 @@ func TestShell_CreateETHKey(t *testing.T) {
 	ethClient.On("LINKBalance", mock.Anything, mock.Anything, mock.Anything).Return(commonassets.NewLinkFromJuels(42), nil)
 	ethClient.On("PendingNonceAt", mock.Anything, mock.Anything).Return(uint64(0), nil)
 
-	app := startNewApplicationV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	app := startNewApplicationV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].Enabled = ptr(true)
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
@@ -210,7 +210,7 @@ func TestShell_CreateETHKey(t *testing.T) {
 func TestShell_DeleteETHKey(t *testing.T) {
 	t.Parallel()
 
-	app := startNewApplicationV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	app := startNewApplicationV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].Enabled = ptr(true)
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
@@ -248,7 +248,7 @@ func TestShell_ImportExportETHKey_NoChains(t *testing.T) {
 	ethClient.On("BalanceAt", mock.Anything, mock.Anything, mock.Anything).Return(big.NewInt(42), nil)
 	ethClient.On("LINKBalance", mock.Anything, mock.Anything, mock.Anything).Return(commonassets.NewLinkFromJuels(42), nil)
 	ethClient.On("PendingNonceAt", mock.Anything, mock.Anything).Return(uint64(0), nil)
-	app := startNewApplicationV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	app := startNewApplicationV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].Enabled = ptr(true)
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
@@ -352,7 +352,7 @@ func TestShell_ImportExportETHKey_WithChains(t *testing.T) {
 
 	ethClient := newEthMock(t)
 	ethClient.On("PendingNonceAt", mock.Anything, mock.Anything).Return(uint64(0), nil)
-	app := startNewApplicationV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	app := startNewApplicationV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].Enabled = ptr(true)
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)

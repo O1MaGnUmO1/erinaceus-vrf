@@ -12,7 +12,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/require"
 
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
 
@@ -74,7 +74,7 @@ func jsonAPIResponse(c *gin.Context, resource interface{}, name string) {
 	jsonAPIResponseWithStatus(c, resource, name, http.StatusOK)
 }
 
-func Router(t testing.TB, app chainlink.Application, prometheus *ginprom.Prometheus) *gin.Engine {
+func Router(t testing.TB, app erinaceus.Application, prometheus *ginprom.Prometheus) *gin.Engine {
 	r, err := NewRouter(app, prometheus)
 	require.NoError(t, err)
 	return r

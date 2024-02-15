@@ -21,7 +21,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/pgtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
 
@@ -144,7 +144,7 @@ func TestShell_SendEther_From_Txm(t *testing.T) {
 	ethMock.On("SequenceAt", mock.Anything, mock.Anything, mock.Anything).Return(evmtypes.Nonce(0), nil).Maybe()
 	ethMock.On("PendingNonceAt", mock.Anything, fromAddress).Return(uint64(0), nil).Once()
 
-	app := startNewApplicationV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	app := startNewApplicationV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].Enabled = ptr(true)
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
@@ -210,7 +210,7 @@ func TestShell_SendEther_From_Txm_WEI(t *testing.T) {
 	ethMock.On("SequenceAt", mock.Anything, mock.Anything, mock.Anything).Return(evmtypes.Nonce(0), nil).Maybe()
 	ethMock.On("PendingNonceAt", mock.Anything, fromAddress).Return(uint64(0), nil).Once()
 
-	app := startNewApplicationV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	app := startNewApplicationV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].Enabled = ptr(true)
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)

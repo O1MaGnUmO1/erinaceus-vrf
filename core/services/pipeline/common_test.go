@@ -17,7 +17,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
 )
 
@@ -302,7 +302,7 @@ func TestTaskRunResult_IsPending(t *testing.T) {
 func TestSelectGasLimit(t *testing.T) {
 	t.Parallel()
 
-	gcfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	gcfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].GasEstimator.LimitDefault = testutils.Ptr(uint32(999))
 		c.EVM[0].GasEstimator.LimitJobType = toml.GasLimitJobType{
 			DR:     testutils.Ptr(uint32(100)),

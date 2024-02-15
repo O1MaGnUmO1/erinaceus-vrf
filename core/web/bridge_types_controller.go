@@ -11,7 +11,7 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/assets"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/bridges"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 
@@ -54,7 +54,7 @@ func ValidateBridgeType(bt *bridges.BridgeTypeRequest) error {
 
 // BridgeTypesController manages BridgeType requests in the node.
 type BridgeTypesController struct {
-	App chainlink.Application
+	App erinaceus.Application
 }
 
 // Create adds the BridgeType to the given context.

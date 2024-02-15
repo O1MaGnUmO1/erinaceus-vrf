@@ -16,7 +16,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/legacyevm"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 
@@ -25,7 +25,7 @@ import (
 
 // EVMTransfersController can send LINK tokens to another address
 type EVMTransfersController struct {
-	App chainlink.Application
+	App erinaceus.Application
 }
 
 // Create sends ETH from the Chainlink's account to a specified address.

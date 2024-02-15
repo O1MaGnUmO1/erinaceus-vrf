@@ -20,7 +20,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 )
 
 type mockLoopImpl struct {
@@ -62,7 +62,7 @@ func (m *mockLoopImpl) run() {
 }
 
 func TestLoopRegistry(t *testing.T) {
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.OCR.Enabled = ptr(true)
 		c.P2P.V2.Enabled = ptr(true)
 		c.P2P.V2.ListenAddresses = &[]string{fmt.Sprintf("127.0.0.1:%d", freeport.GetOne(t))}

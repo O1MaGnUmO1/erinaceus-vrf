@@ -14,7 +14,7 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/cmd"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/dkgsignkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 )
@@ -161,7 +161,7 @@ func TestShell_DKGSignKeys(t *testing.T) {
 	})
 }
 
-func requireDKGSignKeyCount(t *testing.T, app chainlink.Application, length int) []dkgsignkey.Key {
+func requireDKGSignKeyCount(t *testing.T, app erinaceus.Application, length int) []dkgsignkey.Key {
 	t.Helper()
 	keys, err := app.GetKeyStore().DKGSign().GetAll()
 	require.NoError(t, err)

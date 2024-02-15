@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"net/http"
 
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 
 	"github.com/ethereum/go-ethereum/common"
@@ -14,7 +14,7 @@ import (
 
 // TransactionsController displays Ethereum transactions requests.
 type TransactionsController struct {
-	App chainlink.Application
+	App erinaceus.Application
 }
 
 // Index returns paginated transactions

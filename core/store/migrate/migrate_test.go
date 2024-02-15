@@ -23,7 +23,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/pgtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
@@ -59,7 +59,7 @@ func getOCR2Spec100() OffchainReporting2OracleSpec100 {
 		RelayConfig:                       map[string]interface{}{"chainID": float64(1337)},
 		P2PBootstrapPeers:                 pq.StringArray{""},
 		OCRKeyBundleID:                    null.String{},
-		MonitoringEndpoint:                null.StringFrom("endpoint:chainlink.monitor"),
+		MonitoringEndpoint:                null.StringFrom("endpoint:erinaceus.monitor"),
 		TransmitterID:                     null.String{},
 		BlockchainTimeout:                 1337,
 		ContractConfigTrackerPollInterval: 16,
@@ -418,7 +418,7 @@ func TestMigrate(t *testing.T) {
 func TestSetMigrationENVVars(t *testing.T) {
 	t.Run("ValidEVMConfig", func(t *testing.T) {
 		chainID := ubig.New(big.NewInt(1337))
-		testConfig := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+		testConfig := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 			evmEnabled := true
 			c.EVM = evmcfg.EVMConfigs{&evmcfg.EVMConfig{
 				ChainID: chainID,
@@ -434,7 +434,7 @@ func TestSetMigrationENVVars(t *testing.T) {
 
 	t.Run("EVMConfigMissing", func(t *testing.T) {
 		chainID := ubig.New(big.NewInt(1337))
-		testConfig := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) { c.EVM = nil })
+		testConfig := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) { c.EVM = nil })
 
 		require.NoError(t, migrate.SetMigrationENVVars(testConfig))
 

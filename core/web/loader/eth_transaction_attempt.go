@@ -6,12 +6,12 @@ import (
 	"github.com/graph-gophers/dataloader"
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/txmgr"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils/stringutils"
 )
 
 type ethTransactionAttemptBatcher struct {
-	app chainlink.Application
+	app erinaceus.Application
 }
 
 func (b *ethTransactionAttemptBatcher) loadByEthTransactionIDs(ctx context.Context, keys dataloader.Keys) []*dataloader.Result {

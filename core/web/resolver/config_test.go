@@ -8,7 +8,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 )
 
 var (
@@ -39,7 +39,7 @@ func TestResolver_ConfigV2(t *testing.T) {
 			name:          "empty",
 			authenticated: true,
 			before: func(f *gqlTestFramework) {
-				opts := chainlink.GeneralConfigOpts{}
+				opts := erinaceus.GeneralConfigOpts{}
 				cfg, err := opts.New()
 				require.NoError(t, err)
 				f.App.On("GetConfig").Return(cfg)
@@ -51,7 +51,7 @@ func TestResolver_ConfigV2(t *testing.T) {
 			name:          "full",
 			authenticated: true,
 			before: func(f *gqlTestFramework) {
-				opts := chainlink.GeneralConfigOpts{
+				opts := erinaceus.GeneralConfigOpts{
 					ConfigStrings:  []string{configFull},
 					SecretsStrings: []string{},
 				}
@@ -66,7 +66,7 @@ func TestResolver_ConfigV2(t *testing.T) {
 			name:          "partial",
 			authenticated: true,
 			before: func(f *gqlTestFramework) {
-				opts := chainlink.GeneralConfigOpts{
+				opts := erinaceus.GeneralConfigOpts{
 					ConfigStrings:  []string{configMulti},
 					SecretsStrings: []string{},
 				}

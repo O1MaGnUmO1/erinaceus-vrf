@@ -9,7 +9,7 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/types"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config/toml"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
 
@@ -43,7 +43,7 @@ func TestResolver_Nodes(t *testing.T) {
 			name:          "success",
 			authenticated: true,
 			before: func(f *gqlTestFramework) {
-				f.App.On("GetRelayers").Return(chainlink.RelayerChainInteroperators(f.Mocks.relayerChainInterops))
+				f.App.On("GetRelayers").Return(erinaceus.RelayerChainInteroperators(f.Mocks.relayerChainInterops))
 				f.Mocks.relayerChainInterops.Nodes = []types.NodeStatus{
 					{
 						Name:    "node-name",

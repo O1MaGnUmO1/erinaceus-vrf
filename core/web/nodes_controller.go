@@ -10,7 +10,7 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/types"
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/relay"
 )
 
@@ -21,11 +21,11 @@ type NodesController interface {
 
 type NetworkScopedNodeStatuser struct {
 	network  relay.Network
-	relayers chainlink.RelayerChainInteroperators
+	relayers erinaceus.RelayerChainInteroperators
 }
 
-func NewNetworkScopedNodeStatuser(relayers chainlink.RelayerChainInteroperators, network relay.Network) *NetworkScopedNodeStatuser {
-	scoped := relayers.List(chainlink.FilterRelayersByType(network))
+func NewNetworkScopedNodeStatuser(relayers erinaceus.RelayerChainInteroperators, network relay.Network) *NetworkScopedNodeStatuser {
+	scoped := relayers.List(erinaceus.FilterRelayersByType(network))
 	return &NetworkScopedNodeStatuser{
 		network:  network,
 		relayers: scoped,

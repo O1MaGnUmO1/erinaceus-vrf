@@ -27,7 +27,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/p2pkey"
@@ -151,7 +151,7 @@ func TestJobsController_FailToCreate_EmptyJsonAttribute(t *testing.T) {
 }
 
 func TestJobsController_Update_HappyPath(t *testing.T) {
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.OCR.Enabled = ptr(true)
 		c.P2P.V2.Enabled = ptr(true)
 		c.P2P.V2.ListenAddresses = &[]string{fmt.Sprintf("127.0.0.1:%d", freeport.GetOne(t))}
@@ -213,7 +213,7 @@ func TestJobsController_Update_HappyPath(t *testing.T) {
 }
 
 func TestJobsController_Update_NonExistentID(t *testing.T) {
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.OCR.Enabled = ptr(true)
 		c.P2P.V2.Enabled = ptr(true)
 		c.P2P.V2.ListenAddresses = &[]string{fmt.Sprintf("127.0.0.1:%d", freeport.GetOne(t))}
@@ -298,7 +298,7 @@ func setupBridges(t *testing.T, db *sqlx.DB, cfg pg.QConfig) (b1, b2 string) {
 }
 
 func setupJobsControllerTests(t *testing.T) (ta *cltest.TestApplication, cc cltest.HTTPClientCleaner) {
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.OCR.Enabled = ptr(true)
 		c.P2P.V2.Enabled = ptr(true)
 		c.P2P.V2.ListenAddresses = &[]string{fmt.Sprintf("127.0.0.1:%d", freeport.GetOne(t))}

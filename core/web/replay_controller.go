@@ -8,11 +8,11 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 )
 
 type ReplayController struct {
-	App chainlink.Application
+	App erinaceus.Application
 }
 
 // ReplayFromBlock causes the node to process blocks again from the given block number

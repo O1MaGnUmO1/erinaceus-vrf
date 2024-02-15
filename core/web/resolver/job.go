@@ -5,22 +5,22 @@ import (
 
 	"github.com/graph-gophers/graphql-go"
 
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/loader"
 )
 
 // JobResolver resolves the Job type.
 type JobResolver struct {
-	app chainlink.Application
+	app erinaceus.Application
 	j   job.Job
 }
 
-func NewJob(app chainlink.Application, j job.Job) *JobResolver {
+func NewJob(app erinaceus.Application, j job.Job) *JobResolver {
 	return &JobResolver{app: app, j: j}
 }
 
-func NewJobs(app chainlink.Application, jobs []job.Job) []*JobResolver {
+func NewJobs(app erinaceus.Application, jobs []job.Job) []*JobResolver {
 	var resolvers []*JobResolver
 	for _, j := range jobs {
 		resolvers = append(resolvers, NewJob(app, j))
@@ -133,12 +133,12 @@ func (r *JobResolver) Runs(ctx context.Context, args struct {
 
 // JobsPayloadResolver resolves a page of jobs
 type JobsPayloadResolver struct {
-	app   chainlink.Application
+	app   erinaceus.Application
 	jobs  []job.Job
 	total int32
 }
 
-func NewJobsPayload(app chainlink.Application, jobs []job.Job, total int32) *JobsPayloadResolver {
+func NewJobsPayload(app erinaceus.Application, jobs []job.Job, total int32) *JobsPayloadResolver {
 	return &JobsPayloadResolver{
 		app:   app,
 		jobs:  jobs,
@@ -157,12 +157,12 @@ func (r *JobsPayloadResolver) Metadata() *PaginationMetadataResolver {
 }
 
 type JobPayloadResolver struct {
-	app chainlink.Application
+	app erinaceus.Application
 	job *job.Job
 	NotFoundErrorUnionType
 }
 
-func NewJobPayload(app chainlink.Application, j *job.Job, err error) *JobPayloadResolver {
+func NewJobPayload(app erinaceus.Application, j *job.Job, err error) *JobPayloadResolver {
 	e := NotFoundErrorUnionType{err, "job not found", nil}
 
 	return &JobPayloadResolver{app: app, job: j, NotFoundErrorUnionType: e}
@@ -180,12 +180,12 @@ func (r *JobPayloadResolver) ToJob() (*JobResolver, bool) {
 // -- CreateJob Mutation --
 
 type CreateJobPayloadResolver struct {
-	app       chainlink.Application
+	app       erinaceus.Application
 	j         *job.Job
 	inputErrs map[string]string
 }
 
-func NewCreateJobPayload(app chainlink.Application, job *job.Job, inputErrs map[string]string) *CreateJobPayloadResolver {
+func NewCreateJobPayload(app erinaceus.Application, job *job.Job, inputErrs map[string]string) *CreateJobPayloadResolver {
 	return &CreateJobPayloadResolver{app: app, j: job, inputErrs: inputErrs}
 }
 
@@ -212,11 +212,11 @@ func (r *CreateJobPayloadResolver) ToInputErrors() (*InputErrorsResolver, bool) 
 }
 
 type CreateJobSuccessResolver struct {
-	app chainlink.Application
+	app erinaceus.Application
 	j   *job.Job
 }
 
-func NewCreateJobSuccess(app chainlink.Application, job *job.Job) *CreateJobSuccessResolver {
+func NewCreateJobSuccess(app erinaceus.Application, job *job.Job) *CreateJobSuccessResolver {
 	return &CreateJobSuccessResolver{app: app, j: job}
 }
 
@@ -227,12 +227,12 @@ func (r *CreateJobSuccessResolver) Job() *JobResolver {
 // -- DeleteJob Mutation --
 
 type DeleteJobPayloadResolver struct {
-	app chainlink.Application
+	app erinaceus.Application
 	j   *job.Job
 	NotFoundErrorUnionType
 }
 
-func NewDeleteJobPayload(app chainlink.Application, j *job.Job, err error) *DeleteJobPayloadResolver {
+func NewDeleteJobPayload(app erinaceus.Application, j *job.Job, err error) *DeleteJobPayloadResolver {
 	e := NotFoundErrorUnionType{err: err, message: "job not found"}
 
 	return &DeleteJobPayloadResolver{app: app, j: j, NotFoundErrorUnionType: e}
@@ -247,11 +247,11 @@ func (r *DeleteJobPayloadResolver) ToDeleteJobSuccess() (*DeleteJobSuccessResolv
 }
 
 type DeleteJobSuccessResolver struct {
-	app chainlink.Application
+	app erinaceus.Application
 	j   *job.Job
 }
 
-func NewDeleteJobSuccess(app chainlink.Application, job *job.Job) *DeleteJobSuccessResolver {
+func NewDeleteJobSuccess(app erinaceus.Application, job *job.Job) *DeleteJobSuccessResolver {
 	return &DeleteJobSuccessResolver{app: app, j: job}
 }
 

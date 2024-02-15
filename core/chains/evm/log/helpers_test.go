@@ -38,7 +38,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/pgtest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
@@ -58,7 +58,7 @@ type broadcasterHelper struct {
 	pipelineHelper cltest.JobPipelineV2TestHelper
 }
 
-func newBroadcasterHelper(t *testing.T, blockHeight int64, timesSubscribe int, filterLogsResult []types.Log, overridesFn func(*chainlink.Config, *chainlink.Secrets)) *broadcasterHelper {
+func newBroadcasterHelper(t *testing.T, blockHeight int64, timesSubscribe int, filterLogsResult []types.Log, overridesFn func(*erinaceus.Config, *erinaceus.Secrets)) *broadcasterHelper {
 	// ensure we check before registering any mock Cleanup assertions
 	testutils.SkipShortDB(t)
 
@@ -77,8 +77,8 @@ func newBroadcasterHelper(t *testing.T, blockHeight int64, timesSubscribe int, f
 	return helper
 }
 
-func newBroadcasterHelperWithEthClient(t *testing.T, ethClient evmclient.Client, highestSeenHead *evmtypes.Head, overridesFn func(*chainlink.Config, *chainlink.Secrets)) *broadcasterHelper {
-	globalConfig := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+func newBroadcasterHelperWithEthClient(t *testing.T, ethClient evmclient.Client, highestSeenHead *evmtypes.Head, overridesFn func(*erinaceus.Config, *erinaceus.Secrets)) *broadcasterHelper {
+	globalConfig := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.Database.LogQueries = ptr(true)
 		finality := uint32(10)
 		c.EVM[0].FinalityDepth = &finality

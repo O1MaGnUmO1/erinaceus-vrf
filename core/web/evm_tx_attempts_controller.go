@@ -1,7 +1,7 @@
 package web
 
 import (
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 
 	"github.com/gin-gonic/gin"
@@ -9,7 +9,7 @@ import (
 
 // TxAttemptsController lists TxAttempts requests.
 type TxAttemptsController struct {
-	App chainlink.Application
+	App erinaceus.Application
 }
 
 // Index returns paginated transaction attempts

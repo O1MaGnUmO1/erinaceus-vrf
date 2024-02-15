@@ -22,7 +22,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/cmd"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/sessions"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web"
 
@@ -84,24 +84,24 @@ func (rm *RendererMock) Render(v interface{}, headers ...string) error {
 
 // InstanceAppFactory is an InstanceAppFactory
 type InstanceAppFactory struct {
-	App chainlink.Application
+	App erinaceus.Application
 }
 
 // NewApplication creates a new application with specified config
-func (f InstanceAppFactory) NewApplication(context.Context, chainlink.GeneralConfig, logger.Logger, *sqlx.DB) (chainlink.Application, error) {
+func (f InstanceAppFactory) NewApplication(context.Context, erinaceus.GeneralConfig, logger.Logger, *sqlx.DB) (erinaceus.Application, error) {
 	return f.App, nil
 }
 
 type seededAppFactory struct {
-	Application chainlink.Application
+	Application erinaceus.Application
 }
 
-func (s seededAppFactory) NewApplication(context.Context, chainlink.GeneralConfig, logger.Logger, *sqlx.DB) (chainlink.Application, error) {
+func (s seededAppFactory) NewApplication(context.Context, erinaceus.GeneralConfig, logger.Logger, *sqlx.DB) (erinaceus.Application, error) {
 	return noopStopApplication{s.Application}, nil
 }
 
 type noopStopApplication struct {
-	chainlink.Application
+	erinaceus.Application
 }
 
 // FIXME: Why bother with this wrapper?
@@ -115,7 +115,7 @@ type BlockedRunner struct {
 }
 
 // Run runs the blocked runner, doesn't return until the channel is signalled
-func (r BlockedRunner) Run(context.Context, chainlink.Application) error {
+func (r BlockedRunner) Run(context.Context, erinaceus.Application) error {
 	<-r.Done
 	return nil
 }
@@ -124,7 +124,7 @@ func (r BlockedRunner) Run(context.Context, chainlink.Application) error {
 type EmptyRunner struct{}
 
 // Run runs the empty runner
-func (r EmptyRunner) Run(context.Context, chainlink.Application) error {
+func (r EmptyRunner) Run(context.Context, erinaceus.Application) error {
 	return nil
 }
 
@@ -303,7 +303,7 @@ func (ns NeverSleeper) Duration() time.Duration { return 0 * time.Microsecond }
 
 // MustRandomUser inserts a new admin user with a random email into the test DB
 func MustRandomUser(t testing.TB) sessions.User {
-	email := fmt.Sprintf("user-%v@chainlink.test", NewRandomPositiveInt64())
+	email := fmt.Sprintf("user-%v@erinaceus.test", NewRandomPositiveInt64())
 	r, err := sessions.NewUser(email, Password, sessions.UserRoleAdmin)
 	if err != nil {
 		logger.TestLogger(t).Panic(err)

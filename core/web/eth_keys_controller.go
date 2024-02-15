@@ -16,7 +16,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/toml"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
 	evmrelay "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/relay/evm"
@@ -30,11 +30,11 @@ import (
 
 // ETHKeysController manages account keys
 type ETHKeysController struct {
-	app  chainlink.Application
+	app  erinaceus.Application
 	lggr logger.Logger
 }
 
-func NewETHKeysController(app chainlink.Application) *ETHKeysController {
+func NewETHKeysController(app erinaceus.Application) *ETHKeysController {
 	return &ETHKeysController{
 		app:  app,
 		lggr: app.GetLogger().Named("ETHKeysController"),

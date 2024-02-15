@@ -15,7 +15,7 @@ import (
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/cmd"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
@@ -275,7 +275,7 @@ func TestJob_ToRows(t *testing.T) {
 func TestShell_ListFindJobs(t *testing.T) {
 	t.Parallel()
 
-	app := startNewApplicationV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	app := startNewApplicationV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].Enabled = ptr(true)
 	})
 	client, r := app.NewShellAndRenderer()
@@ -296,7 +296,7 @@ func TestShell_ListFindJobs(t *testing.T) {
 func TestShell_ShowJob(t *testing.T) {
 	t.Parallel()
 
-	app := startNewApplicationV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	app := startNewApplicationV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].Enabled = ptr(true)
 	})
 	client, r := app.NewShellAndRenderer()
@@ -324,7 +324,7 @@ func TestShell_ShowJob(t *testing.T) {
 func TestShell_CreateJobV2(t *testing.T) {
 	t.Parallel()
 
-	app := startNewApplicationV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	app := startNewApplicationV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.Database.Listener.FallbackPollInterval = models.MustNewDuration(100 * time.Millisecond)
 		c.OCR.Enabled = ptr(true)
 		c.P2P.V2.Enabled = ptr(true)
@@ -358,7 +358,7 @@ func TestShell_CreateJobV2(t *testing.T) {
 func TestShell_DeleteJob(t *testing.T) {
 	t.Parallel()
 
-	app := startNewApplicationV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	app := startNewApplicationV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.Database.Listener.FallbackPollInterval = models.MustNewDuration(100 * time.Millisecond)
 		c.EVM[0].Enabled = ptr(true)
 		c.EVM[0].NonceAutoSync = ptr(false)

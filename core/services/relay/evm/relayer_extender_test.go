@@ -16,7 +16,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/pgtest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	evmrelay "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/relay/evm"
 )
 
@@ -24,7 +24,7 @@ func TestChainRelayExtenders(t *testing.T) {
 	t.Parallel()
 
 	newId := testutils.NewRandomEVMChainID()
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		one := uint32(1)
 		c.EVM[0].MinIncomingConfirmations = &one
 		t := true

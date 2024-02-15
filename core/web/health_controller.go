@@ -11,12 +11,12 @@ import (
 	"github.com/gin-gonic/gin"
 	"golang.org/x/exp/maps"
 
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 )
 
 type HealthController struct {
-	App chainlink.Application
+	App erinaceus.Application
 }
 
 const (

@@ -11,7 +11,7 @@ import (
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/relay"
 )
 
@@ -25,7 +25,7 @@ type ChainsController interface {
 type chainsController[R jsonapi.EntityNamer] struct {
 	network       relay.Network
 	resourceName  string
-	chainStats    chainlink.ChainStatuser
+	chainStats    erinaceus.ChainStatuser
 	errNotEnabled error
 	newResource   func(types.ChainStatus) R
 	lggr          logger.Logger
@@ -41,7 +41,7 @@ func (e errChainDisabled) Error() string {
 	return fmt.Sprintf("%s is disabled: Set %s=true to enable", e.name, e.tomlKey)
 }
 
-func newChainsController[R jsonapi.EntityNamer](network relay.Network, chainStats chainlink.ChainsNodesStatuser, errNotEnabled error,
+func newChainsController[R jsonapi.EntityNamer](network relay.Network, chainStats erinaceus.ChainsNodesStatuser, errNotEnabled error,
 	newResource func(types.ChainStatus) R, lggr logger.Logger, auditLogger audit.AuditLogger) *chainsController[R] {
 	return &chainsController[R]{
 		network:       network,

@@ -12,7 +12,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/cmd"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 )
 
 func newRandChainID() *big.Big {
@@ -22,7 +22,7 @@ func newRandChainID() *big.Big {
 func TestShell_IndexEVMChains(t *testing.T) {
 	t.Parallel()
 
-	app := startNewApplicationV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	app := startNewApplicationV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].Enabled = ptr(true)
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)

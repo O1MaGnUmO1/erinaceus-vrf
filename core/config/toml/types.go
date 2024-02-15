@@ -28,7 +28,7 @@ import (
 
 var ErrUnsupported = errors.New("unsupported with config v2")
 
-// Core holds the core configuration. See chainlink.Config for more information.
+// Core holds the core configuration. See erinaceus.Config for more information.
 type Core struct {
 	// General/misc
 	AppID               uuid.UUID `toml:"-"` // random or test

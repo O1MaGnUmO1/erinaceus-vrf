@@ -11,7 +11,7 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/webhook"
@@ -21,7 +21,7 @@ import (
 
 // PipelineRunsController manages V2 job run requests.
 type PipelineRunsController struct {
-	App chainlink.Application
+	App erinaceus.Application
 }
 
 // Index returns all pipeline runs for a job.

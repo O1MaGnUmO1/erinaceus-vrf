@@ -7,14 +7,14 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/p2pkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 )
 
 // P2PKeysController manages P2P keys
 type P2PKeysController struct {
-	App chainlink.Application
+	App erinaceus.Application
 }
 
 // Index lists P2P keys

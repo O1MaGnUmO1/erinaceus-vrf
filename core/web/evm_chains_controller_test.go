@@ -16,7 +16,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
@@ -73,7 +73,7 @@ func Test_EVMChainsController_Show(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			t.Parallel()
 
-			controller := setupEVMChainsControllerTest(t, configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+			controller := setupEVMChainsControllerTest(t, configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 				if tc.want != nil {
 					c.EVM = evmcfg.EVMConfigs{tc.want}
 				}
@@ -141,7 +141,7 @@ func Test_EVMChainsController_Index(t *testing.T) {
 	}
 
 	assert.Len(t, configuredChains, 3)
-	controller := setupEVMChainsControllerTest(t, configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	controller := setupEVMChainsControllerTest(t, configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM = append(c.EVM, configuredChains...)
 	}))
 
@@ -198,7 +198,7 @@ type TestEVMChainsController struct {
 	client cltest.HTTPClientCleaner
 }
 
-func setupEVMChainsControllerTest(t *testing.T, cfg chainlink.GeneralConfig) *TestEVMChainsController {
+func setupEVMChainsControllerTest(t *testing.T, cfg erinaceus.GeneralConfig) *TestEVMChainsController {
 	// Using this instead of `NewApplicationEVMDisabled` since we need the chain set to be loaded in the app
 	// for the sake of the API endpoints to work properly
 	app := cltest.NewApplicationWithConfig(t, cfg)

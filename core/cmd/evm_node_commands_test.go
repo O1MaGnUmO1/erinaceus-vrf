@@ -12,7 +12,7 @@ import (
 	evmcfg "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config/toml"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/cmd"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
 
@@ -48,7 +48,7 @@ func TestShell_IndexEVMNodes(t *testing.T) {
 		Chain:   evmcfg.Defaults(chainID),
 		Nodes:   evmcfg.EVMNodes{&node1, &node2},
 	}
-	app := startNewApplicationV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	app := startNewApplicationV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM = evmcfg.EVMConfigs{&chain}
 	})
 	client, r := app.NewShellAndRenderer()

@@ -7,13 +7,13 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 )
 
 // VRFKeysController manages VRF keys
 type VRFKeysController struct {
-	App chainlink.Application
+	App erinaceus.Application
 }
 
 // Index lists VRF keys

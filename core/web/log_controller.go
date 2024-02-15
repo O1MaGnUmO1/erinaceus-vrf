@@ -9,13 +9,13 @@ import (
 	"go.uber.org/zap/zapcore"
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 )
 
 // LogController manages the logger config
 type LogController struct {
-	App chainlink.Application
+	App erinaceus.Application
 }
 
 type LogPatchRequest struct {

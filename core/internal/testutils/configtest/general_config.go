@@ -12,22 +12,22 @@ import (
 	evmcfg "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config/toml"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/dialects"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
 
 const DefaultPeerID = "12D3KooWPjceQrSwdWXPyLLeABRXmuqt69Rg3sBYbU1Nft9HyQ6X"
 
-// NewTestGeneralConfig returns a new chainlink.GeneralConfig with default test overrides and one chain with evmclient.NullClientChainID.
-func NewTestGeneralConfig(t testing.TB) chainlink.GeneralConfig { return NewGeneralConfig(t, nil) }
+// NewTestGeneralConfig returns a new erinaceus.GeneralConfig with default test overrides and one chain with evmclient.NullClientChainID.
+func NewTestGeneralConfig(t testing.TB) erinaceus.GeneralConfig { return NewGeneralConfig(t, nil) }
 
-// NewGeneralConfig returns a new chainlink.GeneralConfig with overrides.
+// NewGeneralConfig returns a new erinaceus.GeneralConfig with overrides.
 // The default test overrides are applied before overrideFn, and include one chain with evmclient.NullClientChainID.
-func NewGeneralConfig(t testing.TB, overrideFn func(*chainlink.Config, *chainlink.Secrets)) chainlink.GeneralConfig {
+func NewGeneralConfig(t testing.TB, overrideFn func(*erinaceus.Config, *erinaceus.Secrets)) erinaceus.GeneralConfig {
 	tempDir := t.TempDir()
-	g, err := chainlink.GeneralConfigOpts{
-		OverrideFn: func(c *chainlink.Config, s *chainlink.Secrets) {
+	g, err := erinaceus.GeneralConfigOpts{
+		OverrideFn: func(c *erinaceus.Config, s *erinaceus.Secrets) {
 			overrides(c, s)
 			c.RootDir = &tempDir
 			if fn := overrideFn; fn != nil {
@@ -40,7 +40,7 @@ func NewGeneralConfig(t testing.TB, overrideFn func(*chainlink.Config, *chainlin
 }
 
 // overrides applies some test config settings and adds a default chain with evmclient.NullClientChainID.
-func overrides(c *chainlink.Config, s *chainlink.Secrets) {
+func overrides(c *erinaceus.Config, s *erinaceus.Secrets) {
 	s.Password.Keystore = models.NewSecret("dummy-to-pass-validation")
 
 	c.Insecure.OCRDevelopmentMode = ptr(true)
@@ -80,11 +80,11 @@ func overrides(c *chainlink.Config, s *chainlink.Secrets) {
 	})
 }
 
-// NewGeneralConfigSimulated returns a new chainlink.GeneralConfig with overrides, including the simulated EVM chain.
+// NewGeneralConfigSimulated returns a new erinaceus.GeneralConfig with overrides, including the simulated EVM chain.
 // The default test overrides are applied before overrideFn.
 // The simulated chain (testutils.SimulatedChainID) replaces the null chain (evmclient.NullClientChainID).
-func NewGeneralConfigSimulated(t testing.TB, overrideFn func(*chainlink.Config, *chainlink.Secrets)) chainlink.GeneralConfig {
-	return NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+func NewGeneralConfigSimulated(t testing.TB, overrideFn func(*erinaceus.Config, *erinaceus.Secrets)) erinaceus.GeneralConfig {
+	return NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		simulated(c, s)
 		if fn := overrideFn; fn != nil {
 			fn(c, s)
@@ -94,7 +94,7 @@ func NewGeneralConfigSimulated(t testing.TB, overrideFn func(*chainlink.Config, 
 
 // simulated is a config override func that appends the simulated EVM chain (testutils.SimulatedChainID),
 // or replaces the null chain (client.NullClientChainID) if that is the only entry.
-func simulated(c *chainlink.Config, s *chainlink.Secrets) {
+func simulated(c *erinaceus.Config, s *erinaceus.Secrets) {
 	chainID := big.New(testutils.SimulatedChainID)
 	enabled := true
 	cfg := evmcfg.EVMConfig{

@@ -37,7 +37,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/pgtest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
 
@@ -422,7 +422,7 @@ func TestHeadTracker_SwitchesToLongestChainWithHeadSamplingEnabled(t *testing.T)
 	db := pgtest.NewSqlxDB(t)
 	logger := logger.Test(t)
 
-	config := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	config := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].FinalityDepth = ptr[uint32](50)
 		// Need to set the buffer to something large since we inject a lot of heads at once and otherwise they will be dropped
 		c.EVM[0].HeadTracker.MaxBufferSize = ptr[uint32](100)
@@ -550,7 +550,7 @@ func TestHeadTracker_SwitchesToLongestChainWithHeadSamplingDisabled(t *testing.T
 	db := pgtest.NewSqlxDB(t)
 	logger := logger.Test(t)
 
-	config := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	config := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].FinalityDepth = ptr[uint32](50)
 		// Need to set the buffer to something large since we inject a lot of heads at once and otherwise they will be dropped
 		c.EVM[0].HeadTracker.MaxBufferSize = ptr[uint32](100)
@@ -1005,7 +1005,7 @@ func createHeadTracker(t *testing.T, ethClient evmclient.Client, config headtrac
 	}
 }
 
-func createHeadTrackerWithNeverSleeper(t *testing.T, ethClient evmclient.Client, cfg chainlink.GeneralConfig, orm headtracker.ORM) *headTrackerUniverse {
+func createHeadTrackerWithNeverSleeper(t *testing.T, ethClient evmclient.Client, cfg erinaceus.GeneralConfig, orm headtracker.ORM) *headTrackerUniverse {
 	evmcfg := evmtest.NewChainScopedConfig(t, cfg)
 	lggr := logger.Test(t)
 	hb := headtracker.NewHeadBroadcaster(lggr)

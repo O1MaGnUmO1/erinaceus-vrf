@@ -9,7 +9,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/auth"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/bridges"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 
@@ -42,7 +42,7 @@ func ValidateExternalInitiator(
 
 // ExternalInitiatorsController manages external initiators
 type ExternalInitiatorsController struct {
-	App chainlink.Application
+	App erinaceus.Application
 }
 
 func (eic *ExternalInitiatorsController) Index(c *gin.Context, size, page, offset int) {

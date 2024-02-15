@@ -21,7 +21,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/pgtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
@@ -705,7 +705,7 @@ func Test_Prune(t *testing.T) {
 
 	n := uint64(2)
 
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.JobPipeline.MaxSuccessfulRuns = &n
 	})
 	lggr, observed := logger.TestLoggerObserved(t, zapcore.DebugLevel)

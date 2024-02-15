@@ -39,7 +39,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/pgtest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 )
 
@@ -1331,7 +1331,7 @@ func TestNotifyAfterInsert(t *testing.T) {
 	// Use a non-transactional db for this test because notify events
 	// are not delivered until the transaction is committed.
 	var dbURL string
-	_, sqlxDB := heavyweight.FullTestDBV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	_, sqlxDB := heavyweight.FullTestDBV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		dbURL = s.Database.URL.URL().String()
 	})
 

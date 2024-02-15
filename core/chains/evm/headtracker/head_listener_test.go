@@ -20,7 +20,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
 
@@ -37,7 +37,7 @@ func Test_HeadListener_HappyPath(t *testing.T) {
 
 	lggr := logger.Test(t)
 	ethClient := evmtest.NewEthClientMockWithDefaultChain(t)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		// no need to test head timeouts here
 		c.EVM[0].NoNewHeadsThreshold = &models.Duration{}
 	})
@@ -99,7 +99,7 @@ func Test_HeadListener_NotReceivingHeads(t *testing.T) {
 	lggr := logger.Test(t)
 	ethClient := evmtest.NewEthClientMockWithDefaultChain(t)
 
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].NoNewHeadsThreshold = models.MustNewDuration(time.Second)
 	})
 	evmcfg := evmtest.NewChainScopedConfig(t, cfg)

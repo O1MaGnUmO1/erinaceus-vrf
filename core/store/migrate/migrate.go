@@ -16,7 +16,7 @@ import (
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/env"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/migrate/migrations" // Invoke init() functions within migrations pkg.
 )
@@ -140,7 +140,7 @@ func Create(db *sql.DB, name, migrationType string) error {
 }
 
 // SetMigrationENVVars is used to inject values from config to goose migrations via env.
-func SetMigrationENVVars(generalConfig chainlink.GeneralConfig) error {
+func SetMigrationENVVars(generalConfig erinaceus.GeneralConfig) error {
 	if generalConfig.EVMEnabled() {
 		err := os.Setenv(env.EVMChainIDNotNullMigration0195, generalConfig.EVMConfigs()[0].ChainID.String())
 		if err != nil {

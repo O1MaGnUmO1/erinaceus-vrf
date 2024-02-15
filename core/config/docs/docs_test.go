@@ -14,8 +14,8 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/assets"
 	evmcfg "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config/toml"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/docs"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink/cfgtest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus/cfgtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
@@ -23,7 +23,7 @@ import (
 func TestDoc(t *testing.T) {
 	d := gotoml.NewDecoder(strings.NewReader(docs.DocsTOML))
 	d.DisallowUnknownFields() // Ensure no extra fields
-	var c chainlink.Config
+	var c erinaceus.Config
 	err := d.Decode(&c)
 	var strict *gotoml.StrictMissingError
 	if err != nil && strings.Contains(err.Error(), "undecoded keys: ") {
@@ -42,7 +42,7 @@ func TestDoc(t *testing.T) {
 
 	cfgtest.AssertFieldsNotNil(t, c)
 
-	var defaults chainlink.Config
+	var defaults erinaceus.Config
 	require.NoError(t, cfgtest.DocDefaultsOnly(strings.NewReader(docs.DocsTOML), &defaults, config.DecodeTOML))
 
 	t.Run("EVM", func(t *testing.T) {

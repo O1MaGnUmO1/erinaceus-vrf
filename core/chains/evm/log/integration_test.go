@@ -23,7 +23,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 )
 
 func TestBroadcaster_AwaitsInitialSubscribersOnStartup(t *testing.T) {
@@ -232,7 +232,7 @@ func TestBroadcaster_ShallowBackfillOnNodeStart(t *testing.T) {
 
 	chchRawLogs := make(chan evmtest.RawSub[types.Log], backfillTimes)
 	mockEth := newMockEthClient(t, chchRawLogs, blockHeight, expectedCalls)
-	helper := newBroadcasterHelperWithEthClient(t, mockEth.EthClient, cltest.Head(lastStoredBlockHeight), func(c *chainlink.Config, s *chainlink.Secrets) {
+	helper := newBroadcasterHelperWithEthClient(t, mockEth.EthClient, cltest.Head(lastStoredBlockHeight), func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].BlockBackfillSkip = ptr(true)
 		c.EVM[0].BlockBackfillDepth = ptr[uint32](15)
 	})
@@ -282,7 +282,7 @@ func TestBroadcaster_BackfillInBatches(t *testing.T) {
 
 	chchRawLogs := make(chan evmtest.RawSub[types.Log], backfillTimes)
 	mockEth := newMockEthClient(t, chchRawLogs, blockHeight, expectedCalls)
-	helper := newBroadcasterHelperWithEthClient(t, mockEth.EthClient, cltest.Head(lastStoredBlockHeight), func(c *chainlink.Config, s *chainlink.Secrets) {
+	helper := newBroadcasterHelperWithEthClient(t, mockEth.EthClient, cltest.Head(lastStoredBlockHeight), func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].LogBackfillBatchSize = ptr(uint32(batchSize))
 	})
 	helper.mockEth = mockEth

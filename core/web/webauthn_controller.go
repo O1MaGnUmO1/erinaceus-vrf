@@ -9,7 +9,7 @@ import (
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/sessions"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/auth"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
@@ -18,11 +18,11 @@ import (
 // WebAuthnController manages registers new keys as well as authentication
 // with those keys
 type WebAuthnController struct {
-	App                          chainlink.Application
+	App                          erinaceus.Application
 	inProgressRegistrationsStore *sessions.WebAuthnSessionStore
 }
 
-func NewWebAuthnController(app chainlink.Application) WebAuthnController {
+func NewWebAuthnController(app erinaceus.Application) WebAuthnController {
 	return WebAuthnController{
 		App:                          app,
 		inProgressRegistrationsStore: sessions.NewWebAuthnSessionStore(),

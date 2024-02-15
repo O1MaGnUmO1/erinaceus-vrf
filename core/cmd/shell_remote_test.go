@@ -27,7 +27,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/pgtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/sessions"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/static"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
@@ -45,7 +45,7 @@ type startOptions struct {
 	WithKey bool
 }
 
-func startNewApplicationV2(t *testing.T, overrideFn func(c *chainlink.Config, s *chainlink.Secrets), setup ...func(opts *startOptions)) *cltest.TestApplication {
+func startNewApplicationV2(t *testing.T, overrideFn func(c *erinaceus.Config, s *erinaceus.Secrets), setup ...func(opts *startOptions)) *cltest.TestApplication {
 	t.Helper()
 
 	sopts := &startOptions{
@@ -55,7 +55,7 @@ func startNewApplicationV2(t *testing.T, overrideFn func(c *chainlink.Config, s 
 		fn(sopts)
 	}
 
-	config := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	config := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.JobPipeline.HTTPRequest.DefaultTimeout = models.MustNewDuration(30 * time.Millisecond)
 		f := false
 		c.EVM[0].Enabled = &f
@@ -110,7 +110,7 @@ func deleteKeyExportFile(t *testing.T) {
 
 func TestShell_ReplayBlocks(t *testing.T) {
 	t.Parallel()
-	app := startNewApplicationV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	app := startNewApplicationV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].Enabled = ptr(true)
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
@@ -146,7 +146,7 @@ func TestShell_CreateExternalInitiator(t *testing.T) {
 	for _, tt := range tests {
 		test := tt
 		t.Run(test.name, func(t *testing.T) {
-			app := startNewApplicationV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+			app := startNewApplicationV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 				c.JobPipeline.ExternalInitiatorsEnabled = ptr(true)
 			})
 			client, _ := app.NewShellAndRenderer()
@@ -185,7 +185,7 @@ func TestShell_CreateExternalInitiator_Errors(t *testing.T) {
 	for _, tt := range tests {
 		test := tt
 		t.Run(test.name, func(t *testing.T) {
-			app := startNewApplicationV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+			app := startNewApplicationV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 				c.JobPipeline.ExternalInitiatorsEnabled = ptr(true)
 			})
 			client, _ := app.NewShellAndRenderer()
@@ -210,7 +210,7 @@ func TestShell_CreateExternalInitiator_Errors(t *testing.T) {
 func TestShell_DestroyExternalInitiator(t *testing.T) {
 	t.Parallel()
 
-	app := startNewApplicationV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	app := startNewApplicationV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.JobPipeline.ExternalInitiatorsEnabled = ptr(true)
 	})
 	client, r := app.NewShellAndRenderer()
@@ -236,7 +236,7 @@ func TestShell_DestroyExternalInitiator(t *testing.T) {
 func TestShell_DestroyExternalInitiator_NotFound(t *testing.T) {
 	t.Parallel()
 
-	app := startNewApplicationV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	app := startNewApplicationV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.JobPipeline.ExternalInitiatorsEnabled = ptr(true)
 	})
 	client, r := app.NewShellAndRenderer()

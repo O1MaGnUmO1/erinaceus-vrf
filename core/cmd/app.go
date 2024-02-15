@@ -12,7 +12,7 @@ import (
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/build"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/static"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 )
@@ -34,7 +34,7 @@ func NewApp(s *Shell) *cli.App {
 	app.Usage = "CLI for Chainlink"
 	app.Version = fmt.Sprintf("%v@%v", static.Version, static.Sha)
 	// TOML
-	var opts chainlink.GeneralConfigOpts
+	var opts erinaceus.GeneralConfigOpts
 
 	app.Flags = []cli.Flag{
 		cli.BoolFlag{
@@ -301,7 +301,7 @@ func format(s string) string {
 	return string(whitespace.ReplaceAll([]byte(s), []byte(" ")))
 }
 
-func initServerConfig(opts *chainlink.GeneralConfigOpts, configFiles []string, secretsFiles []string) (chainlink.GeneralConfig, error) {
+func initServerConfig(opts *erinaceus.GeneralConfigOpts, configFiles []string, secretsFiles []string) (erinaceus.GeneralConfig, error) {
 	err := opts.Setup(configFiles, secretsFiles)
 	if err != nil {
 		return nil, err

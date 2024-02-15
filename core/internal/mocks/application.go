@@ -9,7 +9,7 @@ import (
 
 	bridges "github.com/O1MaGnUmO1/erinaceus-vrf/core/bridges"
 
-	chainlink "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	chainlink "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 
 	context "context"
 
@@ -184,19 +184,19 @@ func (_m *Application) GetAuditLogger() audit.AuditLogger {
 }
 
 // GetConfig provides a mock function with given fields:
-func (_m *Application) GetConfig() chainlink.GeneralConfig {
+func (_m *Application) GetConfig() erinaceus.GeneralConfig {
 	ret := _m.Called()
 
 	if len(ret) == 0 {
 		panic("no return value specified for GetConfig")
 	}
 
-	var r0 chainlink.GeneralConfig
-	if rf, ok := ret.Get(0).(func() chainlink.GeneralConfig); ok {
+	var r0 erinaceus.GeneralConfig
+	if rf, ok := ret.Get(0).(func() erinaceus.GeneralConfig); ok {
 		r0 = rf()
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(chainlink.GeneralConfig)
+			r0 = ret.Get(0).(erinaceus.GeneralConfig)
 		}
 	}
 
@@ -305,19 +305,19 @@ func (_m *Application) GetLoopRegistry() *plugins.LoopRegistry {
 }
 
 // GetRelayers provides a mock function with given fields:
-func (_m *Application) GetRelayers() chainlink.RelayerChainInteroperators {
+func (_m *Application) GetRelayers() erinaceus.RelayerChainInteroperators {
 	ret := _m.Called()
 
 	if len(ret) == 0 {
 		panic("no return value specified for GetRelayers")
 	}
 
-	var r0 chainlink.RelayerChainInteroperators
-	if rf, ok := ret.Get(0).(func() chainlink.RelayerChainInteroperators); ok {
+	var r0 erinaceus.RelayerChainInteroperators
+	if rf, ok := ret.Get(0).(func() erinaceus.RelayerChainInteroperators); ok {
 		r0 = rf()
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(chainlink.RelayerChainInteroperators)
+			r0 = ret.Get(0).(erinaceus.RelayerChainInteroperators)
 		}
 	}
 
@@ -535,19 +535,19 @@ func (_m *Application) RunWebhookJobV2(ctx context.Context, jobUUID uuid.UUID, r
 }
 
 // SecretGenerator provides a mock function with given fields:
-func (_m *Application) SecretGenerator() chainlink.SecretGenerator {
+func (_m *Application) SecretGenerator() erinaceus.SecretGenerator {
 	ret := _m.Called()
 
 	if len(ret) == 0 {
 		panic("no return value specified for SecretGenerator")
 	}
 
-	var r0 chainlink.SecretGenerator
-	if rf, ok := ret.Get(0).(func() chainlink.SecretGenerator); ok {
+	var r0 erinaceus.SecretGenerator
+	if rf, ok := ret.Get(0).(func() erinaceus.SecretGenerator); ok {
 		r0 = rf()
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(chainlink.SecretGenerator)
+			r0 = ret.Get(0).(erinaceus.SecretGenerator)
 		}
 	}
 

@@ -3,7 +3,7 @@ package web
 import (
 	"net/http"
 
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/static"
 
 	"github.com/gin-gonic/gin"
@@ -11,7 +11,7 @@ import (
 
 // BuildVersonController has the build_info endpoint.
 type BuildInfoController struct {
-	App chainlink.Application
+	App erinaceus.Application
 }
 
 // Show returns the build info.

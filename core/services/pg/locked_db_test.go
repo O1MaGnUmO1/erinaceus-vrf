@@ -8,14 +8,14 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 
 	"github.com/stretchr/testify/require"
 )
 
-func lease(c *chainlink.Config, s *chainlink.Secrets) {
+func lease(c *erinaceus.Config, s *erinaceus.Secrets) {
 	t := true
 	c.Database.Lock.Enabled = &t
 	c.Database.Lock.LeaseDuration = models.MustNewDuration(10 * time.Second)

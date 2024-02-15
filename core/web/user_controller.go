@@ -11,7 +11,7 @@ import (
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/auth"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	clsession "github.com/O1MaGnUmO1/erinaceus-vrf/core/sessions"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 	webauth "github.com/O1MaGnUmO1/erinaceus-vrf/core/web/auth"
@@ -20,7 +20,7 @@ import (
 
 // UserController manages the current Session's User.
 type UserController struct {
-	App chainlink.Application
+	App erinaceus.Application
 }
 
 // UpdatePasswordRequest defines the request to set a new password for the

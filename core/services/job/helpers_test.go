@@ -15,7 +15,7 @@ import (
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 )
 
@@ -187,7 +187,7 @@ func compareOCRJobSpecs(t *testing.T, expected, actual job.Job) {
 	require.Equal(t, expected.OCROracleSpec.ContractConfigConfirmations, actual.OCROracleSpec.ContractConfigConfirmations)
 }
 
-func makeMinimalHTTPOracleSpec(t *testing.T, db *sqlx.DB, cfg chainlink.GeneralConfig, contractAddress, transmitterAddress, keyBundle, fetchUrl, timeout string) *job.Job {
+func makeMinimalHTTPOracleSpec(t *testing.T, db *sqlx.DB, cfg erinaceus.GeneralConfig, contractAddress, transmitterAddress, keyBundle, fetchUrl, timeout string) *job.Job {
 	var os = job.Job{
 		Name:          null.NewString("a job", true),
 		Type:          job.OffchainReporting,

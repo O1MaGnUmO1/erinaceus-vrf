@@ -6,13 +6,13 @@ import (
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 )
 
 func TestCors_DefaultOrigins(t *testing.T) {
 	t.Parallel()
 
-	config := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	config := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.WebServer.AllowOrigins = ptr("http://localhost:3000,http://localhost:6689")
 	})
 
@@ -47,16 +47,16 @@ func TestCors_OverrideOrigins(t *testing.T) {
 		origin     string
 		statusCode int
 	}{
-		{"http://chainlink.com", "http://chainlink.com", http.StatusOK},
-		{"http://chainlink.com", "http://localhost:3000", http.StatusForbidden},
-		{"*", "http://chainlink.com", http.StatusOK},
+		{"http://erinaceus.com", "http://erinaceus.com", http.StatusOK},
+		{"http://erinaceus.com", "http://localhost:3000", http.StatusForbidden},
+		{"*", "http://erinaceus.com", http.StatusOK},
 		{"*", "http://localhost:3000", http.StatusOK},
 	}
 
 	for _, test := range tests {
 		t.Run(test.origin, func(t *testing.T) {
 
-			config := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+			config := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 				c.WebServer.AllowOrigins = ptr(test.allow)
 			})
 			app := cltest.NewApplicationWithConfig(t, config)

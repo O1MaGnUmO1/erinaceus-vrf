@@ -6,12 +6,12 @@ import (
 
 	"github.com/graph-gophers/dataloader"
 
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils/stringutils"
 )
 
 type jobRunBatcher struct {
-	app chainlink.Application
+	app erinaceus.Application
 }
 
 func (b *jobRunBatcher) loadByIDs(_ context.Context, keys dataloader.Keys) []*dataloader.Result {

@@ -3,13 +3,13 @@ package web
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 )
 
 // FeaturesController manages the feature flags
 type FeaturesController struct {
-	App chainlink.Application
+	App erinaceus.Application
 }
 
 const (

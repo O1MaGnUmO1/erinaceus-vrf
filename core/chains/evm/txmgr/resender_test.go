@@ -22,7 +22,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/pgtest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
 
@@ -34,7 +34,7 @@ func Test_EthResender_resendUnconfirmed(t *testing.T) {
 	lggr := logger.Test(t)
 	ethKeyStore := cltest.NewKeyStore(t, db, logCfg).Eth()
 	ethClient := evmtest.NewEthClientMockWithDefaultChain(t)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {})
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {})
 	ccfg := evmtest.NewChainScopedConfig(t, cfg)
 
 	_, fromAddress := cltest.MustInsertRandomKey(t, ethKeyStore)
@@ -107,7 +107,7 @@ func Test_EthResender_alertUnconfirmed(t *testing.T) {
 	ethClient := evmtest.NewEthClientMockWithDefaultChain(t)
 	// Set this to the smallest non-zero value possible for the attempt to be eligible for resend
 	delay := models.MustNewDuration(1 * time.Nanosecond)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0] = &toml.EVMConfig{
 			Chain: toml.Defaults(ubig.New(big.NewInt(0)), &toml.Chain{
 				Transactions: toml.Transactions{ResendAfterThreshold: delay},
@@ -142,7 +142,7 @@ func Test_EthResender_Start(t *testing.T) {
 	t.Parallel()
 
 	db := pgtest.NewSqlxDB(t)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		// This can be anything as long as it isn't zero
 		c.EVM[0].Transactions.ResendAfterThreshold = models.MustNewDuration(42 * time.Hour)
 		// Set batch size low to test batching

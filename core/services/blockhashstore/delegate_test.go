@@ -22,7 +22,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/pgtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/blockhashstore"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
@@ -51,7 +51,7 @@ func createTestDelegate(t *testing.T) (*blockhashstore.Delegate, *testData) {
 
 	lggr, logs := logger.TestLoggerObserved(t, zapcore.DebugLevel)
 	ethClient := evmtest.NewEthClientMockWithDefaultChain(t)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.Feature.LogPoller = func(b bool) *bool { return &b }(true)
 	})
 	db := pgtest.NewSqlxDB(t)

@@ -15,7 +15,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest/heavyweight"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 )
 
@@ -24,7 +24,7 @@ func newLeaseLock(t *testing.T, db *sqlx.DB, cfg pg.LeaseLockConfig) pg.LeaseLoc
 }
 
 func Test_LeaseLock(t *testing.T) {
-	cfg, db := heavyweight.FullTestDBNoFixturesV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg, db := heavyweight.FullTestDBNoFixturesV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		t := true
 		c.Database.Lock.Enabled = &t
 	})

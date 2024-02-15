@@ -9,13 +9,13 @@ import (
 	"github.com/urfave/cli"
 
 	ubig "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 )
 
 func Test_ReplayFromBlock(t *testing.T) {
 	t.Parallel()
 
-	app := startNewApplicationV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	app := startNewApplicationV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].ChainID = (*ubig.Big)(big.NewInt(5))
 		c.EVM[0].Enabled = ptr(true)
 	})

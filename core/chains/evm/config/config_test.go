@@ -19,14 +19,14 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
 
 func TestChainScopedConfig(t *testing.T) {
 	t.Parallel()
-	gcfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	gcfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		id := ubig.New(big.NewInt(rand.Int63()))
 		c.EVM[0] = &toml.EVMConfig{
 			ChainID: id,
@@ -37,7 +37,7 @@ func TestChainScopedConfig(t *testing.T) {
 	})
 	cfg := evmtest.NewChainScopedConfig(t, gcfg)
 
-	overrides := func(c *chainlink.Config, s *chainlink.Secrets) {
+	overrides := func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		id := ubig.New(big.NewInt(rand.Int63()))
 		c.EVM[0] = &toml.EVMConfig{
 			ChainID: id,
@@ -64,7 +64,7 @@ func TestChainScopedConfig(t *testing.T) {
 
 		t.Run("uses customer configured value when set", func(t *testing.T) {
 			var override uint32 = 10
-			gasBumpOverrides := func(c *chainlink.Config, s *chainlink.Secrets) {
+			gasBumpOverrides := func(c *erinaceus.Config, s *erinaceus.Secrets) {
 				id := ubig.New(big.NewInt(rand.Int63()))
 				c.EVM[0] = &toml.EVMConfig{
 					ChainID: id,
@@ -85,7 +85,7 @@ func TestChainScopedConfig(t *testing.T) {
 	t.Run("PriceMaxKey", func(t *testing.T) {
 		addr := testutils.NewAddress()
 		randomOtherAddr := testutils.NewAddress()
-		gcfg2 := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+		gcfg2 := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 			overrides(c, s)
 			c.EVM[0].KeySpecific = toml.KeySpecificConfig{
 				{Key: ptr(ethkey.EIP55AddressFromAddress(randomOtherAddr)),
@@ -103,7 +103,7 @@ func TestChainScopedConfig(t *testing.T) {
 
 		t.Run("uses chain-specific override value when that is set", func(t *testing.T) {
 			val := assets.NewWeiI(rand.Int63())
-			gcfg3 := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+			gcfg3 := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 				c.EVM[0].GasEstimator.PriceMax = val
 			})
 			cfg3 := evmtest.NewChainScopedConfig(t, gcfg3)
@@ -121,7 +121,7 @@ func TestChainScopedConfig(t *testing.T) {
 
 			for _, tt := range tests {
 				t.Run(tt.name, func(t *testing.T) {
-					gcfg3 := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+					gcfg3 := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 						c.EVM[0].KeySpecific = toml.KeySpecificConfig{
 							{Key: ptr(ethkey.EIP55AddressFromAddress(addr)),
 								GasEstimator: toml.KeySpecificGasEstimator{
@@ -139,7 +139,7 @@ func TestChainScopedConfig(t *testing.T) {
 		t.Run("uses key-specific override value when set and lower than chain specific config", func(t *testing.T) {
 			keySpecificPrice := assets.GWei(900)
 			chainSpecificPrice := assets.GWei(1200)
-			gcfg3 := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+			gcfg3 := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 				c.EVM[0].GasEstimator.PriceMax = chainSpecificPrice
 				c.EVM[0].KeySpecific = toml.KeySpecificConfig{
 					{Key: ptr(ethkey.EIP55AddressFromAddress(addr)),
@@ -156,7 +156,7 @@ func TestChainScopedConfig(t *testing.T) {
 		t.Run("uses chain-specific value when higher than key-specific value", func(t *testing.T) {
 			keySpecificPrice := assets.GWei(1400)
 			chainSpecificPrice := assets.GWei(1200)
-			gcfg3 := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+			gcfg3 := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 				c.EVM[0].GasEstimator.PriceMax = chainSpecificPrice
 				c.EVM[0].KeySpecific = toml.KeySpecificConfig{
 					{Key: ptr(ethkey.EIP55AddressFromAddress(addr)),
@@ -172,7 +172,7 @@ func TestChainScopedConfig(t *testing.T) {
 		})
 		t.Run("uses key-specific override value when set and lower than global config", func(t *testing.T) {
 			keySpecificPrice := assets.GWei(900)
-			gcfg3 := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+			gcfg3 := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 				c.EVM[0].KeySpecific = toml.KeySpecificConfig{
 					{Key: ptr(ethkey.EIP55AddressFromAddress(addr)),
 						GasEstimator: toml.KeySpecificGasEstimator{
@@ -188,7 +188,7 @@ func TestChainScopedConfig(t *testing.T) {
 		t.Run("uses global value when higher than key-specific value", func(t *testing.T) {
 			keySpecificPrice := assets.GWei(1400)
 			chainSpecificPrice := assets.GWei(1200)
-			gcfg3 := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+			gcfg3 := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 				c.EVM[0].GasEstimator.PriceMax = chainSpecificPrice
 				c.EVM[0].KeySpecific = toml.KeySpecificConfig{
 					{Key: ptr(ethkey.EIP55AddressFromAddress(addr)),
@@ -205,7 +205,7 @@ func TestChainScopedConfig(t *testing.T) {
 		t.Run("uses global value when there is no key-specific price", func(t *testing.T) {
 			val := assets.NewWeiI(rand.Int63())
 			unsetAddr := testutils.NewAddress()
-			gcfg3 := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+			gcfg3 := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 				c.EVM[0].GasEstimator.PriceMax = val
 			})
 			cfg3 := evmtest.NewChainScopedConfig(t, gcfg3)
@@ -222,7 +222,7 @@ func TestChainScopedConfig(t *testing.T) {
 		t.Run("uses chain-specific override value when that is set", func(t *testing.T) {
 			val := testutils.NewAddress()
 
-			gcfg3 := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+			gcfg3 := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 				c.EVM[0].LinkContractAddress = ptr(ethkey.EIP55AddressFromAddress(val))
 			})
 			cfg3 := evmtest.NewChainScopedConfig(t, gcfg3)
@@ -239,7 +239,7 @@ func TestChainScopedConfig(t *testing.T) {
 		t.Run("uses chain-specific override value when that is set", func(t *testing.T) {
 			val := testutils.NewAddress()
 
-			gcfg3 := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+			gcfg3 := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 				c.EVM[0].OperatorFactoryAddress = ptr(ethkey.EIP55AddressFromAddress(val))
 			})
 			cfg3 := evmtest.NewChainScopedConfig(t, gcfg3)
@@ -266,7 +266,7 @@ func TestChainScopedConfig_BlockHistory(t *testing.T) {
 
 func TestChainScopedConfig_GasEstimator(t *testing.T) {
 	t.Parallel()
-	gcfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	gcfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].GasEstimator.PriceMax = assets.GWei(500)
 	})
 	cfg := evmtest.NewChainScopedConfig(t, gcfg)
@@ -322,7 +322,7 @@ func TestChainScopedConfig_Profiles(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
-			gcfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, secrets *chainlink.Secrets) {
+			gcfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, secrets *erinaceus.Secrets) {
 				id := ubig.NewI(tt.chainID)
 				cfg := toml.Defaults(id)
 				c.EVM[0] = &toml.EVMConfig{
@@ -356,7 +356,7 @@ func TestChainScopedConfig_HeadTracker(t *testing.T) {
 
 func Test_chainScopedConfig_Validate(t *testing.T) {
 	configWithChains := func(t *testing.T, id int64, chains ...*toml.Chain) config.AppConfig {
-		return configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+		return configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 			chainID := ubig.NewI(id)
 			c.EVM[0] = &toml.EVMConfig{ChainID: chainID, Enabled: ptr(true), Chain: toml.Defaults(chainID, chains...),
 				Nodes: toml.EVMNodes{{
@@ -439,7 +439,7 @@ func Test_chainScopedConfig_Validate(t *testing.T) {
 }
 
 func TestNodePoolConfig(t *testing.T) {
-	gcfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	gcfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		id := ubig.New(big.NewInt(rand.Int63()))
 		c.EVM[0] = &toml.EVMConfig{
 			ChainID: id,

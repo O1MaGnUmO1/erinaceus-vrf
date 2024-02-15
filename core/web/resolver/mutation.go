@@ -17,7 +17,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/bridges"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/blockhashstore"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
@@ -33,7 +33,7 @@ import (
 )
 
 type Resolver struct {
-	App chainlink.Application
+	App erinaceus.Application
 }
 
 type createBridgeInput struct {

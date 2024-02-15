@@ -12,7 +12,7 @@ moved to their respective repos, and all must be moved out of this module eventu
 
 ## How to use
 
-[chainlink.Dockerfile](chainlink.Dockerfile) extends the regular [core/chainlink.Dockerfile](../core/chainlink.Dockerfile)
+[erinaceus.Dockerfile](erinaceus.Dockerfile) extends the regular [core/erinaceus.Dockerfile](../core/erinaceus.Dockerfile)
 to include the plugin binaries, and enables support by setting `CL_SOLANA_CMD`, `CL_STARKNET_CMD`, and `CL_MEDIAN_CMD`. 
 Either plugin can be disabled by un-setting the environment variable, which will revert to the original in-process runtime. 
 Images built from this Dockerfile can otherwise be used normally, provided that the [pre-requisites](#pre-requisites) have been met.

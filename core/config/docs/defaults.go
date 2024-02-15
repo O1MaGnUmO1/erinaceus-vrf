@@ -6,7 +6,7 @@ import (
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/config"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/toml"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink/cfgtest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus/cfgtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/dialects"
 )
 

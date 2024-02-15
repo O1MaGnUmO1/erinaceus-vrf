@@ -8,14 +8,14 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 )
 
 // CSAKeysController manages CSA keys
 type CSAKeysController struct {
-	App chainlink.Application
+	App erinaceus.Application
 }
 
 // Index lists CSA keys

@@ -39,7 +39,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/pgtest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
 	ksmocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/mocks"
 )
@@ -594,7 +594,7 @@ func TestEthConfirmer_CheckForReceipts_batching(t *testing.T) {
 	t.Parallel()
 
 	db := pgtest.NewSqlxDB(t)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].RPCDefaultBatchSize = ptr[uint32](2)
 	})
 	txStore := cltest.NewTestTxStore(t, db, cfg.Database())
@@ -656,7 +656,7 @@ func TestEthConfirmer_CheckForReceipts_HandlesNonFwdTxsWithForwardingEnabled(t *
 
 	db := pgtest.NewSqlxDB(t)
 
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].RPCDefaultBatchSize = ptr[uint32](1)
 		c.EVM[0].Transactions.ForwardersEnabled = ptr(true)
 	})
@@ -707,7 +707,7 @@ func TestEthConfirmer_CheckForReceipts_only_likely_confirmed(t *testing.T) {
 	t.Parallel()
 
 	db := pgtest.NewSqlxDB(t)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].RPCDefaultBatchSize = ptr[uint32](6)
 	})
 	txStore := cltest.NewTestTxStore(t, db, cfg.Database())
@@ -859,7 +859,7 @@ func TestEthConfirmer_CheckForReceipts_confirmed_missing_receipt(t *testing.T) {
 	t.Parallel()
 
 	db := pgtest.NewSqlxDB(t)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].FinalityDepth = ptr[uint32](50)
 	})
 	txStore := cltest.NewTestTxStore(t, db, cfg.Database())
@@ -1119,7 +1119,7 @@ func TestEthConfirmer_CheckConfirmedMissingReceipt(t *testing.T) {
 	t.Parallel()
 
 	db := pgtest.NewSqlxDB(t)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].FinalityDepth = ptr[uint32](50)
 	})
 	txStore := cltest.NewTestTxStore(t, db, cfg.Database())
@@ -1198,7 +1198,7 @@ func TestEthConfirmer_CheckConfirmedMissingReceipt_batchSendTransactions_fails(t
 	t.Parallel()
 
 	db := pgtest.NewSqlxDB(t)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].FinalityDepth = ptr[uint32](50)
 	})
 	txStore := cltest.NewTestTxStore(t, db, cfg.Database())
@@ -1261,7 +1261,7 @@ func TestEthConfirmer_CheckConfirmedMissingReceipt_smallEvmRPCBatchSize_middleBa
 	t.Parallel()
 
 	db := pgtest.NewSqlxDB(t)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].FinalityDepth = ptr[uint32](50)
 		c.EVM[0].RPCDefaultBatchSize = ptr[uint32](1)
 	})
@@ -1627,7 +1627,7 @@ func TestEthConfirmer_RebroadcastWhereNecessary_WithConnectivityCheck(t *testing
 	ethClient := evmtest.NewEthClientMockWithDefaultChain(t)
 
 	t.Run("should retry previous attempt if connectivity check failed for legacy transactions", func(t *testing.T) {
-		cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+		cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 			c.EVM[0].GasEstimator.EIP1559DynamicFees = ptr(false)
 			c.EVM[0].GasEstimator.BlockHistory.BlockHistorySize = ptr[uint16](2)
 			c.EVM[0].GasEstimator.BlockHistory.CheckInclusionBlocks = ptr[uint16](4)
@@ -1673,7 +1673,7 @@ func TestEthConfirmer_RebroadcastWhereNecessary_WithConnectivityCheck(t *testing
 	})
 
 	t.Run("should retry previous attempt if connectivity check failed for dynamic transactions", func(t *testing.T) {
-		cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+		cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 			c.EVM[0].GasEstimator.EIP1559DynamicFees = ptr(true)
 			c.EVM[0].GasEstimator.BlockHistory.BlockHistorySize = ptr[uint16](2)
 			c.EVM[0].GasEstimator.BlockHistory.CheckInclusionBlocks = ptr[uint16](4)
@@ -1723,7 +1723,7 @@ func TestEthConfirmer_RebroadcastWhereNecessary(t *testing.T) {
 	t.Parallel()
 
 	db := pgtest.NewSqlxDB(t)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].GasEstimator.PriceMax = (*assets.Wei)(assets.GWei(500))
 	})
 	txStore := cltest.NewTestTxStore(t, db, cfg.Database())
@@ -2206,7 +2206,7 @@ func TestEthConfirmer_RebroadcastWhereNecessary(t *testing.T) {
 		// Set price such that the next bump will exceed EVM.GasEstimator.PriceMax
 		// Existing gas price is: 60480000000
 		gasPrice := attempt3_4.TxFee.Legacy.ToInt()
-		gcfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+		gcfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 			c.EVM[0].GasEstimator.PriceMax = assets.NewWeiI(60500000000)
 		})
 		newCfg := evmtest.NewChainScopedConfig(t, gcfg)
@@ -2236,7 +2236,7 @@ func TestEthConfirmer_RebroadcastWhereNecessary(t *testing.T) {
 		// Set price such that the current price is already at EVM.GasEstimator.PriceMax
 		// Existing gas price is: 60480000000
 		gasPrice := attempt3_4.TxFee.Legacy.ToInt()
-		gcfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+		gcfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 			c.EVM[0].GasEstimator.PriceMax = assets.NewWeiI(60480000000)
 		})
 		newCfg := evmtest.NewChainScopedConfig(t, gcfg)
@@ -2304,7 +2304,7 @@ func TestEthConfirmer_RebroadcastWhereNecessary(t *testing.T) {
 		oldEnough, assets.GWei(999), assets.GWei(1000), attempt4_2.ID))
 
 	t.Run("EIP-1559: resubmits at the old price and does not create a new attempt if one of the bumped EIP-1559 transactions would have its tip cap exceed EVM.GasEstimator.PriceMax", func(t *testing.T) {
-		gcfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+		gcfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 			c.EVM[0].GasEstimator.PriceMax = assets.GWei(1000)
 		})
 		newCfg := evmtest.NewChainScopedConfig(t, gcfg)
@@ -2372,7 +2372,7 @@ func TestEthConfirmer_RebroadcastWhereNecessary_TerminallyUnderpriced_ThenGoesTh
 	t.Parallel()
 
 	db := pgtest.NewSqlxDB(t)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].GasEstimator.PriceMax = (*assets.Wei)(assets.GWei(500))
 	})
 	txStore := cltest.NewTestTxStore(t, db, cfg.Database())
@@ -2594,7 +2594,7 @@ func TestEthConfirmer_RebroadcastWhereNecessary_WhenOutOfEth(t *testing.T) {
 		depth := 2
 		etxCount := 4
 
-		cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+		cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 			c.EVM[0].GasEstimator.BumpTxDepth = ptr(uint32(depth))
 		})
 		evmcfg := evmtest.NewChainScopedConfig(t, cfg)

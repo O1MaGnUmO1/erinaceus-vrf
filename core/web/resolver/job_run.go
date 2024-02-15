@@ -6,7 +6,7 @@ import (
 	"github.com/graph-gophers/graphql-go"
 	"github.com/pkg/errors"
 
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/webhook"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils/stringutils"
@@ -42,14 +42,14 @@ var outputRetrievalErrorStr = "error: unable to retrieve outputs"
 
 type JobRunResolver struct {
 	run pipeline.Run
-	app chainlink.Application
+	app erinaceus.Application
 }
 
-func NewJobRun(run pipeline.Run, app chainlink.Application) *JobRunResolver {
+func NewJobRun(run pipeline.Run, app erinaceus.Application) *JobRunResolver {
 	return &JobRunResolver{run: run, app: app}
 }
 
-func NewJobRuns(runs []pipeline.Run, app chainlink.Application) []*JobRunResolver {
+func NewJobRuns(runs []pipeline.Run, app erinaceus.Application) []*JobRunResolver {
 	var resolvers []*JobRunResolver
 
 	for _, run := range runs {
@@ -155,11 +155,11 @@ func (r *JobRunResolver) FinishedAt() *graphql.Time {
 
 type JobRunPayloadResolver struct {
 	jr  *pipeline.Run
-	app chainlink.Application
+	app erinaceus.Application
 	NotFoundErrorUnionType
 }
 
-func NewJobRunPayload(jr *pipeline.Run, app chainlink.Application, err error) *JobRunPayloadResolver {
+func NewJobRunPayload(jr *pipeline.Run, app erinaceus.Application, err error) *JobRunPayloadResolver {
 	e := NotFoundErrorUnionType{err: err, message: "job run not found", isExpectedErrorFn: nil}
 
 	return &JobRunPayloadResolver{jr: jr, app: app, NotFoundErrorUnionType: e}
@@ -177,10 +177,10 @@ func (r *JobRunPayloadResolver) ToJobRun() (*JobRunResolver, bool) {
 type JobRunsPayloadResolver struct {
 	runs  []pipeline.Run
 	total int32
-	app   chainlink.Application
+	app   erinaceus.Application
 }
 
-func NewJobRunsPayload(runs []pipeline.Run, total int32, app chainlink.Application) *JobRunsPayloadResolver {
+func NewJobRunsPayload(runs []pipeline.Run, total int32, app erinaceus.Application) *JobRunsPayloadResolver {
 	return &JobRunsPayloadResolver{
 		runs:  runs,
 		total: total,
@@ -202,11 +202,11 @@ func (r *JobRunsPayloadResolver) Metadata() *PaginationMetadataResolver {
 
 type RunJobPayloadResolver struct {
 	run *pipeline.Run
-	app chainlink.Application
+	app erinaceus.Application
 	NotFoundErrorUnionType
 }
 
-func NewRunJobPayload(run *pipeline.Run, app chainlink.Application, err error) *RunJobPayloadResolver {
+func NewRunJobPayload(run *pipeline.Run, app erinaceus.Application, err error) *RunJobPayloadResolver {
 	var e NotFoundErrorUnionType
 
 	if err != nil {
@@ -240,10 +240,10 @@ func (r *RunJobPayloadResolver) ToRunJobCannotRunError() (*RunJobCannotRunErrorR
 
 type RunJobSuccessResolver struct {
 	run pipeline.Run
-	app chainlink.Application
+	app erinaceus.Application
 }
 
-func NewRunJobSuccess(run pipeline.Run, app chainlink.Application) *RunJobSuccessResolver {
+func NewRunJobSuccess(run pipeline.Run, app erinaceus.Application) *RunJobSuccessResolver {
 	return &RunJobSuccessResolver{run: run, app: app}
 }
 

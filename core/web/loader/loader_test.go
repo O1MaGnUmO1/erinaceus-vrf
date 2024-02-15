@@ -22,7 +22,7 @@ import (
 	coremocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/mocks"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
-	chainlinkmocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink/mocks"
+	chainlinkmocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus/mocks"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 	jobORMMocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job/mocks"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"

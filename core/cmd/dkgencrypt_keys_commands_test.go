@@ -14,7 +14,7 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/cmd"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/dkgencryptkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 )
@@ -163,7 +163,7 @@ func TestShell_DKGEncryptKeys(t *testing.T) {
 	})
 }
 
-func requireDKGEncryptKeyCount(t *testing.T, app chainlink.Application, length int) []dkgencryptkey.Key {
+func requireDKGEncryptKeyCount(t *testing.T, app erinaceus.Application, length int) []dkgencryptkey.Key {
 	t.Helper()
 	keys, err := app.GetKeyStore().DKGEncrypt().GetAll()
 	require.NoError(t, err)

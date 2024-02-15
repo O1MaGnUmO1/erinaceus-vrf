@@ -8,13 +8,13 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 )
 
 // PipelineJobSpecErrorsController manages PipelineJobSpecError requests
 type PipelineJobSpecErrorsController struct {
-	App chainlink.Application
+	App erinaceus.Application
 }
 
 // Destroy deletes a PipelineJobSpecError record from the database, effectively

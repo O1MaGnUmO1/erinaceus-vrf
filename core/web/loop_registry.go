@@ -15,7 +15,7 @@ import (
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/env"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/plugins"
 )
 
@@ -30,7 +30,7 @@ type LoopRegistryServer struct {
 	jsonMarshalFn func(any) ([]byte, error)
 }
 
-func NewLoopRegistryServer(app chainlink.Application) *LoopRegistryServer {
+func NewLoopRegistryServer(app erinaceus.Application) *LoopRegistryServer {
 	discoveryHostName, loopHostName := initHostNames()
 	return &LoopRegistryServer{
 		exposedPromPort:   int(app.GetConfig().WebServer().HTTPPort()),

@@ -10,7 +10,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/env"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/toml"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
 
@@ -20,7 +20,7 @@ var (
 
 	testEnvContents = fmt.Sprintf("P2P.V2.AnnounceAddresses = ['%s']", setInEnv)
 
-	testConfigFileContents = chainlink.Config{
+	testConfigFileContents = erinaceus.Config{
 		Core: toml.Core{
 			RootDir: &setInFile,
 			P2P: toml.P2P{
@@ -32,7 +32,7 @@ var (
 		},
 	}
 
-	testSecretsFileContents = chainlink.Secrets{
+	testSecretsFileContents = erinaceus.Secrets{
 		Secrets: toml.Secrets{
 			Prometheus: toml.PrometheusSecrets{
 				AuthToken: models.NewSecret("PROM_TOKEN"),
@@ -40,7 +40,7 @@ var (
 		},
 	}
 
-	testSecretsRedactedContents = chainlink.Secrets{
+	testSecretsRedactedContents = erinaceus.Secrets{
 		Secrets: toml.Secrets{
 			Prometheus: toml.PrometheusSecrets{
 				AuthToken: models.NewSecret("xxxxx"),
@@ -49,15 +49,15 @@ var (
 	}
 )
 
-func withDefaults(t *testing.T, c chainlink.Config, s chainlink.Secrets) chainlink.GeneralConfig {
-	cfg, err := chainlink.GeneralConfigOpts{Config: c, Secrets: s}.New()
+func withDefaults(t *testing.T, c erinaceus.Config, s erinaceus.Secrets) erinaceus.GeneralConfig {
+	cfg, err := erinaceus.GeneralConfigOpts{Config: c, Secrets: s}.New()
 	require.NoError(t, err)
 	return cfg
 }
 
 func Test_initServerConfig(t *testing.T) {
 	type args struct {
-		opts         *chainlink.GeneralConfigOpts
+		opts         *erinaceus.GeneralConfigOpts
 		fileNames    []string
 		secretsFiles []string
 		envVar       string
@@ -66,15 +66,15 @@ func Test_initServerConfig(t *testing.T) {
 		name    string
 		args    args
 		wantErr bool
-		wantCfg chainlink.GeneralConfig
+		wantCfg erinaceus.GeneralConfig
 	}{
 		{
 			name: "env only",
 			args: args{
-				opts:   new(chainlink.GeneralConfigOpts),
+				opts:   new(erinaceus.GeneralConfigOpts),
 				envVar: testEnvContents,
 			},
-			wantCfg: withDefaults(t, chainlink.Config{
+			wantCfg: withDefaults(t, erinaceus.Config{
 				Core: toml.Core{
 					P2P: toml.P2P{
 						V2: toml.P2PV2{
@@ -82,20 +82,20 @@ func Test_initServerConfig(t *testing.T) {
 						},
 					},
 				},
-			}, chainlink.Secrets{}),
+			}, erinaceus.Secrets{}),
 		},
 		{
 			name: "files only",
 			args: args{
-				opts:      new(chainlink.GeneralConfigOpts),
+				opts:      new(erinaceus.GeneralConfigOpts),
 				fileNames: []string{configtest.WriteTOMLFile(t, testConfigFileContents, "test.toml")},
 			},
-			wantCfg: withDefaults(t, testConfigFileContents, chainlink.Secrets{}),
+			wantCfg: withDefaults(t, testConfigFileContents, erinaceus.Secrets{}),
 		},
 		{
 			name: "file error",
 			args: args{
-				opts:      new(chainlink.GeneralConfigOpts),
+				opts:      new(erinaceus.GeneralConfigOpts),
 				fileNames: []string{"notexist"},
 			},
 			wantErr: true,
@@ -103,11 +103,11 @@ func Test_initServerConfig(t *testing.T) {
 		{
 			name: "env overlay of file",
 			args: args{
-				opts:      new(chainlink.GeneralConfigOpts),
+				opts:      new(erinaceus.GeneralConfigOpts),
 				fileNames: []string{configtest.WriteTOMLFile(t, testConfigFileContents, "test.toml")},
 				envVar:    testEnvContents,
 			},
-			wantCfg: withDefaults(t, chainlink.Config{
+			wantCfg: withDefaults(t, erinaceus.Config{
 				Core: toml.Core{
 					RootDir: &setInFile,
 					P2P: toml.P2P{
@@ -118,12 +118,12 @@ func Test_initServerConfig(t *testing.T) {
 						},
 					},
 				},
-			}, chainlink.Secrets{}),
+			}, erinaceus.Secrets{}),
 		},
 		{
 			name: "failed to read secrets",
 			args: args{
-				opts:         new(chainlink.GeneralConfigOpts),
+				opts:         new(erinaceus.GeneralConfigOpts),
 				fileNames:    []string{configtest.WriteTOMLFile(t, testConfigFileContents, "test.toml")},
 				secretsFiles: []string{"/doesnt-exist"},
 			},
@@ -132,7 +132,7 @@ func Test_initServerConfig(t *testing.T) {
 		{
 			name: "reading secrets",
 			args: args{
-				opts:         new(chainlink.GeneralConfigOpts),
+				opts:         new(erinaceus.GeneralConfigOpts),
 				fileNames:    []string{configtest.WriteTOMLFile(t, testConfigFileContents, "test.toml")},
 				secretsFiles: []string{configtest.WriteTOMLFile(t, testSecretsFileContents, "test_secrets.toml")},
 			},
@@ -141,7 +141,7 @@ func Test_initServerConfig(t *testing.T) {
 		{
 			name: "reading multiple secrets",
 			args: args{
-				opts:      new(chainlink.GeneralConfigOpts),
+				opts:      new(erinaceus.GeneralConfigOpts),
 				fileNames: []string{configtest.WriteTOMLFile(t, testConfigFileContents, "test.toml")},
 				secretsFiles: []string{
 					"../services/chainlink/testdata/mergingsecretsdata/secrets-database.toml",
@@ -159,7 +159,7 @@ func Test_initServerConfig(t *testing.T) {
 		{
 			name: "reading multiple secrets with overrides: Database",
 			args: args{
-				opts:      new(chainlink.GeneralConfigOpts),
+				opts:      new(erinaceus.GeneralConfigOpts),
 				fileNames: []string{configtest.WriteTOMLFile(t, testConfigFileContents, "test.toml")},
 				secretsFiles: []string{
 					"../testdata/mergingsecretsdata/secrets-database.toml",
@@ -171,7 +171,7 @@ func Test_initServerConfig(t *testing.T) {
 		{
 			name: "reading multiple secrets with overrides: Password",
 			args: args{
-				opts:      new(chainlink.GeneralConfigOpts),
+				opts:      new(erinaceus.GeneralConfigOpts),
 				fileNames: []string{configtest.WriteTOMLFile(t, testConfigFileContents, "test.toml")},
 				secretsFiles: []string{
 					"../testdata/mergingsecretsdata/secrets-password.toml",
@@ -183,7 +183,7 @@ func Test_initServerConfig(t *testing.T) {
 		{
 			name: "reading multiple secrets with overrides: Pyroscope",
 			args: args{
-				opts:      new(chainlink.GeneralConfigOpts),
+				opts:      new(erinaceus.GeneralConfigOpts),
 				fileNames: []string{configtest.WriteTOMLFile(t, testConfigFileContents, "test.toml")},
 				secretsFiles: []string{
 					"../testdata/mergingsecretsdata/secrets-pyroscope.toml",
@@ -195,7 +195,7 @@ func Test_initServerConfig(t *testing.T) {
 		{
 			name: "reading multiple secrets with overrides: Prometheus",
 			args: args{
-				opts:      new(chainlink.GeneralConfigOpts),
+				opts:      new(erinaceus.GeneralConfigOpts),
 				fileNames: []string{configtest.WriteTOMLFile(t, testConfigFileContents, "test.toml")},
 				secretsFiles: []string{
 					"../testdata/mergingsecretsdata/secrets-prometheus.toml",
@@ -207,7 +207,7 @@ func Test_initServerConfig(t *testing.T) {
 		{
 			name: "reading multiple secrets with overrides: Mercury",
 			args: args{
-				opts:      new(chainlink.GeneralConfigOpts),
+				opts:      new(erinaceus.GeneralConfigOpts),
 				fileNames: []string{configtest.WriteTOMLFile(t, testConfigFileContents, "test.toml")},
 				secretsFiles: []string{
 					"../testdata/mergingsecretsdata/secrets-mercury-split-one.toml",
@@ -219,7 +219,7 @@ func Test_initServerConfig(t *testing.T) {
 		{
 			name: "reading multiple secrets with overrides: Threshold",
 			args: args{
-				opts:      new(chainlink.GeneralConfigOpts),
+				opts:      new(erinaceus.GeneralConfigOpts),
 				fileNames: []string{configtest.WriteTOMLFile(t, testConfigFileContents, "test.toml")},
 				secretsFiles: []string{
 					"../testdata/mergingsecretsdata/secrets-threshold.toml",

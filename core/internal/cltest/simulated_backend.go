@@ -15,7 +15,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 )
 
@@ -30,7 +30,7 @@ func NewSimulatedBackend(t *testing.T, alloc core.GenesisAlloc, gasLimit uint32)
 }
 func NewApplicationWithConfigV2OnSimulatedBlockchain(
 	t testing.TB,
-	cfg chainlink.GeneralConfig,
+	cfg erinaceus.GeneralConfig,
 	backend *backends.SimulatedBackend,
 	flagsAndDeps ...interface{},
 ) *TestApplication {
@@ -55,7 +55,7 @@ func NewApplicationWithConfigV2OnSimulatedBlockchain(
 // but cfg should be v2, and configtest.NewGeneralConfigSimulated used to include the simulated chain (testutils.SimulatedChainID).
 func NewApplicationWithConfigV2AndKeyOnSimulatedBlockchain(
 	t testing.TB,
-	cfg chainlink.GeneralConfig,
+	cfg erinaceus.GeneralConfig,
 	backend *backends.SimulatedBackend,
 	flagsAndDeps ...interface{},
 ) *TestApplication {

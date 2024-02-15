@@ -17,7 +17,7 @@ import (
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/dialects"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
@@ -26,17 +26,17 @@ import (
 
 // FullTestDBV2 creates a pristine DB which runs in a separate database than the normal
 // unit tests, so you can do things like use other Postgres connection types with it.
-func FullTestDBV2(t testing.TB, overrideFn func(c *chainlink.Config, s *chainlink.Secrets)) (chainlink.GeneralConfig, *sqlx.DB) {
+func FullTestDBV2(t testing.TB, overrideFn func(c *erinaceus.Config, s *erinaceus.Secrets)) (erinaceus.GeneralConfig, *sqlx.DB) {
 	return KindFixtures.PrepareDB(t, overrideFn)
 }
 
 // FullTestDBNoFixturesV2 is the same as FullTestDB, but it does not load fixtures.
-func FullTestDBNoFixturesV2(t testing.TB, overrideFn func(c *chainlink.Config, s *chainlink.Secrets)) (chainlink.GeneralConfig, *sqlx.DB) {
+func FullTestDBNoFixturesV2(t testing.TB, overrideFn func(c *erinaceus.Config, s *erinaceus.Secrets)) (erinaceus.GeneralConfig, *sqlx.DB) {
 	return KindTemplate.PrepareDB(t, overrideFn)
 }
 
 // FullTestDBEmptyV2 creates an empty DB (without migrations).
-func FullTestDBEmptyV2(t testing.TB, overrideFn func(c *chainlink.Config, s *chainlink.Secrets)) (chainlink.GeneralConfig, *sqlx.DB) {
+func FullTestDBEmptyV2(t testing.TB, overrideFn func(c *erinaceus.Config, s *erinaceus.Secrets)) (erinaceus.GeneralConfig, *sqlx.DB) {
 	return KindEmpty.PrepareDB(t, overrideFn)
 }
 
@@ -52,10 +52,10 @@ const (
 	KindFixtures
 )
 
-func (c Kind) PrepareDB(t testing.TB, overrideFn func(c *chainlink.Config, s *chainlink.Secrets)) (chainlink.GeneralConfig, *sqlx.DB) {
+func (c Kind) PrepareDB(t testing.TB, overrideFn func(c *erinaceus.Config, s *erinaceus.Secrets)) (erinaceus.GeneralConfig, *sqlx.DB) {
 	testutils.SkipShort(t, "FullTestDB")
 
-	gcfg := configtest.NewGeneralConfigSimulated(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	gcfg := configtest.NewGeneralConfigSimulated(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.Database.Dialect = dialects.Postgres
 		if overrideFn != nil {
 			overrideFn(c, s)
@@ -72,7 +72,7 @@ func (c Kind) PrepareDB(t testing.TB, overrideFn func(c *chainlink.Config, s *ch
 		os.RemoveAll(gcfg.RootDir())
 	})
 
-	gcfg = configtest.NewGeneralConfigSimulated(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	gcfg = configtest.NewGeneralConfigSimulated(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.Database.Dialect = dialects.Postgres
 		s.Database.URL = models.MustSecretURL(migrationTestDBURL)
 		if overrideFn != nil {

@@ -10,18 +10,18 @@ import (
 	"go.uber.org/multierr"
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	clsessions "github.com/O1MaGnUmO1/erinaceus-vrf/core/sessions"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/auth"
 )
 
 // SessionsController manages session requests.
 type SessionsController struct {
-	App      chainlink.Application
+	App      erinaceus.Application
 	sessions *clsessions.WebAuthnSessionStore
 }
 
-func NewSessionsController(app chainlink.Application) *SessionsController {
+func NewSessionsController(app erinaceus.Application) *SessionsController {
 	return &SessionsController{app, clsessions.NewWebAuthnSessionStore()}
 }
 

@@ -40,7 +40,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/periodicbackup"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
@@ -87,7 +87,7 @@ var (
 // Shell for the node, local commands and remote commands.
 type Shell struct {
 	Renderer
-	Config                         chainlink.GeneralConfig // initialized in Before
+	Config                         erinaceus.GeneralConfig // initialized in Before
 	Logger                         logger.Logger           // initialized in Before
 	CloseLogger                    func() error            // called in After
 	AppFactory                     AppFactory
@@ -128,14 +128,14 @@ func (s *Shell) configExitErr(validateFn func() error) cli.ExitCoder {
 
 // AppFactory implements the NewApplication method.
 type AppFactory interface {
-	NewApplication(ctx context.Context, cfg chainlink.GeneralConfig, appLggr logger.Logger, db *sqlx.DB) (chainlink.Application, error)
+	NewApplication(ctx context.Context, cfg erinaceus.GeneralConfig, appLggr logger.Logger, db *sqlx.DB) (erinaceus.Application, error)
 }
 
 // ChainlinkAppFactory is used to create a new Application.
 type ChainlinkAppFactory struct{}
 
 // NewApplication returns a new instance of the node with the given config.
-func (n ChainlinkAppFactory) NewApplication(ctx context.Context, cfg chainlink.GeneralConfig, appLggr logger.Logger, db *sqlx.DB) (app chainlink.Application, err error) {
+func (n ChainlinkAppFactory) NewApplication(ctx context.Context, cfg erinaceus.GeneralConfig, appLggr logger.Logger, db *sqlx.DB) (app erinaceus.Application, err error) {
 	err = initGlobals(cfg.Prometheus(), cfg.Tracing(), appLggr)
 	if err != nil {
 		appLggr.Errorf("Failed to initialize globals: %v", err)
@@ -159,21 +159,21 @@ func (n ChainlinkAppFactory) NewApplication(ctx context.Context, cfg chainlink.G
 	loopRegistry := plugins.NewLoopRegistry(appLggr, cfg.Tracing())
 
 	// create the relayer-chain interoperators from application configuration
-	relayerFactory := chainlink.RelayerFactory{
+	relayerFactory := erinaceus.RelayerFactory{
 		Logger:       appLggr,
 		LoopRegistry: loopRegistry,
 		GRPCOpts:     grpcOpts,
 	}
 
-	evmFactoryCfg := chainlink.EVMFactoryConfig{
+	evmFactoryCfg := erinaceus.EVMFactoryConfig{
 		CSAETHKeystore: keyStore,
 		ChainOpts:      legacyevm.ChainOpts{AppConfig: cfg, EventBroadcaster: eventBroadcaster, MailMon: mailMon, DB: db},
 	}
 	// evm always enabled for backward compatibility
 	// TODO BCF-2510 this needs to change in order to clear the path for EVM extraction
-	initOps := []chainlink.CoreRelayerChainInitFunc{chainlink.InitEVM(ctx, relayerFactory, evmFactoryCfg)}
+	initOps := []erinaceus.CoreRelayerChainInitFunc{erinaceus.InitEVM(ctx, relayerFactory, evmFactoryCfg)}
 
-	relayChainInterops, err := chainlink.NewCoreRelayerChainInteroperators(initOps...)
+	relayChainInterops, err := erinaceus.NewCoreRelayerChainInteroperators(initOps...)
 	if err != nil {
 		return nil, err
 	}
@@ -187,7 +187,7 @@ func (n ChainlinkAppFactory) NewApplication(ctx context.Context, cfg chainlink.G
 	restrictedClient := clhttp.NewRestrictedHTTPClient(cfg.Database(), appLggr)
 	unrestrictedClient := clhttp.NewUnrestrictedHTTPClient()
 	externalInitiatorManager := webhook.NewExternalInitiatorManager(db, unrestrictedClient, appLggr, cfg.Database())
-	return chainlink.NewApplication(chainlink.ApplicationOpts{
+	return erinaceus.NewApplication(erinaceus.ApplicationOpts{
 		Config:                     cfg,
 		SqlxDB:                     db,
 		KeyStore:                   keyStore,
@@ -200,7 +200,7 @@ func (n ChainlinkAppFactory) NewApplication(ctx context.Context, cfg chainlink.G
 		Version:                    static.Version,
 		RestrictedHTTPClient:       restrictedClient,
 		UnrestrictedHTTPClient:     unrestrictedClient,
-		SecretGenerator:            chainlink.FilePersistedSecretGenerator{},
+		SecretGenerator:            erinaceus.FilePersistedSecretGenerator{},
 		LoopRegistry:               loopRegistry,
 		GRPCOpts:                   grpcOpts,
 	})
@@ -284,7 +284,7 @@ func takeBackupIfVersionUpgrade(dbUrl url.URL, rootDir string, cfg periodicbacku
 
 // Runner implements the Run method.
 type Runner interface {
-	Run(context.Context, chainlink.Application) error
+	Run(context.Context, erinaceus.Application) error
 }
 
 // ChainlinkRunner is used to run the node application.
@@ -292,7 +292,7 @@ type ChainlinkRunner struct{}
 
 // Run sets the log level based on config and starts the web router to listen
 // for input and return data.
-func (n ChainlinkRunner) Run(ctx context.Context, app chainlink.Application) error {
+func (n ChainlinkRunner) Run(ctx context.Context, app erinaceus.Application) error {
 	config := app.GetConfig()
 
 	mode := gin.ReleaseMode

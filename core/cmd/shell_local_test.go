@@ -23,8 +23,8 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/pgtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
-	chainlinkmocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink/mocks"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
+	chainlinkmocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus/mocks"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 	evmrelayer "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/relay/evm"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/sessions/localauth"
@@ -41,13 +41,13 @@ import (
 	"github.com/urfave/cli"
 )
 
-func genTestEVMRelayers(t *testing.T, opts legacyevm.ChainRelayExtenderConfig, ks evmrelayer.CSAETHKeystore) *chainlink.CoreRelayerChainInteroperators {
-	f := chainlink.RelayerFactory{
+func genTestEVMRelayers(t *testing.T, opts legacyevm.ChainRelayExtenderConfig, ks evmrelayer.CSAETHKeystore) *erinaceus.CoreRelayerChainInteroperators {
+	f := erinaceus.RelayerFactory{
 		Logger:       opts.Logger,
 		LoopRegistry: plugins.NewLoopRegistry(opts.Logger, opts.AppConfig.Tracing()),
 	}
 
-	relayers, err := chainlink.NewCoreRelayerChainInteroperators(chainlink.InitEVM(testutils.Context(t), f, chainlink.EVMFactoryConfig{
+	relayers, err := erinaceus.NewCoreRelayerChainInteroperators(erinaceus.InitEVM(testutils.Context(t), f, erinaceus.EVMFactoryConfig{
 		ChainOpts:      opts.ChainOpts,
 		CSAETHKeystore: ks,
 	}))
@@ -71,7 +71,7 @@ func TestShell_RunNodeWithPasswords(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+			cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 				s.Password.Keystore = models.NewSecret("dummy")
 				c.EVM[0].Nodes[0].Name = ptr("fake")
 				c.EVM[0].Nodes[0].HTTPURL = models.MustParseURL("http://fake.com")
@@ -165,7 +165,7 @@ func TestShell_RunNodeWithAPICredentialsFile(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+			cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 				s.Password.Keystore = models.NewSecret("16charlengthp4SsW0rD1!@#_")
 				c.EVM[0].Nodes[0].Name = ptr("fake")
 				c.EVM[0].Nodes[0].WSURL = models.MustParseURL("WSS://fake.com/ws")
@@ -282,7 +282,7 @@ func TestShell_RebroadcastTransactions_Txm(t *testing.T) {
 	// Use a non-transactional db for this test because we need to
 	// test multiple connections to the database, and changes made within
 	// the transaction cannot be seen from another connection.
-	config, sqlxDB := heavyweight.FullTestDBV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	config, sqlxDB := heavyweight.FullTestDBV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.Database.Dialect = dialects.Postgres
 		// evm config is used in this test. but if set, it must be pass config validation.
 		// simplest to make it nil
@@ -361,7 +361,7 @@ func TestShell_RebroadcastTransactions_OutsideRange_Txm(t *testing.T) {
 			// Use the non-transactional db for this test because we need to
 			// test multiple connections to the database, and changes made within
 			// the transaction cannot be seen from another connection.
-			config, sqlxDB := heavyweight.FullTestDBV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+			config, sqlxDB := heavyweight.FullTestDBV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 				c.Database.Dialect = dialects.Postgres
 				// evm config is used in this test. but if set, it must be pass config validation.
 				// simplest to make it nil
@@ -439,7 +439,7 @@ func TestShell_RebroadcastTransactions_AddressCheck(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 
-			config, sqlxDB := heavyweight.FullTestDBV2(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+			config, sqlxDB := heavyweight.FullTestDBV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 				c.Database.Dialect = dialects.Postgres
 
 				c.EVM = nil
@@ -498,7 +498,7 @@ func TestShell_RebroadcastTransactions_AddressCheck(t *testing.T) {
 func TestShell_CleanupChainTables(t *testing.T) {
 	// Just check if it doesn't error, command itself shouldn't be changed unless major schema changes were made.
 	// It would be really hard to write a test that accounts for schema changes, so this should be enough to alarm us that something broke.
-	config, _ := heavyweight.FullTestDBV2(t, func(c *chainlink.Config, s *chainlink.Secrets) { c.Database.Dialect = dialects.Postgres })
+	config, _ := heavyweight.FullTestDBV2(t, func(c *erinaceus.Config, s *erinaceus.Secrets) { c.Database.Dialect = dialects.Postgres })
 	client := cmd.Shell{
 		Config: config,
 		Logger: logger.TestLogger(t),

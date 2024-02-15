@@ -14,7 +14,7 @@ import (
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/blockhashstore"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
@@ -26,7 +26,7 @@ import (
 
 // JobsController manages jobs
 type JobsController struct {
-	App chainlink.Application
+	App erinaceus.Application
 }
 
 // Index lists all jobs

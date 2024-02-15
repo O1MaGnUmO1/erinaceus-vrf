@@ -13,7 +13,7 @@ install-git-hooks: ## Install git hooks.
 	git config core.hooksPath .githooks
 
 .PHONY: install-chainlink-autoinstall
-install-chainlink-autoinstall: | pnpmdep gomod install-chainlink ## Autoinstall chainlink.
+install-chainlink-autoinstall: | pnpmdep gomod install-chainlink ## Autoinstall erinaceus.
 .PHONY: operator-ui-autoinstall
 operator-ui-autoinstall: | operator-ui ## Autoinstall frontend UI.
 
@@ -65,13 +65,13 @@ install-medianpoc: ## Build & install the chainlink-medianpoc binary.
 docker:
 	docker buildx build \
 	--build-arg COMMIT_SHA=$(COMMIT_SHA) \
-	-f core/chainlink.Dockerfile .
+	-f core/erinaceus.Dockerfile .
 
 .PHONY: docker-plugins ## Build the chainlink-plugins docker image
 docker-plugins:
 	docker buildx build \
 	--build-arg COMMIT_SHA=$(COMMIT_SHA) \
-	-f plugins/chainlink.Dockerfile .
+	-f plugins/erinaceus.Dockerfile .
 
 .PHONY: operator-ui
 operator-ui: ## Fetch the frontend

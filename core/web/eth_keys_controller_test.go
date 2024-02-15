@@ -17,7 +17,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
 	webpresenters "github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 
@@ -33,7 +33,7 @@ func TestETHKeysController_Index_Success(t *testing.T) {
 
 	ethClient := cltest.NewEthMocksWithStartupAssertions(t)
 	ethClient.On("PendingNonceAt", mock.Anything, mock.Anything).Return(uint64(0), nil)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
 	})
@@ -86,7 +86,7 @@ func TestETHKeysController_Index_Errors(t *testing.T) {
 
 	ethClient := cltest.NewEthMocksWithStartupAssertions(t)
 	ethClient.On("PendingNonceAt", mock.Anything, mock.Anything).Return(uint64(0), nil)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
 	})
@@ -123,7 +123,7 @@ func TestETHKeysController_Index_Disabled(t *testing.T) {
 	t.Parallel()
 
 	ethClient := cltest.NewEthMocksWithStartupAssertions(t)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].Enabled = ptr(false)
 	})
 
@@ -158,7 +158,7 @@ func TestETHKeysController_Index_NotDev(t *testing.T) {
 
 	ethClient := cltest.NewEthMocksWithStartupAssertions(t)
 	ethClient.On("PendingNonceAt", mock.Anything, mock.Anything).Return(uint64(0), nil)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
 		c.EVM[0].GasEstimator.Mode = ptr("FixedPrice")
@@ -211,7 +211,7 @@ func TestETHKeysController_Index_NoAccounts(t *testing.T) {
 func TestETHKeysController_CreateSuccess(t *testing.T) {
 	t.Parallel()
 
-	config := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	config := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
 	})
 	ethClient := evmtest.NewEthClientMockWithDefaultChain(t)
@@ -253,7 +253,7 @@ func TestETHKeysController_ChainSuccess_UpdateNonce(t *testing.T) {
 
 	ethClient := cltest.NewEthMocksWithStartupAssertions(t)
 	ethClient.On("PendingNonceAt", mock.Anything, mock.Anything).Return(uint64(0), nil)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
 	})
@@ -294,7 +294,7 @@ func TestETHKeysController_ChainSuccess_Disable(t *testing.T) {
 
 	ethClient := cltest.NewEthMocksWithStartupAssertions(t)
 	ethClient.On("PendingNonceAt", mock.Anything, mock.Anything).Return(uint64(0), nil)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
 	})
@@ -337,7 +337,7 @@ func TestETHKeysController_ChainSuccess_Enable(t *testing.T) {
 	t.Parallel()
 
 	ethClient := cltest.NewEthMocksWithStartupAssertions(t)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
 	})
@@ -381,7 +381,7 @@ func TestETHKeysController_ChainSuccess_ResetWithAbandon(t *testing.T) {
 
 	ethClient := cltest.NewEthMocksWithStartupAssertions(t)
 	ethClient.On("PendingNonceAt", mock.Anything, mock.Anything).Return(uint64(0), nil)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
 	})
@@ -453,7 +453,7 @@ func TestETHKeysController_ChainFailure_InvalidAbandon(t *testing.T) {
 
 	ethClient := cltest.NewEthMocksWithStartupAssertions(t)
 	ethClient.On("PendingNonceAt", mock.Anything, mock.Anything).Return(uint64(0), nil)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
 	})
@@ -486,7 +486,7 @@ func TestETHKeysController_ChainFailure_InvalidEnabled(t *testing.T) {
 
 	ethClient := cltest.NewEthMocksWithStartupAssertions(t)
 	ethClient.On("PendingNonceAt", mock.Anything, mock.Anything).Return(uint64(0), nil)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
 	})
@@ -518,7 +518,7 @@ func TestETHKeysController_ChainFailure_InvalidAddress(t *testing.T) {
 	t.Parallel()
 
 	ethClient := cltest.NewEthMocksWithStartupAssertions(t)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
 	})
@@ -546,7 +546,7 @@ func TestETHKeysController_ChainFailure_MissingAddress(t *testing.T) {
 	t.Parallel()
 
 	ethClient := cltest.NewEthMocksWithStartupAssertions(t)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
 	})
@@ -574,7 +574,7 @@ func TestETHKeysController_ChainFailure_InvalidChainID(t *testing.T) {
 	t.Parallel()
 
 	ethClient := cltest.NewEthMocksWithStartupAssertions(t)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
 	})
@@ -603,7 +603,7 @@ func TestETHKeysController_ChainFailure_MissingChainID(t *testing.T) {
 
 	ethClient := cltest.NewEthMocksWithStartupAssertions(t)
 	ethClient.On("PendingNonceAt", mock.Anything, mock.Anything).Return(uint64(0), nil)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
 	})
@@ -634,7 +634,7 @@ func TestETHKeysController_DeleteSuccess(t *testing.T) {
 	t.Parallel()
 	ethClient := cltest.NewEthMocksWithStartupAssertions(t)
 	ethClient.On("PendingNonceAt", mock.Anything, mock.Anything).Return(uint64(0), nil)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
 	})
@@ -684,7 +684,7 @@ func TestETHKeysController_DeleteSuccess(t *testing.T) {
 func TestETHKeysController_DeleteFailure_InvalidAddress(t *testing.T) {
 	t.Parallel()
 	ethClient := cltest.NewEthMocksWithStartupAssertions(t)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
 	})
@@ -705,7 +705,7 @@ func TestETHKeysController_DeleteFailure_InvalidAddress(t *testing.T) {
 func TestETHKeysController_DeleteFailure_KeyMissing(t *testing.T) {
 	t.Parallel()
 	ethClient := cltest.NewEthMocksWithStartupAssertions(t)
-	cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		c.EVM[0].NonceAutoSync = ptr(false)
 		c.EVM[0].BalanceMonitor.Enabled = ptr(false)
 	})

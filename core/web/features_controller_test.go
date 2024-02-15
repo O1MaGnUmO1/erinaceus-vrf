@@ -7,7 +7,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 
@@ -16,7 +16,7 @@ import (
 )
 
 func Test_FeaturesController_List(t *testing.T) {
-	app := cltest.NewApplicationWithConfig(t, configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+	app := cltest.NewApplicationWithConfig(t, configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 		csa := true
 		c.Feature.UICSAKeys = &csa
 	}))

@@ -35,7 +35,7 @@ import (
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/build"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/auth"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/loader"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/resolver"
@@ -43,7 +43,7 @@ import (
 )
 
 // NewRouter returns *gin.Engine router that listens and responds to requests to the node for valid paths.
-func NewRouter(app chainlink.Application, prometheus *ginprom.Prometheus) (*gin.Engine, error) {
+func NewRouter(app erinaceus.Application, prometheus *ginprom.Prometheus) (*gin.Engine, error) {
 	engine := gin.New()
 	engine.RemoteIPHeaders = nil // don't trust default headers: "X-Forwarded-For", "X-Real-IP"
 	config := app.GetConfig()
@@ -99,7 +99,7 @@ func NewRouter(app chainlink.Application, prometheus *ginprom.Prometheus) (*gin.
 }
 
 // Defining the Graphql handler
-func graphqlHandler(app chainlink.Application) gin.HandlerFunc {
+func graphqlHandler(app erinaceus.Application) gin.HandlerFunc {
 	rootSchema := schema.MustGetRootSchema()
 
 	// Disable introspection and set a max query depth in production.
@@ -169,7 +169,7 @@ func secureMiddleware(tlsRedirect bool, tlsHost string, devWebServer bool) gin.H
 	return secureFunc
 }
 
-func debugRoutes(app chainlink.Application, r *gin.RouterGroup) {
+func debugRoutes(app erinaceus.Application, r *gin.RouterGroup) {
 	group := r.Group("/debug", auth.Authenticate(app.AuthenticationProvider(), auth.AuthenticateBySession))
 	group.GET("/vars", expvar.Handler())
 }
@@ -198,7 +198,7 @@ func ginHandlerFromHTTP(h http.HandlerFunc) gin.HandlerFunc {
 	}
 }
 
-func sessionRoutes(app chainlink.Application, r *gin.RouterGroup) {
+func sessionRoutes(app erinaceus.Application, r *gin.RouterGroup) {
 	config := app.GetConfig()
 	rl := config.WebServer().RateLimit()
 	unauth := r.Group("/", rateLimiter(
@@ -211,7 +211,7 @@ func sessionRoutes(app chainlink.Application, r *gin.RouterGroup) {
 	auth.DELETE("/sessions", sc.Destroy)
 }
 
-func healthRoutes(app chainlink.Application, r *gin.RouterGroup) {
+func healthRoutes(app erinaceus.Application, r *gin.RouterGroup) {
 	hc := HealthController{app}
 	r.GET("/readyz", hc.Readyz)
 	r.GET("/health", hc.Health)
@@ -220,14 +220,14 @@ func healthRoutes(app chainlink.Application, r *gin.RouterGroup) {
 	}, hc.Health)
 }
 
-func loopRoutes(app chainlink.Application, r *gin.RouterGroup) {
+func loopRoutes(app erinaceus.Application, r *gin.RouterGroup) {
 	loopRegistry := NewLoopRegistryServer(app)
 	r.GET("/discovery", ginHandlerFromHTTP(loopRegistry.discoveryHandler))
 	r.GET("/plugins/:name/metrics", loopRegistry.pluginMetricHandler)
 
 }
 
-func v2Routes(app chainlink.Application, r *gin.RouterGroup) {
+func v2Routes(app erinaceus.Application, r *gin.RouterGroup) {
 	unauthedv2 := r.Group("/v2")
 
 	prc := PipelineRunsController{app}

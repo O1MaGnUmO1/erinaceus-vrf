@@ -20,7 +20,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/pgtest"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
@@ -1380,7 +1380,7 @@ func TestORM_UpdateTxUnstartedToInProgress(t *testing.T) {
 		require.Len(t, etx.TxAttempts, 1)
 
 		zero := models.MustNewDuration(time.Duration(0))
-		evmCfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+		evmCfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 			c.EVM[0].Chain.Transactions.ReaperInterval = zero
 			c.EVM[0].Chain.Transactions.ReaperThreshold = zero
 			c.EVM[0].Chain.Transactions.ResendAfterThreshold = zero

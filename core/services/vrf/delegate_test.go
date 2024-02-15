@@ -35,7 +35,7 @@ package vrf_test
 // 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
 // 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/pgtest"
 // 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
-// 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+// 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 // 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 // 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
 // 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/vrfkey"
@@ -65,7 +65,7 @@ package vrf_test
 // 	cid          big.Int
 // }
 
-// func buildVrfUni(t *testing.T, db *sqlx.DB, cfg chainlink.GeneralConfig) vrfUniverse {
+// func buildVrfUni(t *testing.T, db *sqlx.DB, cfg erinaceus.GeneralConfig) vrfUniverse {
 // 	// Mock all chain interactions
 // 	lb := log_mocks.NewBroadcaster(t)
 // 	lb.On("AddDependents", 1).Maybe()

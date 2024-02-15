@@ -21,7 +21,7 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/pgtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	keystoremocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/mocks"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
 	pipelinemocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline/mocks"
@@ -247,7 +247,7 @@ func TestETHCallTask(t *testing.T) {
 			config := pipelinemocks.NewConfig(t)
 			test.setupClientMocks(ethClient, config)
 
-			cfg := configtest.NewGeneralConfig(t, func(c *chainlink.Config, s *chainlink.Secrets) {
+			cfg := configtest.NewGeneralConfig(t, func(c *erinaceus.Config, s *erinaceus.Secrets) {
 				c.EVM[0].GasEstimator.LimitDefault = testutils.Ptr(gasLimit)
 				c.EVM[0].GasEstimator.LimitJobType.DR = testutils.Ptr(drJobTypeGasLimit)
 			})
