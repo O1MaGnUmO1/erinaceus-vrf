@@ -8,8 +8,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 )
 
 // ChainID   *big.Big   `json:"chainID"`

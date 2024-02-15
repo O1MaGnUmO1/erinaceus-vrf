@@ -7,12 +7,12 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	client2 "github.com/smartcontractkit/chainlink/v2/core/chains/evm/client"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils/big"
-	"github.com/smartcontractkit/chainlink/v2/core/cmd"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/cltest"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
-	"github.com/smartcontractkit/chainlink/v2/core/services/chainlink"
+	client2 "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/client"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/cmd"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
 )
 
 func newRandChainID() *big.Big {

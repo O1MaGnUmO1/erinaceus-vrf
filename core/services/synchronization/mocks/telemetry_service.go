@@ -5,7 +5,7 @@ package mocks
 import (
 	context "context"
 
-	synchronization "github.com/smartcontractkit/chainlink/v2/core/services/synchronization"
+	synchronization "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/synchronization"
 	mock "github.com/stretchr/testify/mock"
 )
 

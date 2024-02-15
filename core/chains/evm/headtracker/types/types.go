@@ -5,8 +5,8 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 
-	commontypes "github.com/smartcontractkit/chainlink/v2/common/types"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
+	commontypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
 )
 
 // HeadSaver maintains chains persisted in DB. All methods are thread-safe.

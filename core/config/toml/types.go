@@ -14,16 +14,16 @@ import (
 
 	ocrcommontypes "github.com/smartcontractkit/libocr/commontypes"
 
-	"github.com/smartcontractkit/chainlink/v2/core/build"
-	"github.com/smartcontractkit/chainlink/v2/core/config"
-	"github.com/smartcontractkit/chainlink/v2/core/config/parse"
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore/keys/ethkey"
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore/keys/p2pkey"
-	"github.com/smartcontractkit/chainlink/v2/core/sessions"
-	"github.com/smartcontractkit/chainlink/v2/core/store/dialects"
-	"github.com/smartcontractkit/chainlink/v2/core/store/models"
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
-	configutils "github.com/smartcontractkit/chainlink/v2/core/utils/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/build"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/parse"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/p2pkey"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/sessions"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/dialects"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
+	configutils "github.com/O1MaGnUmO1/erinaceus-vrf/core/utils/config"
 )
 
 var ErrUnsupported = errors.New("unsupported with config v2")

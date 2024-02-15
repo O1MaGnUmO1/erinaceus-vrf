@@ -12,9 +12,9 @@ import (
 	"github.com/smartcontractkit/wsrpc/examples/simple/keys"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore"
-	telemPb "github.com/smartcontractkit/chainlink/v2/core/services/synchronization/telem"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
+	telemPb "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/synchronization/telem"
 )
 
 type NoopTelemetryIngressClient struct{}

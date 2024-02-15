@@ -20,13 +20,13 @@ import (
 	"github.com/urfave/cli"
 	"go.uber.org/multierr"
 
-	"github.com/smartcontractkit/chainlink/v2/core/bridges"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/sessions"
-	"github.com/smartcontractkit/chainlink/v2/core/static"
-	"github.com/smartcontractkit/chainlink/v2/core/store/models"
-	"github.com/smartcontractkit/chainlink/v2/core/web"
-	webpresenters "github.com/smartcontractkit/chainlink/v2/core/web/presenters"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/bridges"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/sessions"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/static"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web"
+	webpresenters "github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 )
 
 func initRemoteConfigSubCmds(s *Shell) []cli.Command {

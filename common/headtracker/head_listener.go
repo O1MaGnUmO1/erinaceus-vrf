@@ -13,9 +13,9 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services"
 
-	htrktypes "github.com/smartcontractkit/chainlink/v2/common/headtracker/types"
-	"github.com/smartcontractkit/chainlink/v2/common/internal/utils"
-	"github.com/smartcontractkit/chainlink/v2/common/types"
+	htrktypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/headtracker/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/internal/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
 )
 
 var (

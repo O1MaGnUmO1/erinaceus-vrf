@@ -12,7 +12,7 @@ import (
 	ocrtypes "github.com/smartcontractkit/libocr/offchainreporting2plus/types"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils/tests"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/types"
 )

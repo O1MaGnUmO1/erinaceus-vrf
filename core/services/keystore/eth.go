@@ -12,9 +12,9 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/pkg/errors"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore/keys/ethkey"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pg"
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 )
 
 // Eth is the external interface for EthKeyStore

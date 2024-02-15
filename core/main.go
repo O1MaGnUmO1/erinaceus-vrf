@@ -7,10 +7,10 @@ import (
 
 	"github.com/Masterminds/semver/v3"
 
-	"github.com/smartcontractkit/chainlink/v2/core/build"
-	"github.com/smartcontractkit/chainlink/v2/core/cmd"
-	"github.com/smartcontractkit/chainlink/v2/core/recovery"
-	"github.com/smartcontractkit/chainlink/v2/core/static"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/build"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/cmd"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/recovery"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/static"
 )
 
 func init() {

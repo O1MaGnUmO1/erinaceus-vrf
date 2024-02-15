@@ -8,7 +8,7 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/stretchr/testify/require"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/common"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/common"
 )
 
 func TestUtils_BytesUint32Conversions(t *testing.T) {

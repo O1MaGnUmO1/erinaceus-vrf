@@ -14,13 +14,13 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promauto"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/api"
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/config"
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/handlers"
-	gw_net "github.com/smartcontractkit/chainlink/v2/core/services/gateway/network"
-	"github.com/smartcontractkit/chainlink/v2/core/services/job"
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/api"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/handlers"
+	gw_net "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/network"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 )
 
 var promRequest = promauto.NewCounterVec(prometheus.CounterOpts{

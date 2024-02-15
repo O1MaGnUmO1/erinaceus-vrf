@@ -25,10 +25,10 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils/mathutil"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/client"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
-	ubig "github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils/big"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pg"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/client"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
+	ubig "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 )
 
 //go:generate mockery --quiet --name LogPoller --output ./mocks/ --case=underscore --structname LogPoller --filename log_poller.go

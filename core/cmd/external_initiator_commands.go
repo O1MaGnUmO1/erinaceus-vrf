@@ -3,7 +3,7 @@ package cmd
 import (
 	"github.com/urfave/cli"
 
-	"github.com/smartcontractkit/chainlink/v2/core/web/presenters"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 )
 
 func initInitiatorsSubCmds(s *Shell) []cli.Command {

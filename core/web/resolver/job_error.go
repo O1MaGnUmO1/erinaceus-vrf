@@ -3,8 +3,8 @@ package resolver
 import (
 	"github.com/graph-gophers/graphql-go"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/job"
-	"github.com/smartcontractkit/chainlink/v2/core/utils/stringutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils/stringutils"
 )
 
 // JobErrorResolver resolves a Job Error

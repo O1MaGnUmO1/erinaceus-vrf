@@ -6,7 +6,7 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/loop"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/loop/reportingplugins"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/types"
-	"github.com/smartcontractkit/chainlink/v2/plugins/medianpoc"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/plugins/medianpoc"
 )
 
 const (

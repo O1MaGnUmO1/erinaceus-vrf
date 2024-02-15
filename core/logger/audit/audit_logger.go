@@ -15,9 +15,9 @@ import (
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services"
 
-	"github.com/smartcontractkit/chainlink/v2/core/config"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/store/models"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
 
 const bufferCapacity = 2048

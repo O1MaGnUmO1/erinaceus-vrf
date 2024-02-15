@@ -9,8 +9,8 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils"
 
-	txmgrtypes "github.com/smartcontractkit/chainlink/v2/common/txmgr/types"
-	"github.com/smartcontractkit/chainlink/v2/common/types"
+	txmgrtypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/txmgr/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
 )
 
 // Reaper handles periodic database cleanup for Txm

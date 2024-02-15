@@ -5,19 +5,19 @@ import (
 
 	"github.com/jmoiron/sqlx"
 
-	"github.com/smartcontractkit/chainlink/v2/core/bridges"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pg"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/bridges"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/smartcontractkit/chainlink/v2/core/internal/cltest"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils/pgtest"
-	"github.com/smartcontractkit/chainlink/v2/core/services/webhook"
-	"github.com/smartcontractkit/chainlink/v2/core/sessions"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/pgtest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/webhook"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/sessions"
 )
 
 func newBridgeORM(t *testing.T, db *sqlx.DB, cfg pg.QConfig) bridges.ORM {

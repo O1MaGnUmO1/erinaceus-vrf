@@ -7,10 +7,10 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
-	"github.com/smartcontractkit/chainlink/v2/common/headtracker"
-	commontypes "github.com/smartcontractkit/chainlink/v2/common/types"
-	evmclient "github.com/smartcontractkit/chainlink/v2/core/chains/evm/client"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/headtracker"
+	commontypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
+	evmclient "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/client"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
 )
 
 type headListener = headtracker.HeadListener[*evmtypes.Head, ethereum.Subscription, *big.Int, common.Hash]

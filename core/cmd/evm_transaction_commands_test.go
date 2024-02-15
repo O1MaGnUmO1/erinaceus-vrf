@@ -12,17 +12,17 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/urfave/cli"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/assets"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/txmgr"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
-	"github.com/smartcontractkit/chainlink/v2/core/cmd"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/cltest"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils/evmtest"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils/pgtest"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/services/chainlink"
-	"github.com/smartcontractkit/chainlink/v2/core/store/models"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/assets"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/txmgr"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/cmd"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/pgtest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
 
 func TestShell_IndexTransactions(t *testing.T) {

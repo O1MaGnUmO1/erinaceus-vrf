@@ -8,7 +8,7 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/loop"
 
-	"github.com/smartcontractkit/chainlink/v2/core/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config"
 )
 
 const (

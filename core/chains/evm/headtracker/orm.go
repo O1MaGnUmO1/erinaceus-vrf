@@ -11,9 +11,9 @@ import (
 	"github.com/jmoiron/sqlx"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
-	ubig "github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils/big"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pg"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
+	ubig "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 )
 
 type ORM interface {

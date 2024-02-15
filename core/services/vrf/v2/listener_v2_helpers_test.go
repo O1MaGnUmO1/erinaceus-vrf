@@ -6,10 +6,10 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/assets"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/txmgr"
-	v2 "github.com/smartcontractkit/chainlink/v2/core/services/vrf/v2"
-	"github.com/smartcontractkit/chainlink/v2/core/services/vrf/vrfcommon"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/assets"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/txmgr"
+	v2 "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/vrf/v2"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/vrf/vrfcommon"
 )
 
 func TestListener_EstimateFeeJuels(t *testing.T) {

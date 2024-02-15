@@ -9,7 +9,7 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services"
 
-	"github.com/smartcontractkit/chainlink/v2/common/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
 )
 
 //go:generate mockery --quiet --name sendOnlyClient --structname mockSendOnlyClient --filename "mock_send_only_client_test.go" --inpackage --case=underscore

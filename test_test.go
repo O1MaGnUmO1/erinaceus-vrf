@@ -17,7 +17,7 @@ import (
 	"testing"
 
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/smartcontractkit/chainlink/v2/core/services/signatures/secp256k1"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/signatures/secp256k1"
 )
 
 // var vrfProofTemplate = `{

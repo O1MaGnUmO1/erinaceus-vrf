@@ -8,8 +8,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore/keys/csakey"
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/csakey"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 )
 
 func TestCSAKeyResource(t *testing.T) {

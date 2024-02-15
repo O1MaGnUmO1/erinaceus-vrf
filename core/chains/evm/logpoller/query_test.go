@@ -8,8 +8,8 @@ import (
 	"github.com/lib/pq"
 	"github.com/stretchr/testify/require"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils"
-	ubig "github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils/big"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils"
+	ubig "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
 )
 
 func Test_QueryArgs(t *testing.T) {

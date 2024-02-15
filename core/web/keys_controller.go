@@ -8,9 +8,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/manyminds/api2go/jsonapi"
 
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/logger/audit"
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
 )
 
 type Keystore[K keystore.Key] interface {

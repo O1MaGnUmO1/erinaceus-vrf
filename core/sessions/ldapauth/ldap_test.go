@@ -13,13 +13,13 @@ import (
 
 	"github.com/jmoiron/sqlx"
 
-	"github.com/smartcontractkit/chainlink/v2/core/internal/cltest"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils/pgtest"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/logger/audit"
-	"github.com/smartcontractkit/chainlink/v2/core/sessions"
-	"github.com/smartcontractkit/chainlink/v2/core/sessions/ldapauth"
-	"github.com/smartcontractkit/chainlink/v2/core/sessions/ldapauth/mocks"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/pgtest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/sessions"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/sessions/ldapauth"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/sessions/ldapauth/mocks"
 )
 
 // Setup LDAP Auth authenticator

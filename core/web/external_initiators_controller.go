@@ -6,12 +6,12 @@ import (
 	"net/http"
 	"regexp"
 
-	"github.com/smartcontractkit/chainlink/v2/core/auth"
-	"github.com/smartcontractkit/chainlink/v2/core/bridges"
-	"github.com/smartcontractkit/chainlink/v2/core/logger/audit"
-	"github.com/smartcontractkit/chainlink/v2/core/services/chainlink"
-	"github.com/smartcontractkit/chainlink/v2/core/store/models"
-	"github.com/smartcontractkit/chainlink/v2/core/web/presenters"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/auth"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/bridges"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"

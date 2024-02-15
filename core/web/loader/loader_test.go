@@ -13,19 +13,19 @@ import (
 
 	commontypes "github.com/O1MaGnUmO1/chainlink-common/pkg/types"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/config/toml"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/txmgr"
-	evmtxmgrmocks "github.com/smartcontractkit/chainlink/v2/core/chains/evm/txmgr/mocks"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils"
-	ubig "github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils/big"
-	coremocks "github.com/smartcontractkit/chainlink/v2/core/internal/mocks"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils/evmtest"
-	chainlinkmocks "github.com/smartcontractkit/chainlink/v2/core/services/chainlink/mocks"
-	"github.com/smartcontractkit/chainlink/v2/core/services/job"
-	jobORMMocks "github.com/smartcontractkit/chainlink/v2/core/services/job/mocks"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pipeline"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config/toml"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/txmgr"
+	evmtxmgrmocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/txmgr/mocks"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils"
+	ubig "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
+	coremocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/mocks"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
+	chainlinkmocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink/mocks"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
+	jobORMMocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job/mocks"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
 )
 
 func TestLoader_Chains(t *testing.T) {

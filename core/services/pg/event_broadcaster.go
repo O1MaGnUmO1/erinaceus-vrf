@@ -14,9 +14,9 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services"
 	commonutils "github.com/O1MaGnUmO1/chainlink-common/pkg/utils"
 
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/static"
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/static"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 )
 
 //go:generate mockery --quiet --name EventBroadcaster --output ./mocks/ --case=underscore

@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 )
 
 func TestPluginPortManager(t *testing.T) {

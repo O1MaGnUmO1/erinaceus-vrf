@@ -9,15 +9,15 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	proof2 "github.com/smartcontractkit/chainlink/v2/core/services/vrf/proof"
-	"github.com/smartcontractkit/chainlink/v2/core/services/vrf/solidity_cross_tests"
-	"github.com/smartcontractkit/chainlink/v2/core/services/vrf/vrftesthelpers"
+	proof2 "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/vrf/proof"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/vrf/solidity_cross_tests"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/vrf/vrftesthelpers"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils"
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore/keys/vrfkey"
-	"github.com/smartcontractkit/chainlink/v2/core/services/signatures/secp256k1"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/vrfkey"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/signatures/secp256k1"
 
-	"github.com/smartcontractkit/chainlink/v2/core/internal/cltest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
 )
 
 const defaultGasLimit uint32 = 500000

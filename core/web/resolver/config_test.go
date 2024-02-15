@@ -8,7 +8,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
 )
 
 var (

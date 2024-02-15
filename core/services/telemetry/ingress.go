@@ -5,7 +5,7 @@ import (
 
 	ocrtypes "github.com/smartcontractkit/libocr/commontypes"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/synchronization"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/synchronization"
 )
 
 var _ MonitoringEndpointGenerator = &IngressAgentWrapper{}

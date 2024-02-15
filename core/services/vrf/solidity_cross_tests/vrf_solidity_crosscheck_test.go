@@ -7,9 +7,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/smartcontractkit/chainlink/v2/core/gethwrappers/generated/solidity_vrf_verifier_wrapper"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
-	proof2 "github.com/smartcontractkit/chainlink/v2/core/services/vrf/proof"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/gethwrappers/generated/solidity_vrf_verifier_wrapper"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
+	proof2 "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/vrf/proof"
 
 	"github.com/ethereum/go-ethereum/eth/ethconfig"
 
@@ -20,10 +20,10 @@ import (
 	"go.dedis.ch/kyber/v3"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/assets"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/cltest"
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore/keys/vrfkey"
-	"github.com/smartcontractkit/chainlink/v2/core/services/signatures/secp256k1"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/assets"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/vrfkey"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/signatures/secp256k1"
 )
 
 // Cross-checks of golang implementation details vs corresponding solidity

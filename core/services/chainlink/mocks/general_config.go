@@ -3,13 +3,13 @@
 package mocks
 
 import (
-	config "github.com/smartcontractkit/chainlink/v2/core/config"
+	config "github.com/O1MaGnUmO1/erinaceus-vrf/core/config"
 
 	mock "github.com/stretchr/testify/mock"
 
 	time "time"
 
-	toml "github.com/smartcontractkit/chainlink/v2/core/chains/evm/config/toml"
+	toml "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config/toml"
 
 	uuid "github.com/google/uuid"
 

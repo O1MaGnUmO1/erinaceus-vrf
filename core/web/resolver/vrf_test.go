@@ -9,8 +9,8 @@ import (
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore"
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore/keys/vrfkey"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/vrfkey"
 )
 
 func TestResolver_GetVRFKey(t *testing.T) {

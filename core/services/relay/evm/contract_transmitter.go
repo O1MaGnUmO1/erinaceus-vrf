@@ -14,12 +14,12 @@ import (
 	"github.com/smartcontractkit/libocr/offchainreporting2plus/chains/evmutil"
 	ocrtypes "github.com/smartcontractkit/libocr/offchainreporting2plus/types"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/logpoller"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/txmgr"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/services"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pg"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/logpoller"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/txmgr"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 )
 
 type ContractTransmitter interface {

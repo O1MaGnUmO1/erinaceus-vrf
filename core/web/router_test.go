@@ -8,12 +8,12 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/smartcontractkit/chainlink/v2/core/auth"
-	"github.com/smartcontractkit/chainlink/v2/core/bridges"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/cltest"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
-	clhttptest "github.com/smartcontractkit/chainlink/v2/core/internal/testutils/httptest"
-	"github.com/smartcontractkit/chainlink/v2/core/web"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/auth"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/bridges"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
+	clhttptest "github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/httptest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

@@ -10,16 +10,16 @@ import (
 	"github.com/stretchr/testify/mock"
 
 	commonassets "github.com/O1MaGnUmO1/chainlink-common/pkg/assets"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/assets"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/config"
-	mocks2 "github.com/smartcontractkit/chainlink/v2/core/chains/evm/config/mocks"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/config/toml"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils/big"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/legacyevm"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils/configtest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/assets"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config"
+	mocks2 "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config/mocks"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config/toml"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/legacyevm"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore/keys/ethkey"
-	evmrelay "github.com/smartcontractkit/chainlink/v2/core/services/relay/evm"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
+	evmrelay "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/relay/evm"
 )
 
 type mockEvmConfig struct {

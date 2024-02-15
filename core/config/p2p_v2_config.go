@@ -3,7 +3,7 @@ package config
 import (
 	ocrcommontypes "github.com/smartcontractkit/libocr/commontypes"
 
-	"github.com/smartcontractkit/chainlink/v2/core/store/models"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
 
 type V2 interface {

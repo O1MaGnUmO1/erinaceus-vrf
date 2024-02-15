@@ -9,9 +9,9 @@ import (
 	"github.com/pkg/errors"
 	"go.dedis.ch/kyber/v3"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils"
-	"github.com/smartcontractkit/chainlink/v2/core/services/signatures/secp256k1"
-	bm "github.com/smartcontractkit/chainlink/v2/core/utils/big_math"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/signatures/secp256k1"
+	bm "github.com/O1MaGnUmO1/erinaceus-vrf/core/utils/big_math"
 )
 
 var suite = secp256k1.NewBlakeKeccackSecp256k1()

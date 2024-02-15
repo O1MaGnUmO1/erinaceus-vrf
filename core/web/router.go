@@ -33,13 +33,13 @@ import (
 	"github.com/ulule/limiter/v3/drivers/store/memory"
 	"github.com/unrolled/secure"
 
-	"github.com/smartcontractkit/chainlink/v2/core/build"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/services/chainlink"
-	"github.com/smartcontractkit/chainlink/v2/core/web/auth"
-	"github.com/smartcontractkit/chainlink/v2/core/web/loader"
-	"github.com/smartcontractkit/chainlink/v2/core/web/resolver"
-	"github.com/smartcontractkit/chainlink/v2/core/web/schema"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/build"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/auth"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/loader"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/resolver"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/schema"
 )
 
 // NewRouter returns *gin.Engine router that listens and responds to requests to the node for valid paths.

@@ -6,9 +6,9 @@ import (
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
 
-	"github.com/smartcontractkit/chainlink/v2/core/auth"
-	"github.com/smartcontractkit/chainlink/v2/core/bridges"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/cltest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/auth"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/bridges"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
 
 	"github.com/stretchr/testify/assert"
 )

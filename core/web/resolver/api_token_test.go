@@ -7,9 +7,9 @@ import (
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/require"
 
-	"github.com/smartcontractkit/chainlink/v2/core/auth"
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
-	webauth "github.com/smartcontractkit/chainlink/v2/core/web/auth"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/auth"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
+	webauth "github.com/O1MaGnUmO1/erinaceus-vrf/core/web/auth"
 )
 
 func TestResolver_CreateAPIToken(t *testing.T) {

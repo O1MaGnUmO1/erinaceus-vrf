@@ -12,9 +12,9 @@ import (
 	"github.com/urfave/cli"
 	"go.uber.org/multierr"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/pipeline"
-	"github.com/smartcontractkit/chainlink/v2/core/web"
-	"github.com/smartcontractkit/chainlink/v2/core/web/presenters"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 )
 
 func initJobsSubCmds(s *Shell) []cli.Command {

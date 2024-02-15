@@ -17,8 +17,8 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/sqlutil"
 	clnull "github.com/O1MaGnUmO1/chainlink-common/pkg/utils/null"
 
-	feetypes "github.com/smartcontractkit/chainlink/v2/common/fee/types"
-	"github.com/smartcontractkit/chainlink/v2/common/types"
+	feetypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/fee/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
 )
 
 // TxStrategy controls how txes are queued and sent

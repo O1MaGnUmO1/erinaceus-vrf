@@ -13,8 +13,8 @@ import (
 	"gopkg.in/guregu/null.v4"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/types"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils"
-	ubig "github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils/big"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils"
+	ubig "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
 )
 
 type Configs interface {

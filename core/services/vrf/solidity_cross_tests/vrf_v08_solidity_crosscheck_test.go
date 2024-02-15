@@ -5,9 +5,9 @@ import (
 	mrand "math/rand"
 	"testing"
 
-	"github.com/smartcontractkit/chainlink/v2/core/gethwrappers/generated/solidity_vrf_v08_verifier_wrapper"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
-	proof2 "github.com/smartcontractkit/chainlink/v2/core/services/vrf/proof"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/gethwrappers/generated/solidity_vrf_v08_verifier_wrapper"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
+	proof2 "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/vrf/proof"
 
 	"github.com/ethereum/go-ethereum/eth/ethconfig"
 
@@ -16,10 +16,10 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/assets"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/cltest"
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore/keys/vrfkey"
-	"github.com/smartcontractkit/chainlink/v2/core/services/signatures/secp256k1"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/assets"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/vrfkey"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/signatures/secp256k1"
 )
 
 // Note these tests are identical to the ones in vrf_solidity_crosscheck_test.go,

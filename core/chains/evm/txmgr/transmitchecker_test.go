@@ -17,20 +17,20 @@ import (
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
 
-	txmgrtypes "github.com/smartcontractkit/chainlink/v2/common/txmgr/types"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
+	txmgrtypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/txmgr/types"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
 
 	"github.com/stretchr/testify/require"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/sqlutil"
-	txmgrcommon "github.com/smartcontractkit/chainlink/v2/common/txmgr"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/assets"
-	evmclient "github.com/smartcontractkit/chainlink/v2/core/chains/evm/client"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/txmgr"
-	v1 "github.com/smartcontractkit/chainlink/v2/core/gethwrappers/generated/solidity_vrf_coordinator_interface"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/cltest"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils/evmtest"
+	txmgrcommon "github.com/O1MaGnUmO1/erinaceus-vrf/common/txmgr"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/assets"
+	evmclient "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/client"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/txmgr"
+	v1 "github.com/O1MaGnUmO1/erinaceus-vrf/core/gethwrappers/generated/solidity_vrf_coordinator_interface"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
 )
 
 func TestFactory(t *testing.T) {

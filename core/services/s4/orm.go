@@ -3,8 +3,8 @@ package s4
 import (
 	"time"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils/big"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pg"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 )
 
 // Row represents a data row persisted by ORM.

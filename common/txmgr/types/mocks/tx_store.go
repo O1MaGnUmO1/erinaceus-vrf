@@ -6,16 +6,16 @@ import (
 	context "context"
 	big "math/big"
 
-	feetypes "github.com/smartcontractkit/chainlink/v2/common/fee/types"
+	feetypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/fee/types"
 	mock "github.com/stretchr/testify/mock"
 
 	null "gopkg.in/guregu/null.v4"
 
 	time "time"
 
-	txmgrtypes "github.com/smartcontractkit/chainlink/v2/common/txmgr/types"
+	txmgrtypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/txmgr/types"
 
-	types "github.com/smartcontractkit/chainlink/v2/common/types"
+	types "github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
 
 	uuid "github.com/google/uuid"
 )

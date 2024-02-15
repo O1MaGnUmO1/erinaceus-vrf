@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"gonum.org/v1/gonum/graph"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/pipeline"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
 )
 
 func TestGraph_Decode(t *testing.T) {

@@ -4,8 +4,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/smartcontractkit/chainlink/v2/core/auth"
-	"github.com/smartcontractkit/chainlink/v2/core/bridges"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/auth"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/bridges"
 )
 
 // Application config constant options

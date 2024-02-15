@@ -6,29 +6,29 @@ import (
 	big "math/big"
 
 	common "github.com/ethereum/go-ethereum/common"
-	client "github.com/smartcontractkit/chainlink/v2/core/chains/evm/client"
+	client "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/client"
 
-	commontypes "github.com/smartcontractkit/chainlink/v2/common/types"
+	commontypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
 
-	config "github.com/smartcontractkit/chainlink/v2/core/chains/evm/config"
+	config "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config"
 
 	context "context"
 
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
 
-	gas "github.com/smartcontractkit/chainlink/v2/core/chains/evm/gas"
+	gas "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/gas"
 
-	log "github.com/smartcontractkit/chainlink/v2/core/chains/evm/log"
+	log "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/log"
 
-	logger "github.com/smartcontractkit/chainlink/v2/core/logger"
+	logger "github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 
-	logpoller "github.com/smartcontractkit/chainlink/v2/core/chains/evm/logpoller"
+	logpoller "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/logpoller"
 
 	mock "github.com/stretchr/testify/mock"
 
-	monitor "github.com/smartcontractkit/chainlink/v2/core/chains/evm/monitor"
+	monitor "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/monitor"
 
-	txmgr "github.com/smartcontractkit/chainlink/v2/common/txmgr"
+	txmgr "github.com/O1MaGnUmO1/erinaceus-vrf/common/txmgr"
 
 	types "github.com/O1MaGnUmO1/chainlink-common/pkg/types"
 )

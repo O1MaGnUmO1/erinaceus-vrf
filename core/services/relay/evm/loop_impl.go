@@ -3,8 +3,8 @@ package evm
 import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/loop"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/legacyevm"
-	"github.com/smartcontractkit/chainlink/v2/core/services/relay"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/legacyevm"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/relay"
 )
 
 //go:generate mockery --quiet --name LoopRelayAdapter --output ./mocks/ --case=underscore

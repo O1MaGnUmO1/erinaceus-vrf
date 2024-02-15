@@ -6,9 +6,9 @@ import (
 
 	"go.uber.org/multierr"
 
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/api"
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/api"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/config"
 )
 
 // DummyHandler forwards each request/response without doing any checks.

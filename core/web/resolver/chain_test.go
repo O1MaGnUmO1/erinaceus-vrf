@@ -8,8 +8,8 @@ import (
 	"github.com/pelletier/go-toml/v2"
 	"github.com/stretchr/testify/require"
 
-	evmtoml "github.com/smartcontractkit/chainlink/v2/core/chains/evm/config/toml"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils/big"
+	evmtoml "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config/toml"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
 )
 
 func TestResolver_Chains(t *testing.T) {

@@ -12,9 +12,9 @@ import (
 	"github.com/ethereum/go-ethereum/common/math"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/assets"
-	"github.com/smartcontractkit/chainlink/v2/core/bridges"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/cltest"
-	"github.com/smartcontractkit/chainlink/v2/core/store/models"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/bridges"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

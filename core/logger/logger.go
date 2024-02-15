@@ -14,8 +14,8 @@ import (
 
 	common "github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
 
-	"github.com/smartcontractkit/chainlink/v2/core/static"
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/static"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 )
 
 // logsFile describes the logs file name

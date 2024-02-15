@@ -15,7 +15,7 @@ import (
 	"github.com/fatih/color"
 
 	cutils "github.com/O1MaGnUmO1/chainlink-common/pkg/utils"
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

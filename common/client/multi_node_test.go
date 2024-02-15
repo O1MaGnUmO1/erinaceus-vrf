@@ -16,8 +16,8 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils/tests"
 
-	"github.com/smartcontractkit/chainlink/v2/common/config"
-	"github.com/smartcontractkit/chainlink/v2/common/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
 )
 
 type multiNodeRPCClient RPC[types.ID, *big.Int, Hashable, Hashable, any, Hashable, any, any,

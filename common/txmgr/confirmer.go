@@ -20,12 +20,12 @@ import (
 	commonhex "github.com/O1MaGnUmO1/chainlink-common/pkg/utils/hex"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils/mailbox"
 
-	"github.com/smartcontractkit/chainlink/v2/common/client"
-	commonfee "github.com/smartcontractkit/chainlink/v2/common/fee"
-	feetypes "github.com/smartcontractkit/chainlink/v2/common/fee/types"
-	iutils "github.com/smartcontractkit/chainlink/v2/common/internal/utils"
-	txmgrtypes "github.com/smartcontractkit/chainlink/v2/common/txmgr/types"
-	"github.com/smartcontractkit/chainlink/v2/common/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/client"
+	commonfee "github.com/O1MaGnUmO1/erinaceus-vrf/common/fee"
+	feetypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/fee/types"
+	iutils "github.com/O1MaGnUmO1/erinaceus-vrf/common/internal/utils"
+	txmgrtypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/txmgr/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
 )
 
 const (

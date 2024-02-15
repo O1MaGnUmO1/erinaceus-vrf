@@ -15,13 +15,13 @@ import (
 
 	"github.com/jmoiron/sqlx"
 
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils/configtest"
-	"github.com/smartcontractkit/chainlink/v2/core/services/chainlink"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pg"
-	"github.com/smartcontractkit/chainlink/v2/core/store/dialects"
-	"github.com/smartcontractkit/chainlink/v2/core/store/models"
-	"github.com/smartcontractkit/chainlink/v2/internal/testdb"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/dialects"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/internal/testdb"
 )
 
 // FullTestDBV2 creates a pristine DB which runs in a separate database than the normal

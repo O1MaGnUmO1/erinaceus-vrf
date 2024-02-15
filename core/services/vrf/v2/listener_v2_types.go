@@ -8,12 +8,12 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	heaps "github.com/theodesp/go-heaps"
 
-	txmgrcommon "github.com/smartcontractkit/chainlink/v2/common/txmgr"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/txmgr"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pg"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pipeline"
-	"github.com/smartcontractkit/chainlink/v2/core/services/vrf/vrfcommon"
+	txmgrcommon "github.com/O1MaGnUmO1/erinaceus-vrf/common/txmgr"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/txmgr"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/vrf/vrfcommon"
 )
 
 type errPossiblyInsufficientFunds struct{}

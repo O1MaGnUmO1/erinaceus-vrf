@@ -8,12 +8,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/smartcontractkit/chainlink/v2/core/internal/cltest"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
-	clhttptest "github.com/smartcontractkit/chainlink/v2/core/internal/testutils/httptest"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pg"
-	"github.com/smartcontractkit/chainlink/v2/core/sessions"
-	"github.com/smartcontractkit/chainlink/v2/core/web"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
+	clhttptest "github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/httptest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/sessions"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web"
 
 	"github.com/onsi/gomega"
 	"github.com/stretchr/testify/assert"

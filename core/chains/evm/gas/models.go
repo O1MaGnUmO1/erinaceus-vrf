@@ -13,16 +13,16 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services"
 	bigmath "github.com/O1MaGnUmO1/chainlink-common/pkg/utils/big_math"
 
-	"github.com/smartcontractkit/chainlink/v2/common/config"
-	commonfee "github.com/smartcontractkit/chainlink/v2/common/fee"
-	feetypes "github.com/smartcontractkit/chainlink/v2/common/fee/types"
-	commontypes "github.com/smartcontractkit/chainlink/v2/common/types"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/assets"
-	evmclient "github.com/smartcontractkit/chainlink/v2/core/chains/evm/client"
-	evmconfig "github.com/smartcontractkit/chainlink/v2/core/chains/evm/config"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/gas/rollups"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/label"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/config"
+	commonfee "github.com/O1MaGnUmO1/erinaceus-vrf/common/fee"
+	feetypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/fee/types"
+	commontypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/assets"
+	evmclient "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/client"
+	evmconfig "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/gas/rollups"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/label"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
 )
 
 // EvmFeeEstimator provides a unified interface that wraps EvmEstimator and can determine if legacy or dynamic fee estimation should be used

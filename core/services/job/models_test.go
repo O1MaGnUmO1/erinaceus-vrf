@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/relay"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/relay"
 )
 
 func TestOCR2OracleSpec_RelayIdentifier(t *testing.T) {

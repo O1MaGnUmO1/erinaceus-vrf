@@ -16,14 +16,14 @@ import (
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/logpoller"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils"
-	ubig "github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils/big"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/cltest/heavyweight"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils/pgtest"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pg"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/logpoller"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils"
+	ubig "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest/heavyweight"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/pgtest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 )
 
 type block struct {

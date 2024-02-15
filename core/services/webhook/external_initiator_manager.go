@@ -12,12 +12,12 @@ import (
 
 	"github.com/jmoiron/sqlx"
 
-	"github.com/smartcontractkit/chainlink/v2/core/bridges"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/services/job"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pg"
-	"github.com/smartcontractkit/chainlink/v2/core/static"
-	"github.com/smartcontractkit/chainlink/v2/core/store/models"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/bridges"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/static"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
 
 //go:generate mockery --quiet --name ExternalInitiatorManager --output ./mocks/ --case=underscore

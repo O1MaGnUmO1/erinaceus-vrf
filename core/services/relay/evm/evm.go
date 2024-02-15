@@ -18,12 +18,12 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services"
 	commontypes "github.com/O1MaGnUmO1/chainlink-common/pkg/types"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/legacyevm"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore"
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore/keys/ethkey"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pg"
-	"github.com/smartcontractkit/chainlink/v2/core/services/relay/evm/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/legacyevm"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/relay/evm/types"
 )
 
 var _ commontypes.Relayer = &Relayer{} //nolint:staticcheck

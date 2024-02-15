@@ -10,11 +10,11 @@ import (
 
 	commontypes "github.com/O1MaGnUmO1/chainlink-common/pkg/types"
 
-	mocklogpoller "github.com/smartcontractkit/chainlink/v2/core/chains/evm/logpoller/mocks"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/legacyevm/mocks"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/services/relay/evm/types"
+	mocklogpoller "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/logpoller/mocks"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/legacyevm/mocks"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/relay/evm/types"
 )
 
 type chainReaderTestHelper struct {

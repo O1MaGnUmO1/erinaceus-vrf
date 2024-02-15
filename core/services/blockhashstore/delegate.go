@@ -9,16 +9,16 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/legacyevm"
-	"github.com/smartcontractkit/chainlink/v2/core/gethwrappers/generated/blockhash_store"
-	"github.com/smartcontractkit/chainlink/v2/core/gethwrappers/generated/trusted_blockhash_store"
-	v2 "github.com/smartcontractkit/chainlink/v2/core/gethwrappers/generated/vrf_coordinator_v2"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/services/job"
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore"
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore/keys/ethkey"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pg"
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/legacyevm"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/gethwrappers/generated/blockhash_store"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/gethwrappers/generated/trusted_blockhash_store"
+	v2 "github.com/O1MaGnUmO1/erinaceus-vrf/core/gethwrappers/generated/vrf_coordinator_v2"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 )
 
 var _ job.ServiceCtx = &service{}

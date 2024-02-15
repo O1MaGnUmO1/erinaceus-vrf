@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	bridges "github.com/smartcontractkit/chainlink/v2/core/bridges"
+	bridges "github.com/O1MaGnUmO1/erinaceus-vrf/core/bridges"
 	mock "github.com/stretchr/testify/mock"
 )
 

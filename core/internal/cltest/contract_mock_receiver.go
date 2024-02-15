@@ -12,7 +12,7 @@ import (
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 
-	evmclimocks "github.com/smartcontractkit/chainlink/v2/core/chains/evm/client/mocks"
+	evmclimocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/client/mocks"
 )
 
 // funcSigLength is the length of the function signature (including the 0x)

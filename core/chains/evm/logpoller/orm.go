@@ -12,8 +12,8 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
-	ubig "github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils/big"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pg"
+	ubig "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 )
 
 // ORM represents the persistent data access layer used by the log poller. At this moment, it's a bit leaky abstraction, because

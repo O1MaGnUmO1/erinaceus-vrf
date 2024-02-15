@@ -19,10 +19,10 @@ import (
 	"go.uber.org/zap"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
-	evmclient "github.com/smartcontractkit/chainlink/v2/core/chains/evm/client"
-	evmmocks "github.com/smartcontractkit/chainlink/v2/core/chains/evm/mocks"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/cltest"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
+	evmclient "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/client"
+	evmmocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/mocks"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 )
 
 type poolConfig struct {

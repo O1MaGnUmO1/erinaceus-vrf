@@ -20,12 +20,12 @@ import (
 	commonassets "github.com/O1MaGnUmO1/chainlink-common/pkg/assets"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
 
-	commonclient "github.com/smartcontractkit/chainlink/v2/common/client"
-	commontypes "github.com/smartcontractkit/chainlink/v2/common/types"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/assets"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils"
-	ubig "github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils/big"
+	commonclient "github.com/O1MaGnUmO1/erinaceus-vrf/common/client"
+	commontypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/assets"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils"
+	ubig "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
 )
 
 // RPCCLient includes all the necessary generalized RPC methods along with any additional chain-specific methods.

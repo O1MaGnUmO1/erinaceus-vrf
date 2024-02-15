@@ -17,14 +17,14 @@ import (
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services"
 
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/api"
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/common"
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/config"
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/handlers"
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/network"
-	"github.com/smartcontractkit/chainlink/v2/core/services/job"
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/api"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/common"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/handlers"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/network"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 )
 
 var promHeartbeatsSent = promauto.NewGaugeVec(prometheus.GaugeOpts{

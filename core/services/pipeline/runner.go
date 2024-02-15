@@ -16,15 +16,15 @@ import (
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services"
 	commonutils "github.com/O1MaGnUmO1/chainlink-common/pkg/utils"
-	"github.com/smartcontractkit/chainlink/v2/core/config/env"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/env"
 
-	"github.com/smartcontractkit/chainlink/v2/core/bridges"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/legacyevm"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/recovery"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pg"
-	"github.com/smartcontractkit/chainlink/v2/core/store/models"
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/bridges"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/legacyevm"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/recovery"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 )
 
 //go:generate mockery --quiet --name Runner --output ./mocks/ --case=underscore

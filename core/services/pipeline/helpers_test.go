@@ -1,7 +1,7 @@
 package pipeline
 
 import (
-	"github.com/smartcontractkit/chainlink/v2/core/chains/legacyevm"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/legacyevm"
 )
 
 const (

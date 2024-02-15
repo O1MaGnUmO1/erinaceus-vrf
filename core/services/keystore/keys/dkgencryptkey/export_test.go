@@ -3,7 +3,7 @@ package dkgencryptkey
 import (
 	"testing"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore/keys"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys"
 )
 
 func TestDKGEncryptKeys_ExportImport(t *testing.T) {

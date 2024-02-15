@@ -13,13 +13,13 @@ import (
 	bigmath "github.com/O1MaGnUmO1/chainlink-common/pkg/utils/big_math"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils/bytes"
 
-	"github.com/smartcontractkit/chainlink/v2/common/txmgr"
-	txmgrtypes "github.com/smartcontractkit/chainlink/v2/common/txmgr/types"
-	evmclient "github.com/smartcontractkit/chainlink/v2/core/chains/evm/client"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/gas"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
-	v2 "github.com/smartcontractkit/chainlink/v2/core/gethwrappers/generated/vrf_coordinator_v2"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/txmgr"
+	txmgrtypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/txmgr/types"
+	evmclient "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/client"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/gas"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
+	v2 "github.com/O1MaGnUmO1/erinaceus-vrf/core/gethwrappers/generated/vrf_coordinator_v2"
 )
 
 type (

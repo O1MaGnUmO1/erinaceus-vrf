@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/smartcontractkit/chainlink/v2/core/null"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/null"
 )
 
 func TestUint32From(t *testing.T) {

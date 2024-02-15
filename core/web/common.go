@@ -5,7 +5,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/legacyevm"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/legacyevm"
 )
 
 var (

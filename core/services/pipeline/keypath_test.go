@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/pipeline"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
 )
 
 func TestKeypath(t *testing.T) {

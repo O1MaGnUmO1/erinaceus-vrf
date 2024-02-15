@@ -12,16 +12,16 @@ import (
 	"github.com/google/uuid"
 	"github.com/pkg/errors"
 
-	"github.com/smartcontractkit/chainlink/v2/core/logger/audit"
-	"github.com/smartcontractkit/chainlink/v2/core/services/blockhashstore"
-	"github.com/smartcontractkit/chainlink/v2/core/services/chainlink"
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway"
-	"github.com/smartcontractkit/chainlink/v2/core/services/job"
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pg"
-	"github.com/smartcontractkit/chainlink/v2/core/services/vrf/vrfcommon"
-	"github.com/smartcontractkit/chainlink/v2/core/services/webhook"
-	"github.com/smartcontractkit/chainlink/v2/core/web/presenters"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/blockhashstore"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/vrf/vrfcommon"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/webhook"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 )
 
 // JobsController manages jobs

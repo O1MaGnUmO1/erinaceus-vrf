@@ -1,4 +1,4 @@
-module github.com/smartcontractkit/chainlink/v2
+module github.com/O1MaGnUmO1/erinaceus-vrf
 
 go 1.21.3
 

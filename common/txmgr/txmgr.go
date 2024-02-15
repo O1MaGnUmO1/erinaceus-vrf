@@ -16,10 +16,10 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils"
 
-	feetypes "github.com/smartcontractkit/chainlink/v2/common/fee/types"
-	iutils "github.com/smartcontractkit/chainlink/v2/common/internal/utils"
-	txmgrtypes "github.com/smartcontractkit/chainlink/v2/common/txmgr/types"
-	"github.com/smartcontractkit/chainlink/v2/common/types"
+	feetypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/fee/types"
+	iutils "github.com/O1MaGnUmO1/erinaceus-vrf/common/internal/utils"
+	txmgrtypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/txmgr/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
 )
 
 // For more information about the Txm architecture, see the design doc:

@@ -9,11 +9,11 @@ import (
 
 	commontypes "github.com/O1MaGnUmO1/chainlink-common/pkg/types"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/txmgr"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
-	"github.com/smartcontractkit/chainlink/v2/core/services/job"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pipeline"
-	"github.com/smartcontractkit/chainlink/v2/core/utils/stringutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/txmgr"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils/stringutils"
 )
 
 // ErrInvalidType indicates that results loaded is not the type expected

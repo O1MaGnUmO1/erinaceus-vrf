@@ -4,8 +4,8 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/smartcontractkit/chainlink/v2/core/config"
-	"github.com/smartcontractkit/chainlink/v2/core/config/toml"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/toml"
 )
 
 var _ config.TelemetryIngress = (*telemetryIngressConfig)(nil)

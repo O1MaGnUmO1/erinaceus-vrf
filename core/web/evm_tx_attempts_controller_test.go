@@ -4,10 +4,10 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/smartcontractkit/chainlink/v2/core/internal/cltest"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
-	"github.com/smartcontractkit/chainlink/v2/core/web"
-	"github.com/smartcontractkit/chainlink/v2/core/web/presenters"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 
 	"github.com/manyminds/api2go/jsonapi"
 	"github.com/stretchr/testify/assert"

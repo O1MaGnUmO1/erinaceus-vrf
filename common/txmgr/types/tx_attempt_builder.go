@@ -5,8 +5,8 @@ import (
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services"
-	feetypes "github.com/smartcontractkit/chainlink/v2/common/fee/types"
-	"github.com/smartcontractkit/chainlink/v2/common/types"
+	feetypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/fee/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
 )
 
 // TxAttemptBuilder takes the base unsigned transaction + optional parameters (tx type, gas parameters)

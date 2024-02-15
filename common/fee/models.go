@@ -7,7 +7,7 @@ import (
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
 	bigmath "github.com/O1MaGnUmO1/chainlink-common/pkg/utils/big_math"
-	"github.com/smartcontractkit/chainlink/v2/common/chains/label"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/chains/label"
 )
 
 var (

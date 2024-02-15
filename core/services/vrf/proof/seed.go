@@ -7,7 +7,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/stretchr/testify/require"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils"
 )
 
 // Seed represents a VRF seed as a serialized uint256

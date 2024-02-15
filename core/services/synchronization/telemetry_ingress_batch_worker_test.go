@@ -7,9 +7,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/services/synchronization"
-	"github.com/smartcontractkit/chainlink/v2/core/services/synchronization/mocks"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/synchronization"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/synchronization/mocks"
 )
 
 func TestTelemetryIngressWorker_BuildTelemBatchReq(t *testing.T) {

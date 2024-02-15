@@ -8,9 +8,9 @@ import (
 
 	common "github.com/ethereum/go-ethereum/common"
 
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
 
-	gas "github.com/smartcontractkit/chainlink/v2/core/chains/evm/gas"
+	gas "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/gas"
 
 	mock "github.com/stretchr/testify/mock"
 
@@ -18,7 +18,7 @@ import (
 
 	time "time"
 
-	types "github.com/smartcontractkit/chainlink/v2/common/txmgr/types"
+	types "github.com/O1MaGnUmO1/erinaceus-vrf/common/txmgr/types"
 
 	uuid "github.com/google/uuid"
 )

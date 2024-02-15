@@ -6,7 +6,7 @@ import (
 	context "context"
 	big "math/big"
 
-	client "github.com/smartcontractkit/chainlink/v2/core/chains/evm/client"
+	client "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/client"
 
 	mock "github.com/stretchr/testify/mock"
 

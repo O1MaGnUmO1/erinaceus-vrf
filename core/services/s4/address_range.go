@@ -7,7 +7,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 
-	ubig "github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils/big"
+	ubig "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
 )
 
 // AddressRange represents a range of Ethereum addresses.

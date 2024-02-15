@@ -9,8 +9,8 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils/hex"
-	gw_common "github.com/smartcontractkit/chainlink/v2/core/services/gateway/common"
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
+	gw_common "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/common"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 )
 
 const (

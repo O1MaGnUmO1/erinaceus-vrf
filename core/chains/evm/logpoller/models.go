@@ -7,7 +7,7 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/lib/pq"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils/big"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
 )
 
 // LogPollerBlock represents an unfinalized block

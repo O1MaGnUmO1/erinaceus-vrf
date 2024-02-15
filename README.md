@@ -227,9 +227,9 @@ This repository contains three Go modules:
 
 ```mermaid
 flowchart RL
-    github.com/smartcontractkit/chainlink/v2
-    github.com/smartcontractkit/chainlink/integration-tests --> github.com/smartcontractkit/chainlink/v2
-    github.com/smartcontractkit/chainlink/core/scripts --> github.com/smartcontractkit/chainlink/v2
+    github.com/O1MaGnUmO1/erinaceus-vrf
+    github.com/smartcontractkit/chainlink/integration-tests --> github.com/O1MaGnUmO1/erinaceus-vrf
+    github.com/smartcontractkit/chainlink/core/scripts --> github.com/O1MaGnUmO1/erinaceus-vrf
 
 ```
 The `integration-tests` and `core/scripts` modules import the root module using a relative replace in their `go.mod` files,

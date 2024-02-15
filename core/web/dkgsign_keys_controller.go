@@ -1,9 +1,9 @@
 package web
 
 import (
-	"github.com/smartcontractkit/chainlink/v2/core/services/chainlink"
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore/keys/dkgsignkey"
-	"github.com/smartcontractkit/chainlink/v2/core/web/presenters"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/dkgsignkey"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 )
 
 func NewDKGSignKeysController(app chainlink.Application) KeysController {

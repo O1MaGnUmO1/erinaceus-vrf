@@ -9,7 +9,7 @@ import (
 	"go.uber.org/zap/zapcore"
 	"go.uber.org/zap/zaptest/observer"
 
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 )
 
 // LoggerAssertMaxLevel returns a test logger which is observed on cleanup

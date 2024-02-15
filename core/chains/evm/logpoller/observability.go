@@ -11,7 +11,7 @@ import (
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/pg"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 )
 
 type queryType string

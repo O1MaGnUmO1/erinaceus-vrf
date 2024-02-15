@@ -5,7 +5,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/crypto"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils"
 )
 
 const functionSignatureLength = 4

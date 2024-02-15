@@ -13,12 +13,12 @@ import (
 	"github.com/stretchr/testify/mock"
 	"gopkg.in/guregu/null.v4"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains"
-	clnull "github.com/smartcontractkit/chainlink/v2/core/null"
-	"github.com/smartcontractkit/chainlink/v2/core/services/job"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pipeline"
-	"github.com/smartcontractkit/chainlink/v2/core/store/models"
-	"github.com/smartcontractkit/chainlink/v2/core/utils/stringutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains"
+	clnull "github.com/O1MaGnUmO1/erinaceus-vrf/core/null"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils/stringutils"
 )
 
 // This tests the main fields on the job results. Embedded spec testing is done

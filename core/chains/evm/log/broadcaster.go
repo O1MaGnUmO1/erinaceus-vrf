@@ -17,13 +17,13 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils/mailbox"
 
-	evmclient "github.com/smartcontractkit/chainlink/v2/core/chains/evm/client"
-	httypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/headtracker/types"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
-	evmutils "github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils"
-	"github.com/smartcontractkit/chainlink/v2/core/gethwrappers/generated"
-	"github.com/smartcontractkit/chainlink/v2/core/null"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pg"
+	evmclient "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/client"
+	httypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/headtracker/types"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
+	evmutils "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/gethwrappers/generated"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/null"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 )
 
 //go:generate mockery --quiet --name Broadcaster --output ./mocks/ --case=underscore --structname Broadcaster --filename broadcaster.go

@@ -15,9 +15,9 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils"
 
-	"github.com/smartcontractkit/chainlink/v2/common/config"
-	feetypes "github.com/smartcontractkit/chainlink/v2/common/fee/types"
-	"github.com/smartcontractkit/chainlink/v2/common/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/config"
+	feetypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/fee/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
 )
 
 var (

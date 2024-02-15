@@ -11,9 +11,9 @@ import (
 	"github.com/ethereum/go-ethereum/rpc"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
-	feetypes "github.com/smartcontractkit/chainlink/v2/common/fee/types"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/assets"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/gas"
+	feetypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/fee/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/assets"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/gas"
 )
 
 func main() {

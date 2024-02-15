@@ -9,13 +9,13 @@ import (
 	"github.com/jackc/pgconn"
 	"github.com/pkg/errors"
 
-	"github.com/smartcontractkit/chainlink/v2/core/auth"
-	"github.com/smartcontractkit/chainlink/v2/core/logger/audit"
-	"github.com/smartcontractkit/chainlink/v2/core/services/chainlink"
-	clsession "github.com/smartcontractkit/chainlink/v2/core/sessions"
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
-	webauth "github.com/smartcontractkit/chainlink/v2/core/web/auth"
-	"github.com/smartcontractkit/chainlink/v2/core/web/presenters"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/auth"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	clsession "github.com/O1MaGnUmO1/erinaceus-vrf/core/sessions"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
+	webauth "github.com/O1MaGnUmO1/erinaceus-vrf/core/web/auth"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 )
 
 // UserController manages the current Session's User.

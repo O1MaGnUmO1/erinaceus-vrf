@@ -7,7 +7,7 @@ import (
 
 	"github.com/google/uuid"
 
-	txmgrtypes "github.com/smartcontractkit/chainlink/v2/common/txmgr/types"
+	txmgrtypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/txmgr/types"
 )
 
 var _ txmgrtypes.TxStrategy = SendEveryStrategy{}

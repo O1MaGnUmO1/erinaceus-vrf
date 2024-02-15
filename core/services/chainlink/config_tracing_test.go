@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/smartcontractkit/chainlink/v2/core/config/toml"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/toml"
 )
 
 func TestTracing_Config(t *testing.T) {

@@ -8,13 +8,13 @@ import (
 
 	gotoml "github.com/pelletier/go-toml/v2"
 
-	evmcfg "github.com/smartcontractkit/chainlink/v2/core/chains/evm/config/toml"
-	"github.com/smartcontractkit/chainlink/v2/core/config/docs"
-	"github.com/smartcontractkit/chainlink/v2/core/config/env"
-	"github.com/smartcontractkit/chainlink/v2/core/config/toml"
-	"github.com/smartcontractkit/chainlink/v2/core/store/models"
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
-	"github.com/smartcontractkit/chainlink/v2/core/utils/config"
+	evmcfg "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config/toml"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/docs"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/env"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/toml"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils/config"
 )
 
 // Config is the root type used for TOML configuration.

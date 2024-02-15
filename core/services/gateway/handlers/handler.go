@@ -3,8 +3,8 @@ package handlers
 import (
 	"context"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/api"
-	"github.com/smartcontractkit/chainlink/v2/core/services/job"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/api"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 )
 
 //go:generate mockery --quiet --name Handler --output ./mocks/ --case=underscore

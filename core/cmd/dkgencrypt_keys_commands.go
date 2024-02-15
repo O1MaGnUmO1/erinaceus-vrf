@@ -2,8 +2,8 @@ package cmd
 
 import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils"
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore/keys/dkgsignkey"
-	"github.com/smartcontractkit/chainlink/v2/core/web/presenters"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/dkgsignkey"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 )
 
 type DKGEncryptKeyPresenter struct {

@@ -13,14 +13,14 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services/servicetest"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway"
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/api"
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/config"
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/handlers"
-	handler_mocks "github.com/smartcontractkit/chainlink/v2/core/services/gateway/handlers/mocks"
-	net_mocks "github.com/smartcontractkit/chainlink/v2/core/services/gateway/network/mocks"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/api"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/handlers"
+	handler_mocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/handlers/mocks"
+	net_mocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/network/mocks"
 )
 
 func parseTOMLConfig(t *testing.T, tomlConfig string) *config.GatewayConfig {

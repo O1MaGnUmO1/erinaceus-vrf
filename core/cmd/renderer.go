@@ -7,8 +7,8 @@ import (
 
 	"github.com/olekukonko/tablewriter"
 
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
-	webpresenters "github.com/smartcontractkit/chainlink/v2/core/web/presenters"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
+	webpresenters "github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 )
 
 // Renderer implements the Render method.

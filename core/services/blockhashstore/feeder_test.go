@@ -16,17 +16,17 @@ import (
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils/mathutil"
 
-	mocklp "github.com/smartcontractkit/chainlink/v2/core/chains/evm/logpoller/mocks"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
+	mocklp "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/logpoller/mocks"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/logpoller"
-	bhsmocks "github.com/smartcontractkit/chainlink/v2/core/services/blockhashstore/mocks"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/logpoller"
+	bhsmocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/blockhashstore/mocks"
 
-	"github.com/smartcontractkit/chainlink/v2/core/gethwrappers/generated/solidity_vrf_coordinator_interface"
-	"github.com/smartcontractkit/chainlink/v2/core/gethwrappers/generated/vrf_coordinator_v2"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	loggermocks "github.com/smartcontractkit/chainlink/v2/core/logger/mocks"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/gethwrappers/generated/solidity_vrf_coordinator_interface"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/gethwrappers/generated/vrf_coordinator_v2"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	loggermocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/mocks"
 )
 
 const (

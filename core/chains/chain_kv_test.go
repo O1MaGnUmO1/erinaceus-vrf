@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/types"
-	"github.com/smartcontractkit/chainlink/v2/core/chains"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains"
 )
 
 func Test_ChainKV(t *testing.T) {

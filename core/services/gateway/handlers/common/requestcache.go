@@ -5,8 +5,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/api"
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/handlers"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/api"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/handlers"
 )
 
 // RequestCache is used to store pending requests and collect incoming responses as they arrive.

@@ -15,9 +15,9 @@ import (
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services"
 
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pg"
-	"github.com/smartcontractkit/chainlink/v2/core/store/models"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
 
 // KeepersObservationSource is the same for all keeper jobs and it is not persisted in DB

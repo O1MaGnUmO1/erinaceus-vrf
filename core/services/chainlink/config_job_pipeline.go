@@ -3,9 +3,9 @@ package chainlink
 import (
 	"time"
 
-	"github.com/smartcontractkit/chainlink/v2/core/config"
-	"github.com/smartcontractkit/chainlink/v2/core/config/toml"
-	"github.com/smartcontractkit/chainlink/v2/core/store/models"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/toml"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
 
 var _ config.JobPipeline = (*jobPipelineConfig)(nil)

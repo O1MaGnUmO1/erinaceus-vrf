@@ -3,7 +3,7 @@ package synchronization
 import (
 	"context"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services"
 )
 
 // TelemetryType defines supported telemetry types

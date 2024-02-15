@@ -11,9 +11,9 @@ import (
 	"github.com/urfave/cli"
 	"go.uber.org/multierr"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/signatures/secp256k1"
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
-	"github.com/smartcontractkit/chainlink/v2/core/web/presenters"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/signatures/secp256k1"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 )
 
 func initVRFKeysSubCmd(s *Shell) cli.Command {

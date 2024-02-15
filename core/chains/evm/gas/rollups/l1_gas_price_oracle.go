@@ -16,9 +16,9 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils"
 
-	"github.com/smartcontractkit/chainlink/v2/common/config"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/assets"
-	evmclient "github.com/smartcontractkit/chainlink/v2/core/chains/evm/client"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/assets"
+	evmclient "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/client"
 )
 
 //go:generate mockery --quiet --name ethClient --output ./mocks/ --case=underscore --structname ETHClient

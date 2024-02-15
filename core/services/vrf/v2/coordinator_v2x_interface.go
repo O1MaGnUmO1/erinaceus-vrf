@@ -9,10 +9,10 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/pkg/errors"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/log"
-	"github.com/smartcontractkit/chainlink/v2/core/gethwrappers/generated"
-	"github.com/smartcontractkit/chainlink/v2/core/gethwrappers/generated/vrf_coordinator_v2"
-	"github.com/smartcontractkit/chainlink/v2/core/services/vrf/vrfcommon"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/log"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/gethwrappers/generated"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/gethwrappers/generated/vrf_coordinator_v2"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/vrf/vrfcommon"
 )
 
 var (

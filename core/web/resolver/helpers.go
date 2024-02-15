@@ -9,8 +9,8 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/assets"
-	"github.com/smartcontractkit/chainlink/v2/core/bridges"
-	"github.com/smartcontractkit/chainlink/v2/core/utils/stringutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/bridges"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils/stringutils"
 )
 
 const (

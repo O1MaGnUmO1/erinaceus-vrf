@@ -12,8 +12,8 @@ import (
 	"go.uber.org/multierr"
 
 	cutils "github.com/O1MaGnUmO1/chainlink-common/pkg/utils"
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
-	"github.com/smartcontractkit/chainlink/v2/core/web/presenters"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 )
 
 func initP2PKeysSubCmd(s *Shell) cli.Command {

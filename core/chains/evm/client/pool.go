@@ -19,8 +19,8 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils"
 
-	"github.com/smartcontractkit/chainlink/v2/common/config"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/config"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
 )
 
 var (
@@ -40,7 +40,7 @@ const (
 
 // NodeSelector represents a strategy to select the next node from the pool.
 //
-// Deprecated: use [pkg/github.com/smartcontractkit/chainlink/v2/common/client.NodeSelector]
+// Deprecated: use [pkg/github.com/O1MaGnUmO1/erinaceus-vrf/common/client.NodeSelector]
 type NodeSelector interface {
 	// Select returns a Node, or nil if none can be selected.
 	// Implementation must be thread-safe.
@@ -61,7 +61,7 @@ type PoolConfig interface {
 // Pool represents an abstraction over one or more primary nodes
 // It is responsible for liveness checking and balancing queries across live nodes
 //
-// Deprecated: use [pkg/github.com/smartcontractkit/chainlink/v2/common/client.MultiNode]
+// Deprecated: use [pkg/github.com/O1MaGnUmO1/erinaceus-vrf/common/client.MultiNode]
 type Pool struct {
 	services.StateMachine
 	nodes               []Node
@@ -84,7 +84,7 @@ type Pool struct {
 
 // NewPool - creates new instance of [Pool]
 //
-// Deprecated: use [pkg/github.com/smartcontractkit/chainlink/v2/common/client.NewMultiNode]
+// Deprecated: use [pkg/github.com/O1MaGnUmO1/erinaceus-vrf/common/client.NewMultiNode]
 func NewPool(lggr logger.Logger, selectionMode string, leaseDuration time.Duration, noNewHeadsTreshold time.Duration, nodes []Node, sendonlys []SendOnlyNode, chainID *big.Int, chainType config.ChainType) *Pool {
 	if chainID == nil {
 		panic("chainID is required")

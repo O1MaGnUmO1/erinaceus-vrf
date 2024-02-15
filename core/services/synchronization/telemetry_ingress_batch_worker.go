@@ -8,8 +8,8 @@ import (
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services"
 
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	telemPb "github.com/smartcontractkit/chainlink/v2/core/services/synchronization/telem"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	telemPb "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/synchronization/telem"
 )
 
 // telemetryIngressBatchWorker pushes telemetry in batches to the ingress server via wsrpc.

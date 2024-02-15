@@ -1,6 +1,6 @@
 package config
 
-import "github.com/smartcontractkit/chainlink/v2/core/chains/evm/config/toml"
+import "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config/toml"
 
 type balanceMonitorConfig struct {
 	c toml.BalanceMonitor

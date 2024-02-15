@@ -1,8 +1,8 @@
 package chainlink
 
 import (
-	"github.com/smartcontractkit/chainlink/v2/core/build"
-	"github.com/smartcontractkit/chainlink/v2/core/config/toml"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/build"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/toml"
 )
 
 type insecureConfig struct {

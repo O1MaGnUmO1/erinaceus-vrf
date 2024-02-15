@@ -5,8 +5,8 @@ import (
 
 	"github.com/grafana/pyroscope-go"
 
-	"github.com/smartcontractkit/chainlink/v2/core/config"
-	"github.com/smartcontractkit/chainlink/v2/core/static"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/static"
 )
 
 type PprofConfig interface {

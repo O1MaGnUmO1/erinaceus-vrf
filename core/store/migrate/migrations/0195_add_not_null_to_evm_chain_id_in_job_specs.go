@@ -8,7 +8,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/pressly/goose/v3"
 
-	"github.com/smartcontractkit/chainlink/v2/core/config/env"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/env"
 )
 
 func init() {

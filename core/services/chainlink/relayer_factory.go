@@ -5,11 +5,11 @@ import (
 	"errors"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/loop"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/legacyevm"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/services/relay"
-	evmrelay "github.com/smartcontractkit/chainlink/v2/core/services/relay/evm"
-	"github.com/smartcontractkit/chainlink/v2/plugins"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/legacyevm"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/relay"
+	evmrelay "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/relay/evm"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/plugins"
 )
 
 type RelayerFactory struct {

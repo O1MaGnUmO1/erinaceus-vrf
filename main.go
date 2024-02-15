@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/smartcontractkit/chainlink/v2/core"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core"
 )
 
 //go:generate make modgraph

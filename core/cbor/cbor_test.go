@@ -11,7 +11,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils/hex"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 )
 
 func Test_ParseCBOR(t *testing.T) {

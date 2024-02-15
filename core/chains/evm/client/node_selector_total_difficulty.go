@@ -4,7 +4,7 @@ import "math/big"
 
 type totalDifficultyNodeSelector []Node
 
-// Deprecated: use [pkg/github.com/smartcontractkit/chainlink/v2/common/client.NewTotalDifficultyNodeSelector]
+// Deprecated: use [pkg/github.com/O1MaGnUmO1/erinaceus-vrf/common/client.NewTotalDifficultyNodeSelector]
 func NewTotalDifficultyNodeSelector(nodes []Node) NodeSelector {
 	return totalDifficultyNodeSelector(nodes)
 }

@@ -5,8 +5,8 @@ import (
 	"math/big"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/assets"
-	feetypes "github.com/smartcontractkit/chainlink/v2/common/fee/types"
-	"github.com/smartcontractkit/chainlink/v2/common/types"
+	feetypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/fee/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
 )
 
 // RPC includes all the necessary methods for a multi-node client to interact directly with any RPC endpoint.

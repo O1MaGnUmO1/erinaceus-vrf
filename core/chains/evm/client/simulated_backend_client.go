@@ -21,9 +21,9 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/assets"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
 
-	commonclient "github.com/smartcontractkit/chainlink/v2/common/client"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
-	ubig "github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils/big"
+	commonclient "github.com/O1MaGnUmO1/erinaceus-vrf/common/client"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
+	ubig "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
 )
 
 func init() {

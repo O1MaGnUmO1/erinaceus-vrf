@@ -3,7 +3,7 @@ package headtracker
 import (
 	"time"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config"
 )
 
 //go:generate mockery --quiet --name Config --output ./mocks/ --case=underscore

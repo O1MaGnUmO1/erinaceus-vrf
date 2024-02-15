@@ -15,8 +15,8 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/config"
-	"github.com/smartcontractkit/chainlink/v2/core/config/env"
-	"github.com/smartcontractkit/chainlink/v2/core/config/toml"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/env"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/toml"
 )
 
 func TestTOMLGeneralConfig_Defaults(t *testing.T) {

@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/vrf/solidity_cross_tests"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/vrf/solidity_cross_tests"
 )
 
 var (

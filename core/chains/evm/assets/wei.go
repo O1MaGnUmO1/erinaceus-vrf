@@ -11,7 +11,7 @@ import (
 	"golang.org/x/exp/constraints"
 
 	bigmath "github.com/O1MaGnUmO1/chainlink-common/pkg/utils/big_math"
-	ubig "github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils/big"
+	ubig "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
 )
 
 const (

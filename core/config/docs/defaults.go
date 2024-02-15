@@ -5,9 +5,9 @@ import (
 	"strings"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/config"
-	"github.com/smartcontractkit/chainlink/v2/core/config/toml"
-	"github.com/smartcontractkit/chainlink/v2/core/services/chainlink/cfgtest"
-	"github.com/smartcontractkit/chainlink/v2/core/store/dialects"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/toml"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink/cfgtest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/dialects"
 )
 
 var (

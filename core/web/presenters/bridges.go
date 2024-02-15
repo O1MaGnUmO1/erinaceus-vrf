@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/assets"
-	"github.com/smartcontractkit/chainlink/v2/core/bridges"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/bridges"
 )
 
 // BridgeResource represents a Bridge JSONAPI resource.

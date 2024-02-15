@@ -7,7 +7,7 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 )
 
 type httpClientConfig interface {

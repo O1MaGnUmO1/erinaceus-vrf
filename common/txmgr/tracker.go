@@ -10,9 +10,9 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils/mailbox"
 
-	feetypes "github.com/smartcontractkit/chainlink/v2/common/fee/types"
-	txmgrtypes "github.com/smartcontractkit/chainlink/v2/common/txmgr/types"
-	"github.com/smartcontractkit/chainlink/v2/common/types"
+	feetypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/fee/types"
+	txmgrtypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/txmgr/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
 )
 
 const (

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils"
 )
 
 // verifyLoop may only be triggered once, on Start, if initial chain ID check

@@ -14,10 +14,10 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services/servicetest"
 
-	"github.com/smartcontractkit/chainlink/v2/common/config"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/assets"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/gas/rollups/mocks"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/assets"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/gas/rollups/mocks"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 )
 
 func TestL1GasPriceOracle(t *testing.T) {

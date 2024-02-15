@@ -1,6 +1,6 @@
 package cmd
 
-import "github.com/smartcontractkit/chainlink/v2/core/logger"
+import "github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 
 // CheckRemoteBuildCompatibility exposes checkRemoteBuildCompatibility for testing.
 func (s *Shell) CheckRemoteBuildCompatibility(lggr logger.Logger, onlyWarn bool, cliVersion, cliSha string) error {

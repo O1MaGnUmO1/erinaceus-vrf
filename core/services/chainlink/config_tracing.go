@@ -1,6 +1,6 @@
 package chainlink
 
-import "github.com/smartcontractkit/chainlink/v2/core/config/toml"
+import "github.com/O1MaGnUmO1/erinaceus-vrf/core/config/toml"
 
 type tracingConfig struct {
 	s toml.Tracing

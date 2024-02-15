@@ -4,14 +4,14 @@ import (
 	"context"
 	"slices"
 
-	services2 "github.com/smartcontractkit/chainlink/v2/core/services"
-	"github.com/smartcontractkit/chainlink/v2/core/services/chainlink"
+	services2 "github.com/O1MaGnUmO1/erinaceus-vrf/core/services"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/legacyevm"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/legacyevm"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/loop"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/relay"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/relay"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/types"
 )

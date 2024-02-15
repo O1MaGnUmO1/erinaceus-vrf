@@ -21,11 +21,11 @@ import (
 	"gopkg.in/guregu/null.v4"
 
 	cutils "github.com/O1MaGnUmO1/chainlink-common/pkg/utils"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/config"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	cnull "github.com/smartcontractkit/chainlink/v2/core/null"
-	"github.com/smartcontractkit/chainlink/v2/core/store/models"
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	cnull "github.com/O1MaGnUmO1/erinaceus-vrf/core/null"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 )
 
 const (

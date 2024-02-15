@@ -11,10 +11,10 @@ import (
 
 	commontypes "github.com/O1MaGnUmO1/chainlink-common/pkg/types"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/logpoller"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/services"
-	"github.com/smartcontractkit/chainlink/v2/core/services/relay/evm/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/logpoller"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/relay/evm/types"
 )
 
 type ChainReaderService interface {

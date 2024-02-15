@@ -9,7 +9,7 @@ import (
 	"github.com/pkg/errors"
 	"go.dedis.ch/kyber/v3"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/signatures/secp256k1"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/signatures/secp256k1"
 )
 
 // PrivateKey represents the secret used to construct a VRF proof.

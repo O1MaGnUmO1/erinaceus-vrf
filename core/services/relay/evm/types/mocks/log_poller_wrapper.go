@@ -5,7 +5,7 @@ package mocks
 import (
 	context "context"
 
-	types "github.com/smartcontractkit/chainlink/v2/core/services/relay/evm/types"
+	types "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/relay/evm/types"
 	mock "github.com/stretchr/testify/mock"
 )
 

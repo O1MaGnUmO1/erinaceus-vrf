@@ -6,7 +6,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 
-	evmclient "github.com/smartcontractkit/chainlink/v2/core/chains/evm/client"
+	evmclient "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/client"
 )
 
 func newSendErrorWrapped(s string) *evmclient.SendError {

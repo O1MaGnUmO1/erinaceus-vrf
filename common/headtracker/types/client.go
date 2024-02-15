@@ -4,7 +4,7 @@ import (
 	"context"
 	"math/big"
 
-	"github.com/smartcontractkit/chainlink/v2/common/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
 )
 
 type Client[H types.Head[BLOCK_HASH], S types.Subscription, ID types.ID, BLOCK_HASH types.Hashable] interface {

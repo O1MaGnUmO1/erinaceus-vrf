@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	config "github.com/smartcontractkit/chainlink/v2/core/config"
+	config "github.com/O1MaGnUmO1/erinaceus-vrf/core/config"
 	mock "github.com/stretchr/testify/mock"
 
 	time "time"

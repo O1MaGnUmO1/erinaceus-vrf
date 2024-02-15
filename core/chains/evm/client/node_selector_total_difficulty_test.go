@@ -4,8 +4,8 @@ import (
 	"math/big"
 	"testing"
 
-	evmclient "github.com/smartcontractkit/chainlink/v2/core/chains/evm/client"
-	evmmocks "github.com/smartcontractkit/chainlink/v2/core/chains/evm/mocks"
+	evmclient "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/client"
+	evmmocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/mocks"
 
 	"github.com/stretchr/testify/assert"
 )

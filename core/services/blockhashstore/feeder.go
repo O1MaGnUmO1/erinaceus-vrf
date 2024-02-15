@@ -11,8 +11,8 @@ import (
 	"go.uber.org/multierr"
 	"golang.org/x/exp/maps"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/logpoller"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/logpoller"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 )
 
 const trustedTimeout = 1 * time.Second

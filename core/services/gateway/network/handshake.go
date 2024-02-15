@@ -7,7 +7,7 @@ import (
 
 	"github.com/gorilla/websocket"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/common"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/common"
 )
 
 // The handshake works as follows:

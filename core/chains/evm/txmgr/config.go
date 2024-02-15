@@ -5,9 +5,9 @@ import (
 
 	gethcommon "github.com/ethereum/go-ethereum/common"
 
-	"github.com/smartcontractkit/chainlink/v2/common/config"
-	txmgrtypes "github.com/smartcontractkit/chainlink/v2/common/txmgr/types"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/assets"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/config"
+	txmgrtypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/txmgr/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/assets"
 )
 
 // ChainConfig encompasses config used by txmgr package

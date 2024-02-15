@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore/keys/p2pkey"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/p2pkey"
 )
 
 type P2P interface {

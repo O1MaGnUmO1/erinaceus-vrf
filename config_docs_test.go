@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/smartcontractkit/chainlink/v2/core/config/docs"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/docs"
 )
 
 var (

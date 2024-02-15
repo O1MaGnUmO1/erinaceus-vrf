@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	ldapauth "github.com/smartcontractkit/chainlink/v2/core/sessions/ldapauth"
+	ldapauth "github.com/O1MaGnUmO1/erinaceus-vrf/core/sessions/ldapauth"
 	mock "github.com/stretchr/testify/mock"
 )
 

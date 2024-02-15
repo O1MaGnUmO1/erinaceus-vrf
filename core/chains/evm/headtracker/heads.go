@@ -6,7 +6,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
 )
 
 // Heads is a collection of heads. All methods are thread-safe.

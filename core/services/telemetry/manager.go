@@ -12,10 +12,10 @@ import (
 	"github.com/smartcontractkit/libocr/commontypes"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services"
-	"github.com/smartcontractkit/chainlink/v2/core/config"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore"
-	"github.com/smartcontractkit/chainlink/v2/core/services/synchronization"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/synchronization"
 )
 
 //// Client encapsulates all the functionality needed to

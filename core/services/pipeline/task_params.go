@@ -14,7 +14,7 @@ import (
 	"github.com/shopspring/decimal"
 
 	commonhex "github.com/O1MaGnUmO1/chainlink-common/pkg/utils/hex"
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 )
 
 //go:generate mockery --quiet --name PipelineParamUnmarshaler --output ./mocks/ --case=underscore

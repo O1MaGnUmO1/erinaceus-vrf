@@ -13,15 +13,15 @@ import (
 	"github.com/stretchr/testify/mock"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
-	commonmocks "github.com/smartcontractkit/chainlink/v2/common/types/mocks"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/headtracker"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/cltest"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils/configtest"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils/evmtest"
-	"github.com/smartcontractkit/chainlink/v2/core/services/chainlink"
-	"github.com/smartcontractkit/chainlink/v2/core/store/models"
+	commonmocks "github.com/O1MaGnUmO1/erinaceus-vrf/common/types/mocks"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/headtracker"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
 
 func Test_HeadListener_HappyPath(t *testing.T) {

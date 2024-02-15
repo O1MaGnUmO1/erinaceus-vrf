@@ -8,9 +8,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/api"
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/handlers"
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/handlers/common"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/api"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/handlers"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/handlers/common"
 )
 
 type requestState struct {

@@ -9,9 +9,9 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
-	"github.com/smartcontractkit/chainlink/v2/common/txmgr"
-	evmclient "github.com/smartcontractkit/chainlink/v2/core/chains/evm/client"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/txmgr"
+	evmclient "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/client"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
 )
 
 // NonceSyncer manages the delicate task of syncing the local nonce with the

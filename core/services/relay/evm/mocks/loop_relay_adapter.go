@@ -6,7 +6,7 @@ import (
 	context "context"
 	big "math/big"
 
-	legacyevm "github.com/smartcontractkit/chainlink/v2/core/chains/legacyevm"
+	legacyevm "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/legacyevm"
 
 	mock "github.com/stretchr/testify/mock"
 

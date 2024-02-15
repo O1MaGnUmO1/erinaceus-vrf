@@ -1,7 +1,7 @@
 package connector
 
 import (
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/network"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/network"
 )
 
 type ConnectorConfig struct {

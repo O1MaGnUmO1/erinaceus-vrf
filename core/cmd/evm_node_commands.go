@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/smartcontractkit/chainlink/v2/core/web/presenters"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 )
 
 // EVMNodePresenter implements TableRenderer for an EVMNodeResource.

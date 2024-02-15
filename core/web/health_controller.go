@@ -11,8 +11,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"golang.org/x/exp/maps"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/chainlink"
-	"github.com/smartcontractkit/chainlink/v2/core/web/presenters"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 )
 
 type HealthController struct {

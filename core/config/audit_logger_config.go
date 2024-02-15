@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/smartcontractkit/chainlink/v2/core/store/models"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
 
 type AuditLogger interface {

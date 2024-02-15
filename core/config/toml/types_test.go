@@ -8,11 +8,11 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/smartcontractkit/chainlink/v2/core/build"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
-	"github.com/smartcontractkit/chainlink/v2/core/store/models"
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
-	configutils "github.com/smartcontractkit/chainlink/v2/core/utils/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/build"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
+	configutils "github.com/O1MaGnUmO1/erinaceus-vrf/core/utils/config"
 )
 
 func TestMercurySecrets_valid(t *testing.T) {

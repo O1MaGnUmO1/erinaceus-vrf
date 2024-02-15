@@ -10,10 +10,10 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
-	"github.com/smartcontractkit/chainlink/v2/core/gethwrappers"
-	"github.com/smartcontractkit/chainlink/v2/core/gethwrappers/generated"
-	"github.com/smartcontractkit/chainlink/v2/core/services/pg"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/gethwrappers"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/gethwrappers/generated"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 )
 
 // 1. Each listener being registered can specify a custom NumConfirmations - number of block confirmations required for any log being sent to it.

@@ -16,14 +16,14 @@ import (
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
 
-	evmclimocks "github.com/smartcontractkit/chainlink/v2/core/chains/evm/client/mocks"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/log"
-	logmocks "github.com/smartcontractkit/chainlink/v2/core/chains/evm/log/mocks"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/cltest"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils/evmtest"
-	"github.com/smartcontractkit/chainlink/v2/core/services/chainlink"
+	evmclimocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/client/mocks"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/log"
+	logmocks "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/log/mocks"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/evmtest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
 )
 
 func TestBroadcaster_AwaitsInitialSubscribersOnStartup(t *testing.T) {

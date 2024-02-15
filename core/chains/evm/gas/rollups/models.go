@@ -3,8 +3,8 @@ package rollups
 import (
 	"context"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/assets"
-	"github.com/smartcontractkit/chainlink/v2/core/services"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/assets"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services"
 )
 
 // L1Oracle provides interface for fetching L1-specific fee components if the chain is an L2.

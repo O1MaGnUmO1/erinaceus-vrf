@@ -3,7 +3,7 @@ package config
 import (
 	"encoding/json"
 
-	gw_net "github.com/smartcontractkit/chainlink/v2/core/services/gateway/network"
+	gw_net "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/network"
 )
 
 type GatewayConfig struct {

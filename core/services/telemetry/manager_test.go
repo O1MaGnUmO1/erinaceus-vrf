@@ -14,15 +14,15 @@ import (
 	"github.com/stretchr/testify/require"
 	"go.uber.org/zap/zapcore"
 
-	"github.com/smartcontractkit/chainlink/v2/core/config"
-	"github.com/smartcontractkit/chainlink/v2/core/config/mocks"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore/keys/csakey"
-	mocks3 "github.com/smartcontractkit/chainlink/v2/core/services/keystore/mocks"
-	"github.com/smartcontractkit/chainlink/v2/core/services/synchronization"
-	mocks2 "github.com/smartcontractkit/chainlink/v2/core/services/synchronization/mocks"
-	"github.com/smartcontractkit/chainlink/v2/core/store/models"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/mocks"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/csakey"
+	mocks3 "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/mocks"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/synchronization"
+	mocks2 "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/synchronization/mocks"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
 
 func setupMockConfig(t *testing.T, useBatchSend bool) *mocks.TelemetryIngress {

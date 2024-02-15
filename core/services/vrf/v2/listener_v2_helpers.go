@@ -8,7 +8,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/pkg/errors"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/vrf/vrfcommon"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/vrf/vrfcommon"
 )
 
 func uniqueReqs(reqs []pendingRequest) int {

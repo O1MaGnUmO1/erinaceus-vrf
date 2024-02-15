@@ -3,7 +3,7 @@
 package client
 
 import (
-	types "github.com/smartcontractkit/chainlink/v2/common/types"
+	types "github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
 	mock "github.com/stretchr/testify/mock"
 )
 

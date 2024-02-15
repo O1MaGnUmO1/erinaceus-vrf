@@ -1,7 +1,7 @@
 package chainlink
 
 import (
-	"github.com/smartcontractkit/chainlink/v2/core/config/toml"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/toml"
 )
 
 type prometheusConfig struct {

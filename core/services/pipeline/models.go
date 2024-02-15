@@ -14,7 +14,7 @@ import (
 	"go.uber.org/multierr"
 	"gopkg.in/guregu/null.v4"
 
-	"github.com/smartcontractkit/chainlink/v2/core/store/models"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
 
 type Spec struct {

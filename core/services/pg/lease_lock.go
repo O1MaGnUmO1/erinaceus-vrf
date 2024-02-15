@@ -13,7 +13,7 @@ import (
 	"go.uber.org/multierr"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils"
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 )
 
 // LeaseLock handles taking an exclusive lease on database access. This is not

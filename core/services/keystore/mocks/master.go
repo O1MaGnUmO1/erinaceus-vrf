@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	keystore "github.com/smartcontractkit/chainlink/v2/core/services/keystore"
+	keystore "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
 	mock "github.com/stretchr/testify/mock"
 )
 

@@ -17,13 +17,13 @@ import (
 	"github.com/ugorji/go/codec"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils/hex"
-	htrktypes "github.com/smartcontractkit/chainlink/v2/common/headtracker/types"
-	commontypes "github.com/smartcontractkit/chainlink/v2/common/types"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/assets"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/types/internal/blocks"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils"
-	ubig "github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils/big"
-	"github.com/smartcontractkit/chainlink/v2/core/null"
+	htrktypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/headtracker/types"
+	commontypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/assets"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types/internal/blocks"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils"
+	ubig "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/null"
 )
 
 // Head represents a BlockNumber, BlockHash.

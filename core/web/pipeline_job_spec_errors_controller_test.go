@@ -8,8 +8,8 @@ package web_test
 // 	"github.com/stretchr/testify/assert"
 // 	"github.com/stretchr/testify/require"
 
-// 	"github.com/smartcontractkit/chainlink/v2/core/internal/cltest"
-// 	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
+// 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
+// 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 // )
 
 // func TestPipelineJobSpecErrorsController_Delete_2(t *testing.T) {

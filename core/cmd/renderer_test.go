@@ -5,11 +5,11 @@ import (
 	"io"
 	"testing"
 
-	"github.com/smartcontractkit/chainlink/v2/core/cmd"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/cltest"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
-	"github.com/smartcontractkit/chainlink/v2/core/web"
-	webpresenters "github.com/smartcontractkit/chainlink/v2/core/web/presenters"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/cmd"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/cltest"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web"
+	webpresenters "github.com/O1MaGnUmO1/erinaceus-vrf/core/web/presenters"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

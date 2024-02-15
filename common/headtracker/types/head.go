@@ -1,7 +1,7 @@
 package types
 
 import (
-	"github.com/smartcontractkit/chainlink/v2/common/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
 )
 
 //go:generate mockery --quiet --name Head --output ./mocks/ --case=underscore

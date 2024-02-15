@@ -7,7 +7,7 @@ import (
 
 	"github.com/gin-contrib/sessions"
 
-	"github.com/smartcontractkit/chainlink/v2/core/store/models"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
 
 type TLS interface {

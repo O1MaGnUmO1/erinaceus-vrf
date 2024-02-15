@@ -22,8 +22,8 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/services"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/config"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
 )
 
 var (
@@ -84,7 +84,7 @@ var (
 
 // Node represents a client that connects to an ethereum-compatible RPC node
 //
-// Deprecated: use [pkg/github.com/smartcontractkit/chainlink/v2/common/client.Node]
+// Deprecated: use [pkg/github.com/O1MaGnUmO1/erinaceus-vrf/common/client.Node]
 type Node interface {
 	Start(ctx context.Context) error
 	Close() error
@@ -181,7 +181,7 @@ type node struct {
 
 // NewNode returns a new *node as Node
 //
-// Deprecated: use [pkg/github.com/smartcontractkit/chainlink/v2/common/client.NewNode]
+// Deprecated: use [pkg/github.com/O1MaGnUmO1/erinaceus-vrf/common/client.NewNode]
 func NewNode(nodeCfg config.NodePool, noNewHeadsThreshold time.Duration, lggr logger.Logger, wsuri url.URL, httpuri *url.URL, name string, id int32, chainID *big.Int, nodeOrder int32) Node {
 	n := new(node)
 	n.name = name

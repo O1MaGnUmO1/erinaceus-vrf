@@ -5,39 +5,39 @@ package mocks
 import (
 	big "math/big"
 
-	audit "github.com/smartcontractkit/chainlink/v2/core/logger/audit"
+	audit "github.com/O1MaGnUmO1/erinaceus-vrf/core/logger/audit"
 
-	bridges "github.com/smartcontractkit/chainlink/v2/core/bridges"
+	bridges "github.com/O1MaGnUmO1/erinaceus-vrf/core/bridges"
 
-	chainlink "github.com/smartcontractkit/chainlink/v2/core/services/chainlink"
+	chainlink "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/chainlink"
 
 	context "context"
 
-	job "github.com/smartcontractkit/chainlink/v2/core/services/job"
+	job "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 
-	keystore "github.com/smartcontractkit/chainlink/v2/core/services/keystore"
+	keystore "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
 
-	logger "github.com/smartcontractkit/chainlink/v2/core/logger"
+	logger "github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 
 	mock "github.com/stretchr/testify/mock"
 
-	pipeline "github.com/smartcontractkit/chainlink/v2/core/services/pipeline"
+	pipeline "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
 
-	plugins "github.com/smartcontractkit/chainlink/v2/plugins"
+	plugins "github.com/O1MaGnUmO1/erinaceus-vrf/plugins"
 
-	services "github.com/smartcontractkit/chainlink/v2/core/services"
+	services "github.com/O1MaGnUmO1/erinaceus-vrf/core/services"
 
-	sessions "github.com/smartcontractkit/chainlink/v2/core/sessions"
+	sessions "github.com/O1MaGnUmO1/erinaceus-vrf/core/sessions"
 
 	sqlx "github.com/jmoiron/sqlx"
 
-	txmgr "github.com/smartcontractkit/chainlink/v2/core/chains/evm/txmgr"
+	txmgr "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/txmgr"
 
-	types "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
+	types "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
 
 	uuid "github.com/google/uuid"
 
-	webhook "github.com/smartcontractkit/chainlink/v2/core/services/webhook"
+	webhook "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/webhook"
 
 	zapcore "go.uber.org/zap/zapcore"
 )

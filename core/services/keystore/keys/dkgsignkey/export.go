@@ -3,8 +3,8 @@ package dkgsignkey
 import (
 	"github.com/ethereum/go-ethereum/accounts/keystore"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/keystore/keys"
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 )
 
 const keyTypeIdentifier = "DKGSign"

@@ -16,10 +16,10 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils"
 
-	commonclient "github.com/smartcontractkit/chainlink/v2/common/client"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/client"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/gas"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
+	commonclient "github.com/O1MaGnUmO1/erinaceus-vrf/common/client"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/client"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/gas"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
 )
 
 var _ TxmClient = (*evmTxmClient)(nil)

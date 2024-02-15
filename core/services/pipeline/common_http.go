@@ -10,8 +10,8 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/smartcontractkit/chainlink/v2/core/logger"
-	clhttp "github.com/smartcontractkit/chainlink/v2/core/utils/http"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
+	clhttp "github.com/O1MaGnUmO1/erinaceus-vrf/core/utils/http"
 )
 
 func makeHTTPRequest(

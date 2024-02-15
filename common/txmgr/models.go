@@ -1,7 +1,7 @@
 package txmgr
 
 import (
-	txmgrtypes "github.com/smartcontractkit/chainlink/v2/common/txmgr/types"
+	txmgrtypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/txmgr/types"
 )
 
 const (

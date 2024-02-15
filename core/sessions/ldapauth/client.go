@@ -5,7 +5,7 @@ import (
 
 	"github.com/go-ldap/ldap/v3"
 
-	"github.com/smartcontractkit/chainlink/v2/core/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config"
 )
 
 type ldapClient struct {

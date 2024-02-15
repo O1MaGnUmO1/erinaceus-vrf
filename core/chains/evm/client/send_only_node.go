@@ -22,7 +22,7 @@ import (
 
 // SendOnlyNode represents one ethereum node used as a sendonly
 //
-// Deprecated: use [pkg/github.com/smartcontractkit/chainlink/v2/common/client.SendOnlyNode]
+// Deprecated: use [pkg/github.com/O1MaGnUmO1/erinaceus-vrf/common/client.SendOnlyNode]
 type SendOnlyNode interface {
 	// Start may attempt to connect to the node, but should only return error for misconfiguration - never for temporary errors.
 	Start(context.Context) error
@@ -76,7 +76,7 @@ type sendOnlyNode struct {
 
 // NewSendOnlyNode returns a new sendonly node
 //
-// Deprecated: use [pkg/github.com/smartcontractkit/chainlink/v2/common/client.NewSendOnlyNode]
+// Deprecated: use [pkg/github.com/O1MaGnUmO1/erinaceus-vrf/common/client.NewSendOnlyNode]
 func NewSendOnlyNode(lggr logger.Logger, httpuri url.URL, name string, chainID *big.Int) SendOnlyNode {
 	s := new(sendOnlyNode)
 	s.name = name

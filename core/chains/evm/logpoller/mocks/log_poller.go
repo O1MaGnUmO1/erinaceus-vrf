@@ -7,11 +7,11 @@ import (
 
 	common "github.com/ethereum/go-ethereum/common"
 
-	logpoller "github.com/smartcontractkit/chainlink/v2/core/chains/evm/logpoller"
+	logpoller "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/logpoller"
 
 	mock "github.com/stretchr/testify/mock"
 
-	pg "github.com/smartcontractkit/chainlink/v2/core/services/pg"
+	pg "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 
 	time "time"
 )

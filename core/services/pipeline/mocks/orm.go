@@ -5,12 +5,12 @@ package mocks
 import (
 	context "context"
 
-	models "github.com/smartcontractkit/chainlink/v2/core/store/models"
+	models "github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 	mock "github.com/stretchr/testify/mock"
 
-	pg "github.com/smartcontractkit/chainlink/v2/core/services/pg"
+	pg "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 
-	pipeline "github.com/smartcontractkit/chainlink/v2/core/services/pipeline"
+	pipeline "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
 
 	time "time"
 

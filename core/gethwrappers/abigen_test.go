@@ -10,8 +10,8 @@ import (
 	"github.com/ethereum/go-ethereum/core/rawdb"
 	"github.com/stretchr/testify/require"
 
-	"github.com/smartcontractkit/chainlink/v2/core/gethwrappers/generated/log_emitter"
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/gethwrappers/generated/log_emitter"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 )
 
 // Test that the generated Deploy method fill all the required fields and returns the correct address.

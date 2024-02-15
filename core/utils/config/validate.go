@@ -10,7 +10,7 @@ import (
 	"go.uber.org/multierr"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/config"
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 )
 
 // Validated configurations impose constraints that must be checked.

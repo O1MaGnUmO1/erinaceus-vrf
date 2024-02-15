@@ -10,10 +10,10 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
-	commonclient "github.com/smartcontractkit/chainlink/v2/common/client"
-	commonconfig "github.com/smartcontractkit/chainlink/v2/common/config"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/config"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
+	commonclient "github.com/O1MaGnUmO1/erinaceus-vrf/common/client"
+	commonconfig "github.com/O1MaGnUmO1/erinaceus-vrf/common/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
 )
 
 type TestNodePoolConfig struct {

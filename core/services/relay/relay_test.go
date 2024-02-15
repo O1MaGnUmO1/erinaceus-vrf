@@ -11,7 +11,7 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/loop"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/types"
 
-	"github.com/smartcontractkit/chainlink/v2/core/internal/testutils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
 )
 
 func TestIdentifier_UnmarshalString(t *testing.T) {

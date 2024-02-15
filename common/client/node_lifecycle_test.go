@@ -16,8 +16,8 @@ import (
 	bigmath "github.com/O1MaGnUmO1/chainlink-common/pkg/utils/big_math"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils/tests"
 
-	"github.com/smartcontractkit/chainlink/v2/common/types"
-	"github.com/smartcontractkit/chainlink/v2/common/types/mocks"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/common/types/mocks"
 )
 
 func TestUnit_NodeLifecycle_aliveLoop(t *testing.T) {

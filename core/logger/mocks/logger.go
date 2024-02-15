@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	logger "github.com/smartcontractkit/chainlink/v2/core/logger"
+	logger "github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 	mock "github.com/stretchr/testify/mock"
 
 	zapcore "go.uber.org/zap/zapcore"

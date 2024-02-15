@@ -3,12 +3,12 @@
 package mocks
 
 import (
-	big "github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils/big"
+	big "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
 	mock "github.com/stretchr/testify/mock"
 
-	pg "github.com/smartcontractkit/chainlink/v2/core/services/pg"
+	pg "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 
-	s4 "github.com/smartcontractkit/chainlink/v2/core/services/s4"
+	s4 "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/s4"
 
 	time "time"
 )

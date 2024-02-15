@@ -3,7 +3,7 @@ package logger
 import (
 	"github.com/shirou/gopsutil/v3/disk"
 
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 )
 
 // diskSpaceAvailableFn is used for testing to replace the default diskSpaceAvailable.

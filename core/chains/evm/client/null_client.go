@@ -11,8 +11,8 @@ import (
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/assets"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
-	commonclient "github.com/smartcontractkit/chainlink/v2/common/client"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
+	commonclient "github.com/O1MaGnUmO1/erinaceus-vrf/common/client"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
 )
 
 // NullClient satisfies the Client but has no side effects

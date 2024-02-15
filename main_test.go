@@ -13,10 +13,10 @@ import (
 	"github.com/hashicorp/consul/sdk/freeport"
 	"github.com/rogpeppe/go-internal/testscript"
 
-	"github.com/smartcontractkit/chainlink/v2/core"
-	"github.com/smartcontractkit/chainlink/v2/core/config/env"
-	"github.com/smartcontractkit/chainlink/v2/core/static"
-	"github.com/smartcontractkit/chainlink/v2/internal/testdb"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/env"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/static"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/internal/testdb"
 )
 
 // special files can be included to allocate additional test resources

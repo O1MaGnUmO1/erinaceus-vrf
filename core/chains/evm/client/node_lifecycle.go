@@ -15,8 +15,8 @@ import (
 	cutils "github.com/O1MaGnUmO1/chainlink-common/pkg/utils"
 	bigmath "github.com/O1MaGnUmO1/chainlink-common/pkg/utils/big_math"
 
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils"
 )
 
 var (

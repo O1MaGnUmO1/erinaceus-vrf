@@ -6,9 +6,9 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
-	commontypes "github.com/smartcontractkit/chainlink/v2/common/types"
-	httypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/headtracker/types"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
+	commontypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
+	httypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/headtracker/types"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
 )
 
 type headSaver struct {

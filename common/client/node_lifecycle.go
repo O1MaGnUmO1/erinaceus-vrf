@@ -15,7 +15,7 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils"
 	bigmath "github.com/O1MaGnUmO1/chainlink-common/pkg/utils/big_math"
 
-	iutils "github.com/smartcontractkit/chainlink/v2/common/internal/utils"
+	iutils "github.com/O1MaGnUmO1/erinaceus-vrf/common/internal/utils"
 )
 
 var (

@@ -7,7 +7,7 @@ import (
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/assets"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils/bytes"
-	ubig "github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils/big"
+	ubig "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
 
 	"github.com/shopspring/decimal"
 )

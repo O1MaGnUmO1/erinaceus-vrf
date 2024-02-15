@@ -7,7 +7,7 @@ import (
 
 	gethParams "github.com/ethereum/go-ethereum/params"
 
-	gethwrappers2 "github.com/smartcontractkit/chainlink/v2/core/gethwrappers"
+	gethwrappers2 "github.com/O1MaGnUmO1/erinaceus-vrf/core/gethwrappers"
 )
 
 func main() {

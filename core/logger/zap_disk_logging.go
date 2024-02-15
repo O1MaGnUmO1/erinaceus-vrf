@@ -4,7 +4,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/smartcontractkit/chainlink/v2/core/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"

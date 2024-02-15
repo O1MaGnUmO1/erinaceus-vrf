@@ -12,7 +12,7 @@ import (
 	"go.uber.org/multierr"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
-	corelogger "github.com/smartcontractkit/chainlink/v2/core/logger"
+	corelogger "github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 )
 
 // NOTE: This is the default level in Postgres anyway, we just make it

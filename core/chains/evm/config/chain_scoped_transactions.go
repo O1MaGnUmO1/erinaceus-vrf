@@ -3,7 +3,7 @@ package config
 import (
 	"time"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/config/toml"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config/toml"
 )
 
 type transactionsConfig struct {

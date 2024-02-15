@@ -25,8 +25,8 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/signatures/ethschnorr"
-	"github.com/smartcontractkit/chainlink/v2/core/services/signatures/secp256k1"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/signatures/ethschnorr"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/signatures/secp256k1"
 
 	"go.dedis.ch/kyber/v3"
 	"go.dedis.ch/kyber/v3/share"

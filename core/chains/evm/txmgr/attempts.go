@@ -11,12 +11,12 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/logger"
-	feetypes "github.com/smartcontractkit/chainlink/v2/common/fee/types"
-	txmgrtypes "github.com/smartcontractkit/chainlink/v2/common/txmgr/types"
-	commontypes "github.com/smartcontractkit/chainlink/v2/common/types"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/assets"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/gas"
-	evmtypes "github.com/smartcontractkit/chainlink/v2/core/chains/evm/types"
+	feetypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/fee/types"
+	txmgrtypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/txmgr/types"
+	commontypes "github.com/O1MaGnUmO1/erinaceus-vrf/common/types"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/assets"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/gas"
+	evmtypes "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/types"
 )
 
 type TxAttemptSigner[ADDR commontypes.Hashable] interface {

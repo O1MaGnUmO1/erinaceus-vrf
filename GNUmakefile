@@ -1,4 +1,4 @@
-.DEFAULT_GOAL := chainlink
+.DEFAULT_GOAL := erinaceus
 
 COMMIT_SHA ?= $(shell git rev-parse HEAD)
 VERSION = $(shell cat VERSION)
@@ -37,7 +37,7 @@ gomodtidy: ## Run go mod tidy on all modules.
 .PHONY: godoc
 godoc: ## Install and run godoc
 	go install golang.org/x/tools/cmd/godoc@latest
-	# http://localhost:6060/pkg/github.com/smartcontractkit/chainlink/v2/
+	# http://localhost:6060/pkg/github.com/O1MaGnUmO1/erinaceus-vrf/
 	godoc -http=:6060
 
 .PHONY: install-chainlink

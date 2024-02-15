@@ -17,7 +17,7 @@ import (
 	gethParams "github.com/ethereum/go-ethereum/params"
 	"golang.org/x/tools/go/ast/astutil"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/utils"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils"
 )
 
 const headerComment = `// Code generated - DO NOT EDIT.
@@ -93,7 +93,7 @@ func ImproveAbigenOutput(path string, abiPath string) {
 	logNames := getLogNames(fileNode)
 	if len(logNames) > 0 {
 		astutil.AddImport(fset, fileNode, "fmt")
-		astutil.AddImport(fset, fileNode, "github.com/smartcontractkit/chainlink/v2/core/gethwrappers/generated")
+		astutil.AddImport(fset, fileNode, "github.com/O1MaGnUmO1/erinaceus-vrf/core/gethwrappers/generated")
 	}
 	contractName := getContractName(fileNode)
 	fileNode = addContractStructFields(contractName, fileNode)

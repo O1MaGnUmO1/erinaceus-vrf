@@ -1,8 +1,8 @@
 package chainlink
 
 import (
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/config/toml"
-	"github.com/smartcontractkit/chainlink/v2/core/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config/toml"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config"
 )
 
 //go:generate mockery --quiet --name GeneralConfig --output ./mocks/ --case=underscore

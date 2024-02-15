@@ -7,9 +7,9 @@ import (
 	gethcommon "github.com/ethereum/go-ethereum/common"
 
 	commonassets "github.com/O1MaGnUmO1/chainlink-common/pkg/assets"
-	commonconfig "github.com/smartcontractkit/chainlink/v2/common/config"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/assets"
-	"github.com/smartcontractkit/chainlink/v2/core/config"
+	commonconfig "github.com/O1MaGnUmO1/erinaceus-vrf/common/config"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/assets"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config"
 )
 
 type EVM interface {

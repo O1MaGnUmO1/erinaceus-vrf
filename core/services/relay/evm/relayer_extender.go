@@ -11,8 +11,8 @@ import (
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/loop"
 	commontypes "github.com/O1MaGnUmO1/chainlink-common/pkg/types"
 
-	"github.com/smartcontractkit/chainlink/v2/core/chains/evm/config/toml"
-	"github.com/smartcontractkit/chainlink/v2/core/chains/legacyevm"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config/toml"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/legacyevm"
 )
 
 // ErrNoChains indicates that no EVM chains have been started

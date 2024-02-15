@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/smartcontractkit/chainlink/v2/core/services/gateway/handlers/common"
+	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/gateway/handlers/common"
 )
 
 func TestRateLimiter_Simple(t *testing.T) {
