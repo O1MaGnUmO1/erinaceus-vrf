@@ -3,7 +3,7 @@ RootDir = 'test/root/dir'
 ShutdownGracePeriod = '10s'
 
 [Feature]
-FeedsManager = true
+
 LogPoller = true
 UICSAKeys = true
 

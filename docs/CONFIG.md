@@ -48,17 +48,10 @@ ShutdownGracePeriod is the maximum time allowed to shut down gracefully. If exce
 ## Feature
 ```toml
 [Feature]
-FeedsManager = true # Default
 LogPoller = false # Default
 UICSAKeys = false # Default
 ```
 
-
-### FeedsManager
-```toml
-FeedsManager = true # Default
-```
-FeedsManager enables the feeds manager service.
 
 ### LogPoller
 ```toml

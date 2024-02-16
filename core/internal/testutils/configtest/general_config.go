@@ -43,7 +43,6 @@ func NewGeneralConfig(t testing.TB, overrideFn func(*erinaceus.Config, *erinaceu
 func overrides(c *erinaceus.Config, s *erinaceus.Secrets) {
 	s.Password.Keystore = models.NewSecret("dummy-to-pass-validation")
 
-	c.Insecure.OCRDevelopmentMode = ptr(true)
 	c.InsecureFastScrypt = ptr(true)
 	c.ShutdownGracePeriod = models.MustNewDuration(testutils.DefaultWaitTimeout)
 
@@ -55,8 +54,6 @@ func overrides(c *erinaceus.Config, s *erinaceus.Secrets) {
 	c.Database.DefaultLockTimeout = models.MustNewDuration(1 * time.Minute)
 
 	c.JobPipeline.ReaperInterval = models.MustNewDuration(0)
-
-	c.P2P.V2.Enabled = ptr(false)
 
 	c.WebServer.SessionTimeout = models.MustNewDuration(2 * time.Minute)
 	c.WebServer.BridgeResponseURL = models.MustParseURL("http://localhost:6688")

@@ -206,25 +206,6 @@ func (_m *GeneralConfig) Feature() config.Feature {
 	return r0
 }
 
-// FluxMonitor provides a mock function with given fields:
-func (_m *GeneralConfig) FluxMonitor() config.FluxMonitor {
-	ret := _m.Called()
-
-	if len(ret) == 0 {
-		panic("no return value specified for FluxMonitor")
-	}
-
-	var r0 config.FluxMonitor
-	if rf, ok := ret.Get(0).(func() config.FluxMonitor); ok {
-		r0 = rf()
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(config.FluxMonitor)
-		}
-	}
-
-	return r0
-}
 
 // Insecure provides a mock function with given fields:
 func (_m *GeneralConfig) Insecure() config.Insecure {
@@ -329,26 +310,6 @@ func (_m *GeneralConfig) LogConfiguration(log config.LogfFn, warn config.LogfFn)
 	_m.Called(log, warn)
 }
 
-
-// P2P provides a mock function with given fields:
-func (_m *GeneralConfig) P2P() config.P2P {
-	ret := _m.Called()
-
-	if len(ret) == 0 {
-		panic("no return value specified for P2P")
-	}
-
-	var r0 config.P2P
-	if rf, ok := ret.Get(0).(func() config.P2P); ok {
-		r0 = rf()
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(config.P2P)
-		}
-	}
-
-	return r0
-}
 
 // Password provides a mock function with given fields:
 func (_m *GeneralConfig) Password() config.Password {

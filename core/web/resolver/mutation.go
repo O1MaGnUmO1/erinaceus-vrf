@@ -22,7 +22,6 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/csakey"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/p2pkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/vrfkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/vrf/vrfcommon"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/webhook"
@@ -242,56 +241,6 @@ func (r *Resolver) DeleteBridge(ctx context.Context, args struct {
 
 	r.App.GetAuditLogger().Audit(audit.BridgeDeleted, map[string]interface{}{"name": bt.Name})
 	return NewDeleteBridgePayload(&bt, nil), nil
-}
-
-func (r *Resolver) CreateP2PKey(ctx context.Context) (*CreateP2PKeyPayloadResolver, error) {
-	if err := authenticateUserCanEdit(ctx); err != nil {
-		return nil, err
-	}
-
-	key, err := r.App.GetKeyStore().P2P().Create()
-	if err != nil {
-		return nil, err
-	}
-
-	const keyType = "Ed25519"
-	r.App.GetAuditLogger().Audit(audit.KeyCreated, map[string]interface{}{
-		"type":         "p2p",
-		"id":           key.ID(),
-		"p2pPublicKey": key.PublicKeyHex(),
-		"p2pPeerID":    key.PeerID(),
-		"p2pType":      keyType,
-	})
-
-	return NewCreateP2PKeyPayload(key), nil
-}
-
-func (r *Resolver) DeleteP2PKey(ctx context.Context, args struct {
-	ID graphql.ID
-}) (*DeleteP2PKeyPayloadResolver, error) {
-	if err := authenticateUserIsAdmin(ctx); err != nil {
-		return nil, err
-	}
-
-	keyID, err := p2pkey.MakePeerID(string(args.ID))
-	if err != nil {
-		return nil, err
-	}
-
-	key, err := r.App.GetKeyStore().P2P().Delete(keyID)
-	if err != nil {
-		if errors.As(err, &keystore.KeyNotFoundError{}) {
-			return NewDeleteP2PKeyPayload(p2pkey.KeyV2{}, err), nil
-		}
-		return nil, err
-	}
-
-	r.App.GetAuditLogger().Audit(audit.KeyDeleted, map[string]interface{}{
-		"type": "p2p",
-		"id":   args.ID,
-	})
-
-	return NewDeleteP2PKeyPayload(key, nil), nil
 }
 
 func (r *Resolver) CreateVRFKey(ctx context.Context) (*CreateVRFKeyPayloadResolver, error) {

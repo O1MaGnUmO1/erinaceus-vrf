@@ -41,7 +41,7 @@ FinalityDepth = 50 # Default
 # Finality for a block is solely defined by the finality related tags provided by the chain's RPC API. This is a placeholder and hasn't been implemented yet.
 FinalityTagEnabled = false # Default
 # **ADVANCED**
-# FlagsContractAddress can optionally point to a [Flags contract](../contracts/src/v0.8/Flags.sol). If set, the node will lookup that contract for each job that supports flags contracts (currently OCR and FM jobs are supported). If the job's contractAddress is set as hibernating in the FlagsContractAddress address, it overrides the standard update parameters (such as heartbeat/threshold).
+# FlagsContractAddress can optionally point to a [Flags contract](../contracts/src/v0.8/Flags.sol). If set, the node will lookup that contract for each job that supports flags contracts (currently FM jobs are supported). If the job's contractAddress is set as hibernating in the FlagsContractAddress address, it overrides the standard update parameters (such as heartbeat/threshold).
 FlagsContractAddress = '0xae4E781a6218A8031764928E88d457937A954fC3' # Example
 # LinkContractAddress is the canonical ERC-677 LINK token contract address on the given chain. Note that this is usually autodetected from chain ID.
 LinkContractAddress = '0x538aAaB4ea120b2bC2fe5D296852D948F07D849e' # Example
@@ -224,10 +224,6 @@ TipCapDefault = '1 wei' # Default
 TipCapMin = '1 wei' # Default
 
 [EVM.GasEstimator.LimitJobType]
-# OCR overrides LimitDefault for OCR jobs.
-OCR = 100_000 # Example
-# OCR2 overrides LimitDefault for OCR2 jobs.
-OCR2 = 100_000 # Example
 # DR overrides LimitDefault for Direct Request jobs.
 DR = 100_000 # Example
 # VRF overrides LimitDefault for VRF jobs.
@@ -328,24 +324,6 @@ SyncThreshold = 5 # Default
 # Set to '0s' to disable
 LeaseDuration = '0s' # Default
 
-[EVM.OCR]
-# ContractConfirmations sets `OCR.ContractConfirmations` for this EVM chain.
-ContractConfirmations = 4 # Default
-# ContractTransmitterTransmitTimeout sets `OCR.ContractTransmitterTransmitTimeout` for this EVM chain.
-ContractTransmitterTransmitTimeout = '10s' # Default
-# DatabaseTimeout sets `OCR.DatabaseTimeout` for this EVM chain.
-DatabaseTimeout = '10s' # Default
-# **ADVANCED**
-# DeltaCOverride (and `DeltaCJitterOverride`) determine the config override DeltaC.
-# DeltaC is the maximum age of the latest report in the contract. If the maximum age is exceeded, a new report will be
-# created by the report generation protocol.
-DeltaCOverride = "168h" # Default
-# **ADVANCED**
-# DeltaCJitterOverride is the range for jitter to add to `DeltaCOverride`.
-DeltaCJitterOverride = "1h" # Default
-# ObservationGracePeriod sets `OCR.ObservationGracePeriod` for this EVM chain.
-ObservationGracePeriod = '1s' # Default
-
 [[EVM.Nodes]]
 # Name is a unique (per-chain) identifier for this node.
 Name = 'foo' # Example
@@ -357,7 +335,3 @@ HTTPURL = 'https://foo.web' # Example
 SendOnly = false # Default
 # Order of the node in the pool, will takes effect if `SelectionMode` is `PriorityLevel` or will be used as a tie-breaker for `HighestHead` and `TotalDifficulty`
 Order = 100 # Default
-
-[EVM.OCR2.Automation]
-# GasLimit controls the gas limit for transmit transactions from ocr2automation job.
-GasLimit = 5300000 # Default

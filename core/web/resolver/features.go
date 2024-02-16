@@ -15,11 +15,6 @@ func (r *FeaturesResolver) CSA() bool {
 	return r.cfg.UICSAKeys()
 }
 
-// FeedsManager resolves to whether the Feeds Manager is enabled for the UI
-func (r *FeaturesResolver) FeedsManager() bool {
-	return r.cfg.FeedsManager()
-}
-
 type FeaturesPayloadResolver struct {
 	cfg config.Feature
 }

@@ -1,6 +1,6 @@
 module github.com/O1MaGnUmO1/erinaceus-vrf
 
-go 1.21.3
+go 1.21
 
 require (
 	github.com/Depado/ginprom v1.8.0

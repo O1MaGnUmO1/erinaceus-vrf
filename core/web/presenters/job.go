@@ -4,8 +4,6 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/lib/pq"
-	"gopkg.in/guregu/null.v4"
 
 	commonassets "github.com/O1MaGnUmO1/chainlink-common/pkg/assets"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/assets"
@@ -14,7 +12,6 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/relay"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/signatures/secp256k1"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
@@ -52,152 +49,6 @@ type DirectRequestSpec struct {
 	EVMChainID               *big.Big                 `json:"evmChainID"`
 }
 
-// NewDirectRequestSpec initializes a new DirectRequestSpec from a
-// job.DirectRequestSpec
-func NewDirectRequestSpec(spec *job.DirectRequestSpec) *DirectRequestSpec {
-	return &DirectRequestSpec{
-		ContractAddress:          spec.ContractAddress,
-		MinIncomingConfirmations: spec.MinIncomingConfirmations,
-		MinContractPayment:       spec.MinContractPayment,
-		Requesters:               spec.Requesters,
-		// This is hardcoded to runlog. When we support other initiators, we need
-		// to change this
-		Initiator:  "runlog",
-		CreatedAt:  spec.CreatedAt,
-		UpdatedAt:  spec.UpdatedAt,
-		EVMChainID: spec.EVMChainID,
-	}
-}
-
-// FluxMonitorSpec defines the spec details of a FluxMonitor Job
-type FluxMonitorSpec struct {
-	ContractAddress     ethkey.EIP55Address `json:"contractAddress"`
-	Threshold           float32             `json:"threshold"`
-	AbsoluteThreshold   float32             `json:"absoluteThreshold"`
-	PollTimerPeriod     string              `json:"pollTimerPeriod"`
-	PollTimerDisabled   bool                `json:"pollTimerDisabled"`
-	IdleTimerPeriod     string              `json:"idleTimerPeriod"`
-	IdleTimerDisabled   bool                `json:"idleTimerDisabled"`
-	DrumbeatEnabled     bool                `json:"drumbeatEnabled"`
-	DrumbeatSchedule    *string             `json:"drumbeatSchedule"`
-	DrumbeatRandomDelay *string             `json:"drumbeatRandomDelay"`
-	MinPayment          *commonassets.Link  `json:"minPayment"`
-	CreatedAt           time.Time           `json:"createdAt"`
-	UpdatedAt           time.Time           `json:"updatedAt"`
-	EVMChainID          *big.Big            `json:"evmChainID"`
-}
-
-// NewFluxMonitorSpec initializes a new DirectFluxMonitorSpec from a
-// job.FluxMonitorSpec
-func NewFluxMonitorSpec(spec *job.FluxMonitorSpec) *FluxMonitorSpec {
-	var drumbeatSchedulePtr *string
-	if spec.DrumbeatEnabled {
-		drumbeatSchedulePtr = &spec.DrumbeatSchedule
-	}
-	var drumbeatRandomDelayPtr *string
-	if spec.DrumbeatRandomDelay > 0 {
-		drumbeatRandomDelay := spec.DrumbeatRandomDelay.String()
-		drumbeatRandomDelayPtr = &drumbeatRandomDelay
-	}
-	return &FluxMonitorSpec{
-		ContractAddress:     spec.ContractAddress,
-		Threshold:           float32(spec.Threshold),
-		AbsoluteThreshold:   float32(spec.AbsoluteThreshold),
-		PollTimerPeriod:     spec.PollTimerPeriod.String(),
-		PollTimerDisabled:   spec.PollTimerDisabled,
-		IdleTimerPeriod:     spec.IdleTimerPeriod.String(),
-		IdleTimerDisabled:   spec.IdleTimerDisabled,
-		DrumbeatEnabled:     spec.DrumbeatEnabled,
-		DrumbeatSchedule:    drumbeatSchedulePtr,
-		DrumbeatRandomDelay: drumbeatRandomDelayPtr,
-		MinPayment:          spec.MinPayment,
-		CreatedAt:           spec.CreatedAt,
-		UpdatedAt:           spec.UpdatedAt,
-		EVMChainID:          spec.EVMChainID,
-	}
-}
-
-// OffChainReportingSpec defines the spec details of a OffChainReporting Job
-type OffChainReportingSpec struct {
-	ContractAddress                        ethkey.EIP55Address  `json:"contractAddress"`
-	P2PV2Bootstrappers                     pq.StringArray       `json:"p2pv2Bootstrappers"`
-	IsBootstrapPeer                        bool                 `json:"isBootstrapPeer"`
-	EncryptedOCRKeyBundleID                *models.Sha256Hash   `json:"keyBundleID"`
-	TransmitterAddress                     *ethkey.EIP55Address `json:"transmitterAddress"`
-	ObservationTimeout                     models.Interval      `json:"observationTimeout"`
-	BlockchainTimeout                      models.Interval      `json:"blockchainTimeout"`
-	ContractConfigTrackerSubscribeInterval models.Interval      `json:"contractConfigTrackerSubscribeInterval"`
-	ContractConfigTrackerPollInterval      models.Interval      `json:"contractConfigTrackerPollInterval"`
-	ContractConfigConfirmations            uint16               `json:"contractConfigConfirmations"`
-	CreatedAt                              time.Time            `json:"createdAt"`
-	UpdatedAt                              time.Time            `json:"updatedAt"`
-	EVMChainID                             *big.Big             `json:"evmChainID"`
-	DatabaseTimeout                        *models.Interval     `json:"databaseTimeout"`
-	ObservationGracePeriod                 *models.Interval     `json:"observationGracePeriod"`
-	ContractTransmitterTransmitTimeout     *models.Interval     `json:"contractTransmitterTransmitTimeout"`
-	CollectTelemetry                       bool                 `json:"collectTelemetry,omitempty"`
-}
-
-// NewOffChainReportingSpec initializes a new OffChainReportingSpec from a
-// job.OCROracleSpec
-func NewOffChainReportingSpec(spec *job.OCROracleSpec) *OffChainReportingSpec {
-	return &OffChainReportingSpec{
-		ContractAddress:                        spec.ContractAddress,
-		P2PV2Bootstrappers:                     spec.P2PV2Bootstrappers,
-		IsBootstrapPeer:                        spec.IsBootstrapPeer,
-		EncryptedOCRKeyBundleID:                spec.EncryptedOCRKeyBundleID,
-		TransmitterAddress:                     spec.TransmitterAddress,
-		ObservationTimeout:                     spec.ObservationTimeout,
-		BlockchainTimeout:                      spec.BlockchainTimeout,
-		ContractConfigTrackerSubscribeInterval: spec.ContractConfigTrackerSubscribeInterval,
-		ContractConfigTrackerPollInterval:      spec.ContractConfigTrackerPollInterval,
-		ContractConfigConfirmations:            spec.ContractConfigConfirmations,
-		CreatedAt:                              spec.CreatedAt,
-		UpdatedAt:                              spec.UpdatedAt,
-		EVMChainID:                             spec.EVMChainID,
-		DatabaseTimeout:                        spec.DatabaseTimeout,
-		ObservationGracePeriod:                 spec.ObservationGracePeriod,
-		ContractTransmitterTransmitTimeout:     spec.ContractTransmitterTransmitTimeout,
-		CollectTelemetry:                       spec.CaptureEATelemetry,
-	}
-}
-
-// OffChainReporting2Spec defines the spec details of a OffChainReporting2 Job
-type OffChainReporting2Spec struct {
-	ContractID                        string                 `json:"contractID"`
-	Relay                             relay.Network          `json:"relay"`
-	RelayConfig                       map[string]interface{} `json:"relayConfig"`
-	P2PV2Bootstrappers                pq.StringArray         `json:"p2pv2Bootstrappers"`
-	OCRKeyBundleID                    null.String            `json:"ocrKeyBundleID"`
-	TransmitterID                     null.String            `json:"transmitterID"`
-	ObservationTimeout                models.Interval        `json:"observationTimeout"`
-	BlockchainTimeout                 models.Interval        `json:"blockchainTimeout"`
-	ContractConfigTrackerPollInterval models.Interval        `json:"contractConfigTrackerPollInterval"`
-	ContractConfigConfirmations       uint16                 `json:"contractConfigConfirmations"`
-	CreatedAt                         time.Time              `json:"createdAt"`
-	UpdatedAt                         time.Time              `json:"updatedAt"`
-	CollectTelemetry                  bool                   `json:"collectTelemetry"`
-}
-
-// NewOffChainReporting2Spec initializes a new OffChainReportingSpec from a
-// job.OCR2OracleSpec
-func NewOffChainReporting2Spec(spec *job.OCR2OracleSpec) *OffChainReporting2Spec {
-	return &OffChainReporting2Spec{
-		ContractID:                        spec.ContractID,
-		Relay:                             spec.Relay,
-		RelayConfig:                       spec.RelayConfig,
-		P2PV2Bootstrappers:                spec.P2PV2Bootstrappers,
-		OCRKeyBundleID:                    spec.OCRKeyBundleID,
-		TransmitterID:                     spec.TransmitterID,
-		BlockchainTimeout:                 spec.BlockchainTimeout,
-		ContractConfigTrackerPollInterval: spec.ContractConfigTrackerPollInterval,
-		ContractConfigConfirmations:       spec.ContractConfigConfirmations,
-		CreatedAt:                         spec.CreatedAt,
-		UpdatedAt:                         spec.UpdatedAt,
-		CollectTelemetry:                  spec.CaptureEATelemetry,
-	}
-}
-
 // PipelineSpec defines the spec details of the pipeline
 type PipelineSpec struct {
 	ID           int32  `json:"id"`
@@ -214,26 +65,6 @@ func NewPipelineSpec(spec *pipeline.Spec) PipelineSpec {
 	}
 }
 
-// KeeperSpec defines the spec details of a Keeper Job
-type KeeperSpec struct {
-	ContractAddress ethkey.EIP55Address `json:"contractAddress"`
-	FromAddress     ethkey.EIP55Address `json:"fromAddress"`
-	CreatedAt       time.Time           `json:"createdAt"`
-	UpdatedAt       time.Time           `json:"updatedAt"`
-	EVMChainID      *big.Big            `json:"evmChainID"`
-}
-
-// NewKeeperSpec generates a new KeeperSpec from a job.KeeperSpec
-func NewKeeperSpec(spec *job.KeeperSpec) *KeeperSpec {
-	return &KeeperSpec{
-		ContractAddress: spec.ContractAddress,
-		FromAddress:     spec.FromAddress,
-		CreatedAt:       spec.CreatedAt,
-		UpdatedAt:       spec.UpdatedAt,
-		EVMChainID:      spec.EVMChainID,
-	}
-}
-
 // WebhookSpec defines the spec details of a Webhook Job
 type WebhookSpec struct {
 	CreatedAt time.Time `json:"createdAt"`
@@ -245,22 +76,6 @@ func NewWebhookSpec(spec *job.WebhookSpec) *WebhookSpec {
 	return &WebhookSpec{
 		CreatedAt: spec.CreatedAt,
 		UpdatedAt: spec.UpdatedAt,
-	}
-}
-
-// CronSpec defines the spec details of a Cron Job
-type CronSpec struct {
-	CronSchedule string    `json:"schedule" tom:"schedule"`
-	CreatedAt    time.Time `json:"createdAt"`
-	UpdatedAt    time.Time `json:"updatedAt"`
-}
-
-// NewCronSpec generates a new CronSpec from a job.CronSpec
-func NewCronSpec(spec *job.CronSpec) *CronSpec {
-	return &CronSpec{
-		CronSchedule: spec.CronSchedule,
-		CreatedAt:    spec.CreatedAt,
-		UpdatedAt:    spec.UpdatedAt,
 	}
 }
 
@@ -346,24 +161,18 @@ func NewJobError(e job.SpecError) JobError {
 // JobResource represents a JobResource
 type JobResource struct {
 	JAID
-	Name                   string                  `json:"name"`
-	Type                   JobSpecType             `json:"type"`
-	SchemaVersion          uint32                  `json:"schemaVersion"`
-	GasLimit               clnull.Uint32           `json:"gasLimit"`
-	ForwardingAllowed      bool                    `json:"forwardingAllowed"`
-	MaxTaskDuration        models.Interval         `json:"maxTaskDuration"`
-	ExternalJobID          uuid.UUID               `json:"externalJobID"`
-	DirectRequestSpec      *DirectRequestSpec      `json:"directRequestSpec"`
-	FluxMonitorSpec        *FluxMonitorSpec        `json:"fluxMonitorSpec"`
-	CronSpec               *CronSpec               `json:"cronSpec"`
-	OffChainReportingSpec  *OffChainReportingSpec  `json:"offChainReportingOracleSpec"`
-	OffChainReporting2Spec *OffChainReporting2Spec `json:"offChainReporting2OracleSpec"`
-	KeeperSpec             *KeeperSpec             `json:"keeperSpec"`
-	VRFSpec                *VRFSpec                `json:"vrfSpec"`
-	WebhookSpec            *WebhookSpec            `json:"webhookSpec"`
-	GatewaySpec            *GatewaySpec            `json:"gatewaySpec"`
-	PipelineSpec           PipelineSpec            `json:"pipelineSpec"`
-	Errors                 []JobError              `json:"errors"`
+	Name              string          `json:"name"`
+	Type              JobSpecType     `json:"type"`
+	SchemaVersion     uint32          `json:"schemaVersion"`
+	GasLimit          clnull.Uint32   `json:"gasLimit"`
+	ForwardingAllowed bool            `json:"forwardingAllowed"`
+	MaxTaskDuration   models.Interval `json:"maxTaskDuration"`
+	ExternalJobID     uuid.UUID       `json:"externalJobID"`
+	VRFSpec           *VRFSpec        `json:"vrfSpec"`
+	WebhookSpec       *WebhookSpec    `json:"webhookSpec"`
+	GatewaySpec       *GatewaySpec    `json:"gatewaySpec"`
+	PipelineSpec      PipelineSpec    `json:"pipelineSpec"`
+	Errors            []JobError      `json:"errors"`
 }
 
 // NewJobResource initializes a new JSONAPI job resource
@@ -381,8 +190,6 @@ func NewJobResource(j job.Job) *JobResource {
 	}
 
 	switch j.Type {
-	case job.Keeper:
-		resource.KeeperSpec = NewKeeperSpec(j.KeeperSpec)
 	case job.VRF:
 		resource.VRFSpec = NewVRFSpec(j.VRFSpec)
 	case job.Webhook:

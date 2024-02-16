@@ -185,7 +185,6 @@ func NewApp(s *Shell) *cli.App {
 				// TODO unify init vs keysCommand
 				// out of scope for initial refactor because it breaks usage messages.
 				initEthKeysSubCmd(s),
-				initP2PKeysSubCmd(s),
 				initCSAKeysSubCmd(s),
 
 				keysCommand("DKGSign", NewDKGSignKeysClient(s)),

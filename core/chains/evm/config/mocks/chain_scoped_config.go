@@ -194,25 +194,6 @@ func (_m *ChainScopedConfig) Feature() coreconfig.Feature {
 	return r0
 }
 
-// FluxMonitor provides a mock function with given fields:
-func (_m *ChainScopedConfig) FluxMonitor() coreconfig.FluxMonitor {
-	ret := _m.Called()
-
-	if len(ret) == 0 {
-		panic("no return value specified for FluxMonitor")
-	}
-
-	var r0 coreconfig.FluxMonitor
-	if rf, ok := ret.Get(0).(func() coreconfig.FluxMonitor); ok {
-		r0 = rf()
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(coreconfig.FluxMonitor)
-		}
-	}
-
-	return r0
-}
 
 // Insecure provides a mock function with given fields:
 func (_m *ChainScopedConfig) Insecure() coreconfig.Insecure {
@@ -317,29 +298,6 @@ func (_m *ChainScopedConfig) LogConfiguration(log coreconfig.LogfFn, warn coreco
 	_m.Called(log, warn)
 }
 
-
-// OCR provides a mock function with given fields:
-
-
-// P2P provides a mock function with given fields:
-func (_m *ChainScopedConfig) P2P() coreconfig.P2P {
-	ret := _m.Called()
-
-	if len(ret) == 0 {
-		panic("no return value specified for P2P")
-	}
-
-	var r0 coreconfig.P2P
-	if rf, ok := ret.Get(0).(func() coreconfig.P2P); ok {
-		r0 = rf()
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(coreconfig.P2P)
-		}
-	}
-
-	return r0
-}
 
 // Password provides a mock function with given fields:
 func (_m *ChainScopedConfig) Password() coreconfig.Password {

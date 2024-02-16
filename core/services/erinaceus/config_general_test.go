@@ -39,7 +39,6 @@ func TestTOMLGeneralConfig_InsecureConfig(t *testing.T) {
 		assert.False(t, config.Insecure().DevWebServer())
 		assert.False(t, config.Insecure().DisableRateLimiting())
 		assert.False(t, config.Insecure().InfiniteDepthQueries())
-		assert.False(t, config.Insecure().OCRDevelopmentMode())
 	})
 
 	t.Run("insecure config ignore override on non-dev builds", func(t *testing.T) {
@@ -66,7 +65,6 @@ func TestTOMLGeneralConfig_InsecureConfig(t *testing.T) {
 		  DevWebServer = true
 		  DisableRateLimiting = false
 		  InfiniteDepthQueries = false
-		  OCRDevelopmentMode = false
 		`
 		opts := GeneralConfigOpts{
 			ConfigStrings: []string{config},

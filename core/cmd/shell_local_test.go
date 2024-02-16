@@ -76,8 +76,6 @@ func TestShell_RunNodeWithPasswords(t *testing.T) {
 				c.EVM[0].Nodes[0].Name = ptr("fake")
 				c.EVM[0].Nodes[0].HTTPURL = models.MustParseURL("http://fake.com")
 				c.EVM[0].Nodes[0].WSURL = models.MustParseURL("WSS://fake.com/ws")
-				// seems to be needed for config validate
-				c.Insecure.OCRDevelopmentMode = nil
 			})
 			db := pgtest.NewSqlxDB(t)
 			keyStore := cltest.NewKeyStore(t, db, cfg.Database())
@@ -170,8 +168,6 @@ func TestShell_RunNodeWithAPICredentialsFile(t *testing.T) {
 				c.EVM[0].Nodes[0].Name = ptr("fake")
 				c.EVM[0].Nodes[0].WSURL = models.MustParseURL("WSS://fake.com/ws")
 				c.EVM[0].Nodes[0].HTTPURL = models.MustParseURL("http://fake.com")
-				// seems to be needed for config validate
-				c.Insecure.OCRDevelopmentMode = nil
 			})
 			db := pgtest.NewSqlxDB(t)
 			authProviderORM := localauth.NewORM(db, time.Minute, logger.TestLogger(t), cfg.Database(), audit.NoopLogger)
@@ -287,8 +283,6 @@ func TestShell_RebroadcastTransactions_Txm(t *testing.T) {
 		// evm config is used in this test. but if set, it must be pass config validation.
 		// simplest to make it nil
 		c.EVM = nil
-		// seems to be needed for config validate
-		c.Insecure.OCRDevelopmentMode = nil
 	})
 	keyStore := cltest.NewKeyStore(t, sqlxDB, config.Database())
 	_, fromAddress := cltest.MustInsertRandomKey(t, keyStore.Eth())
@@ -367,7 +361,6 @@ func TestShell_RebroadcastTransactions_OutsideRange_Txm(t *testing.T) {
 				// simplest to make it nil
 				c.EVM = nil
 				// seems to be needed for config validate
-				c.Insecure.OCRDevelopmentMode = nil
 			})
 
 			keyStore := cltest.NewKeyStore(t, sqlxDB, config.Database())
@@ -443,8 +436,6 @@ func TestShell_RebroadcastTransactions_AddressCheck(t *testing.T) {
 				c.Database.Dialect = dialects.Postgres
 
 				c.EVM = nil
-				// seems to be needed for config validate
-				c.Insecure.OCRDevelopmentMode = nil
 			})
 
 			keyStore := cltest.NewKeyStore(t, sqlxDB, config.Database())

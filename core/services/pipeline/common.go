@@ -498,8 +498,6 @@ func SelectGasLimit(ge config.GasEstimator, jobType string, specGasLimit *uint32
 	switch jobType {
 	case DirectRequestJobType:
 		jobTypeGasLimit = jt.DR()
-	case KeeperJobType:
-		jobTypeGasLimit = jt.Keeper()
 	case VRFJobType:
 		jobTypeGasLimit = jt.VRF()
 	}

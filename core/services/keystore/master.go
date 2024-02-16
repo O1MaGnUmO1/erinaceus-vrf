@@ -15,7 +15,6 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/dkgencryptkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/dkgsignkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/p2pkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/vrfkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
@@ -38,7 +37,6 @@ type Master interface {
 	DKGSign() DKGSign
 	DKGEncrypt() DKGEncrypt
 	Eth() Eth
-	P2P() P2P
 	VRF() VRF
 	Unlock(password string) error
 	IsEmpty() (bool, error)
@@ -48,7 +46,6 @@ type master struct {
 	*keyManager
 	csa        *csa
 	eth        *eth
-	p2p        *p2p
 	vrf        *vrf
 	dkgSign    *dkgSign
 	dkgEncrypt *dkgEncrypt
@@ -72,7 +69,6 @@ func newMaster(db *sqlx.DB, scryptParams utils.ScryptParams, lggr logger.Logger,
 		keyManager: km,
 		csa:        newCSAKeyStore(km),
 		eth:        newEthKeyStore(km, orm, orm.q),
-		p2p:        newP2PKeyStore(km),
 		vrf:        newVRFKeyStore(km),
 		dkgSign:    newDKGSignKeyStore(km),
 		dkgEncrypt: newDKGEncryptKeyStore(km),
@@ -93,10 +89,6 @@ func (ks master) CSA() CSA {
 
 func (ks *master) Eth() Eth {
 	return ks.eth
-}
-
-func (ks *master) P2P() P2P {
-	return ks.p2p
 }
 
 func (ks *master) VRF() VRF {
@@ -222,8 +214,6 @@ func GetFieldNameForKey(unknownKey Key) (string, error) {
 		return "CSA", nil
 	case ethkey.KeyV2:
 		return "Eth", nil
-	case p2pkey.KeyV2:
-		return "P2P", nil
 	case vrfkey.KeyV2:
 		return "VRF", nil
 	case dkgsignkey.Key:

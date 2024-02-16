@@ -1,7 +1,6 @@
 package cltest
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/google/uuid"
@@ -13,34 +12,8 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/p2pkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
 )
-
-const (
-	minimalOCRNonBootstrapTemplate = `
-			type               = "offchainreporting"
-			schemaVersion      = 1
-			contractAddress    = "%s"
-			evmChainID		   = "0"
-			p2pPeerID          = "%s"
-			p2pv2Bootstrappers = ["12D3KooWHfYFQ8hGttAYbMCevQVESEQhzJAqFZokMVtom8bNxwGq@127.0.0.1:5001"]
-			isBootstrapPeer    = false
-			transmitterAddress = "%s"
-			keyBundleID = "%s"
-			observationTimeout = "10s"
-			observationSource = """
-	ds1          [type=http method=GET url="http://data.com"];
-	ds1_parse    [type=jsonparse path="USD" lax=true];
-	ds1 -> ds1_parse;
-	"""
-	`
-)
-
-func MinimalOCRNonBootstrapSpec(contractAddress, transmitterAddress ethkey.EIP55Address, peerID p2pkey.PeerID, keyBundleID string) string {
-	return fmt.Sprintf(minimalOCRNonBootstrapTemplate, contractAddress, peerID, transmitterAddress.Hex(), keyBundleID)
-}
 
 func MustInsertWebhookSpec(t *testing.T, db *sqlx.DB) (job.Job, job.WebhookSpec) {
 	jobORM, pipelineORM := getORMs(t, db)

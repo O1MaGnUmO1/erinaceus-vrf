@@ -11,7 +11,6 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/google/uuid"
-	"github.com/grafana/pyroscope-go"
 	"github.com/pkg/errors"
 	"go.uber.org/multierr"
 	"go.uber.org/zap/zapcore"
@@ -126,7 +125,6 @@ type ChainlinkApplication struct {
 	closeLogger              func() error
 	sqlxDB                   *sqlx.DB
 	secretGenerator          SecretGenerator
-	profiler                 *pyroscope.Profiler
 	loopRegistry             *plugins.LoopRegistry
 
 	started     bool
@@ -172,9 +170,6 @@ func NewApplication(opts ApplicationOpts) (Application, error) {
 	unrestrictedHTTPClient := opts.UnrestrictedHTTPClient
 
 	// LOOPs can be created as options, in the  case of LOOP relayers, or
-	// as OCR2 job implementations, in the case of Median today.
-	// We will have a non-nil registry here in LOOP relayers are being used, otherwise
-	// we need to initialize in case we serve OCR2 LOOPs
 	loopRegistry := opts.LoopRegistry
 	if loopRegistry == nil {
 		loopRegistry = plugins.NewLoopRegistry(globalLogger, opts.Config.Tracing())
@@ -183,18 +178,6 @@ func NewApplication(opts ApplicationOpts) (Application, error) {
 	// If the audit logger is enabled
 	if auditLogger.Ready() == nil {
 		srvcs = append(srvcs, auditLogger)
-	}
-
-	var profiler *pyroscope.Profiler
-	if cfg.Pyroscope().ServerAddress() != "" {
-		globalLogger.Debug("Pyroscope (automatic pprof profiling) is enabled")
-		var err error
-		profiler, err = logger.StartPyroscope(cfg.Pyroscope(), cfg.AutoPprof())
-		if err != nil {
-			return nil, errors.Wrap(err, "starting pyroscope (automatic pprof profiling) failed")
-		}
-	} else {
-		globalLogger.Debug("Pyroscope (automatic pprof profiling) is disabled")
 	}
 
 	ap := cfg.AutoPprof()
@@ -358,7 +341,6 @@ func NewApplication(opts ApplicationOpts) (Application, error) {
 		AuditLogger:              auditLogger,
 		closeLogger:              opts.CloseLogger,
 		secretGenerator:          opts.SecretGenerator,
-		profiler:                 profiler,
 		loopRegistry:             loopRegistry,
 
 		sqlxDB: opts.SqlxDB,
@@ -462,10 +444,6 @@ func (app *ChainlinkApplication) stop() (err error) {
 			err = multierr.Append(err, app.Nurse.Close())
 		}
 
-		if app.profiler != nil {
-			err = multierr.Append(err, app.profiler.Stop())
-		}
-
 		app.logger.Info("Exited all services")
 
 		app.started = false
@@ -567,8 +545,7 @@ func (app *ChainlinkApplication) RunJobV2(
 	var runID int64
 
 	// Some jobs are special in that they do not have a task graph.
-	isBootstrap := jb.Type == job.OffchainReporting && jb.OCROracleSpec != nil && jb.OCROracleSpec.IsBootstrapPeer
-	if jb.Type.RequiresPipelineSpec() || !isBootstrap {
+	if jb.Type.RequiresPipelineSpec() {
 		var vars map[string]interface{}
 		var saveTasks bool
 		if jb.Type == job.VRF {

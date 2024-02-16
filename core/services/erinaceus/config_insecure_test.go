@@ -17,6 +17,5 @@ func TestInsecureConfig(t *testing.T) {
 	ins := cfg.Insecure()
 	assert.False(t, ins.DevWebServer())
 	assert.False(t, ins.DisableRateLimiting())
-	assert.False(t, ins.OCRDevelopmentMode())
 	assert.False(t, ins.InfiniteDepthQueries())
 }

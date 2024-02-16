@@ -10,12 +10,10 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/google/uuid"
-	"github.com/lib/pq"
 	"github.com/pkg/errors"
 	"gopkg.in/guregu/null.v4"
 
 	commonassets "github.com/O1MaGnUmO1/chainlink-common/pkg/assets"
-	"github.com/O1MaGnUmO1/chainlink-common/pkg/types"
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/bridges"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/assets"
@@ -33,19 +31,11 @@ import (
 )
 
 const (
-	Cron                    Type = (Type)(pipeline.CronJobType)
-	DirectRequest           Type = (Type)(pipeline.DirectRequestJobType)
-	FluxMonitor             Type = (Type)(pipeline.FluxMonitorJobType)
-	OffchainReporting       Type = (Type)(pipeline.OffchainReportingJobType)
-	OffchainReporting2      Type = (Type)(pipeline.OffchainReporting2JobType)
-	Keeper                  Type = (Type)(pipeline.KeeperJobType)
 	VRF                     Type = (Type)(pipeline.VRFJobType)
 	BlockhashStore          Type = (Type)(pipeline.BlockhashStoreJobType)
-	BlockHeaderFeeder       Type = (Type)(pipeline.BlockHeaderFeederJobType)
 	LegacyGasStationServer  Type = (Type)(pipeline.LegacyGasStationServerJobType)
 	LegacyGasStationSidecar Type = (Type)(pipeline.LegacyGasStationSidecarJobType)
 	Webhook                 Type = (Type)(pipeline.WebhookJobType)
-	Bootstrap               Type = (Type)(pipeline.BootstrapJobType)
 	Gateway                 Type = (Type)(pipeline.GatewayJobType)
 )
 
@@ -70,51 +60,27 @@ func (t Type) SchemaVersion() uint32 {
 
 var (
 	requiresPipelineSpec = map[Type]bool{
-		Cron:                    true,
-		DirectRequest:           true,
-		FluxMonitor:             true,
-		OffchainReporting:       false, // bootstrap jobs do not require it
-		OffchainReporting2:      false, // bootstrap jobs do not require it
-		Keeper:                  false, // observationSource is injected in the upkeep executor
 		VRF:                     true,
 		Webhook:                 true,
 		BlockhashStore:          false,
-		BlockHeaderFeeder:       false,
 		LegacyGasStationServer:  false,
 		LegacyGasStationSidecar: false,
-		Bootstrap:               false,
 		Gateway:                 false,
 	}
 	supportsAsync = map[Type]bool{
-		Cron:                    true,
-		DirectRequest:           true,
-		FluxMonitor:             false,
-		OffchainReporting:       false,
-		OffchainReporting2:      false,
-		Keeper:                  true,
 		VRF:                     true,
 		Webhook:                 true,
 		BlockhashStore:          false,
-		BlockHeaderFeeder:       false,
 		LegacyGasStationServer:  false,
 		LegacyGasStationSidecar: false,
-		Bootstrap:               false,
 		Gateway:                 false,
 	}
 	schemaVersions = map[Type]uint32{
-		Cron:                    1,
-		DirectRequest:           1,
-		FluxMonitor:             1,
-		OffchainReporting:       1,
-		OffchainReporting2:      1,
-		Keeper:                  1,
 		VRF:                     1,
 		Webhook:                 1,
 		BlockhashStore:          1,
-		BlockHeaderFeeder:       1,
 		LegacyGasStationServer:  1,
 		LegacyGasStationSidecar: 1,
-		Bootstrap:               1,
 		Gateway:                 1,
 	}
 )
@@ -122,32 +88,16 @@ var (
 type Job struct {
 	ID                            int32     `toml:"-"`
 	ExternalJobID                 uuid.UUID `toml:"externalJobID"`
-	OCROracleSpecID               *int32
-	OCROracleSpec                 *OCROracleSpec
-	OCR2OracleSpecID              *int32
-	OCR2OracleSpec                *OCR2OracleSpec
-	CronSpecID                    *int32
-	CronSpec                      *CronSpec
-	DirectRequestSpecID           *int32
-	DirectRequestSpec             *DirectRequestSpec
-	FluxMonitorSpecID             *int32
-	FluxMonitorSpec               *FluxMonitorSpec
-	KeeperSpecID                  *int32
-	KeeperSpec                    *KeeperSpec
 	VRFSpecID                     *int32
 	VRFSpec                       *VRFSpec
 	WebhookSpecID                 *int32
 	WebhookSpec                   *WebhookSpec
 	BlockhashStoreSpecID          *int32
 	BlockhashStoreSpec            *BlockhashStoreSpec
-	BlockHeaderFeederSpecID       *int32
-	BlockHeaderFeederSpec         *BlockHeaderFeederSpec
 	LegacyGasStationServerSpecID  *int32
 	LegacyGasStationServerSpec    *LegacyGasStationServerSpec
 	LegacyGasStationSidecarSpecID *int32
 	LegacyGasStationSidecarSpec   *LegacyGasStationSidecarSpec
-	BootstrapSpec                 *BootstrapSpec
-	BootstrapSpecID               *int32
 	GatewaySpec                   *GatewaySpec
 	GatewaySpecID                 *int32
 	EALSpec                       *EALSpec
@@ -236,43 +186,6 @@ func (pr *PipelineRun) SetID(value string) error {
 	return nil
 }
 
-// OCROracleSpec defines the job spec for OCR jobs.
-type OCROracleSpec struct {
-	ID                                     int32                `toml:"-"`
-	ContractAddress                        ethkey.EIP55Address  `toml:"contractAddress"`
-	P2PV2Bootstrappers                     pq.StringArray       `toml:"p2pv2Bootstrappers" db:"p2pv2_bootstrappers"`
-	IsBootstrapPeer                        bool                 `toml:"isBootstrapPeer"`
-	EncryptedOCRKeyBundleID                *models.Sha256Hash   `toml:"keyBundleID"`
-	TransmitterAddress                     *ethkey.EIP55Address `toml:"transmitterAddress"`
-	ObservationTimeout                     models.Interval      `toml:"observationTimeout"`
-	BlockchainTimeout                      models.Interval      `toml:"blockchainTimeout"`
-	ContractConfigTrackerSubscribeInterval models.Interval      `toml:"contractConfigTrackerSubscribeInterval"`
-	ContractConfigTrackerPollInterval      models.Interval      `toml:"contractConfigTrackerPollInterval"`
-	ContractConfigConfirmations            uint16               `toml:"contractConfigConfirmations"`
-	EVMChainID                             *big.Big             `toml:"evmChainID" db:"evm_chain_id"`
-	DatabaseTimeout                        *models.Interval     `toml:"databaseTimeout"`
-	ObservationGracePeriod                 *models.Interval     `toml:"observationGracePeriod"`
-	ContractTransmitterTransmitTimeout     *models.Interval     `toml:"contractTransmitterTransmitTimeout"`
-	CaptureEATelemetry                     bool                 `toml:"captureEATelemetry"`
-	CreatedAt                              time.Time            `toml:"-"`
-	UpdatedAt                              time.Time            `toml:"-"`
-}
-
-// GetID is a getter function that returns the ID of the spec.
-func (s OCROracleSpec) GetID() string {
-	return fmt.Sprintf("%v", s.ID)
-}
-
-// SetID is a setter function that sets the ID of the spec.
-func (s *OCROracleSpec) SetID(value string) error {
-	ID, err := strconv.ParseInt(value, 10, 32)
-	if err != nil {
-		return err
-	}
-	s.ID = int32(ID)
-	return nil
-}
-
 // JSONConfig is a Go mapping for JSON based database properties.
 type JSONConfig map[string]interface{}
 
@@ -308,33 +221,6 @@ func (r JSONConfig) MercuryCredentialName() (string, error) {
 	return name, nil
 }
 
-var ForwardersSupportedPlugins = []types.OCR2PluginType{types.Median, types.DKG, types.OCR2VRF, types.OCR2Keeper, types.Functions}
-
-// OCR2OracleSpec defines the job spec for OCR2 jobs.
-// Relay config is chain specific config for a relay (chain adapter).
-type OCR2OracleSpec struct {
-	ID         int32         `toml:"-"`
-	ContractID string        `toml:"contractID"`
-	FeedID     *common.Hash  `toml:"feedID"`
-	Relay      relay.Network `toml:"relay"`
-	// TODO BCF-2442 implement ChainID as top level parameter rathe than buried in RelayConfig.
-	ChainID                           string               `toml:"chainID"`
-	RelayConfig                       JSONConfig           `toml:"relayConfig"`
-	P2PV2Bootstrappers                pq.StringArray       `toml:"p2pv2Bootstrappers"`
-	OCRKeyBundleID                    null.String          `toml:"ocrKeyBundleID"`
-	MonitoringEndpoint                null.String          `toml:"monitoringEndpoint"`
-	TransmitterID                     null.String          `toml:"transmitterID"`
-	BlockchainTimeout                 models.Interval      `toml:"blockchainTimeout"`
-	ContractConfigTrackerPollInterval models.Interval      `toml:"contractConfigTrackerPollInterval"`
-	ContractConfigConfirmations       uint16               `toml:"contractConfigConfirmations"`
-	PluginConfig                      JSONConfig           `toml:"pluginConfig"`
-	PluginType                        types.OCR2PluginType `toml:"pluginType"`
-	CreatedAt                         time.Time            `toml:"-"`
-	UpdatedAt                         time.Time            `toml:"-"`
-	CaptureEATelemetry                bool                 `toml:"captureEATelemetry"`
-	CaptureAutomationCustomTelemetry  bool                 `toml:"captureAutomationCustomTelemetry"`
-}
-
 func validateRelayID(id relay.ID) error {
 	// only the EVM has specific requirements
 	if id.Network == relay.EVM {
@@ -343,63 +229,6 @@ func validateRelayID(id relay.ID) error {
 			return fmt.Errorf("invalid EVM chain id %s: %w", id.ChainID, err)
 		}
 	}
-	return nil
-}
-
-func (s *OCR2OracleSpec) RelayID() (relay.ID, error) {
-	cid, err := s.getChainID()
-	if err != nil {
-		return relay.ID{}, err
-	}
-	rid := relay.NewID(s.Relay, cid)
-	err = validateRelayID(rid)
-	if err != nil {
-		return relay.ID{}, err
-	}
-	return rid, nil
-}
-
-func (s *OCR2OracleSpec) getChainID() (relay.ChainID, error) {
-	if s.ChainID != "" {
-		return relay.ChainID(s.ChainID), nil
-	}
-	// backward compatible job spec
-	return s.getChainIdFromRelayConfig()
-}
-
-func (s *OCR2OracleSpec) getChainIdFromRelayConfig() (relay.ChainID, error) {
-
-	v, exists := s.RelayConfig["chainID"]
-	if !exists {
-		return "", fmt.Errorf("chainID does not exist")
-	}
-	switch t := v.(type) {
-	case string:
-		return relay.ChainID(t), nil
-	case int, int64, int32:
-		return relay.ChainID(fmt.Sprintf("%d", v)), nil
-	case float64:
-		// backward compatibility with JSONConfig.EVMChainID
-		i := int64(t)
-		return relay.ChainID(strconv.FormatInt(i, 10)), nil
-
-	default:
-		return "", fmt.Errorf("unable to parse chainID: unexpected type %T", t)
-	}
-}
-
-// GetID is a getter function that returns the ID of the spec.
-func (s OCR2OracleSpec) GetID() string {
-	return fmt.Sprintf("%v", s.ID)
-}
-
-// SetID is a setter function that sets the ID of the spec.
-func (s *OCR2OracleSpec) SetID(value string) error {
-	ID, err := strconv.ParseInt(value, 10, 32)
-	if err != nil {
-		return err
-	}
-	s.ID = int32(ID)
 	return nil
 }
 
@@ -730,23 +559,6 @@ type BootstrapSpec struct {
 	ContractConfigConfirmations       uint16          `toml:"contractConfigConfirmations"`
 	CreatedAt                         time.Time       `toml:"-"`
 	UpdatedAt                         time.Time       `toml:"-"`
-}
-
-// AsOCR2Spec transforms the bootstrap spec into a generic OCR2 format to enable code sharing between specs.
-func (s BootstrapSpec) AsOCR2Spec() OCR2OracleSpec {
-	return OCR2OracleSpec{
-		ID:                                s.ID,
-		ContractID:                        s.ContractID,
-		Relay:                             s.Relay,
-		RelayConfig:                       s.RelayConfig,
-		MonitoringEndpoint:                s.MonitoringEndpoint,
-		BlockchainTimeout:                 s.BlockchainTimeout,
-		ContractConfigTrackerPollInterval: s.ContractConfigTrackerPollInterval,
-		ContractConfigConfirmations:       s.ContractConfigConfirmations,
-		CreatedAt:                         s.CreatedAt,
-		UpdatedAt:                         s.UpdatedAt,
-		P2PV2Bootstrappers:                pq.StringArray{},
-	}
 }
 
 type GatewaySpec struct {

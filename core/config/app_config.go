@@ -36,9 +36,7 @@ type AppConfig interface {
 	Feature() Feature
 	Insecure() Insecure
 	JobPipeline() JobPipeline
-	Keeper() Keeper
 	Log() Log
-	P2P() P2P
 	Password() Password
 	Prometheus() Prometheus
 	Pyroscope() Pyroscope

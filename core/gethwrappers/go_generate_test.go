@@ -40,7 +40,7 @@ func TestCheckContractHashesFromLastGoGenerate(t *testing.T) {
 			"changes", wd)))
 
 	for _, contractVersionInfo := range versions.ContractVersions {
-		if isOCRContract(contractVersionInfo.AbiPath) || isVRFV2Contract(contractVersionInfo.AbiPath) {
+		if isVRFV2Contract(contractVersionInfo.AbiPath) {
 			continue
 		}
 		compareCurrentCompilerArtifactAgainstRecordsAndSoliditySources(t, contractVersionInfo)
@@ -51,10 +51,6 @@ func TestCheckContractHashesFromLastGoGenerate(t *testing.T) {
 	require.Equal(t, fmt.Sprintf("%x", sha256.Sum256(linkDetails)),
 		"27c0e17a79553fccc63a4400c6bbe415ff710d9cc7c25757bff0f7580205c922",
 		"should never differ!")
-}
-
-func isOCRContract(fullpath string) bool {
-	return strings.Contains(fullpath, "OffchainAggregator")
 }
 
 // VRFv2 currently uses revert error types which are not supported by abigen

@@ -20,7 +20,6 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/env"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/parse"
 	v2 "github.com/O1MaGnUmO1/erinaceus-vrf/core/config/toml"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/p2pkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 )
@@ -370,32 +369,8 @@ func (g *generalConfig) JobPipeline() coreconfig.JobPipeline {
 	return &jobPipelineConfig{c: g.c.JobPipeline}
 }
 
-func (g *generalConfig) Keeper() config.Keeper {
-	return &keeperConfig{c: g.c.Keeper}
-}
-
 func (g *generalConfig) Log() config.Log {
 	return &logConfig{c: g.c.Log, rootDir: g.RootDir, level: g.logLevel, defaultLevel: g.logLevelDefault}
-}
-
-func (g *generalConfig) P2P() config.P2P {
-	return &p2p{c: g.c.P2P}
-}
-
-func (g *generalConfig) P2PPeerID() p2pkey.PeerID {
-	return *g.c.P2P.PeerID
-}
-
-func (g *generalConfig) P2PPeerIDRaw() string {
-	return g.c.P2P.PeerID.String()
-}
-
-func (g *generalConfig) P2PIncomingMessageBufferSize() int {
-	return int(*g.c.P2P.IncomingMessageBufferSize)
-}
-
-func (g *generalConfig) P2POutgoingMessageBufferSize() int {
-	return int(*g.c.P2P.OutgoingMessageBufferSize)
 }
 
 func (g *generalConfig) Pyroscope() config.Pyroscope {

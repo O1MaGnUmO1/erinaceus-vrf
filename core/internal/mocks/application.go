@@ -9,7 +9,7 @@ import (
 
 	bridges "github.com/O1MaGnUmO1/erinaceus-vrf/core/bridges"
 
-	chainlink "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
+	erinaceus "github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 
 	context "context"
 

@@ -18,20 +18,6 @@ JSONConsole = true
 [JobPipeline.HTTPRequest]
 DefaultTimeout = '30s'
 
-[OCR2]
-Enabled = true
-DatabaseTimeout = '20s'
-
-[OCR]
-Enabled = true
-BlockchainTimeout = '5s'
-
-[P2P]
-IncomingMessageBufferSize = 999
-
-[Keeper]
-GasPriceBufferPercent = 10
-
 [AutoPprof]
 CPUProfileRate = 7
 
@@ -69,42 +55,3 @@ Mode = 'FixedPrice'
 Name = 'bar'
 WSURL = 'wss://web.socket/test/bar'
 
-[[Cosmos]]
-ChainID = 'Ibiza-808'
-MaxMsgsPerBatch = 13
-
-[[Cosmos.Nodes]]
-Name = 'primary'
-TendermintURL = 'http://columbus.cosmos.com'
-
-[[Cosmos]]
-ChainID = 'Malaga-420'
-BlocksUntilTxTimeout = 20
-
-[[Cosmos.Nodes]]
-Name = 'secondary'
-TendermintURL = 'http://bombay.cosmos.com'
-
-[[Solana]]
-ChainID = 'mainnet'
-MaxRetries = 12
-
-[[Solana.Nodes]]
-Name = 'primary'
-URL = 'http://mainnet.solana.com'
-
-[[Solana]]
-ChainID = 'testnet'
-OCR2CachePollPeriod = '1m0s'
-
-[[Solana.Nodes]]
-Name = 'secondary'
-URL = 'http://testnet.solana.com'
-
-[[Starknet]]
-ChainID = 'foobar'
-ConfirmationPoll = '1h0m0s'
-
-[[Starknet.Nodes]]
-Name = 'primary'
-URL = 'http://stark.node'

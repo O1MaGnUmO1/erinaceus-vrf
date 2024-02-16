@@ -210,19 +210,6 @@ func (r *Resolver) Node(ctx context.Context, args struct{ ID graphql.ID }) (*Nod
 	return npr, nil
 }
 
-func (r *Resolver) P2PKeys(ctx context.Context) (*P2PKeysPayloadResolver, error) {
-	if err := authenticateUser(ctx); err != nil {
-		return nil, err
-	}
-
-	p2pKeys, err := r.App.GetKeyStore().P2P().GetAll()
-	if err != nil {
-		return nil, err
-	}
-
-	return NewP2PKeysPayload(p2pKeys), nil
-}
-
 // VRFKeys fetches all VRF keys.
 func (r *Resolver) VRFKeys(ctx context.Context) (*VRFKeysPayloadResolver, error) {
 	if err := authenticateUser(ctx); err != nil {

@@ -16,20 +16,13 @@ import (
 
 	"github.com/jmoiron/sqlx"
 
-	"github.com/O1MaGnUmO1/chainlink-common/pkg/types"
-
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/bridges"
-	evmconfig "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/null"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/relay"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 )
 
 var (
@@ -49,8 +42,6 @@ type ORM interface {
 	FindJobTx(ctx context.Context, id int32) (Job, error)
 	FindJob(ctx context.Context, id int32) (Job, error)
 	FindJobByExternalJobID(uuid uuid.UUID, qopts ...pg.QOpt) (Job, error)
-	FindJobIDByAddress(address ethkey.EIP55Address, evmChainID *big.Big, qopts ...pg.QOpt) (int32, error)
-	FindOCR2JobIDByAddress(contractID string, feedID *common.Hash, qopts ...pg.QOpt) (int32, error)
 	FindJobIDsWithBridge(name string) ([]int32, error)
 	DeleteJob(id int32, qopts ...pg.QOpt) error
 	RecordError(jobID int32, description string, qopts ...pg.QOpt) error
@@ -127,53 +118,6 @@ func (o *orm) CreateJob(jb *Job, qopts ...pg.QOpt) error {
 		}
 
 		switch jb.Type {
-		case DirectRequest:
-			if jb.DirectRequestSpec.EVMChainID == nil {
-				return errors.New("evm chain id must be defined")
-			}
-			var specID int32
-			sql := `INSERT INTO direct_request_specs (contract_address, min_incoming_confirmations, requesters, min_contract_payment, evm_chain_id, created_at, updated_at)
-			VALUES (:contract_address, :min_incoming_confirmations, :requesters, :min_contract_payment, :evm_chain_id, now(), now())
-			RETURNING id;`
-			if err := pg.PrepareQueryRowx(tx, sql, &specID, jb.DirectRequestSpec); err != nil {
-				return errors.Wrap(err, "failed to create DirectRequestSpec")
-			}
-			jb.DirectRequestSpecID = &specID
-		case FluxMonitor:
-			if jb.FluxMonitorSpec.EVMChainID == nil {
-				return errors.New("evm chain id must be defined")
-			}
-			var specID int32
-			sql := `INSERT INTO flux_monitor_specs (contract_address, threshold, absolute_threshold, poll_timer_period, poll_timer_disabled, idle_timer_period, idle_timer_disabled,
-					drumbeat_schedule, drumbeat_random_delay, drumbeat_enabled, min_payment, evm_chain_id, created_at, updated_at)
-			VALUES (:contract_address, :threshold, :absolute_threshold, :poll_timer_period, :poll_timer_disabled, :idle_timer_period, :idle_timer_disabled,
-					:drumbeat_schedule, :drumbeat_random_delay, :drumbeat_enabled, :min_payment, :evm_chain_id, NOW(), NOW())
-			RETURNING id;`
-			if err := pg.PrepareQueryRowx(tx, sql, &specID, jb.FluxMonitorSpec); err != nil {
-				return errors.Wrap(err, "failed to create FluxMonitorSpec")
-			}
-			jb.FluxMonitorSpecID = &specID
-		case Keeper:
-			if jb.KeeperSpec.EVMChainID == nil {
-				return errors.New("evm chain id must be defined")
-			}
-			var specID int32
-			sql := `INSERT INTO keeper_specs (contract_address, from_address, evm_chain_id, created_at, updated_at)
-			VALUES (:contract_address, :from_address, :evm_chain_id, NOW(), NOW())
-			RETURNING id;`
-			if err := pg.PrepareQueryRowx(tx, sql, &specID, jb.KeeperSpec); err != nil {
-				return errors.Wrap(err, "failed to create KeeperSpec")
-			}
-			jb.KeeperSpecID = &specID
-		case Cron:
-			var specID int32
-			sql := `INSERT INTO cron_specs (cron_schedule, created_at, updated_at)
-			VALUES (:cron_schedule, NOW(), NOW())
-			RETURNING id;`
-			if err := pg.PrepareQueryRowx(tx, sql, &specID, jb.CronSpec); err != nil {
-				return errors.Wrap(err, "failed to create CronSpec")
-			}
-			jb.CronSpecID = &specID
 		case VRF:
 			if jb.VRFSpec.EVMChainID == nil {
 				return errors.New("evm chain id must be defined")
@@ -240,18 +184,6 @@ func (o *orm) CreateJob(jb *Job, qopts ...pg.QOpt) error {
 				return errors.Wrap(err, "failed to create BlockhashStore spec")
 			}
 			jb.BlockhashStoreSpecID = &specID
-		case BlockHeaderFeeder:
-			if jb.BlockHeaderFeederSpec.EVMChainID == nil {
-				return errors.New("evm chain id must be defined")
-			}
-			var specID int32
-			sql := `INSERT INTO block_header_feeder_specs (coordinator_v1_address, coordinator_v2_address, coordinator_v2_plus_address, wait_blocks, lookback_blocks, blockhash_store_address, batch_blockhash_store_address, poll_period, run_timeout, evm_chain_id, from_addresses, get_blockhashes_batch_size, store_blockhashes_batch_size, created_at, updated_at)
-			VALUES (:coordinator_v1_address, :coordinator_v2_address, :coordinator_v2_plus_address, :wait_blocks, :lookback_blocks, :blockhash_store_address, :batch_blockhash_store_address, :poll_period, :run_timeout, :evm_chain_id, :from_addresses,  :get_blockhashes_batch_size, :store_blockhashes_batch_size, NOW(), NOW())
-			RETURNING id;`
-			if err := pg.PrepareQueryRowx(tx, sql, &specID, toBlockHeaderFeederSpecRow(jb.BlockHeaderFeederSpec)); err != nil {
-				return errors.Wrap(err, "failed to create BlockHeaderFeeder spec")
-			}
-			jb.BlockHeaderFeederSpecID = &specID
 		case LegacyGasStationServer:
 			if jb.LegacyGasStationServerSpec.EVMChainID == nil {
 				return errors.New("evm chain id must be defined")
@@ -276,19 +208,6 @@ func (o *orm) CreateJob(jb *Job, qopts ...pg.QOpt) error {
 				return errors.Wrap(err, "failed to create LegacyGasStationSidecar spec")
 			}
 			jb.LegacyGasStationSidecarSpecID = &specID
-		case Bootstrap:
-			var specID int32
-			sql := `INSERT INTO bootstrap_specs (contract_id, feed_id, relay, relay_config, monitoring_endpoint,
-					blockchain_timeout, contract_config_tracker_poll_interval,
-					contract_config_confirmations, created_at, updated_at)
-			VALUES (:contract_id, :feed_id, :relay, :relay_config, :monitoring_endpoint,
-					:blockchain_timeout, :contract_config_tracker_poll_interval,
-					:contract_config_confirmations, NOW(), NOW())
-			RETURNING id;`
-			if err := pg.PrepareQueryRowx(tx, sql, &specID, jb.BootstrapSpec); err != nil {
-				return errors.Wrap(err, "failed to create BootstrapSpec for jobSpec")
-			}
-			jb.BootstrapSpecID = &specID
 		case Gateway:
 			var specID int32
 			sql := `INSERT INTO gateway_specs (gateway_config, created_at, updated_at)
@@ -320,43 +239,6 @@ func (o *orm) CreateJob(jb *Job, qopts ...pg.QOpt) error {
 	return o.findJob(jb, "id", jobID, qopts...)
 }
 
-// ValidateKeyStoreMatch confirms that the key has a valid match in the keystore
-func ValidateKeyStoreMatch(spec *OCR2OracleSpec, keyStore keystore.Master, key string) error {
-	if spec.PluginType == types.Mercury {
-		_, err := keyStore.CSA().Get(key)
-		if err != nil {
-			return errors.Errorf("no CSA key matching: %q", key)
-		}
-	} else {
-		switch spec.Relay {
-		case relay.EVM:
-			_, err := keyStore.Eth().Get(key)
-			if err != nil {
-				return errors.Errorf("no EVM key matching: %q", key)
-			}
-		}
-	}
-	return nil
-}
-
-func areSendingKeysDefined(jb *Job, keystore keystore.Master) (bool, error) {
-	if jb.OCR2OracleSpec.RelayConfig["sendingKeys"] != nil {
-		sendingKeys, err := SendingKeysForJob(jb)
-		if err != nil {
-			return false, err
-		}
-
-		for _, sendingKey := range sendingKeys {
-			if err = ValidateKeyStoreMatch(jb.OCR2OracleSpec, keystore, sendingKey); err != nil {
-				return false, errors.Wrap(ErrNoSuchSendingKey, err.Error())
-			}
-		}
-
-		return true, nil
-	}
-	return false, nil
-}
-
 func (o *orm) InsertWebhookSpec(webhookSpec *WebhookSpec, qopts ...pg.QOpt) error {
 	q := o.q.WithOpts(qopts...)
 	query := `INSERT INTO webhook_specs (created_at, updated_at)
@@ -371,19 +253,19 @@ func (o *orm) InsertJob(job *Job, qopts ...pg.QOpt) error {
 
 	// if job has id, emplace otherwise insert with a new id.
 	if job.ID == 0 {
-		query = `INSERT INTO jobs (pipeline_spec_id, name, schema_version, type, max_task_duration, ocr_oracle_spec_id, ocr2_oracle_spec_id, direct_request_spec_id, flux_monitor_spec_id,
-				keeper_spec_id, cron_spec_id, vrf_spec_id, webhook_spec_id, blockhash_store_spec_id, bootstrap_spec_id, block_header_feeder_spec_id, gateway_spec_id, 
+		query = `INSERT INTO jobs (pipeline_spec_id, name, schema_version, type, max_task_duration,
+				vrf_spec_id, webhook_spec_id, blockhash_store_spec_id, gateway_spec_id, 
                 legacy_gas_station_server_spec_id, legacy_gas_station_sidecar_spec_id, external_job_id, gas_limit, forwarding_allowed, created_at)
-		VALUES (:pipeline_spec_id, :name, :schema_version, :type, :max_task_duration, :ocr_oracle_spec_id, :ocr2_oracle_spec_id, :direct_request_spec_id, :flux_monitor_spec_id,
-				:keeper_spec_id, :cron_spec_id, :vrf_spec_id, :webhook_spec_id, :blockhash_store_spec_id, :bootstrap_spec_id, :block_header_feeder_spec_id, :gateway_spec_id, 
+		VALUES (:pipeline_spec_id, :name, :schema_version, :type, :max_task_duration,
+				:vrf_spec_id, :webhook_spec_id, :blockhash_store_spec_id, :gateway_spec_id, 
 		        :legacy_gas_station_server_spec_id, :legacy_gas_station_sidecar_spec_id, :external_job_id, :gas_limit, :forwarding_allowed, NOW())
 		RETURNING *;`
 	} else {
-		query = `INSERT INTO jobs (id, pipeline_spec_id, name, schema_version, type, max_task_duration, ocr_oracle_spec_id, ocr2_oracle_spec_id, direct_request_spec_id, flux_monitor_spec_id,
-			keeper_spec_id, cron_spec_id, vrf_spec_id, webhook_spec_id, blockhash_store_spec_id, bootstrap_spec_id, block_header_feeder_spec_id, gateway_spec_id, 
+		query = `INSERT INTO jobs (id, pipeline_spec_id, name, schema_version, type, max_task_duration,
+			keeper_spec_id, cron_spec_id, vrf_spec_id, webhook_spec_id, blockhash_store_spec_id, gateway_spec_id, 
                   legacy_gas_station_server_spec_id, legacy_gas_station_sidecar_spec_id, external_job_id, gas_limit, forwarding_allowed, created_at)
-		VALUES (:id, :pipeline_spec_id, :name, :schema_version, :type, :max_task_duration, :ocr_oracle_spec_id, :ocr2_oracle_spec_id, :direct_request_spec_id, :flux_monitor_spec_id,
-				:keeper_spec_id, :cron_spec_id, :vrf_spec_id, :webhook_spec_id, :blockhash_store_spec_id, :bootstrap_spec_id, :block_header_feeder_spec_id, :gateway_spec_id, 
+		VALUES (:id, :pipeline_spec_id, :name, :schema_version, :type, :max_task_duration,
+				:vrf_spec_id, :webhook_spec_id, :blockhash_store_spec_id, :gateway_spec_id, 
 				:legacy_gas_station_server_spec_id, :legacy_gas_station_sidecar_spec_id, :external_job_id, :gas_limit, :forwarding_allowed, NOW())
 		RETURNING *;`
 	}
@@ -402,11 +284,6 @@ func (o *orm) DeleteJob(id int32, qopts ...pg.QOpt) error {
 		WITH deleted_jobs AS (
 			DELETE FROM jobs WHERE id = $1 RETURNING
 				pipeline_spec_id,
-				ocr_oracle_spec_id,
-				ocr2_oracle_spec_id,
-				keeper_spec_id,
-				cron_spec_id,
-				flux_monitor_spec_id,
 				vrf_spec_id,
 				webhook_spec_id,
 				direct_request_spec_id,
@@ -414,18 +291,6 @@ func (o *orm) DeleteJob(id int32, qopts ...pg.QOpt) error {
 				bootstrap_spec_id,
 				block_header_feeder_spec_id,
 				gateway_spec_id
-		),
-		deleted_oracle_specs AS (
-			DELETE FROM ocr_oracle_specs WHERE id IN (SELECT ocr_oracle_spec_id FROM deleted_jobs)
-		),
-		deleted_oracle2_specs AS (
-			DELETE FROM ocr2_oracle_specs WHERE id IN (SELECT ocr2_oracle_spec_id FROM deleted_jobs)
-		),
-		deleted_keeper_specs AS (
-			DELETE FROM keeper_specs WHERE id IN (SELECT keeper_spec_id FROM deleted_jobs)
-		),
-		deleted_cron_specs AS (
-			DELETE FROM cron_specs WHERE id IN (SELECT cron_spec_id FROM deleted_jobs)
 		),
 		deleted_fm_specs AS (
 			DELETE FROM flux_monitor_specs WHERE id IN (SELECT flux_monitor_spec_id FROM deleted_jobs)
@@ -441,12 +306,6 @@ func (o *orm) DeleteJob(id int32, qopts ...pg.QOpt) error {
 		),
 		deleted_blockhash_store_specs AS (
 			DELETE FROM blockhash_store_specs WHERE id IN (SELECT blockhash_store_spec_id FROM deleted_jobs)
-		),
-		deleted_bootstrap_specs AS (
-			DELETE FROM bootstrap_specs WHERE id IN (SELECT bootstrap_spec_id FROM deleted_jobs)
-		),
-		deleted_block_header_feeder_specs AS (
-			DELETE FROM block_header_feeder_specs WHERE id IN (SELECT block_header_feeder_spec_id FROM deleted_jobs)
 		),
 		deleted_gateway_specs AS (
 			DELETE FROM gateway_specs WHERE id IN (SELECT gateway_spec_id FROM deleted_jobs)
@@ -557,74 +416,6 @@ func SetDRMinIncomingConfirmations(defaultMinIncomingConfirmations uint32, drs D
 	return &drs
 }
 
-type OCRConfig interface {
-	BlockchainTimeout() time.Duration
-	CaptureEATelemetry() bool
-	ContractPollInterval() time.Duration
-	ContractSubscribeInterval() time.Duration
-	KeyBundleID() (string, error)
-	ObservationTimeout() time.Duration
-	TransmitterAddress() (ethkey.EIP55Address, error)
-}
-
-// LoadConfigVarsLocalOCR loads local OCR vars into the OCROracleSpec.
-func LoadConfigVarsLocalOCR(evmOcrCfg evmconfig.OCR, os OCROracleSpec, ocrCfg OCRConfig) *OCROracleSpec {
-	if os.ObservationTimeout == 0 {
-		os.ObservationTimeout = models.Interval(ocrCfg.ObservationTimeout())
-	}
-	if os.BlockchainTimeout == 0 {
-		os.BlockchainTimeout = models.Interval(ocrCfg.BlockchainTimeout())
-	}
-	if os.ContractConfigTrackerSubscribeInterval == 0 {
-		os.ContractConfigTrackerSubscribeInterval = models.Interval(ocrCfg.ContractSubscribeInterval())
-	}
-	if os.ContractConfigTrackerPollInterval == 0 {
-		os.ContractConfigTrackerPollInterval = models.Interval(ocrCfg.ContractPollInterval())
-	}
-	if os.ContractConfigConfirmations == 0 {
-		os.ContractConfigConfirmations = evmOcrCfg.ContractConfirmations()
-	}
-	if os.DatabaseTimeout == nil {
-		os.DatabaseTimeout = models.NewInterval(evmOcrCfg.DatabaseTimeout())
-	}
-	if os.ObservationGracePeriod == nil {
-		os.ObservationGracePeriod = models.NewInterval(evmOcrCfg.ObservationGracePeriod())
-	}
-	if os.ContractTransmitterTransmitTimeout == nil {
-		os.ContractTransmitterTransmitTimeout = models.NewInterval(evmOcrCfg.ContractTransmitterTransmitTimeout())
-	}
-	os.CaptureEATelemetry = ocrCfg.CaptureEATelemetry()
-
-	return &os
-}
-
-// LoadConfigVarsOCR loads OCR config vars into the OCROracleSpec.
-func LoadConfigVarsOCR(evmOcrCfg evmconfig.OCR, ocrCfg OCRConfig, os OCROracleSpec) (*OCROracleSpec, error) {
-	if os.TransmitterAddress == nil {
-		ta, err := ocrCfg.TransmitterAddress()
-		if !errors.Is(errors.Cause(err), config.ErrEnvUnset) {
-			if err != nil {
-				return nil, err
-			}
-			os.TransmitterAddress = &ta
-		}
-	}
-
-	if os.EncryptedOCRKeyBundleID == nil {
-		kb, err := ocrCfg.KeyBundleID()
-		if err != nil {
-			return nil, err
-		}
-		encryptedOCRKeyBundleID, err := models.Sha256HashFromHex(kb)
-		if err != nil {
-			return nil, err
-		}
-		os.EncryptedOCRKeyBundleID = &encryptedOCRKeyBundleID
-	}
-
-	return LoadConfigVarsLocalOCR(evmOcrCfg, os, ocrCfg), nil
-}
-
 func (o *orm) FindJobTx(ctx context.Context, id int32) (Job, error) {
 	ctx, cancel := context.WithTimeout(ctx, o.cfg.DefaultQueryTimeout())
 	defer cancel()
@@ -672,59 +463,6 @@ func (o *orm) FindSpecErrorsByJobIDs(ids []int32, qopts ...pg.QOpt) ([]SpecError
 func (o *orm) FindJobByExternalJobID(externalJobID uuid.UUID, qopts ...pg.QOpt) (jb Job, err error) {
 	err = o.findJob(&jb, "external_job_id", externalJobID, qopts...)
 	return
-}
-
-// FindJobIDByAddress - finds a job id by contract address. Currently only OCR and FM jobs are supported
-func (o *orm) FindJobIDByAddress(address ethkey.EIP55Address, evmChainID *big.Big, qopts ...pg.QOpt) (jobID int32, err error) {
-	q := o.q.WithOpts(qopts...)
-	err = q.Transaction(func(tx pg.Queryer) error {
-		stmt := `
-SELECT jobs.id
-FROM jobs
-LEFT JOIN ocr_oracle_specs ocrspec on ocrspec.contract_address = $1 AND (ocrspec.evm_chain_id = $2 OR ocrspec.evm_chain_id IS NULL) AND ocrspec.id = jobs.ocr_oracle_spec_id
-LEFT JOIN flux_monitor_specs fmspec on fmspec.contract_address = $1 AND (fmspec.evm_chain_id = $2 OR fmspec.evm_chain_id IS NULL) AND fmspec.id = jobs.flux_monitor_spec_id
-WHERE ocrspec.id IS NOT NULL OR fmspec.id IS NOT NULL
-`
-		err = tx.Get(&jobID, stmt, address, evmChainID)
-
-		if !errors.Is(err, sql.ErrNoRows) {
-			if err != nil {
-				return errors.Wrap(err, "error searching for job by contract address")
-			}
-			return nil
-		}
-
-		return err
-	})
-
-	return jobID, errors.Wrap(err, "FindJobIDByAddress failed")
-}
-
-func (o *orm) FindOCR2JobIDByAddress(contractID string, feedID *common.Hash, qopts ...pg.QOpt) (jobID int32, err error) {
-	q := o.q.WithOpts(qopts...)
-	err = q.Transaction(func(tx pg.Queryer) error {
-		// NOTE: We want to explicitly match on NULL feed_id hence usage of `IS
-		// NOT DISTINCT FROM` instead of `=`
-		stmt := `
-SELECT jobs.id
-FROM jobs
-LEFT JOIN ocr2_oracle_specs ocr2spec on ocr2spec.contract_id = $1 AND ocr2spec.feed_id IS NOT DISTINCT FROM $2 AND ocr2spec.id = jobs.ocr2_oracle_spec_id
-LEFT JOIN bootstrap_specs bs on bs.contract_id = $1 AND bs.feed_id IS NOT DISTINCT FROM $2 AND bs.id = jobs.bootstrap_spec_id
-WHERE ocr2spec.id IS NOT NULL OR bs.id IS NOT NULL
-`
-		err = tx.Get(&jobID, stmt, contractID, feedID)
-
-		if !errors.Is(err, sql.ErrNoRows) {
-			if err != nil {
-				return errors.Wrapf(err, "error searching for job by contract id=%s and feed id=%s", contractID, feedID)
-			}
-			return nil
-		}
-
-		return err
-	})
-
-	return jobID, errors.Wrap(err, "FindOCR2JobIDByAddress failed")
 }
 
 func (o *orm) findJob(jb *Job, col string, arg interface{}, qopts ...pg.QOpt) error {
@@ -1045,19 +783,11 @@ func LoadAllJobsTypes(tx pg.Queryer, jobs []Job) error {
 func LoadAllJobTypes(tx pg.Queryer, job *Job) error {
 	return multierr.Combine(
 		loadJobType(tx, job, "PipelineSpec", "pipeline_specs", &job.PipelineSpecID),
-		loadJobType(tx, job, "FluxMonitorSpec", "flux_monitor_specs", job.FluxMonitorSpecID),
-		loadJobType(tx, job, "DirectRequestSpec", "direct_request_specs", job.DirectRequestSpecID),
-		loadJobType(tx, job, "OCROracleSpec", "ocr_oracle_specs", job.OCROracleSpecID),
-		loadJobType(tx, job, "OCR2OracleSpec", "ocr2_oracle_specs", job.OCR2OracleSpecID),
-		loadJobType(tx, job, "KeeperSpec", "keeper_specs", job.KeeperSpecID),
-		loadJobType(tx, job, "CronSpec", "cron_specs", job.CronSpecID),
 		loadJobType(tx, job, "WebhookSpec", "webhook_specs", job.WebhookSpecID),
 		loadVRFJob(tx, job, job.VRFSpecID),
 		loadBlockhashStoreJob(tx, job, job.BlockhashStoreSpecID),
-		loadBlockHeaderFeederJob(tx, job, job.BlockHeaderFeederSpecID),
 		loadLegacyGasStationServerJob(tx, job, job.LegacyGasStationServerSpecID),
 		loadJobType(tx, job, "LegacyGasStationSidecarSpec", "legacy_gas_station_sidecar_specs", job.LegacyGasStationSidecarSpecID),
-		loadJobType(tx, job, "BootstrapSpec", "bootstrap_specs", job.BootstrapSpecID),
 		loadJobType(tx, job, "GatewaySpec", "gateway_specs", job.GatewaySpecID),
 	)
 }
@@ -1160,21 +890,6 @@ func (r blockhashStoreSpecRow) toBlockhashStoreSpec() *BlockhashStoreSpec {
 			ethkey.EIP55AddressFromAddress(common.BytesToAddress(a)))
 	}
 	return r.BlockhashStoreSpec
-}
-
-func loadBlockHeaderFeederJob(tx pg.Queryer, job *Job, id *int32) error {
-	if id == nil {
-		return nil
-	}
-
-	var row blockHeaderFeederSpecRow
-	err := tx.Get(&row, `SELECT * FROM block_header_feeder_specs WHERE id = $1`, *id)
-	if err != nil {
-		return errors.Wrapf(err, `failed to load job type BlockHeaderFeederSpec with id %d`, *id)
-	}
-
-	job.BlockHeaderFeederSpec = row.toBlockHeaderFeederSpec()
-	return nil
 }
 
 // blockHeaderFeederSpecRow is a helper type for reading and writing blockHeaderFeederSpec specs to the database. This is necessary

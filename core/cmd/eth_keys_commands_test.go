@@ -42,14 +42,12 @@ func TestEthKeysPresenter_RenderTable(t *testing.T) {
 		createdAt      = time.Now()
 		updatedAt      = time.Now().Add(time.Second)
 		maxGasPriceWei = ubig.NewI(12345)
-		bundleID       = cltest.DefaultOCRKeyBundleID
 		buffer         = bytes.NewBufferString("")
 		r              = cmd.RendererTable{Writer: buffer}
 	)
 
 	p := cmd.EthKeyPresenter{
 		ETHKeyResource: presenters.ETHKeyResource{
-			JAID:           presenters.NewJAID(bundleID),
 			Address:        address,
 			EthBalance:     ethBalance,
 			LinkBalance:    linkBalance,

@@ -16,7 +16,6 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/dkgencryptkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/dkgsignkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/p2pkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/vrfkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 )
@@ -147,7 +146,6 @@ func (ks *keyStates) delete(addr common.Address) {
 type keyRing struct {
 	CSA        map[string]csakey.KeyV2
 	Eth        map[string]ethkey.KeyV2
-	P2P        map[string]p2pkey.KeyV2
 	VRF        map[string]vrfkey.KeyV2
 	DKGSign    map[string]dkgsignkey.Key
 	DKGEncrypt map[string]dkgencryptkey.Key
@@ -158,7 +156,6 @@ func newKeyRing() *keyRing {
 	return &keyRing{
 		CSA:        make(map[string]csakey.KeyV2),
 		Eth:        make(map[string]ethkey.KeyV2),
-		P2P:        make(map[string]p2pkey.KeyV2),
 		VRF:        make(map[string]vrfkey.KeyV2),
 		DKGSign:    make(map[string]dkgsignkey.Key),
 		DKGEncrypt: make(map[string]dkgencryptkey.Key),
@@ -201,9 +198,6 @@ func (kr *keyRing) raw() (rawKeys rawKeyRing) {
 	for _, ethKey := range kr.Eth {
 		rawKeys.Eth = append(rawKeys.Eth, ethKey.Raw())
 	}
-	for _, p2pKey := range kr.P2P {
-		rawKeys.P2P = append(rawKeys.P2P, p2pKey.Raw())
-	}
 	for _, vrfKey := range kr.VRF {
 		rawKeys.VRF = append(rawKeys.VRF, vrfKey.Raw())
 	}
@@ -227,10 +221,6 @@ func (kr *keyRing) logPubKeys(lggr logger.Logger) {
 		ethIDs = append(ethIDs, ETHKey.ID())
 	}
 
-	var p2pIDs []string
-	for _, P2PKey := range kr.P2P {
-		p2pIDs = append(p2pIDs, P2PKey.ID())
-	}
 	var vrfIDs []string
 	for _, VRFKey := range kr.VRF {
 		vrfIDs = append(vrfIDs, VRFKey.ID())
@@ -248,9 +238,6 @@ func (kr *keyRing) logPubKeys(lggr logger.Logger) {
 	}
 	if len(ethIDs) > 0 {
 		lggr.Infow(fmt.Sprintf("Unlocked %d ETH keys", len(ethIDs)), "keys", ethIDs)
-	}
-	if len(p2pIDs) > 0 {
-		lggr.Infow(fmt.Sprintf("Unlocked %d P2P keys", len(p2pIDs)), "keys", p2pIDs)
 	}
 	if len(vrfIDs) > 0 {
 		lggr.Infow(fmt.Sprintf("Unlocked %d VRF keys", len(vrfIDs)), "keys", vrfIDs)
@@ -272,7 +259,6 @@ func (kr *keyRing) logPubKeys(lggr logger.Logger) {
 type rawKeyRing struct {
 	Eth        []ethkey.Raw
 	CSA        []csakey.Raw
-	P2P        []p2pkey.Raw
 	VRF        []vrfkey.Raw
 	DKGSign    []dkgsignkey.Raw
 	DKGEncrypt []dkgencryptkey.Raw
@@ -288,10 +274,6 @@ func (rawKeys rawKeyRing) keys() (*keyRing, error) {
 	for _, rawETHKey := range rawKeys.Eth {
 		ethKey := rawETHKey.Key()
 		keyRing.Eth[ethKey.ID()] = ethKey
-	}
-	for _, rawP2PKey := range rawKeys.P2P {
-		p2pKey := rawP2PKey.Key()
-		keyRing.P2P[p2pKey.ID()] = p2pKey
 	}
 	for _, rawVRFKey := range rawKeys.VRF {
 		vrfKey := rawVRFKey.Key()

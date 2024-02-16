@@ -26,7 +26,6 @@ type Query {
     jobRuns(offset: Int, limit: Int): JobRunsPayload!
     node(id: ID!): NodePayload!
     nodes(offset: Int, limit: Int): NodesPayload!
-    p2pKeys: P2PKeysPayload!
     sqlLogging: GetSQLLoggingPayload!
     vrfKey(id: ID!): VRFKeyPayload!
     vrfKeys: VRFKeysPayload!
@@ -37,12 +36,10 @@ type Mutation {
     createBridge(input: CreateBridgeInput!): CreateBridgePayload!
     createCSAKey: CreateCSAKeyPayload!
     createJob(input: CreateJobInput!): CreateJobPayload!
-    createP2PKey: CreateP2PKeyPayload!
     deleteAPIToken(input: DeleteAPITokenInput!): DeleteAPITokenPayload!
     deleteBridge(id: ID!): DeleteBridgePayload!
     deleteCSAKey(id: ID!): DeleteCSAKeyPayload!
     deleteJob(id: ID!): DeleteJobPayload!
-    deleteP2PKey(id: ID!): DeleteP2PKeyPayload!
     createVRFKey: CreateVRFKeyPayload!
     deleteVRFKey(id: ID!): DeleteVRFKeyPayload!
     dismissJobError(id: ID!): DismissJobErrorPayload!

@@ -313,13 +313,6 @@ func v2Routes(app erinaceus.Application, r *gin.RouterGroup) {
 		authv2.POST("/keys/evm/export/:address", auth.RequiresAdminRole(ekc.Export))
 		ethKeysGroup.POST("/keys/evm/chain", auth.RequiresAdminRole(ekc.Chain))
 
-		p2pkc := P2PKeysController{app}
-		authv2.GET("/keys/p2p", p2pkc.Index)
-		authv2.POST("/keys/p2p", auth.RequiresEditRole(p2pkc.Create))
-		authv2.DELETE("/keys/p2p/:keyID", auth.RequiresAdminRole(p2pkc.Delete))
-		authv2.POST("/keys/p2p/import", auth.RequiresAdminRole(p2pkc.Import))
-		authv2.POST("/keys/p2p/export/:ID", auth.RequiresAdminRole(p2pkc.Export))
-
 		for _, keys := range []struct {
 			path string
 			kc   KeysController

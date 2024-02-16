@@ -19,12 +19,6 @@ func (i *insecureConfig) DisableRateLimiting() bool {
 		*i.c.DisableRateLimiting
 }
 
-func (i *insecureConfig) OCRDevelopmentMode() bool {
-	// OCRDevelopmentMode is allowed in TestBuilds as well
-	return (build.IsDev() || build.IsTest()) && i.c.OCRDevelopmentMode != nil &&
-		*i.c.OCRDevelopmentMode
-}
-
 func (i *insecureConfig) InfiniteDepthQueries() bool {
 	return build.IsDev() && i.c.InfiniteDepthQueries != nil &&
 		*i.c.InfiniteDepthQueries

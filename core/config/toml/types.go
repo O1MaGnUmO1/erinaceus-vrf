@@ -12,13 +12,9 @@ import (
 	"go.uber.org/multierr"
 	"go.uber.org/zap/zapcore"
 
-	ocrcommontypes "github.com/smartcontractkit/libocr/commontypes"
-
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/build"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/config/parse"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/p2pkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/sessions"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/dialects"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
@@ -43,17 +39,11 @@ type Core struct {
 	Log              Log              `toml:",omitempty"`
 	WebServer        WebServer        `toml:",omitempty"`
 	JobPipeline      JobPipeline      `toml:",omitempty"`
-	FluxMonitor      FluxMonitor      `toml:",omitempty"`
-	OCR2             OCR2             `toml:",omitempty"`
-	OCR              OCR              `toml:",omitempty"`
-	P2P              P2P              `toml:",omitempty"`
-	Keeper           Keeper           `toml:",omitempty"`
 	AutoPprof        AutoPprof        `toml:",omitempty"`
 	Pyroscope        Pyroscope        `toml:",omitempty"`
 	Sentry           Sentry           `toml:",omitempty"`
 	Insecure         Insecure         `toml:",omitempty"`
 	Tracing          Tracing          `toml:",omitempty"`
-	Mercury          Mercury          `toml:",omitempty"`
 }
 
 // SetFrom updates c with any non-nil values from f. (currently TOML field only!)
@@ -76,13 +66,6 @@ func (c *Core) SetFrom(f *Core) {
 
 	c.WebServer.setFrom(&f.WebServer)
 	c.JobPipeline.setFrom(&f.JobPipeline)
-
-	c.FluxMonitor.setFrom(&f.FluxMonitor)
-	c.OCR2.setFrom(&f.OCR2)
-	c.OCR.setFrom(&f.OCR)
-	c.P2P.setFrom(&f.P2P)
-	c.Keeper.setFrom(&f.Keeper)
-	c.Mercury.setFrom(&f.Mercury)
 
 	c.AutoPprof.setFrom(&f.AutoPprof)
 	c.Pyroscope.setFrom(&f.Pyroscope)
@@ -910,246 +893,6 @@ func (j *JobPipelineHTTPRequest) setFrom(f *JobPipelineHTTPRequest) {
 	}
 }
 
-type FluxMonitor struct {
-	DefaultTransactionQueueDepth *uint32
-	SimulateTransactions         *bool
-}
-
-func (m *FluxMonitor) setFrom(f *FluxMonitor) {
-	if v := f.DefaultTransactionQueueDepth; v != nil {
-		m.DefaultTransactionQueueDepth = v
-	}
-	if v := f.SimulateTransactions; v != nil {
-		m.SimulateTransactions = v
-	}
-}
-
-type OCR2 struct {
-	Enabled                            *bool
-	ContractConfirmations              *uint32
-	BlockchainTimeout                  *models.Duration
-	ContractPollInterval               *models.Duration
-	ContractSubscribeInterval          *models.Duration
-	ContractTransmitterTransmitTimeout *models.Duration
-	DatabaseTimeout                    *models.Duration
-	KeyBundleID                        *models.Sha256Hash
-	CaptureEATelemetry                 *bool
-	CaptureAutomationCustomTelemetry   *bool
-	DefaultTransactionQueueDepth       *uint32
-	SimulateTransactions               *bool
-	TraceLogging                       *bool
-}
-
-func (o *OCR2) setFrom(f *OCR2) {
-	if v := f.Enabled; v != nil {
-		o.Enabled = v
-	}
-	if v := f.ContractConfirmations; v != nil {
-		o.ContractConfirmations = v
-	}
-	if v := f.BlockchainTimeout; v != nil {
-		o.BlockchainTimeout = v
-	}
-	if v := f.ContractPollInterval; v != nil {
-		o.ContractPollInterval = v
-	}
-	if v := f.ContractSubscribeInterval; v != nil {
-		o.ContractSubscribeInterval = v
-	}
-	if v := f.ContractTransmitterTransmitTimeout; v != nil {
-		o.ContractTransmitterTransmitTimeout = v
-	}
-	if v := f.DatabaseTimeout; v != nil {
-		o.DatabaseTimeout = v
-	}
-	if v := f.KeyBundleID; v != nil {
-		o.KeyBundleID = v
-	}
-	if v := f.CaptureEATelemetry; v != nil {
-		o.CaptureEATelemetry = v
-	}
-	if v := f.CaptureAutomationCustomTelemetry; v != nil {
-		o.CaptureAutomationCustomTelemetry = v
-	}
-	if v := f.DefaultTransactionQueueDepth; v != nil {
-		o.DefaultTransactionQueueDepth = v
-	}
-	if v := f.SimulateTransactions; v != nil {
-		o.SimulateTransactions = v
-	}
-	if v := f.TraceLogging; v != nil {
-		o.TraceLogging = v
-	}
-}
-
-type OCR struct {
-	Enabled                      *bool
-	ObservationTimeout           *models.Duration
-	BlockchainTimeout            *models.Duration
-	ContractPollInterval         *models.Duration
-	ContractSubscribeInterval    *models.Duration
-	DefaultTransactionQueueDepth *uint32
-	// Optional
-	KeyBundleID          *models.Sha256Hash
-	SimulateTransactions *bool
-	TransmitterAddress   *ethkey.EIP55Address
-	CaptureEATelemetry   *bool
-	TraceLogging         *bool
-}
-
-func (o *OCR) setFrom(f *OCR) {
-	if v := f.Enabled; v != nil {
-		o.Enabled = v
-	}
-	if v := f.ObservationTimeout; v != nil {
-		o.ObservationTimeout = v
-	}
-	if v := f.BlockchainTimeout; v != nil {
-		o.BlockchainTimeout = v
-	}
-	if v := f.ContractPollInterval; v != nil {
-		o.ContractPollInterval = v
-	}
-	if v := f.ContractSubscribeInterval; v != nil {
-		o.ContractSubscribeInterval = v
-	}
-	if v := f.DefaultTransactionQueueDepth; v != nil {
-		o.DefaultTransactionQueueDepth = v
-	}
-	if v := f.KeyBundleID; v != nil {
-		o.KeyBundleID = v
-	}
-	if v := f.SimulateTransactions; v != nil {
-		o.SimulateTransactions = v
-	}
-	if v := f.TransmitterAddress; v != nil {
-		o.TransmitterAddress = v
-	}
-	if v := f.CaptureEATelemetry; v != nil {
-		o.CaptureEATelemetry = v
-	}
-	if v := f.TraceLogging; v != nil {
-		o.TraceLogging = v
-	}
-}
-
-type P2P struct {
-	IncomingMessageBufferSize *int64
-	OutgoingMessageBufferSize *int64
-	PeerID                    *p2pkey.PeerID
-	TraceLogging              *bool
-
-	V2 P2PV2 `toml:",omitempty"`
-}
-
-func (p *P2P) setFrom(f *P2P) {
-	if v := f.IncomingMessageBufferSize; v != nil {
-		p.IncomingMessageBufferSize = v
-	}
-	if v := f.OutgoingMessageBufferSize; v != nil {
-		p.OutgoingMessageBufferSize = v
-	}
-	if v := f.PeerID; v != nil {
-		p.PeerID = v
-	}
-	if v := f.TraceLogging; v != nil {
-		p.TraceLogging = v
-	}
-
-	p.V2.setFrom(&f.V2)
-}
-
-type P2PV2 struct {
-	Enabled              *bool
-	AnnounceAddresses    *[]string
-	DefaultBootstrappers *[]ocrcommontypes.BootstrapperLocator
-	DeltaDial            *models.Duration
-	DeltaReconcile       *models.Duration
-	ListenAddresses      *[]string
-}
-
-func (p *P2PV2) setFrom(f *P2PV2) {
-	if v := f.Enabled; v != nil {
-		p.Enabled = v
-	}
-	if v := f.AnnounceAddresses; v != nil {
-		p.AnnounceAddresses = v
-	}
-	if v := f.DefaultBootstrappers; v != nil {
-		p.DefaultBootstrappers = v
-	}
-	if v := f.DeltaDial; v != nil {
-		p.DeltaDial = v
-	}
-	if v := f.DeltaReconcile; v != nil {
-		p.DeltaReconcile = v
-	}
-	if v := f.ListenAddresses; v != nil {
-		p.ListenAddresses = v
-	}
-}
-
-type Keeper struct {
-	DefaultTransactionQueueDepth *uint32
-	GasPriceBufferPercent        *uint16
-	GasTipCapBufferPercent       *uint16
-	BaseFeeBufferPercent         *uint16
-	MaxGracePeriod               *int64
-	TurnLookBack                 *int64
-
-	Registry KeeperRegistry `toml:",omitempty"`
-}
-
-func (k *Keeper) setFrom(f *Keeper) {
-	if v := f.DefaultTransactionQueueDepth; v != nil {
-		k.DefaultTransactionQueueDepth = v
-	}
-	if v := f.GasPriceBufferPercent; v != nil {
-		k.GasPriceBufferPercent = v
-	}
-	if v := f.GasTipCapBufferPercent; v != nil {
-		k.GasTipCapBufferPercent = v
-	}
-	if v := f.BaseFeeBufferPercent; v != nil {
-		k.BaseFeeBufferPercent = v
-	}
-	if v := f.MaxGracePeriod; v != nil {
-		k.MaxGracePeriod = v
-	}
-	if v := f.TurnLookBack; v != nil {
-		k.TurnLookBack = v
-	}
-
-	k.Registry.setFrom(&f.Registry)
-
-}
-
-type KeeperRegistry struct {
-	CheckGasOverhead    *uint32
-	PerformGasOverhead  *uint32
-	MaxPerformDataSize  *uint32
-	SyncInterval        *models.Duration
-	SyncUpkeepQueueSize *uint32
-}
-
-func (k *KeeperRegistry) setFrom(f *KeeperRegistry) {
-	if v := f.CheckGasOverhead; v != nil {
-		k.CheckGasOverhead = v
-	}
-	if v := f.PerformGasOverhead; v != nil {
-		k.PerformGasOverhead = v
-	}
-	if v := f.MaxPerformDataSize; v != nil {
-		k.MaxPerformDataSize = v
-	}
-	if v := f.SyncInterval; v != nil {
-		k.SyncInterval = v
-	}
-	if v := f.SyncUpkeepQueueSize; v != nil {
-		k.SyncUpkeepQueueSize = v
-	}
-}
-
 type AutoPprof struct {
 	Enabled              *bool
 	ProfileRoot          *string
@@ -1242,7 +985,6 @@ func (s *Sentry) setFrom(f *Sentry) {
 
 type Insecure struct {
 	DevWebServer         *bool
-	OCRDevelopmentMode   *bool
 	InfiniteDepthQueries *bool
 	DisableRateLimiting  *bool
 }
@@ -1257,10 +999,6 @@ func (ins *Insecure) validateConfig(buildMode string) (err error) {
 	}
 	if ins.DevWebServer != nil && *ins.DevWebServer {
 		err = multierr.Append(err, configutils.ErrInvalid{Name: "DevWebServer", Value: *ins.DevWebServer, Msg: "insecure configs are not allowed on secure builds"})
-	}
-	// OCRDevelopmentMode is allowed on dev/test builds.
-	if ins.OCRDevelopmentMode != nil && *ins.OCRDevelopmentMode && buildMode == build.Prod {
-		err = multierr.Append(err, configutils.ErrInvalid{Name: "OCRDevelopmentMode", Value: *ins.OCRDevelopmentMode, Msg: "insecure configs are not allowed on secure builds"})
 	}
 	if ins.InfiniteDepthQueries != nil && *ins.InfiniteDepthQueries {
 		err = multierr.Append(err, configutils.ErrInvalid{Name: "InfiniteDepthQueries", Value: *ins.InfiniteDepthQueries, Msg: "insecure configs are not allowed on secure builds"})
@@ -1280,9 +1018,6 @@ func (ins *Insecure) setFrom(f *Insecure) {
 	}
 	if v := f.DisableRateLimiting; v != nil {
 		ins.DisableRateLimiting = f.DisableRateLimiting
-	}
-	if v := f.OCRDevelopmentMode; v != nil {
-		ins.OCRDevelopmentMode = f.OCRDevelopmentMode
 	}
 }
 

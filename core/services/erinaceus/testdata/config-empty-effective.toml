@@ -123,66 +123,6 @@ ResultWriteQueueDepth = 100
 DefaultTimeout = '15s'
 MaxSize = '32.77kb'
 
-[FluxMonitor]
-DefaultTransactionQueueDepth = 1
-SimulateTransactions = false
-
-[OCR2]
-Enabled = false
-ContractConfirmations = 3
-BlockchainTimeout = '20s'
-ContractPollInterval = '1m0s'
-ContractSubscribeInterval = '2m0s'
-ContractTransmitterTransmitTimeout = '10s'
-DatabaseTimeout = '10s'
-KeyBundleID = '0000000000000000000000000000000000000000000000000000000000000000'
-CaptureEATelemetry = false
-CaptureAutomationCustomTelemetry = true
-DefaultTransactionQueueDepth = 1
-SimulateTransactions = false
-TraceLogging = false
-
-[OCR]
-Enabled = false
-ObservationTimeout = '5s'
-BlockchainTimeout = '20s'
-ContractPollInterval = '1m0s'
-ContractSubscribeInterval = '2m0s'
-DefaultTransactionQueueDepth = 1
-KeyBundleID = '0000000000000000000000000000000000000000000000000000000000000000'
-SimulateTransactions = false
-TransmitterAddress = ''
-CaptureEATelemetry = false
-TraceLogging = false
-
-[P2P]
-IncomingMessageBufferSize = 10
-OutgoingMessageBufferSize = 10
-PeerID = ''
-TraceLogging = false
-
-[P2P.V2]
-Enabled = true
-AnnounceAddresses = []
-DefaultBootstrappers = []
-DeltaDial = '15s'
-DeltaReconcile = '1m0s'
-ListenAddresses = []
-
-[Keeper]
-DefaultTransactionQueueDepth = 1
-GasPriceBufferPercent = 20
-GasTipCapBufferPercent = 20
-BaseFeeBufferPercent = 20
-MaxGracePeriod = 100
-TurnLookBack = 1000
-
-[Keeper.Registry]
-CheckGasOverhead = 200000
-PerformGasOverhead = 300000
-MaxPerformDataSize = 5000
-SyncInterval = '30m0s'
-SyncUpkeepQueueSize = 10
 
 [AutoPprof]
 Enabled = false

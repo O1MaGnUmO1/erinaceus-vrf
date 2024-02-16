@@ -16,7 +16,6 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/google/uuid"
-	ragep2ptypes "github.com/smartcontractkit/libocr/ragep2p/types"
 	"github.com/stretchr/testify/require"
 	"github.com/urfave/cli"
 	"gopkg.in/guregu/null.v4"
@@ -35,9 +34,7 @@ import (
 	evmutils "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils"
 	ubig "github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/utils/big"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
@@ -53,14 +50,6 @@ func NewEIP55Address() ethkey.EIP55Address {
 		panic(err)
 	}
 	return e
-}
-
-func NewPeerID() (id ragep2ptypes.PeerID) {
-	err := id.UnmarshalText([]byte("12D3KooWL3XJ9EMCyZvmmGXL2LMiVBtrVa2BuESsJiXkSj7333Jw"))
-	if err != nil {
-		panic(err)
-	}
-	return id
 }
 
 type BridgeOpts struct {
@@ -317,58 +306,6 @@ func MustInsertHead(t *testing.T, db *sqlx.DB, cfg pg.QConfig, number int64) evm
 	err := horm.IdempotentInsertHead(testutils.Context(t), &h)
 	require.NoError(t, err)
 	return h
-}
-
-func MustInsertV2JobSpec(t *testing.T, db *sqlx.DB, transmitterAddress common.Address) job.Job {
-	t.Helper()
-
-	addr, err := ethkey.NewEIP55Address(transmitterAddress.Hex())
-	require.NoError(t, err)
-
-	pipelineSpec := pipeline.Spec{}
-	err = db.Get(&pipelineSpec, `INSERT INTO pipeline_specs (dot_dag_source,created_at) VALUES ('',NOW()) RETURNING *`)
-	require.NoError(t, err)
-
-	oracleSpec := MustInsertOffchainreportingOracleSpec(t, db, addr)
-	jb := job.Job{
-		OCROracleSpec:   &oracleSpec,
-		OCROracleSpecID: &oracleSpec.ID,
-		ExternalJobID:   uuid.New(),
-		Type:            job.OffchainReporting,
-		SchemaVersion:   1,
-		PipelineSpec:    &pipelineSpec,
-		PipelineSpecID:  pipelineSpec.ID,
-	}
-
-	jorm := job.NewORM(db, nil, nil, nil, logger.TestLogger(t), configtest.NewTestGeneralConfig(t).Database())
-	err = jorm.InsertJob(&jb)
-	require.NoError(t, err)
-	return jb
-}
-
-func MustInsertOffchainreportingOracleSpec(t *testing.T, db *sqlx.DB, transmitterAddress ethkey.EIP55Address) job.OCROracleSpec {
-	t.Helper()
-
-	ocrKeyID := models.MustSha256HashFromHex(DefaultOCRKeyBundleID)
-	spec := job.OCROracleSpec{}
-	require.NoError(t, db.Get(&spec, `INSERT INTO ocr_oracle_specs (created_at, updated_at, contract_address, p2pv2_bootstrappers, is_bootstrap_peer, encrypted_ocr_key_bundle_id, transmitter_address, observation_timeout, blockchain_timeout, contract_config_tracker_subscribe_interval, contract_config_tracker_poll_interval, contract_config_confirmations, database_timeout, observation_grace_period, contract_transmitter_transmit_timeout, evm_chain_id) VALUES (
-NOW(),NOW(),$1,'{}',false,$2,$3,0,0,0,0,0,0,0,0,0
-) RETURNING *`, NewEIP55Address(), &ocrKeyID, &transmitterAddress))
-	return spec
-}
-
-func MakeDirectRequestJobSpec(t *testing.T) *job.Job {
-	t.Helper()
-	drs := &job.DirectRequestSpec{EVMChainID: (*ubig.Big)(testutils.FixtureChainID)}
-	spec := &job.Job{
-		Type:              job.DirectRequest,
-		SchemaVersion:     1,
-		ExternalJobID:     uuid.New(),
-		DirectRequestSpec: drs,
-		Pipeline:          pipeline.Pipeline{},
-		PipelineSpec:      &pipeline.Spec{},
-	}
-	return spec
 }
 
 func MustInsertPipelineRun(t *testing.T, db *sqlx.DB) (run pipeline.Run) {

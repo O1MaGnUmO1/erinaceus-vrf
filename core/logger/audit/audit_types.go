@@ -20,27 +20,10 @@ const (
 	APITokenDeleteAttemptPasswordMismatch EventID = "API_TOKEN_DELETE_ATTEMPT_PASSWORD_MISMATCH"
 	APITokenDeleted                       EventID = "API_TOKEN_DELETED"
 
-	FeedsManCreated EventID = "FEEDS_MAN_CREATED"
-	FeedsManUpdated EventID = "FEEDS_MAN_UPDATED"
-
-	FeedsManChainConfigCreated EventID = "FEEDS_MAN_CHAIN_CONFIG_CREATED"
-	FeedsManChainConfigUpdated EventID = "FEEDS_MAN_CHAIN_CONFIG_UPDATED"
-	FeedsManChainConfigDeleted EventID = "FEEDS_MAN_CHAIN_CONFIG_DELETED"
-
 	CSAKeyCreated  EventID = "CSA_KEY_CREATED"
 	CSAKeyImported EventID = "CSA_KEY_IMPORTED"
 	CSAKeyExported EventID = "CSA_KEY_EXPORTED"
 	CSAKeyDeleted  EventID = "CSA_KEY_DELETED"
-
-	OCRKeyBundleCreated  EventID = "OCR_KEY_BUNDLE_CREATED"
-	OCRKeyBundleImported EventID = "OCR_KEY_BUNDLE_IMPORTED"
-	OCRKeyBundleExported EventID = "OCR_KEY_BUNDLE_EXPORTED"
-	OCRKeyBundleDeleted  EventID = "OCR_KEY_BUNDLE_DELETED"
-
-	OCR2KeyBundleCreated  EventID = "OCR2_KEY_BUNDLE_CREATED"
-	OCR2KeyBundleImported EventID = "OCR2_KEY_BUNDLE_IMPORTED"
-	OCR2KeyBundleExported EventID = "OCR2_KEY_BUNDLE_EXPORTED"
-	OCR2KeyBundleDeleted  EventID = "OCR2_KEY_BUNDLE_DELETED"
 
 	KeyCreated  EventID = "KEY_CREATED"
 	KeyUpdated  EventID = "KEY_UPDATED"
@@ -48,9 +31,7 @@ const (
 	KeyExported EventID = "KEY_EXPORTED"
 	KeyDeleted  EventID = "KEY_DELETED"
 
-	EthTransactionCreated    EventID = "ETH_TRANSACTION_CREATED"
-	CosmosTransactionCreated EventID = "COSMOS_TRANSACTION_CREATED"
-	SolanaTransactionCreated EventID = "SOLANA_TRANSACTION_CREATED"
+	EthTransactionCreated EventID = "ETH_TRANSACTION_CREATED"
 
 	JobCreated EventID = "JOB_CREATED"
 	JobDeleted EventID = "JOB_DELETED"
@@ -65,9 +46,6 @@ const (
 	BridgeCreated EventID = "BRIDGE_CREATED"
 	BridgeUpdated EventID = "BRIDGE_UPDATED"
 	BridgeDeleted EventID = "BRIDGE_DELETED"
-
-	ForwarderCreated EventID = "FORWARDER_CREATED"
-	ForwarderDeleted EventID = "FORWARDER_DELETED"
 
 	ExternalInitiatorCreated EventID = "EXTERNAL_INITIATOR_CREATED"
 	ExternalInitiatorDeleted EventID = "EXTERNAL_INITIATOR_DELETED"

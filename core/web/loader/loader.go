@@ -14,17 +14,15 @@ type loadersKey struct{}
 type Dataloader struct {
 	app erinaceus.Application
 
-	ChainsByIDLoader                          *dataloader.Loader
-	EthTxAttemptsByEthTxIDLoader              *dataloader.Loader
-	FeedsManagersByIDLoader                   *dataloader.Loader
-	FeedsManagerChainConfigsByManagerIDLoader *dataloader.Loader
-	JobProposalsByManagerIDLoader             *dataloader.Loader
-	JobProposalSpecsByJobProposalID           *dataloader.Loader
-	JobRunsByIDLoader                         *dataloader.Loader
-	JobsByExternalJobIDs                      *dataloader.Loader
-	JobsByPipelineSpecIDLoader                *dataloader.Loader
-	NodesByChainIDLoader                      *dataloader.Loader
-	SpecErrorsByJobIDLoader                   *dataloader.Loader
+	ChainsByIDLoader                *dataloader.Loader
+	EthTxAttemptsByEthTxIDLoader    *dataloader.Loader
+	JobProposalsByManagerIDLoader   *dataloader.Loader
+	JobProposalSpecsByJobProposalID *dataloader.Loader
+	JobRunsByIDLoader               *dataloader.Loader
+	JobsByExternalJobIDs            *dataloader.Loader
+	JobsByPipelineSpecIDLoader      *dataloader.Loader
+	NodesByChainIDLoader            *dataloader.Loader
+	SpecErrorsByJobIDLoader         *dataloader.Loader
 }
 
 func New(app erinaceus.Application) *Dataloader {

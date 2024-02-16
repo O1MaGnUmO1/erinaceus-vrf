@@ -71,20 +71,6 @@ var (
 					DefaultTimeout: models.MustNewDuration(30 * time.Second),
 				},
 			},
-			OCR2: toml.OCR2{
-				Enabled:         ptr(true),
-				DatabaseTimeout: models.MustNewDuration(20 * time.Second),
-			},
-			OCR: toml.OCR{
-				Enabled:           ptr(true),
-				BlockchainTimeout: models.MustNewDuration(5 * time.Second),
-			},
-			P2P: toml.P2P{
-				IncomingMessageBufferSize: ptr[int64](999),
-			},
-			Keeper: toml.Keeper{
-				GasPriceBufferPercent: ptr[uint16](10),
-			},
 			AutoPprof: toml.AutoPprof{
 				CPUProfileRate: ptr[int64](7),
 			},
@@ -166,7 +152,6 @@ func TestConfig_Marshal(t *testing.T) {
 			ShutdownGracePeriod: models.MustNewDuration(10 * time.Second),
 			Insecure: toml.Insecure{
 				DevWebServer:         ptr(false),
-				OCRDevelopmentMode:   ptr(false),
 				InfiniteDepthQueries: ptr(false),
 				DisableRateLimiting:  ptr(false),
 			},
@@ -199,9 +184,8 @@ func TestConfig_Marshal(t *testing.T) {
 	}
 
 	full.Feature = toml.Feature{
-		FeedsManager: ptr(true),
-		LogPoller:    ptr(true),
-		UICSAKeys:    ptr(true),
+		LogPoller: ptr(true),
+		UICSAKeys: ptr(true),
 	}
 	full.Database = toml.Database{
 		DefaultIdleInTxSessionTimeout: models.MustNewDuration(time.Minute),
@@ -318,53 +302,6 @@ func TestConfig_Marshal(t *testing.T) {
 		HTTPRequest: toml.JobPipelineHTTPRequest{
 			MaxSize:        ptr[utils.FileSize](100 * utils.MB),
 			DefaultTimeout: models.MustNewDuration(time.Minute),
-		},
-	}
-	full.FluxMonitor = toml.FluxMonitor{
-		DefaultTransactionQueueDepth: ptr[uint32](100),
-		SimulateTransactions:         ptr(true),
-	}
-	full.OCR2 = toml.OCR2{
-		Enabled:                            ptr(true),
-		ContractConfirmations:              ptr[uint32](11),
-		BlockchainTimeout:                  models.MustNewDuration(3 * time.Second),
-		ContractPollInterval:               models.MustNewDuration(time.Hour),
-		ContractSubscribeInterval:          models.MustNewDuration(time.Minute),
-		ContractTransmitterTransmitTimeout: models.MustNewDuration(time.Minute),
-		DatabaseTimeout:                    models.MustNewDuration(8 * time.Second),
-		KeyBundleID:                        ptr(models.MustSha256HashFromHex("7a5f66bbe6594259325bf2b4f5b1a9c9")),
-		CaptureEATelemetry:                 ptr(false),
-		CaptureAutomationCustomTelemetry:   ptr(true),
-		DefaultTransactionQueueDepth:       ptr[uint32](1),
-		SimulateTransactions:               ptr(false),
-		TraceLogging:                       ptr(false),
-	}
-	full.OCR = toml.OCR{
-		Enabled:                      ptr(true),
-		ObservationTimeout:           models.MustNewDuration(11 * time.Second),
-		BlockchainTimeout:            models.MustNewDuration(3 * time.Second),
-		ContractPollInterval:         models.MustNewDuration(time.Hour),
-		ContractSubscribeInterval:    models.MustNewDuration(time.Minute),
-		DefaultTransactionQueueDepth: ptr[uint32](12),
-		KeyBundleID:                  ptr(models.MustSha256HashFromHex("acdd42797a8b921b2910497badc50006")),
-		SimulateTransactions:         ptr(true),
-		TransmitterAddress:           ptr(ethkey.MustEIP55Address("0xa0788FC17B1dEe36f057c42B6F373A34B014687e")),
-		CaptureEATelemetry:           ptr(false),
-		TraceLogging:                 ptr(false),
-	}
-	full.Keeper = toml.Keeper{
-		DefaultTransactionQueueDepth: ptr[uint32](17),
-		GasPriceBufferPercent:        ptr[uint16](12),
-		GasTipCapBufferPercent:       ptr[uint16](43),
-		BaseFeeBufferPercent:         ptr[uint16](89),
-		MaxGracePeriod:               ptr[int64](31),
-		TurnLookBack:                 ptr[int64](91),
-		Registry: toml.KeeperRegistry{
-			CheckGasOverhead:    ptr[uint32](90),
-			PerformGasOverhead:  ptr[uint32](math.MaxUint32),
-			SyncInterval:        models.MustNewDuration(time.Hour),
-			SyncUpkeepQueueSize: ptr[uint32](31),
-			MaxPerformDataSize:  ptr[uint32](5000),
 		},
 	}
 	full.AutoPprof = toml.AutoPprof{
@@ -510,14 +447,13 @@ ShutdownGracePeriod = '10s'
 
 [Insecure]
 DevWebServer = false
-OCRDevelopmentMode = false
 InfiniteDepthQueries = false
 DisableRateLimiting = false
 
 [Tracing]
 Enabled = true
 CollectorTarget = 'localhost:4317'
-NodeID = 'clc-ocr-sol-devnet-node-1'
+NodeID = 'clc-sol-devnet-node-1'
 SamplingRatio = 1.0
 Mode = 'tls'
 TLSCertPath = '/path/to/cert.pem'
@@ -533,7 +469,6 @@ JsonWrapperKey = 'event'
 Headers = ['Authorization: token', 'X-SomeOther-Header: value with spaces | and a bar+*']
 `},
 		{"Feature", Config{Core: toml.Core{Feature: full.Feature}}, `[Feature]
-FeedsManager = true
 LogPoller = true
 UICSAKeys = true
 `},
@@ -642,79 +577,6 @@ HTTPSPort = 6789
 KeyPath = 'tls/key/path'
 ListenIP = '192.158.1.38'
 `},
-		{"FluxMonitor", Config{Core: toml.Core{FluxMonitor: full.FluxMonitor}}, `[FluxMonitor]
-DefaultTransactionQueueDepth = 100
-SimulateTransactions = true
-`},
-		{"JobPipeline", Config{Core: toml.Core{JobPipeline: full.JobPipeline}}, `[JobPipeline]
-ExternalInitiatorsEnabled = true
-MaxRunDuration = '1h0m0s'
-MaxSuccessfulRuns = 123456
-ReaperInterval = '4h0m0s'
-ReaperThreshold = '168h0m0s'
-ResultWriteQueueDepth = 10
-
-[JobPipeline.HTTPRequest]
-DefaultTimeout = '1m0s'
-MaxSize = '100.00mb'
-`},
-		{"OCR", Config{Core: toml.Core{OCR: full.OCR}}, `[OCR]
-Enabled = true
-ObservationTimeout = '11s'
-BlockchainTimeout = '3s'
-ContractPollInterval = '1h0m0s'
-ContractSubscribeInterval = '1m0s'
-DefaultTransactionQueueDepth = 12
-KeyBundleID = 'acdd42797a8b921b2910497badc5000600000000000000000000000000000000'
-SimulateTransactions = true
-TransmitterAddress = '0xa0788FC17B1dEe36f057c42B6F373A34B014687e'
-CaptureEATelemetry = false
-TraceLogging = false
-`},
-		{"OCR2", Config{Core: toml.Core{OCR2: full.OCR2}}, `[OCR2]
-Enabled = true
-ContractConfirmations = 11
-BlockchainTimeout = '3s'
-ContractPollInterval = '1h0m0s'
-ContractSubscribeInterval = '1m0s'
-ContractTransmitterTransmitTimeout = '1m0s'
-DatabaseTimeout = '8s'
-KeyBundleID = '7a5f66bbe6594259325bf2b4f5b1a9c900000000000000000000000000000000'
-CaptureEATelemetry = false
-CaptureAutomationCustomTelemetry = true
-DefaultTransactionQueueDepth = 1
-SimulateTransactions = false
-TraceLogging = false
-`},
-		{"P2P", Config{Core: toml.Core{P2P: full.P2P}}, `[P2P]
-IncomingMessageBufferSize = 13
-OutgoingMessageBufferSize = 17
-PeerID = '12D3KooWMoejJznyDuEk5aX6GvbjaG12UzeornPCBNzMRqdwrFJw'
-TraceLogging = true
-
-[P2P.V2]
-Enabled = false
-AnnounceAddresses = ['a', 'b', 'c']
-DefaultBootstrappers = ['12D3KooWMoejJznyDuEk5aX6GvbjaG12UzeornPCBNzMRqdwrFJw@foo:42/bar:10', '12D3KooWMoejJznyDuEk5aX6GvbjaG12UzeornPCBNzMRqdwrFJw@test:99']
-DeltaDial = '1m0s'
-DeltaReconcile = '1s'
-ListenAddresses = ['foo', 'bar']
-`},
-		{"Keeper", Config{Core: toml.Core{Keeper: full.Keeper}}, `[Keeper]
-DefaultTransactionQueueDepth = 17
-GasPriceBufferPercent = 12
-GasTipCapBufferPercent = 43
-BaseFeeBufferPercent = 89
-MaxGracePeriod = 31
-TurnLookBack = 91
-
-[Keeper.Registry]
-CheckGasOverhead = 90
-PerformGasOverhead = 4294967295
-MaxPerformDataSize = 5000
-SyncInterval = '1h0m0s'
-SyncUpkeepQueueSize = 31
-`},
 		{"AutoPprof", Config{Core: toml.Core{AutoPprof: full.AutoPprof}}, `[AutoPprof]
 Enabled = true
 ProfileRoot = 'prof/root'
@@ -791,12 +653,9 @@ TipCapDefault = '2 wei'
 TipCapMin = '1 wei'
 
 [EVM.GasEstimator.LimitJobType]
-OCR = 1001
-OCR2 = 1006
 DR = 1002
 VRF = 1003
 FM = 1004
-Keeper = 1005
 
 [EVM.GasEstimator.BlockHistory]
 BatchSize = 17
@@ -823,18 +682,6 @@ PollInterval = '1m0s'
 SelectionMode = 'HighestHead'
 SyncThreshold = 13
 LeaseDuration = '0s'
-
-[EVM.OCR]
-ContractConfirmations = 11
-ContractTransmitterTransmitTimeout = '1m0s'
-DatabaseTimeout = '1s'
-DeltaCOverride = '1h0m0s'
-DeltaCJitterOverride = '1s'
-ObservationGracePeriod = '1s'
-
-[EVM.OCR2]
-[EVM.OCR2.Automation]
-GasLimit = 540
 
 [[EVM.Nodes]]
 Name = 'foo'

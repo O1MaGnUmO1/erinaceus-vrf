@@ -68,7 +68,6 @@ func NewInMemory(db *sqlx.DB, scryptParams utils.ScryptParams, lggr logger.Logge
 		keyManager: km,
 		csa:        newCSAKeyStore(km),
 		eth:        newEthKeyStore(km, dbORM, dbORM.q),
-		p2p:        newP2PKeyStore(km),
 		vrf:        newVRFKeyStore(km),
 		dkgSign:    newDKGSignKeyStore(km),
 		dkgEncrypt: newDKGEncryptKeyStore(km),

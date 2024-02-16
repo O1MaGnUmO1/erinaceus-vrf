@@ -43,23 +43,6 @@ type EVM interface {
 	TOMLString() (string, error)
 }
 
-type OCR interface {
-	ContractConfirmations() uint16
-	ContractTransmitterTransmitTimeout() time.Duration
-	ObservationGracePeriod() time.Duration
-	DatabaseTimeout() time.Duration
-	DeltaCOverride() time.Duration
-	DeltaCJitterOverride() time.Duration
-}
-
-type OCR2 interface {
-	Automation() OCR2Automation
-}
-
-type OCR2Automation interface {
-	GasLimit() uint32
-}
-
 type HeadTracker interface {
 	HistoryDepth() uint32
 	MaxBufferSize() uint32
@@ -106,7 +89,6 @@ type GasEstimator interface {
 type LimitJobType interface {
 	DR() *uint32
 	FM() *uint32
-	Keeper() *uint32
 	VRF() *uint32
 }
 

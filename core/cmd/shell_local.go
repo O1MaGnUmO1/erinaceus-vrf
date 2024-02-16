@@ -387,13 +387,6 @@ func (s *Shell) runNode(c *cli.Context) error {
 		}
 	}
 
-	if s.Config.P2P().Enabled() {
-		err2 := app.GetKeyStore().P2P().EnsureKey()
-		if err2 != nil {
-			return errors.Wrap(err2, "failed to ensure p2p key")
-		}
-	}
-
 	err2 := app.GetKeyStore().CSA().EnsureKey()
 	if err2 != nil {
 		return errors.Wrap(err2, "failed to ensure CSA key")

@@ -35,8 +35,6 @@ import (
 
 	"github.com/jmoiron/sqlx"
 
-	ocrtypes "github.com/smartcontractkit/libocr/offchainreporting/types"
-
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/loop"
 	"github.com/O1MaGnUmO1/chainlink-common/pkg/utils/mailbox"
 
@@ -97,11 +95,6 @@ const (
 	// SessionSecret is the hardcoded secret solely used for test
 	SessionSecret = "clsession_test_secret"
 	// DefaultPeerID is the peer ID of the default p2p key
-	DefaultPeerID = configtest.DefaultPeerID
-	// DefaultOCRKeyBundleID is the ID of the default ocr key bundle
-	DefaultOCRKeyBundleID = "f5bf259689b26f1374efb3c9a9868796953a0f814bb2d39b968d0e61b58620a5"
-	// DefaultOCR2KeyBundleID is the ID of the fixture ocr2 key bundle
-	DefaultOCR2KeyBundleID = "92be59c45d0d7b192ef88d391f444ea7c78644f8607f567aab11d53668c27a4d"
 	// Private key seed of test keys created with `big.NewInt(1)`, representations of value present in `scrub_logs` script
 	KeyBigIntSeed = 1
 )
@@ -251,8 +244,6 @@ func setKeys(t testing.TB, app *TestApplication, flagsAndDeps ...interface{}) (c
 		switch v := dep.(type) {
 		case ethkey.KeyV2:
 			app.Keys = append(app.Keys, v)
-		case p2pkey.KeyV2:
-			require.NoError(t, app.GetKeyStore().P2P().Add(v))
 		case csakey.KeyV2:
 			require.NoError(t, app.GetKeyStore().CSA().Add(v))
 		}
@@ -1207,25 +1198,6 @@ func GetLogs(t *testing.T, rv interface{}, logs EthereumLogIterator) []interface
 		irv = append(irv, log.Interface())
 	}
 	return irv
-}
-
-func MakeConfigDigest(t *testing.T) ocrtypes.ConfigDigest {
-	t.Helper()
-	b := make([]byte, 16)
-	_, err := crand.Read(b)
-	if err != nil {
-		t.Fatal(err)
-	}
-	return MustBytesToConfigDigest(t, b)
-}
-
-func MustBytesToConfigDigest(t *testing.T, b []byte) ocrtypes.ConfigDigest {
-	t.Helper()
-	configDigest, err := ocrtypes.BytesToConfigDigest(b)
-	if err != nil {
-		t.Fatal(err)
-	}
-	return configDigest
 }
 
 // MockApplicationEthCalls mocks all calls made by the chainlink application as

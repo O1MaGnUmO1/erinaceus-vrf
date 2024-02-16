@@ -120,10 +120,6 @@ func (p JobPresenter) FriendlyTasks() []string {
 // type in RFC3339 format.
 func (p JobPresenter) FriendlyCreatedAt() string {
 	switch p.Type {
-	case presenters.KeeperJobSpec:
-		if p.KeeperSpec != nil {
-			return p.KeeperSpec.CreatedAt.Format(time.RFC3339)
-		}
 	case presenters.VRFJobSpec:
 		if p.VRFSpec != nil {
 			return p.VRFSpec.CreatedAt.Format(time.RFC3339)
