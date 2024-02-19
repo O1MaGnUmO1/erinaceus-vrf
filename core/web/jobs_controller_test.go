@@ -29,8 +29,6 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/internal/testutils/configtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/job"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/p2pkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/testdata/testspecs"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web"
@@ -48,49 +46,21 @@ func TestJobsController_Create_ValidationFailure_OffchainReportingSpec(t *testin
 
 	var tt = []struct {
 		name        string
-		pid         p2pkey.PeerID
 		kb          string
 		taExists    bool
 		expectedErr error
 	}{
 		{
 			name:        "invalid keybundle",
-			pid:         p2pkey.PeerID(peerID),
 			kb:          hex.EncodeToString(randomBytes[:]),
 			taExists:    true,
 			expectedErr: job.ErrNoSuchKeyBundle,
 		},
 		{
 			name:        "invalid transmitter address",
-			pid:         p2pkey.PeerID(peerID),
-			kb:          cltest.DefaultOCRKeyBundleID,
 			taExists:    false,
 			expectedErr: job.ErrNoSuchTransmitterKey,
 		},
-	}
-	for _, tc := range tt {
-		t.Run(tc.name, func(t *testing.T) {
-			ta, client := setupJobsControllerTests(t)
-
-			var address ethkey.EIP55Address
-			if tc.taExists {
-				key, _ := cltest.MustInsertRandomKey(t, ta.KeyStore.Eth())
-				address = key.EIP55Address
-			} else {
-				address = cltest.NewEIP55Address()
-			}
-
-			sp := cltest.MinimalOCRNonBootstrapSpec(contractAddress, address, tc.pid, tc.kb)
-			body, _ := json.Marshal(web.CreateJobRequest{
-				TOML: sp,
-			})
-			resp, cleanup := client.Post("/v2/jobs", bytes.NewReader(body))
-			t.Cleanup(cleanup)
-			assert.Equal(t, http.StatusBadRequest, resp.StatusCode)
-			b, err := io.ReadAll(resp.Body)
-			require.NoError(t, err)
-			assert.Contains(t, string(b), tc.expectedErr.Error())
-		})
 	}
 }
 

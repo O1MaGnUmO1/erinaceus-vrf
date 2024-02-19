@@ -12,17 +12,9 @@ ALTER TABLE jobs
     DROP CONSTRAINT chk_only_one_spec,
     ADD CONSTRAINT chk_only_one_spec CHECK (
             num_nonnulls(
-                    ocr_oracle_spec_id,
-                    ocr2_oracle_spec_id,
-                    direct_request_spec_id,
-                    flux_monitor_spec_id,
-                    keeper_spec_id,
-                    cron_spec_id,
                     webhook_spec_id,
                     vrf_spec_id,
                     blockhash_store_spec_id,
-                    block_header_feeder_spec_id,
-                    bootstrap_spec_id,
                     gateway_spec_id) = 1);
 -- +goose StatementEnd
 
@@ -33,17 +25,10 @@ ALTER TABLE jobs
     DROP CONSTRAINT chk_only_one_spec,
     ADD CONSTRAINT chk_only_one_spec CHECK (
             num_nonnulls(
-                    ocr_oracle_spec_id,
-                    ocr2_oracle_spec_id,
-                    direct_request_spec_id,
-                    flux_monitor_spec_id,
-                    keeper_spec_id,
-                    cron_spec_id,
                     webhook_spec_id,
                     vrf_spec_id,
                     blockhash_store_spec_id,
-                    block_header_feeder_spec_id,
-                    bootstrap_spec_id) = 1);
+                    ) = 1);
 
 ALTER TABLE jobs
     DROP COLUMN gateway_spec_id;

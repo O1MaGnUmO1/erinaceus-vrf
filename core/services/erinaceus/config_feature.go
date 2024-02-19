@@ -6,10 +6,6 @@ type featureConfig struct {
 	c toml.Feature
 }
 
-func (f *featureConfig) FeedsManager() bool {
-	return *f.c.FeedsManager
-}
-
 func (f *featureConfig) LogPoller() bool {
 	return *f.c.LogPoller
 }

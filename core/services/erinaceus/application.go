@@ -40,7 +40,6 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/promreporter"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/telemetry"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/vrf"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/webhook"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/sessions"
@@ -192,9 +191,6 @@ func NewApplication(opts ApplicationOpts) (Application, error) {
 	} else {
 		globalLogger.Info("Nurse service (automatic pprof profiling) is disabled")
 	}
-
-	telemetryManager := telemetry.NewManager(cfg.TelemetryIngress(), keyStore.CSA(), globalLogger)
-	srvcs = append(srvcs, telemetryManager)
 
 	backupCfg := cfg.Database().Backup()
 	if backupCfg.Mode() != config.DatabaseBackupModeNone && backupCfg.Frequency() > 0 {

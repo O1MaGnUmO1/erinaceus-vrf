@@ -406,8 +406,6 @@ func (o *orm) checkFinishedRun(run *Run, saveSuccessfulTaskRuns bool) error {
 
 // InsertFinishedRun inserts the given run into the database.
 // If saveSuccessfulTaskRuns = false, we only save errored runs.
-// That way if the job is run frequently (such as OCR) we avoid saving a large number of successful task runs
-// which do not provide much value.
 func (o *orm) InsertFinishedRun(run *Run, saveSuccessfulTaskRuns bool, qopts ...pg.QOpt) (err error) {
 	if err = o.checkFinishedRun(run, saveSuccessfulTaskRuns); err != nil {
 		return err

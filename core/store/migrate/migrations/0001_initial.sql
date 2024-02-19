@@ -182,81 +182,6 @@ ALTER SEQUENCE public.configurations_id_seq OWNED BY public.configurations.id;
 
 
 --
--- Name: direct_request_specs; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.direct_request_specs (
-    id integer NOT NULL,
-    contract_address bytea NOT NULL,
-    created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL,
-    on_chain_job_spec_id bytea NOT NULL,
-    CONSTRAINT direct_request_specs_on_chain_job_spec_id_check CHECK ((octet_length(on_chain_job_spec_id) = 32)),
-    CONSTRAINT eth_request_event_specs_contract_address_check CHECK ((octet_length(contract_address) = 20))
-);
-
-
-
-
---
--- Name: encrypted_ocr_key_bundles; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.encrypted_ocr_key_bundles (
-    id bytea NOT NULL,
-    on_chain_signing_address bytea NOT NULL,
-    off_chain_public_key bytea NOT NULL,
-    encrypted_private_keys jsonb NOT NULL,
-    created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL,
-    config_public_key bytea NOT NULL,
-    deleted_at timestamp with time zone
-);
-
-
-
-
---
--- Name: encrypted_p2p_keys; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.encrypted_p2p_keys (
-    id integer NOT NULL,
-    peer_id text NOT NULL,
-    pub_key bytea NOT NULL,
-    encrypted_priv_key jsonb NOT NULL,
-    created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL,
-    deleted_at timestamp with time zone,
-    CONSTRAINT chk_pub_key_length CHECK ((octet_length(pub_key) = 32))
-);
-
-
-
-
---
--- Name: encrypted_p2p_keys_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.encrypted_p2p_keys_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-
-
---
--- Name: encrypted_p2p_keys_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.encrypted_p2p_keys_id_seq OWNED BY public.encrypted_p2p_keys.id;
-
-
---
 -- Name: encrypted_vrf_keys; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -363,15 +288,6 @@ CREATE SEQUENCE public.eth_request_event_specs_id_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
-
-
---
--- Name: eth_request_event_specs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.eth_request_event_specs_id_seq OWNED BY public.direct_request_specs.id;
 
 
 --
@@ -520,89 +436,6 @@ ALTER SEQUENCE public.external_initiators_id_seq OWNED BY public.external_initia
 
 
 --
--- Name: flux_monitor_round_stats; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.flux_monitor_round_stats (
-    id bigint NOT NULL,
-    aggregator bytea NOT NULL,
-    round_id integer NOT NULL,
-    num_new_round_logs integer DEFAULT 0 NOT NULL,
-    num_submissions integer DEFAULT 0 NOT NULL,
-    job_run_id uuid
-);
-
-
-
-
---
--- Name: flux_monitor_round_stats_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.flux_monitor_round_stats_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-
-
---
--- Name: flux_monitor_round_stats_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.flux_monitor_round_stats_id_seq OWNED BY public.flux_monitor_round_stats.id;
-
-
---
--- Name: flux_monitor_specs; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.flux_monitor_specs (
-    id integer NOT NULL,
-    contract_address bytea NOT NULL,
-    "precision" integer,
-    threshold real,
-    absolute_threshold real,
-    poll_timer_period bigint,
-    poll_timer_disabled boolean,
-    idle_timer_period bigint,
-    idle_timer_disabled boolean,
-    created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL,
-    CONSTRAINT flux_monitor_specs_check CHECK ((poll_timer_disabled OR (poll_timer_period > 0))),
-    CONSTRAINT flux_monitor_specs_check1 CHECK ((idle_timer_disabled OR (idle_timer_period > 0))),
-    CONSTRAINT flux_monitor_specs_contract_address_check CHECK ((octet_length(contract_address) = 20))
-);
-
-
-
-
---
--- Name: flux_monitor_specs_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.flux_monitor_specs_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-
-
---
--- Name: flux_monitor_specs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.flux_monitor_specs_id_seq OWNED BY public.flux_monitor_specs.id;
-
-
---
 -- Name: heads; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -616,9 +449,6 @@ CREATE TABLE public.heads (
     CONSTRAINT chk_hash_size CHECK ((octet_length(hash) = 32)),
     CONSTRAINT chk_parent_hash_size CHECK ((octet_length(parent_hash) = 32))
 );
-
-
-
 
 --
 -- Name: heads_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -819,14 +649,10 @@ CREATE TABLE public.job_specs (
 CREATE TABLE public.jobs (
     id integer NOT NULL,
     pipeline_spec_id integer,
-    offchainreporting_oracle_spec_id integer,
     name character varying(255),
     schema_version integer NOT NULL,
     type character varying(255) NOT NULL,
     max_task_duration bigint,
-    direct_request_spec_id integer,
-    flux_monitor_spec_id integer,
-    CONSTRAINT chk_only_one_spec CHECK ((num_nonnulls(offchainreporting_oracle_spec_id, direct_request_spec_id, flux_monitor_spec_id) = 1)),
     CONSTRAINT chk_schema_version CHECK ((schema_version > 0)),
     CONSTRAINT chk_type CHECK (((type)::text <> ''::text))
 );
@@ -935,132 +761,6 @@ CREATE SEQUENCE public.log_consumptions_id_seq
 --
 
 ALTER SEQUENCE public.log_consumptions_id_seq OWNED BY public.log_consumptions.id;
-
-
-
---
--- Name: offchainreporting_contract_configs; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.offchainreporting_contract_configs (
-    offchainreporting_oracle_spec_id integer NOT NULL,
-    config_digest bytea NOT NULL,
-    signers bytea[],
-    transmitters bytea[],
-    threshold integer,
-    encoded_config_version bigint,
-    encoded bytea,
-    created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL,
-    CONSTRAINT offchainreporting_contract_configs_config_digest_check CHECK ((octet_length(config_digest) = 16))
-);
-
-
-
-
---
--- Name: offchainreporting_oracle_specs; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.offchainreporting_oracle_specs (
-    id integer NOT NULL,
-    contract_address bytea NOT NULL,
-    p2p_peer_id text,
-    p2p_bootstrap_peers text[],
-    is_bootstrap_peer boolean NOT NULL,
-    encrypted_ocr_key_bundle_id bytea,
-    monitoring_endpoint text,
-    transmitter_address bytea,
-    observation_timeout bigint,
-    blockchain_timeout bigint,
-    contract_config_tracker_subscribe_interval bigint,
-    contract_config_tracker_poll_interval bigint,
-    contract_config_confirmations integer,
-    created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL,
-    CONSTRAINT chk_contract_address_length CHECK ((octet_length(contract_address) = 20))
-);
-
-
-
-
---
--- Name: offchainreporting_oracle_specs_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.offchainreporting_oracle_specs_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-
-
---
--- Name: offchainreporting_oracle_specs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.offchainreporting_oracle_specs_id_seq OWNED BY public.offchainreporting_oracle_specs.id;
-
-
---
--- Name: offchainreporting_pending_transmissions; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.offchainreporting_pending_transmissions (
-    offchainreporting_oracle_spec_id integer NOT NULL,
-    config_digest bytea NOT NULL,
-    epoch bigint NOT NULL,
-    round bigint NOT NULL,
-    "time" timestamp with time zone NOT NULL,
-    median numeric(78,0) NOT NULL,
-    serialized_report bytea NOT NULL,
-    rs bytea[] NOT NULL,
-    ss bytea[] NOT NULL,
-    vs bytea NOT NULL,
-    created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL,
-    CONSTRAINT offchainreporting_pending_transmissions_config_digest_check CHECK ((octet_length(config_digest) = 16))
-);
-
-
-
-
---
--- Name: offchainreporting_persistent_states; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.offchainreporting_persistent_states (
-    offchainreporting_oracle_spec_id integer NOT NULL,
-    config_digest bytea NOT NULL,
-    epoch bigint NOT NULL,
-    highest_sent_epoch bigint NOT NULL,
-    highest_received_epoch bigint[] NOT NULL,
-    created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL,
-    CONSTRAINT offchainreporting_persistent_states_config_digest_check CHECK ((octet_length(config_digest) = 16))
-);
-
-
-
-
---
--- Name: p2p_peers; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.p2p_peers (
-    id text NOT NULL,
-    addr text NOT NULL,
-    created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL,
-    peer_id text NOT NULL
-);
-
-
-
 
 --
 -- Name: pipeline_runs; Type: TABLE; Schema: public; Owner: postgres
@@ -1452,20 +1152,6 @@ ALTER TABLE ONLY public.configurations ALTER COLUMN id SET DEFAULT nextval('publ
 
 
 --
--- Name: direct_request_specs id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.direct_request_specs ALTER COLUMN id SET DEFAULT nextval('public.eth_request_event_specs_id_seq'::regclass);
-
-
---
--- Name: encrypted_p2p_keys id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.encrypted_p2p_keys ALTER COLUMN id SET DEFAULT nextval('public.encrypted_p2p_keys_id_seq'::regclass);
-
-
---
 -- Name: encumbrances id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1498,20 +1184,6 @@ ALTER TABLE ONLY public.eth_txes ALTER COLUMN id SET DEFAULT nextval('public.eth
 --
 
 ALTER TABLE ONLY public.external_initiators ALTER COLUMN id SET DEFAULT nextval('public.external_initiators_id_seq'::regclass);
-
-
---
--- Name: flux_monitor_round_stats id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.flux_monitor_round_stats ALTER COLUMN id SET DEFAULT nextval('public.flux_monitor_round_stats_id_seq'::regclass);
-
-
---
--- Name: flux_monitor_specs id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.flux_monitor_specs ALTER COLUMN id SET DEFAULT nextval('public.flux_monitor_specs_id_seq'::regclass);
 
 
 --
@@ -1561,13 +1233,6 @@ ALTER TABLE ONLY public.keys ALTER COLUMN id SET DEFAULT nextval('public.keys_id
 --
 
 ALTER TABLE ONLY public.log_consumptions ALTER COLUMN id SET DEFAULT nextval('public.log_consumptions_id_seq'::regclass);
-
-
---
--- Name: offchainreporting_oracle_specs id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.offchainreporting_oracle_specs ALTER COLUMN id SET DEFAULT nextval('public.offchainreporting_oracle_specs_id_seq'::regclass);
 
 
 --
@@ -1649,31 +1314,6 @@ ALTER TABLE ONLY public.configurations
 ALTER TABLE ONLY public.configurations
     ADD CONSTRAINT configurations_pkey PRIMARY KEY (id);
 
-
---
--- Name: direct_request_specs direct_request_specs_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.direct_request_specs
-    ADD CONSTRAINT direct_request_specs_pkey PRIMARY KEY (id);
-
-
---
--- Name: encrypted_ocr_key_bundles encrypted_ocr_key_bundles_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.encrypted_ocr_key_bundles
-    ADD CONSTRAINT encrypted_ocr_key_bundles_pkey PRIMARY KEY (id);
-
-
---
--- Name: encrypted_p2p_keys encrypted_p2p_keys_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.encrypted_p2p_keys
-    ADD CONSTRAINT encrypted_p2p_keys_pkey PRIMARY KEY (id);
-
-
 --
 -- Name: encrypted_vrf_keys encrypted_secret_keys_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
@@ -1720,30 +1360,6 @@ ALTER TABLE ONLY public.eth_txes
 
 ALTER TABLE ONLY public.external_initiators
     ADD CONSTRAINT external_initiators_pkey PRIMARY KEY (id);
-
-
---
--- Name: flux_monitor_round_stats flux_monitor_round_stats_aggregator_round_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.flux_monitor_round_stats
-    ADD CONSTRAINT flux_monitor_round_stats_aggregator_round_id_key UNIQUE (aggregator, round_id);
-
-
---
--- Name: flux_monitor_round_stats flux_monitor_round_stats_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.flux_monitor_round_stats
-    ADD CONSTRAINT flux_monitor_round_stats_pkey PRIMARY KEY (id);
-
-
---
--- Name: flux_monitor_specs flux_monitor_specs_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.flux_monitor_specs
-    ADD CONSTRAINT flux_monitor_specs_pkey PRIMARY KEY (id);
 
 
 --
@@ -1817,42 +1433,6 @@ ALTER TABLE ONLY public.keys
 ALTER TABLE ONLY public.log_consumptions
     ADD CONSTRAINT log_consumptions_pkey PRIMARY KEY (id);
 
-
---
--- Name: offchainreporting_contract_configs offchainreporting_contract_configs_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.offchainreporting_contract_configs
-    ADD CONSTRAINT offchainreporting_contract_configs_pkey PRIMARY KEY (offchainreporting_oracle_spec_id);
-
-
---
--- Name: offchainreporting_oracle_specs offchainreporting_oracle_specs_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.offchainreporting_oracle_specs
-    ADD CONSTRAINT offchainreporting_oracle_specs_pkey PRIMARY KEY (id);
-
-
---
--- Name: offchainreporting_pending_transmissions offchainreporting_pending_transmissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.offchainreporting_pending_transmissions
-    ADD CONSTRAINT offchainreporting_pending_transmissions_pkey PRIMARY KEY (offchainreporting_oracle_spec_id, config_digest, epoch, round);
-
-
---
--- Name: offchainreporting_persistent_states offchainreporting_persistent_states_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.offchainreporting_persistent_states
-    ADD CONSTRAINT offchainreporting_persistent_states_pkey PRIMARY KEY (offchainreporting_oracle_spec_id, config_digest);
-
-
---
--- Name: pipeline_runs pipeline_runs_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public.pipeline_runs
     ADD CONSTRAINT pipeline_runs_pkey PRIMARY KEY (id);
@@ -1938,13 +1518,6 @@ ALTER TABLE ONLY public.task_specs
     ADD CONSTRAINT task_specs_pkey PRIMARY KEY (id);
 
 
---
--- Name: offchainreporting_oracle_specs unique_contract_addr; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.offchainreporting_oracle_specs
-    ADD CONSTRAINT unique_contract_addr UNIQUE (contract_address);
-
 
 --
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
@@ -1980,13 +1553,6 @@ CREATE INDEX idx_bridge_types_updated_at ON public.bridge_types USING brin (upda
 --
 
 CREATE INDEX idx_configurations_name ON public.configurations USING btree (name);
-
-
---
--- Name: idx_direct_request_specs_unique_job_spec_id; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX idx_direct_request_specs_unique_job_spec_id ON public.direct_request_specs USING btree (on_chain_job_spec_id);
 
 
 --
@@ -2284,20 +1850,6 @@ CREATE INDEX idx_job_specs_updated_at ON public.job_specs USING brin (updated_at
 
 
 --
--- Name: idx_jobs_unique_direct_request_spec_id; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX idx_jobs_unique_direct_request_spec_id ON public.jobs USING btree (direct_request_spec_id);
-
-
---
--- Name: idx_jobs_unique_offchain_reporting_oracle_spec_id; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX idx_jobs_unique_offchain_reporting_oracle_spec_id ON public.jobs USING btree (offchainreporting_oracle_spec_id);
-
-
---
 -- Name: idx_jobs_unique_pipeline_spec_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2309,28 +1861,6 @@ CREATE UNIQUE INDEX idx_jobs_unique_pipeline_spec_id ON public.jobs USING btree 
 --
 
 CREATE UNIQUE INDEX idx_keys_only_one_funding ON public.keys USING btree (is_funding) WHERE (is_funding = true);
-
-
---
--- Name: idx_offchainreporting_oracle_specs_created_at; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_offchainreporting_oracle_specs_created_at ON public.offchainreporting_oracle_specs USING brin (created_at);
-
-
---
--- Name: idx_offchainreporting_oracle_specs_updated_at; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_offchainreporting_oracle_specs_updated_at ON public.offchainreporting_oracle_specs USING brin (updated_at);
-
-
---
--- Name: idx_offchainreporting_pending_transmissions_time; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_offchainreporting_pending_transmissions_time ON public.offchainreporting_pending_transmissions USING btree ("time");
-
 
 --
 -- Name: idx_only_one_in_progress_attempt_per_eth_tx; Type: INDEX; Schema: public; Owner: postgres
@@ -2563,19 +2093,6 @@ CREATE INDEX idx_task_specs_updated_at ON public.task_specs USING brin (updated_
 CREATE UNIQUE INDEX idx_unique_keys_address ON public.keys USING btree (address);
 
 
---
--- Name: idx_unique_peer_ids; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX idx_unique_peer_ids ON public.encrypted_p2p_keys USING btree (peer_id);
-
-
---
--- Name: idx_unique_pub_keys; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX idx_unique_pub_keys ON public.encrypted_p2p_keys USING btree (pub_key);
-
 
 --
 -- Name: idx_users_created_at; Type: INDEX; Schema: public; Owner: postgres
@@ -2645,20 +2162,6 @@ CREATE UNIQUE INDEX log_consumptions_unique_v1_idx ON public.log_consumptions US
 --
 
 CREATE UNIQUE INDEX log_consumptions_unique_v2_idx ON public.log_consumptions USING btree (job_id_v2, block_hash, log_index);
-
-
---
--- Name: p2p_peers_id; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX p2p_peers_id ON public.p2p_peers USING btree (id);
-
-
---
--- Name: p2p_peers_peer_id; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX p2p_peers_peer_id ON public.p2p_peers USING btree (peer_id);
 
 
 --
@@ -2793,14 +2296,6 @@ ALTER TABLE ONLY public.task_runs
 
 
 --
--- Name: flux_monitor_round_stats flux_monitor_round_stats_job_run_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.flux_monitor_round_stats
-    ADD CONSTRAINT flux_monitor_round_stats_job_run_id_fkey FOREIGN KEY (job_run_id) REFERENCES public.job_runs(id) ON DELETE CASCADE;
-
-
---
 -- Name: job_runs job_runs_job_spec_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2822,31 +2317,6 @@ ALTER TABLE ONLY public.job_spec_errors
 
 ALTER TABLE ONLY public.job_spec_errors_v2
     ADD CONSTRAINT job_spec_errors_v2_job_id_fkey FOREIGN KEY (job_id) REFERENCES public.jobs(id) ON DELETE CASCADE;
-
-
---
--- Name: jobs jobs_direct_request_spec_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.jobs
-    ADD CONSTRAINT jobs_direct_request_spec_id_fkey FOREIGN KEY (direct_request_spec_id) REFERENCES public.direct_request_specs(id);
-
-
---
--- Name: jobs jobs_flux_monitor_spec_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.jobs
-    ADD CONSTRAINT jobs_flux_monitor_spec_id_fkey FOREIGN KEY (flux_monitor_spec_id) REFERENCES public.flux_monitor_specs(id);
-
-
---
--- Name: jobs jobs_offchainreporting_oracle_spec_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.jobs
-    ADD CONSTRAINT jobs_offchainreporting_oracle_spec_id_fkey FOREIGN KEY (offchainreporting_oracle_spec_id) REFERENCES public.offchainreporting_oracle_specs(id) ON DELETE CASCADE;
-
 
 --
 -- Name: jobs jobs_pipeline_spec_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
@@ -2871,61 +2341,6 @@ ALTER TABLE ONLY public.log_consumptions
 ALTER TABLE ONLY public.log_consumptions
     ADD CONSTRAINT log_consumptions_job_id_v2_fkey FOREIGN KEY (job_id_v2) REFERENCES public.jobs(id) ON DELETE CASCADE;
 
-
---
--- Name: offchainreporting_contract_configs offchainreporting_contract_co_offchainreporting_oracle_spe_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.offchainreporting_contract_configs
-    ADD CONSTRAINT offchainreporting_contract_co_offchainreporting_oracle_spe_fkey FOREIGN KEY (offchainreporting_oracle_spec_id) REFERENCES public.offchainreporting_oracle_specs(id) ON DELETE CASCADE;
-
-
---
--- Name: offchainreporting_oracle_specs offchainreporting_oracle_specs_encrypted_ocr_key_bundle_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.offchainreporting_oracle_specs
-    ADD CONSTRAINT offchainreporting_oracle_specs_encrypted_ocr_key_bundle_id_fkey FOREIGN KEY (encrypted_ocr_key_bundle_id) REFERENCES public.encrypted_ocr_key_bundles(id);
-
-
---
--- Name: offchainreporting_oracle_specs offchainreporting_oracle_specs_p2p_peer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.offchainreporting_oracle_specs
-    ADD CONSTRAINT offchainreporting_oracle_specs_p2p_peer_id_fkey FOREIGN KEY (p2p_peer_id) REFERENCES public.encrypted_p2p_keys(peer_id);
-
-
---
--- Name: offchainreporting_oracle_specs offchainreporting_oracle_specs_transmitter_address_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.offchainreporting_oracle_specs
-    ADD CONSTRAINT offchainreporting_oracle_specs_transmitter_address_fkey FOREIGN KEY (transmitter_address) REFERENCES public.keys(address);
-
-
---
--- Name: offchainreporting_pending_transmissions offchainreporting_pending_tra_offchainreporting_oracle_spe_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.offchainreporting_pending_transmissions
-    ADD CONSTRAINT offchainreporting_pending_tra_offchainreporting_oracle_spe_fkey FOREIGN KEY (offchainreporting_oracle_spec_id) REFERENCES public.offchainreporting_oracle_specs(id) ON DELETE CASCADE;
-
-
---
--- Name: offchainreporting_persistent_states offchainreporting_persistent__offchainreporting_oracle_spe_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.offchainreporting_persistent_states
-    ADD CONSTRAINT offchainreporting_persistent__offchainreporting_oracle_spe_fkey FOREIGN KEY (offchainreporting_oracle_spec_id) REFERENCES public.offchainreporting_oracle_specs(id) ON DELETE CASCADE;
-
-
---
--- Name: p2p_peers p2p_peers_peer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.p2p_peers
-    ADD CONSTRAINT p2p_peers_peer_id_fkey FOREIGN KEY (peer_id) REFERENCES public.encrypted_p2p_keys(peer_id) DEFERRABLE;
 
 
 --
@@ -3003,9 +2418,6 @@ ALTER TABLE ONLY public.task_specs
 -- the migrations table is handled separately.
 DROP TABLE bridge_types,
 		configurations,
-		direct_request_specs,
-		encrypted_ocr_key_bundles,
-		encrypted_p2p_keys,
 		encrypted_vrf_keys,
 		encumbrances,
 		eth_receipts,
@@ -3013,8 +2425,6 @@ DROP TABLE bridge_types,
 		eth_tx_attempts,
 		eth_txes,
 		external_initiators,
-		flux_monitor_round_stats,
-		flux_monitor_specs,
 		heads,
 		initiators,
 		job_runs,
@@ -3024,11 +2434,6 @@ DROP TABLE bridge_types,
 		jobs,
 		keys,
 		log_consumptions,
-		offchainreporting_contract_configs,
-		offchainreporting_oracle_specs,
-		offchainreporting_pending_transmissions,
-		offchainreporting_persistent_states,
-		p2p_peers,
 		pipeline_runs,
 		pipeline_specs,
 		pipeline_task_runs,

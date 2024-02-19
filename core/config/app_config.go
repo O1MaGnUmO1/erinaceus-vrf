@@ -41,7 +41,6 @@ type AppConfig interface {
 	Prometheus() Prometheus
 	Pyroscope() Pyroscope
 	Sentry() Sentry
-	TelemetryIngress() TelemetryIngress
 	Threshold() Threshold
 	WebServer() WebServer
 	Tracing() Tracing

@@ -59,7 +59,6 @@ func startNewApplicationV2(t *testing.T, overrideFn func(c *erinaceus.Config, s 
 		c.JobPipeline.HTTPRequest.DefaultTimeout = models.MustNewDuration(30 * time.Millisecond)
 		f := false
 		c.EVM[0].Enabled = &f
-		c.P2P.V2.Enabled = &f
 
 		if overrideFn != nil {
 			overrideFn(c, s)

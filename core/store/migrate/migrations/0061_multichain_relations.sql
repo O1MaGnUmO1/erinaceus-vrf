@@ -38,10 +38,6 @@ ALTER TABLE heads ALTER COLUMN evm_chain_id SET NOT NULL;
 ALTER TABLE eth_key_states ALTER COLUMN evm_chain_id SET NOT NULL;
 
 ALTER TABLE vrf_specs ADD COLUMN evm_chain_id numeric(78,0) REFERENCES evm_chains (id) DEFERRABLE INITIALLY IMMEDIATE;
-ALTER TABLE direct_request_specs ADD COLUMN evm_chain_id numeric(78,0) REFERENCES evm_chains (id) DEFERRABLE INITIALLY IMMEDIATE;
-ALTER TABLE keeper_specs ADD COLUMN evm_chain_id numeric(78,0) REFERENCES evm_chains (id) DEFERRABLE INITIALLY IMMEDIATE;
-ALTER TABLE offchainreporting_oracle_specs ADD COLUMN evm_chain_id numeric(78,0) REFERENCES evm_chains (id) DEFERRABLE INITIALLY IMMEDIATE;
-ALTER TABLE flux_monitor_specs ADD COLUMN evm_chain_id numeric(78,0) REFERENCES evm_chains (id) DEFERRABLE INITIALLY IMMEDIATE;
 
 -- +goose Down
 ALTER TABLE evm_chains DROP COLUMN enabled;
@@ -64,7 +60,3 @@ CREATE INDEX idx_log_broadcasts_unconsumed_job_id_v2 ON log_broadcasts(job_id in
 CREATE UNIQUE INDEX log_consumptions_unique_v2_idx ON log_broadcasts(job_id int4_ops,block_hash bytea_ops,log_index int8_ops,consumed) WHERE job_id IS NOT NULL;
 
 ALTER TABLE vrf_specs DROP COLUMN evm_chain_id;
-ALTER TABLE direct_request_specs DROP COLUMN evm_chain_id;
-ALTER TABLE keeper_specs DROP COLUMN evm_chain_id;
-ALTER TABLE offchainreporting_oracle_specs DROP COLUMN evm_chain_id;
-ALTER TABLE flux_monitor_specs DROP COLUMN evm_chain_id;

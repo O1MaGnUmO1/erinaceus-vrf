@@ -178,66 +178,6 @@ ResultWriteQueueDepth = 100
 DefaultTimeout = '15s'
 MaxSize = '32.77kb'
 
-[FluxMonitor]
-DefaultTransactionQueueDepth = 1
-SimulateTransactions = false
-
-[OCR2]
-Enabled = false
-ContractConfirmations = 3
-BlockchainTimeout = '20s'
-ContractPollInterval = '1m0s'
-ContractSubscribeInterval = '2m0s'
-ContractTransmitterTransmitTimeout = '10s'
-DatabaseTimeout = '10s'
-KeyBundleID = '0000000000000000000000000000000000000000000000000000000000000000'
-CaptureEATelemetry = false
-CaptureAutomationCustomTelemetry = true
-DefaultTransactionQueueDepth = 1
-SimulateTransactions = false
-TraceLogging = false
-
-[OCR]
-Enabled = false
-ObservationTimeout = '5s'
-BlockchainTimeout = '20s'
-ContractPollInterval = '1m0s'
-ContractSubscribeInterval = '2m0s'
-DefaultTransactionQueueDepth = 1
-KeyBundleID = '0000000000000000000000000000000000000000000000000000000000000000'
-SimulateTransactions = false
-TransmitterAddress = ''
-CaptureEATelemetry = false
-TraceLogging = false
-
-[P2P]
-IncomingMessageBufferSize = 10
-OutgoingMessageBufferSize = 10
-PeerID = ''
-TraceLogging = false
-
-[P2P.V2]
-Enabled = true
-AnnounceAddresses = []
-DefaultBootstrappers = []
-DeltaDial = '15s'
-DeltaReconcile = '1m0s'
-ListenAddresses = []
-
-[Keeper]
-DefaultTransactionQueueDepth = 1
-GasPriceBufferPercent = 20
-GasTipCapBufferPercent = 20
-BaseFeeBufferPercent = 20
-MaxGracePeriod = 100
-TurnLookBack = 1000
-
-[Keeper.Registry]
-CheckGasOverhead = 200000
-PerformGasOverhead = 300000
-MaxPerformDataSize = 5000
-SyncInterval = '30m0s'
-SyncUpkeepQueueSize = 10
 
 [AutoPprof]
 Enabled = false
@@ -252,10 +192,6 @@ BlockProfileRate = 1
 MutexProfileFraction = 1
 MemThreshold = '4.00gb'
 GoroutineThreshold = 5000
-
-[Pyroscope]
-ServerAddress = ''
-Environment = 'mainnet'
 
 [Sentry]
 Debug = false
@@ -276,12 +212,6 @@ NodeID = ''
 SamplingRatio = 0.0
 Mode = 'tls'
 TLSCertPath = ''
-
-[Mercury]
-[Mercury.Cache]
-LatestReportTTL = '1s'
-MaxStaleAge = '1h0m0s'
-LatestReportDeadline = '5s'
 
 [[EVM]]
 ChainID = '1'
@@ -348,18 +278,6 @@ PollInterval = '10s'
 SelectionMode = 'HighestHead'
 SyncThreshold = 5
 LeaseDuration = '0s'
-
-[EVM.OCR]
-ContractConfirmations = 4
-ContractTransmitterTransmitTimeout = '10s'
-DatabaseTimeout = '10s'
-DeltaCOverride = '168h0m0s'
-DeltaCJitterOverride = '1h0m0s'
-ObservationGracePeriod = '1s'
-
-[EVM.OCR2]
-[EVM.OCR2.Automation]
-GasLimit = 5300000
 
 [[EVM.Nodes]]
 Name = 'fake'

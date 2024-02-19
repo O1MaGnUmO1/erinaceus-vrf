@@ -13,8 +13,6 @@ import (
 	"github.com/pkg/errors"
 	"gopkg.in/guregu/null.v4"
 
-	commonassets "github.com/O1MaGnUmO1/chainlink-common/pkg/assets"
-
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/bridges"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/assets"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/chains/evm/config/toml"
@@ -258,68 +256,6 @@ func (w *WebhookSpec) SetID(value string) error {
 	}
 	w.ID = int32(ID)
 	return nil
-}
-
-type DirectRequestSpec struct {
-	ID                       int32                    `toml:"-"`
-	ContractAddress          ethkey.EIP55Address      `toml:"contractAddress"`
-	MinIncomingConfirmations clnull.Uint32            `toml:"minIncomingConfirmations"`
-	Requesters               models.AddressCollection `toml:"requesters"`
-	MinContractPayment       *commonassets.Link       `toml:"minContractPaymentLinkJuels"`
-	EVMChainID               *big.Big                 `toml:"evmChainID"`
-	CreatedAt                time.Time                `toml:"-"`
-	UpdatedAt                time.Time                `toml:"-"`
-}
-
-type CronSpec struct {
-	ID           int32     `toml:"-"`
-	CronSchedule string    `toml:"schedule"`
-	CreatedAt    time.Time `toml:"-"`
-	UpdatedAt    time.Time `toml:"-"`
-}
-
-func (s CronSpec) GetID() string {
-	return fmt.Sprintf("%v", s.ID)
-}
-
-func (s *CronSpec) SetID(value string) error {
-	ID, err := strconv.ParseInt(value, 10, 32)
-	if err != nil {
-		return err
-	}
-	s.ID = int32(ID)
-	return nil
-}
-
-type FluxMonitorSpec struct {
-	ID              int32               `toml:"-"`
-	ContractAddress ethkey.EIP55Address `toml:"contractAddress"`
-	Threshold       tomlutils.Float32   `toml:"threshold,float"`
-	// AbsoluteThreshold is the maximum absolute change allowed in a fluxmonitored
-	// value before a new round should be kicked off, so that the current value
-	// can be reported on-chain.
-	AbsoluteThreshold   tomlutils.Float32 `toml:"absoluteThreshold,float"`
-	PollTimerPeriod     time.Duration
-	PollTimerDisabled   bool
-	IdleTimerPeriod     time.Duration
-	IdleTimerDisabled   bool
-	DrumbeatSchedule    string
-	DrumbeatRandomDelay time.Duration
-	DrumbeatEnabled     bool
-	MinPayment          *commonassets.Link
-	EVMChainID          *big.Big  `toml:"evmChainID"`
-	CreatedAt           time.Time `toml:"-"`
-	UpdatedAt           time.Time `toml:"-"`
-}
-
-type KeeperSpec struct {
-	ID                       int32               `toml:"-"`
-	ContractAddress          ethkey.EIP55Address `toml:"contractAddress"`
-	MinIncomingConfirmations *uint32             `toml:"minIncomingConfirmations"`
-	FromAddress              ethkey.EIP55Address `toml:"fromAddress"`
-	EVMChainID               *big.Big            `toml:"evmChainID"`
-	CreatedAt                time.Time           `toml:"-"`
-	UpdatedAt                time.Time           `toml:"-"`
 }
 
 type VRFSpec struct {

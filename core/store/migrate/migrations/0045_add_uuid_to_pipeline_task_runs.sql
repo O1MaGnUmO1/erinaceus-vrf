@@ -1,6 +1,6 @@
 -- +goose Up
 -- Truncate tables to ease bigint -> UUID migration
-	TRUNCATE TABLE pipeline_runs, pipeline_task_runs, flux_monitor_round_stats_v2;
+	TRUNCATE TABLE pipeline_runs, pipeline_task_runs;
 
 	-- Migrate pipeline_task_runs to UUID
 	ALTER TABLE pipeline_task_runs DROP CONSTRAINT pipeline_task_runs_pkey; 

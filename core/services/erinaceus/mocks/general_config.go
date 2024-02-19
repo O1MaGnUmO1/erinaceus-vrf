@@ -265,26 +265,6 @@ func (_m *GeneralConfig) JobPipeline() config.JobPipeline {
 	return r0
 }
 
-// Keeper provides a mock function with given fields:
-func (_m *GeneralConfig) Keeper() config.Keeper {
-	ret := _m.Called()
-
-	if len(ret) == 0 {
-		panic("no return value specified for Keeper")
-	}
-
-	var r0 config.Keeper
-	if rf, ok := ret.Get(0).(func() config.Keeper); ok {
-		r0 = rf()
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(config.Keeper)
-		}
-	}
-
-	return r0
-}
-
 // Log provides a mock function with given fields:
 func (_m *GeneralConfig) Log() config.Log {
 	ret := _m.Called()
@@ -450,26 +430,6 @@ func (_m *GeneralConfig) ShutdownGracePeriod() time.Duration {
 		r0 = rf()
 	} else {
 		r0 = ret.Get(0).(time.Duration)
-	}
-
-	return r0
-}
-
-// TelemetryIngress provides a mock function with given fields:
-func (_m *GeneralConfig) TelemetryIngress() config.TelemetryIngress {
-	ret := _m.Called()
-
-	if len(ret) == 0 {
-		panic("no return value specified for TelemetryIngress")
-	}
-
-	var r0 config.TelemetryIngress
-	if rf, ok := ret.Get(0).(func() config.TelemetryIngress); ok {
-		r0 = rf()
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(config.TelemetryIngress)
-		}
 	}
 
 	return r0

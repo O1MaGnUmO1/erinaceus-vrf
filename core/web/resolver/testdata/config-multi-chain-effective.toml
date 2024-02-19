@@ -122,66 +122,6 @@ ResultWriteQueueDepth = 100
 DefaultTimeout = '30s'
 MaxSize = '32.77kb'
 
-[FluxMonitor]
-DefaultTransactionQueueDepth = 1
-SimulateTransactions = false
-
-[OCR2]
-Enabled = true
-ContractConfirmations = 3
-BlockchainTimeout = '20s'
-ContractPollInterval = '1m0s'
-ContractSubscribeInterval = '2m0s'
-ContractTransmitterTransmitTimeout = '10s'
-DatabaseTimeout = '20s'
-KeyBundleID = '0000000000000000000000000000000000000000000000000000000000000000'
-CaptureEATelemetry = false
-CaptureAutomationCustomTelemetry = true
-DefaultTransactionQueueDepth = 1
-SimulateTransactions = false
-TraceLogging = false
-
-[OCR]
-Enabled = true
-ObservationTimeout = '5s'
-BlockchainTimeout = '5s'
-ContractPollInterval = '1m0s'
-ContractSubscribeInterval = '2m0s'
-DefaultTransactionQueueDepth = 1
-KeyBundleID = '0000000000000000000000000000000000000000000000000000000000000000'
-SimulateTransactions = false
-TransmitterAddress = ''
-CaptureEATelemetry = false
-TraceLogging = false
-
-[P2P]
-IncomingMessageBufferSize = 999
-OutgoingMessageBufferSize = 10
-PeerID = ''
-TraceLogging = false
-
-[P2P.V2]
-Enabled = true
-AnnounceAddresses = []
-DefaultBootstrappers = []
-DeltaDial = '15s'
-DeltaReconcile = '1m0s'
-ListenAddresses = []
-
-[Keeper]
-DefaultTransactionQueueDepth = 1
-GasPriceBufferPercent = 10
-GasTipCapBufferPercent = 20
-BaseFeeBufferPercent = 20
-MaxGracePeriod = 100
-TurnLookBack = 1000
-
-[Keeper.Registry]
-CheckGasOverhead = 200000
-PerformGasOverhead = 300000
-MaxPerformDataSize = 5000
-SyncInterval = '30m0s'
-SyncUpkeepQueueSize = 10
 
 [AutoPprof]
 Enabled = false
@@ -196,10 +136,6 @@ BlockProfileRate = 1
 MutexProfileFraction = 1
 MemThreshold = '4.00gb'
 GoroutineThreshold = 5000
-
-[Pyroscope]
-ServerAddress = ''
-Environment = 'mainnet'
 
 [Sentry]
 Debug = false
@@ -220,12 +156,6 @@ NodeID = ''
 SamplingRatio = 0.0
 Mode = 'tls'
 TLSCertPath = ''
-
-[Mercury]
-[Mercury.Cache]
-LatestReportTTL = '1s'
-MaxStaleAge = '1h0m0s'
-LatestReportDeadline = '5s'
 
 [[EVM]]
 ChainID = '1'
@@ -292,18 +222,6 @@ PollInterval = '10s'
 SelectionMode = 'HighestHead'
 SyncThreshold = 5
 LeaseDuration = '0s'
-
-[EVM.OCR]
-ContractConfirmations = 4
-ContractTransmitterTransmitTimeout = '10s'
-DatabaseTimeout = '10s'
-DeltaCOverride = '168h0m0s'
-DeltaCJitterOverride = '1h0m0s'
-ObservationGracePeriod = '1s'
-
-[EVM.OCR2]
-[EVM.OCR2.Automation]
-GasLimit = 5300000
 
 [[EVM.Nodes]]
 Name = 'primary'
@@ -380,18 +298,6 @@ SelectionMode = 'HighestHead'
 SyncThreshold = 5
 LeaseDuration = '0s'
 
-[EVM.OCR]
-ContractConfirmations = 4
-ContractTransmitterTransmitTimeout = '10s'
-DatabaseTimeout = '10s'
-DeltaCOverride = '168h0m0s'
-DeltaCJitterOverride = '1h0m0s'
-ObservationGracePeriod = '1s'
-
-[EVM.OCR2]
-[EVM.OCR2.Automation]
-GasLimit = 5300000
-
 [[EVM.Nodes]]
 Name = 'foo'
 WSURL = 'wss://web.socket/test/foo'
@@ -461,110 +367,7 @@ SelectionMode = 'HighestHead'
 SyncThreshold = 10
 LeaseDuration = '0s'
 
-[EVM.OCR]
-ContractConfirmations = 4
-ContractTransmitterTransmitTimeout = '10s'
-DatabaseTimeout = '10s'
-DeltaCOverride = '168h0m0s'
-DeltaCJitterOverride = '1h0m0s'
-ObservationGracePeriod = '1s'
-
-[EVM.OCR2]
-[EVM.OCR2.Automation]
-GasLimit = 5300000
-
 [[EVM.Nodes]]
 Name = 'bar'
 WSURL = 'wss://web.socket/test/bar'
 
-[[Cosmos]]
-ChainID = 'Ibiza-808'
-Bech32Prefix = 'wasm'
-BlockRate = '6s'
-BlocksUntilTxTimeout = 30
-ConfirmPollPeriod = '1s'
-FallbackGasPrice = '0.015'
-GasToken = 'ucosm'
-GasLimitMultiplier = '1.5'
-MaxMsgsPerBatch = 13
-OCR2CachePollPeriod = '4s'
-OCR2CacheTTL = '1m0s'
-TxMsgTimeout = '10m0s'
-
-[[Cosmos.Nodes]]
-Name = 'primary'
-TendermintURL = 'http://columbus.cosmos.com'
-
-[[Cosmos]]
-ChainID = 'Malaga-420'
-Bech32Prefix = 'wasm'
-BlockRate = '6s'
-BlocksUntilTxTimeout = 20
-ConfirmPollPeriod = '1s'
-FallbackGasPrice = '0.015'
-GasToken = 'ucosm'
-GasLimitMultiplier = '1.5'
-MaxMsgsPerBatch = 100
-OCR2CachePollPeriod = '4s'
-OCR2CacheTTL = '1m0s'
-TxMsgTimeout = '10m0s'
-
-[[Cosmos.Nodes]]
-Name = 'secondary'
-TendermintURL = 'http://bombay.cosmos.com'
-
-[[Solana]]
-ChainID = 'mainnet'
-BalancePollPeriod = '5s'
-ConfirmPollPeriod = '500ms'
-OCR2CachePollPeriod = '1s'
-OCR2CacheTTL = '1m0s'
-TxTimeout = '1m0s'
-TxRetryTimeout = '10s'
-TxConfirmTimeout = '30s'
-SkipPreflight = true
-Commitment = 'confirmed'
-MaxRetries = 12
-FeeEstimatorMode = 'fixed'
-ComputeUnitPriceMax = 1000
-ComputeUnitPriceMin = 0
-ComputeUnitPriceDefault = 0
-FeeBumpPeriod = '3s'
-
-[[Solana.Nodes]]
-Name = 'primary'
-URL = 'http://mainnet.solana.com'
-
-[[Solana]]
-ChainID = 'testnet'
-BalancePollPeriod = '5s'
-ConfirmPollPeriod = '500ms'
-OCR2CachePollPeriod = '1m0s'
-OCR2CacheTTL = '1m0s'
-TxTimeout = '1m0s'
-TxRetryTimeout = '10s'
-TxConfirmTimeout = '30s'
-SkipPreflight = true
-Commitment = 'confirmed'
-MaxRetries = 0
-FeeEstimatorMode = 'fixed'
-ComputeUnitPriceMax = 1000
-ComputeUnitPriceMin = 0
-ComputeUnitPriceDefault = 0
-FeeBumpPeriod = '3s'
-
-[[Solana.Nodes]]
-Name = 'secondary'
-URL = 'http://testnet.solana.com'
-
-[[Starknet]]
-ChainID = 'foobar'
-OCR2CachePollPeriod = '5s'
-OCR2CacheTTL = '1m0s'
-RequestTimeout = '10s'
-TxTimeout = '10s'
-ConfirmationPoll = '1h0m0s'
-
-[[Starknet.Nodes]]
-Name = 'primary'
-URL = 'http://stark.node'

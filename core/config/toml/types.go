@@ -275,15 +275,11 @@ func (p *PrometheusSecrets) validateMerge(f *PrometheusSecrets) (err error) {
 }
 
 type Feature struct {
-	FeedsManager *bool
-	LogPoller    *bool
-	UICSAKeys    *bool
+	LogPoller *bool
+	UICSAKeys *bool
 }
 
 func (f *Feature) setFrom(f2 *Feature) {
-	if v := f2.FeedsManager; v != nil {
-		f.FeedsManager = v
-	}
 	if v := f2.LogPoller; v != nil {
 		f.LogPoller = v
 	}

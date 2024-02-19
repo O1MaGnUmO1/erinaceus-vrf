@@ -211,7 +211,6 @@ func (r *runner) OnRunFinished(fn func(*Run)) {
 	r.runFinished = fn
 }
 
-// github.com/smartcontractkit/libocr/offchainreporting2plus/internal/protocol.ReportingPluginTimeoutWarningGracePeriod
 var overtime = 100 * time.Millisecond
 
 func init() {

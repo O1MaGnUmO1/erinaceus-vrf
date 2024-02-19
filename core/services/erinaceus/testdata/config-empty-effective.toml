@@ -3,7 +3,6 @@ RootDir = '~/.chainlink'
 ShutdownGracePeriod = '5s'
 
 [Feature]
-FeedsManager = true
 LogPoller = false
 UICSAKeys = false
 
@@ -138,10 +137,6 @@ MutexProfileFraction = 1
 MemThreshold = '4.00gb'
 GoroutineThreshold = 5000
 
-[Pyroscope]
-ServerAddress = ''
-Environment = 'mainnet'
-
 [Sentry]
 Debug = false
 DSN = ''
@@ -150,7 +145,6 @@ Release = ''
 
 [Insecure]
 DevWebServer = false
-OCRDevelopmentMode = false
 InfiniteDepthQueries = false
 DisableRateLimiting = false
 

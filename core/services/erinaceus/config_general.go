@@ -257,10 +257,6 @@ func (g *generalConfig) Feature() coreconfig.Feature {
 	return &featureConfig{c: g.c.Feature}
 }
 
-func (g *generalConfig) FeatureFeedsManager() bool {
-	return *g.c.Feature.FeedsManager
-}
-
 func (g *generalConfig) FeatureLogPoller() bool {
 	return *g.c.Feature.LogPoller
 }
@@ -384,12 +380,6 @@ func (g *generalConfig) RootDir() string {
 		panic(err) // never happens since we validate that the RootDir is expandable in config.Core.ValidateConfig().
 	}
 	return h
-}
-
-func (g *generalConfig) TelemetryIngress() coreconfig.TelemetryIngress {
-	return &telemetryIngressConfig{
-		c: g.c.TelemetryIngress,
-	}
 }
 
 func (g *generalConfig) AuditLogger() coreconfig.AuditLogger {

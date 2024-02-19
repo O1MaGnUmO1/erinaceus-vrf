@@ -9,9 +9,6 @@ CREATE TABLE external_initiator_webhook_specs (
 );
 
 CREATE INDEX idx_external_initiator_webhook_specs_webhook_spec_id ON external_initiator_webhook_specs (webhook_spec_id);
-CREATE UNIQUE INDEX idx_jobs_unique_flux_monitor_spec_id ON jobs (flux_monitor_spec_id);
-CREATE UNIQUE INDEX idx_jobs_unique_keeper_spec_id ON jobs (keeper_spec_id);
-CREATE UNIQUE INDEX idx_jobs_unique_cron_spec_id ON jobs (cron_spec_id);
 CREATE UNIQUE INDEX idx_jobs_unique_vrf_spec_id ON jobs (vrf_spec_id);
 CREATE UNIQUE INDEX idx_jobs_unique_webhook_spec_id ON jobs (webhook_spec_id);
 

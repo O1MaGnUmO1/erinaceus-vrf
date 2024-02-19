@@ -14,7 +14,6 @@ DROP TABLE service_agreements;
 DROP TABLE eth_task_run_txes;
 DROP TABLE task_runs;
 DROP TABLE task_specs;
-DROP TABLE flux_monitor_round_stats;
 DROP TABLE job_runs;
 DROP TABLE job_spec_errors;
 DROP TABLE initiators;

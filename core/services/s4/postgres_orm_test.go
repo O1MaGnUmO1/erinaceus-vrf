@@ -97,7 +97,6 @@ func TestPostgresORM_UpdateSimpleFlow(t *testing.T) {
 	// user sends a new version
 	assert.NoError(t, orm.Update(row))
 
-	// OCR round confirms it
 	row.Confirmed = true
 	assert.NoError(t, orm.Update(row))
 

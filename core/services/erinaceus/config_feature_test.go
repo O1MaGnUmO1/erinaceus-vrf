@@ -16,6 +16,5 @@ func TestFeatureConfig(t *testing.T) {
 
 	f := cfg.Feature()
 	assert.True(t, f.LogPoller())
-	assert.True(t, f.FeedsManager())
 	assert.True(t, f.UICSAKeys())
 }

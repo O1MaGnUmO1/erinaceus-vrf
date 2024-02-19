@@ -479,25 +479,6 @@ func (_m *ChainScopedConfig) StarkNetEnabled() bool {
 	return r0
 }
 
-// TelemetryIngress provides a mock function with given fields:
-func (_m *ChainScopedConfig) TelemetryIngress() coreconfig.TelemetryIngress {
-	ret := _m.Called()
-
-	if len(ret) == 0 {
-		panic("no return value specified for TelemetryIngress")
-	}
-
-	var r0 coreconfig.TelemetryIngress
-	if rf, ok := ret.Get(0).(func() coreconfig.TelemetryIngress); ok {
-		r0 = rf()
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(coreconfig.TelemetryIngress)
-		}
-	}
-
-	return r0
-}
 
 // Threshold provides a mock function with given fields:
 func (_m *ChainScopedConfig) Threshold() coreconfig.Threshold {

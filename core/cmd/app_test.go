@@ -23,12 +23,6 @@ var (
 	testConfigFileContents = erinaceus.Config{
 		Core: toml.Core{
 			RootDir: &setInFile,
-			P2P: toml.P2P{
-				V2: toml.P2PV2{
-					AnnounceAddresses: &[]string{setInFile},
-					ListenAddresses:   &[]string{setInFile},
-				},
-			},
 		},
 	}
 
@@ -75,13 +69,7 @@ func Test_initServerConfig(t *testing.T) {
 				envVar: testEnvContents,
 			},
 			wantCfg: withDefaults(t, erinaceus.Config{
-				Core: toml.Core{
-					P2P: toml.P2P{
-						V2: toml.P2PV2{
-							AnnounceAddresses: &[]string{setInEnv},
-						},
-					},
-				},
+				Core: toml.Core{},
 			}, erinaceus.Secrets{}),
 		},
 		{
@@ -110,13 +98,6 @@ func Test_initServerConfig(t *testing.T) {
 			wantCfg: withDefaults(t, erinaceus.Config{
 				Core: toml.Core{
 					RootDir: &setInFile,
-					P2P: toml.P2P{
-						V2: toml.P2PV2{
-							// env should override this specific field
-							AnnounceAddresses: &[]string{setInEnv},
-							ListenAddresses:   &[]string{setInFile},
-						},
-					},
 				},
 			}, erinaceus.Secrets{}),
 		},

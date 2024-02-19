@@ -52,7 +52,6 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 	clhttp "github.com/O1MaGnUmO1/erinaceus-vrf/core/utils/http"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/web"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/plugins"
 )
 
 var (
@@ -156,13 +155,13 @@ func (n ChainlinkAppFactory) NewApplication(ctx context.Context, cfg erinaceus.G
 
 	dbListener := cfg.Database().Listener()
 	eventBroadcaster := pg.NewEventBroadcaster(cfg.Database().URL(), dbListener.MinReconnectInterval(), dbListener.MaxReconnectDuration(), appLggr, cfg.AppID())
-	loopRegistry := plugins.NewLoopRegistry(appLggr, cfg.Tracing())
+	// loopRegistry := plugins.NewLoopRegistry(appLggr, cfg.Tracing())
 
 	// create the relayer-chain interoperators from application configuration
 	relayerFactory := erinaceus.RelayerFactory{
-		Logger:       appLggr,
-		LoopRegistry: loopRegistry,
-		GRPCOpts:     grpcOpts,
+		Logger: appLggr,
+		// LoopRegistry: loopRegistry,
+		GRPCOpts: grpcOpts,
 	}
 
 	evmFactoryCfg := erinaceus.EVMFactoryConfig{
@@ -201,8 +200,8 @@ func (n ChainlinkAppFactory) NewApplication(ctx context.Context, cfg erinaceus.G
 		RestrictedHTTPClient:       restrictedClient,
 		UnrestrictedHTTPClient:     unrestrictedClient,
 		SecretGenerator:            erinaceus.FilePersistedSecretGenerator{},
-		LoopRegistry:               loopRegistry,
-		GRPCOpts:                   grpcOpts,
+		// LoopRegistry:               loopRegistry,
+		GRPCOpts: grpcOpts,
 	})
 }
 

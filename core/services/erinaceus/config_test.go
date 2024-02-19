@@ -28,7 +28,6 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/erinaceus/cfgtest"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/p2pkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/store/models"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 )
@@ -128,11 +127,6 @@ func TestConfig_Marshal(t *testing.T) {
 	second := models.MustMakeDuration(time.Second)
 	minute := models.MustMakeDuration(time.Minute)
 	hour := models.MustMakeDuration(time.Hour)
-	_ = func(s string) *p2pkey.PeerID {
-		id, err := p2pkey.MakePeerID(s)
-		require.NoError(t, err)
-		return &id
-	}
 	mustDecimal := func(s string) *decimal.Decimal {
 		d, err := decimal.NewFromString(s)
 		require.NoError(t, err)

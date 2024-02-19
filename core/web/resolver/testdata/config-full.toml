@@ -129,67 +129,6 @@ ResultWriteQueueDepth = 10
 DefaultTimeout = '1m0s'
 MaxSize = '100.00mb'
 
-[FluxMonitor]
-DefaultTransactionQueueDepth = 100
-SimulateTransactions = true
-
-[OCR2]
-Enabled = true
-ContractConfirmations = 11
-BlockchainTimeout = '3s'
-ContractPollInterval = '1h0m0s'
-ContractSubscribeInterval = '1m0s'
-ContractTransmitterTransmitTimeout = '1m0s'
-DatabaseTimeout = '8s'
-KeyBundleID = '7a5f66bbe6594259325bf2b4f5b1a9c900000000000000000000000000000000'
-CaptureEATelemetry = false
-CaptureAutomationCustomTelemetry = true
-DefaultTransactionQueueDepth = 1
-SimulateTransactions = false
-TraceLogging = false
-
-[OCR]
-Enabled = true
-ObservationTimeout = '11s'
-BlockchainTimeout = '3s'
-ContractPollInterval = '1h0m0s'
-ContractSubscribeInterval = '1m0s'
-DefaultTransactionQueueDepth = 12
-KeyBundleID = 'acdd42797a8b921b2910497badc5000600000000000000000000000000000000'
-SimulateTransactions = true
-TransmitterAddress = '0xa0788FC17B1dEe36f057c42B6F373A34B014687e'
-CaptureEATelemetry = false
-TraceLogging = false
-
-[P2P]
-IncomingMessageBufferSize = 13
-OutgoingMessageBufferSize = 17
-PeerID = '12D3KooWMoejJznyDuEk5aX6GvbjaG12UzeornPCBNzMRqdwrFJw'
-TraceLogging = true
-
-[P2P.V2]
-Enabled = false
-AnnounceAddresses = ['a', 'b', 'c']
-DefaultBootstrappers = ['12D3KooWMoejJznyDuEk5aX6GvbjaG12UzeornPCBNzMRqdwrFJw@foo:42/bar:10', '12D3KooWMoejJznyDuEk5aX6GvbjaG12UzeornPCBNzMRqdwrFJw@test:99']
-DeltaDial = '1m0s'
-DeltaReconcile = '1s'
-ListenAddresses = ['foo', 'bar']
-
-[Keeper]
-DefaultTransactionQueueDepth = 17
-GasPriceBufferPercent = 12
-GasTipCapBufferPercent = 43
-BaseFeeBufferPercent = 89
-MaxGracePeriod = 31
-TurnLookBack = 91
-
-[Keeper.Registry]
-CheckGasOverhead = 90
-PerformGasOverhead = 4294967295
-MaxPerformDataSize = 5000
-SyncInterval = '1h0m0s'
-SyncUpkeepQueueSize = 31
-
 [AutoPprof]
 Enabled = true
 ProfileRoot = 'prof/root'
@@ -203,10 +142,6 @@ BlockProfileRate = 5
 MutexProfileFraction = 2
 MemThreshold = '1.00gb'
 GoroutineThreshold = 999
-
-[Pyroscope]
-ServerAddress = 'http://localhost:4040'
-Environment = 'tests'
 
 [Sentry]
 Debug = true
@@ -232,11 +167,6 @@ TLSCertPath = '/path/to/cert.pem'
 env = 'dev'
 test = 'load'
 
-[Mercury]
-[Mercury.Cache]
-LatestReportTTL = '1m40s'
-MaxStaleAge = '1m41s'
-LatestReportDeadline = '1m42s'
 
 [[EVM]]
 ChainID = '1'
@@ -322,17 +252,6 @@ SelectionMode = 'HighestHead'
 SyncThreshold = 13
 LeaseDuration = '0s'
 
-[EVM.OCR]
-ContractConfirmations = 11
-ContractTransmitterTransmitTimeout = '1m0s'
-DatabaseTimeout = '1s'
-DeltaCOverride = '1h0m0s'
-DeltaCJitterOverride = '1s'
-ObservationGracePeriod = '1s'
-
-[EVM.OCR2]
-[EVM.OCR2.Automation]
-GasLimit = 540
 
 [[EVM.Nodes]]
 Name = 'foo'
@@ -349,73 +268,3 @@ Name = 'broadcast'
 HTTPURL = 'http://broadcast.mirror'
 SendOnly = true
 
-[[Cosmos]]
-ChainID = 'Malaga-420'
-Enabled = true
-Bech32Prefix = 'wasm'
-BlockRate = '1m0s'
-BlocksUntilTxTimeout = 12
-ConfirmPollPeriod = '1s'
-FallbackGasPrice = '0.001'
-GasToken = 'ucosm'
-GasLimitMultiplier = '1.2'
-MaxMsgsPerBatch = 17
-OCR2CachePollPeriod = '1m0s'
-OCR2CacheTTL = '1h0m0s'
-TxMsgTimeout = '1s'
-
-[[Cosmos.Nodes]]
-Name = 'primary'
-TendermintURL = 'http://tender.mint'
-
-[[Cosmos.Nodes]]
-Name = 'foo'
-TendermintURL = 'http://foo.url'
-
-[[Cosmos.Nodes]]
-Name = 'bar'
-TendermintURL = 'http://bar.web'
-
-[[Solana]]
-ChainID = 'mainnet'
-Enabled = false
-BalancePollPeriod = '1m0s'
-ConfirmPollPeriod = '1s'
-OCR2CachePollPeriod = '1m0s'
-OCR2CacheTTL = '1h0m0s'
-TxTimeout = '1h0m0s'
-TxRetryTimeout = '1m0s'
-TxConfirmTimeout = '1s'
-SkipPreflight = true
-Commitment = 'banana'
-MaxRetries = 7
-FeeEstimatorMode = 'fixed'
-ComputeUnitPriceMax = 1000000
-ComputeUnitPriceMin = 0
-ComputeUnitPriceDefault = 0
-FeeBumpPeriod = '3s'
-
-[[Solana.Nodes]]
-Name = 'primary'
-URL = 'http://solana.web'
-
-[[Solana.Nodes]]
-Name = 'foo'
-URL = 'http://solana.foo'
-
-[[Solana.Nodes]]
-Name = 'bar'
-URL = 'http://solana.bar'
-
-[[Starknet]]
-ChainID = 'foobar'
-Enabled = true
-OCR2CachePollPeriod = '6h0m0s'
-OCR2CacheTTL = '3m0s'
-RequestTimeout = '1m3s'
-TxTimeout = '13s'
-ConfirmationPoll = '42s'
-
-[[Starknet.Nodes]]
-Name = 'primary'
-URL = 'http://stark.node'

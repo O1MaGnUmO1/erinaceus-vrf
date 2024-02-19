@@ -11,7 +11,6 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/dkgencryptkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/dkgsignkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/p2pkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/vrfkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/utils"
 )
@@ -21,7 +20,7 @@ const password = "password"
 func TestKeyRing_Encrypt_Decrypt(t *testing.T) {
 	csa1, csa2 := csakey.MustNewV2XXXTestingOnly(big.NewInt(1)), csakey.MustNewV2XXXTestingOnly(big.NewInt(2))
 	eth1, eth2 := mustNewEthKey(t), mustNewEthKey(t)
-	p2p1, p2p2 := p2pkey.MustNewV2XXXTestingOnly(big.NewInt(1)), p2pkey.MustNewV2XXXTestingOnly(big.NewInt(2))
+	// p2p1, p2p2 := p2pkey.MustNewV2XXXTestingOnly(big.NewInt(1)), p2pkey.MustNewV2XXXTestingOnly(big.NewInt(2))
 	// sol1, sol2 := solkey.MustNewInsecure(rand.Reader), solkey.MustNewInsecure(rand.Reader)
 	vrf1, vrf2 := vrfkey.MustNewV2XXXTestingOnly(big.NewInt(1)), vrfkey.MustNewV2XXXTestingOnly(big.NewInt(2))
 	// tk1, tk2 := cosmoskey.MustNewInsecure(rand.Reader), cosmoskey.MustNewInsecure(rand.Reader)
@@ -32,7 +31,6 @@ func TestKeyRing_Encrypt_Decrypt(t *testing.T) {
 		Eth: []ethkey.Raw{eth1.Raw(), eth2.Raw()},
 		// OCR:        []ocrkey.Raw{ocr[0].Raw(), ocr[1].Raw()},
 		// OCR2:       ocr2_raw,
-		P2P: []p2pkey.Raw{p2p1.Raw(), p2p2.Raw()},
 		// Solana:     []solkey.Raw{sol1.Raw(), sol2.Raw()},
 		VRF: []vrfkey.Raw{vrf1.Raw(), vrf2.Raw()},
 		// Cosmos:     []cosmoskey.Raw{tk1.Raw(), tk2.Raw()},
@@ -80,11 +78,6 @@ func TestKeyRing_Encrypt_Decrypt(t *testing.T) {
 		// 	require.Equal(t, originalKeyRing.OCR2[id].ChainType(), decryptedKeyRing.OCR2[id].ChainType())
 		// }
 		// compare p2p keys
-		require.Equal(t, 2, len(decryptedKeyRing.P2P))
-		require.Equal(t, originalKeyRing.P2P[p2p1.ID()].PublicKeyHex(), decryptedKeyRing.P2P[p2p1.ID()].PublicKeyHex())
-		require.Equal(t, originalKeyRing.P2P[p2p1.ID()].PeerID(), decryptedKeyRing.P2P[p2p1.ID()].PeerID())
-		require.Equal(t, originalKeyRing.P2P[p2p2.ID()].PublicKeyHex(), decryptedKeyRing.P2P[p2p2.ID()].PublicKeyHex())
-		require.Equal(t, originalKeyRing.P2P[p2p2.ID()].PeerID(), decryptedKeyRing.P2P[p2p2.ID()].PeerID())
 		// compare solana keys
 		// require.Equal(t, 2, len(decryptedKeyRing.Solana))
 		// require.Equal(t, originalKeyRing.Solana[sol1.ID()].GetPublic(), decryptedKeyRing.Solana[sol1.ID()].GetPublic())
@@ -118,12 +111,6 @@ func TestKeyRing_Encrypt_Decrypt(t *testing.T) {
 		// allKeys["OCR2"] = append(allKeys["OCR2"], newOCR2Key1.Raw().String())
 		// allKeys["OCR2"] = append(allKeys["OCR2"], newOCR2Key2.Raw().String())
 
-		//Add more p2p keys
-		newP2PKey1 := p2pkey.MustNewV2XXXTestingOnly(big.NewInt(5))
-		newP2PKey2 := p2pkey.MustNewV2XXXTestingOnly(big.NewInt(7))
-		allKeys["P2P"] = append(allKeys["P2P"], newP2PKey1.Raw().String())
-		allKeys["P2P"] = append(allKeys["P2P"], newP2PKey2.Raw().String())
-
 		//Run legacy system
 		newRawJson, _ := json.Marshal(allKeys)
 		err = originalKeyRing.LegacyKeys.StoreUnsupported(newRawJson, originalKeyRing)
@@ -141,8 +128,6 @@ func TestKeyRing_Encrypt_Decrypt(t *testing.T) {
 		require.Equal(t, shouldHaveAllKeys["foo"], []string{"bar", "biz"})
 		// require.Contains(t, shouldHaveAllKeys["OCR2"], newOCR2Key1.Raw().String())
 		// require.Contains(t, shouldHaveAllKeys["OCR2"], newOCR2Key2.Raw().String())
-		require.Contains(t, shouldHaveAllKeys["P2P"], newP2PKey1.Raw().String())
-		require.Contains(t, shouldHaveAllKeys["P2P"], newP2PKey2.Raw().String())
 
 		//Check error
 		err = originalKeyRing.LegacyKeys.StoreUnsupported(newRawJson, nil)

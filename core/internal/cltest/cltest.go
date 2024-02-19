@@ -66,7 +66,6 @@ import (
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/dkgencryptkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/dkgsignkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/p2pkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/vrfkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pipeline"
@@ -100,11 +99,9 @@ const (
 )
 
 var (
-	DefaultP2PPeerID p2pkey.PeerID
-	FixtureChainID   = *testutils.FixtureChainID
+	FixtureChainID = *testutils.FixtureChainID
 
 	DefaultCSAKey        = csakey.MustNewV2XXXTestingOnly(big.NewInt(KeyBigIntSeed))
-	DefaultP2PKey        = p2pkey.MustNewV2XXXTestingOnly(big.NewInt(KeyBigIntSeed))
 	DefaultVRFKey        = vrfkey.MustNewV2XXXTestingOnly(big.NewInt(KeyBigIntSeed))
 	DefaultDKGSignKey    = dkgsignkey.MustNewXXXTestingOnly(big.NewInt(KeyBigIntSeed))
 	DefaultDKGEncryptKey = dkgencryptkey.MustNewXXXTestingOnly(big.NewInt(KeyBigIntSeed))
@@ -121,11 +118,6 @@ func init() {
 	logger.InitColor(true)
 	gin.DebugPrintRouteFunc = func(httpMethod, absolutePath, handlerName string, nuHandlers int) {
 		fmt.Printf("[gin] %-6s %-25s --> %s (%d handlers)\n", httpMethod, absolutePath, handlerName, nuHandlers)
-	}
-
-	err := DefaultP2PPeerID.UnmarshalString(configtest.DefaultPeerID)
-	if err != nil {
-		panic(err)
 	}
 }
 

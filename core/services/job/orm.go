@@ -18,7 +18,6 @@ import (
 
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/bridges"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/logger"
-	"github.com/O1MaGnUmO1/erinaceus-vrf/core/null"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/keystore/keys/ethkey"
 	"github.com/O1MaGnUmO1/erinaceus-vrf/core/services/pg"
@@ -42,6 +41,7 @@ type ORM interface {
 	FindJobTx(ctx context.Context, id int32) (Job, error)
 	FindJob(ctx context.Context, id int32) (Job, error)
 	FindJobByExternalJobID(uuid uuid.UUID, qopts ...pg.QOpt) (Job, error)
+	// FindJobIDByAddress(address ethkey.EIP55Address, evmChainID *big.Big, qopts ...pg.QOpt) (int32, error)
 	FindJobIDsWithBridge(name string) ([]int32, error)
 	DeleteJob(id int32, qopts ...pg.QOpt) error
 	RecordError(jobID int32, description string, qopts ...pg.QOpt) error
@@ -254,18 +254,18 @@ func (o *orm) InsertJob(job *Job, qopts ...pg.QOpt) error {
 	// if job has id, emplace otherwise insert with a new id.
 	if job.ID == 0 {
 		query = `INSERT INTO jobs (pipeline_spec_id, name, schema_version, type, max_task_duration,
-				vrf_spec_id, webhook_spec_id, blockhash_store_spec_id, gateway_spec_id, 
+				 vrf_spec_id, webhook_spec_id, blockhash_store_spec_id, gateway_spec_id, 
                 legacy_gas_station_server_spec_id, legacy_gas_station_sidecar_spec_id, external_job_id, gas_limit, forwarding_allowed, created_at)
 		VALUES (:pipeline_spec_id, :name, :schema_version, :type, :max_task_duration,
-				:vrf_spec_id, :webhook_spec_id, :blockhash_store_spec_id, :gateway_spec_id, 
+				 :vrf_spec_id, :webhook_spec_id, :blockhash_store_spec_id, :gateway_spec_id, 
 		        :legacy_gas_station_server_spec_id, :legacy_gas_station_sidecar_spec_id, :external_job_id, :gas_limit, :forwarding_allowed, NOW())
 		RETURNING *;`
 	} else {
 		query = `INSERT INTO jobs (id, pipeline_spec_id, name, schema_version, type, max_task_duration,
-			keeper_spec_id, cron_spec_id, vrf_spec_id, webhook_spec_id, blockhash_store_spec_id, gateway_spec_id, 
+			 vrf_spec_id, webhook_spec_id, blockhash_store_spec_id, gateway_spec_id, 
                   legacy_gas_station_server_spec_id, legacy_gas_station_sidecar_spec_id, external_job_id, gas_limit, forwarding_allowed, created_at)
-		VALUES (:id, :pipeline_spec_id, :name, :schema_version, :type, :max_task_duration,
-				:vrf_spec_id, :webhook_spec_id, :blockhash_store_spec_id, :gateway_spec_id, 
+		VALUES (:id, :pipeline_spec_id, :name, :schema_version, :type, :max_task_duration, 
+				 :vrf_spec_id, :webhook_spec_id, :blockhash_store_spec_id, :gateway_spec_id, 
 				:legacy_gas_station_server_spec_id, :legacy_gas_station_sidecar_spec_id, :external_job_id, :gas_limit, :forwarding_allowed, NOW())
 		RETURNING *;`
 	}
@@ -286,23 +286,14 @@ func (o *orm) DeleteJob(id int32, qopts ...pg.QOpt) error {
 				pipeline_spec_id,
 				vrf_spec_id,
 				webhook_spec_id,
-				direct_request_spec_id,
 				blockhash_store_spec_id,
-				bootstrap_spec_id,
-				block_header_feeder_spec_id,
 				gateway_spec_id
-		),
-		deleted_fm_specs AS (
-			DELETE FROM flux_monitor_specs WHERE id IN (SELECT flux_monitor_spec_id FROM deleted_jobs)
 		),
 		deleted_vrf_specs AS (
 			DELETE FROM vrf_specs WHERE id IN (SELECT vrf_spec_id FROM deleted_jobs)
 		),
 		deleted_webhook_specs AS (
 			DELETE FROM webhook_specs WHERE id IN (SELECT webhook_spec_id FROM deleted_jobs)
-		),
-		deleted_dr_specs AS (
-			DELETE FROM direct_request_specs WHERE id IN (SELECT direct_request_spec_id FROM deleted_jobs)
 		),
 		deleted_blockhash_store_specs AS (
 			DELETE FROM blockhash_store_specs WHERE id IN (SELECT blockhash_store_spec_id FROM deleted_jobs)
@@ -406,14 +397,6 @@ func LoadDefaultVRFPollPeriod(vrfs VRFSpec) *VRFSpec {
 	}
 
 	return &vrfs
-}
-
-// SetDRMinIncomingConfirmations takes the largest of the global vs specific.
-func SetDRMinIncomingConfirmations(defaultMinIncomingConfirmations uint32, drs DirectRequestSpec) *DirectRequestSpec {
-	if !drs.MinIncomingConfirmations.Valid || drs.MinIncomingConfirmations.Uint32 < defaultMinIncomingConfirmations {
-		drs.MinIncomingConfirmations = null.Uint32From(defaultMinIncomingConfirmations)
-	}
-	return &drs
 }
 
 func (o *orm) FindJobTx(ctx context.Context, id int32) (Job, error) {
@@ -890,30 +873,6 @@ func (r blockhashStoreSpecRow) toBlockhashStoreSpec() *BlockhashStoreSpec {
 			ethkey.EIP55AddressFromAddress(common.BytesToAddress(a)))
 	}
 	return r.BlockhashStoreSpec
-}
-
-// blockHeaderFeederSpecRow is a helper type for reading and writing blockHeaderFeederSpec specs to the database. This is necessary
-// because the bytea[] in the DB is not automatically convertible to or from the spec's
-// FromAddresses field. pq.ByteaArray must be used instead.
-type blockHeaderFeederSpecRow struct {
-	*BlockHeaderFeederSpec
-	FromAddresses pq.ByteaArray
-}
-
-func toBlockHeaderFeederSpecRow(spec *BlockHeaderFeederSpec) blockHeaderFeederSpecRow {
-	addresses := make(pq.ByteaArray, len(spec.FromAddresses))
-	for i, a := range spec.FromAddresses {
-		addresses[i] = a.Bytes()
-	}
-	return blockHeaderFeederSpecRow{BlockHeaderFeederSpec: spec, FromAddresses: addresses}
-}
-
-func (r blockHeaderFeederSpecRow) toBlockHeaderFeederSpec() *BlockHeaderFeederSpec {
-	for _, a := range r.FromAddresses {
-		r.BlockHeaderFeederSpec.FromAddresses = append(r.BlockHeaderFeederSpec.FromAddresses,
-			ethkey.EIP55AddressFromAddress(common.BytesToAddress(a)))
-	}
-	return r.BlockHeaderFeederSpec
 }
 
 func loadLegacyGasStationServerJob(tx pg.Queryer, job *Job, id *int32) error {
